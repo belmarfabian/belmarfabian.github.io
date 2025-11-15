@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit - Personal academic website for Fabián Belmar\n\nWebsite includes:\n- Minimalist design with Georgia serif font\n- Left sidebar navigation\n- Academic publications (WoS/Scopus indexed)\n- Book chapters\n- Working papers and policy documents\n- Academic profile links (Google Scholar, ORCID, Scopus)\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
