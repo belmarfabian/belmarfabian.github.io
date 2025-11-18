@@ -178,33 +178,5 @@
         </section>
         FIN SECCIÓN OCULTA -->
     </main>
-
-    <script>
-    // Agregar icono de copiar a cada enlace DOI
-    document.addEventListener('DOMContentLoaded', function() {
-        const doiLinks = document.querySelectorAll('a[href^="https://doi.org/"]');
-
-        doiLinks.forEach(link => {
-            const copyButton = document.createElement('span');
-            copyButton.className = 'copy-doi';
-            copyButton.innerHTML = ' 📋';
-            copyButton.title = 'Copiar DOI';
-            copyButton.style.cursor = 'pointer';
-
-            copyButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                const doi = link.href;
-                navigator.clipboard.writeText(doi).then(() => {
-                    copyButton.innerHTML = ' ✓';
-                    setTimeout(() => {
-                        copyButton.innerHTML = ' 📋';
-                    }, 2000);
-                });
-            });
-
-            link.parentNode.insertBefore(copyButton, link.nextSibling);
-        });
-    });
-    </script>
 </body>
 </html>
