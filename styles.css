@@ -75,6 +75,7 @@ h1 {
     margin-bottom: 0.5rem;
     color: #555;
     line-height: 1.5;
+    margin-top: 0.5rem;
 }
 
 .social-links {
@@ -86,7 +87,7 @@ h1 {
 .update-notice {
     font-size: 0.8rem;
     color: #999;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     font-style: italic;
 }
 
