@@ -73,7 +73,6 @@ h1 {
 .contact {
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
     color: #555;
     line-height: 1.5;
 }
@@ -87,7 +86,7 @@ h1 {
 .update-notice {
     font-size: 0.8rem;
     color: #999;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     font-style: italic;
 }
 
