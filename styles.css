@@ -146,17 +146,22 @@ section {
 
 .inicio-recientes {
     border: 1px solid #ddd;
-    padding: 1rem;
+    padding: 0.75rem 1rem 1rem 1rem;
     background-color: #fafafa;
 }
 
 .inicio-recientes h3 {
     font-size: 0.8rem;
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
+    margin-top: 0;
     color: #666;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+.inicio-recientes h3:first-child {
+    margin-top: 0;
 }
 
 .ultima-pub {
