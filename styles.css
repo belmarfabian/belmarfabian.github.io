@@ -54,7 +54,9 @@ body {
 .content {
     margin-left: 120px;
     padding: 2rem;
-    max-width: 800px;
+    max-width: 1200px;
+    column-count: 2;
+    column-gap: 3rem;
 }
 
 h1 {
@@ -93,6 +95,7 @@ h1 {
 
 section {
     margin-bottom: 2.5rem;
+    break-inside: avoid;
 }
 
 #inicio {
@@ -176,6 +179,13 @@ a:hover {
 .scopus:hover,
 .researchgate:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+    .content {
+        column-count: 1;
+        max-width: 800px;
+    }
 }
 
 @media (max-width: 768px) {
