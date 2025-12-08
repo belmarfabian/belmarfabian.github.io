@@ -191,14 +191,6 @@ a:hover {
     text-decoration: underline;
 }
 
-.footer {
-    margin-left: 120px;
-    padding: 2rem;
-    border-top: 1px solid #ddd;
-    font-size: 0.8rem;
-    color: #999;
-}
-
 @media (max-width: 1024px) {
     .content {
         max-width: 800px;
@@ -233,11 +225,6 @@ a:hover {
     .content {
         margin-left: 0;
         padding: 1.5rem 1rem;
-    }
-
-    .footer {
-        margin-left: 0;
-        text-align: center;
     }
 
     h1 {
