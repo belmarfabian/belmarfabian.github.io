@@ -55,8 +55,10 @@ body {
     margin-left: 120px;
     padding: 2rem;
     max-width: 1200px;
-    column-count: 2;
-    column-gap: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
 }
 
 h1 {
@@ -95,7 +97,11 @@ h1 {
 
 section {
     margin-bottom: 2.5rem;
-    break-inside: avoid;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
 }
 
 #inicio {
@@ -183,7 +189,7 @@ a:hover {
 
 @media (max-width: 1024px) {
     .content {
-        column-count: 1;
+        grid-template-columns: 1fr;
         max-width: 800px;
     }
 }
