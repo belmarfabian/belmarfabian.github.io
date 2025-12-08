@@ -8,7 +8,9 @@
       "Bash(git branch:*)",
       "Bash(git push:*)",
       "Bash(git pull:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(start index.html)",
+      "Bash(start \"g:\\My Drive\\web propia\\index.html\")"
     ],
     "deny": [],
     "ask": []
