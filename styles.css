@@ -55,6 +55,9 @@ body {
     margin-left: 120px;
     padding: 2rem;
     max-width: 1200px;
+}
+
+.two-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
@@ -104,9 +107,6 @@ section {
     flex-direction: column;
 }
 
-.spacer {
-    height: 16.5rem;
-}
 
 #inicio {
     margin-bottom: 2.5rem;
@@ -193,8 +193,11 @@ a:hover {
 
 @media (max-width: 1024px) {
     .content {
-        grid-template-columns: 1fr;
         max-width: 800px;
+    }
+
+    .two-columns {
+        grid-template-columns: 1fr;
     }
 }
 
