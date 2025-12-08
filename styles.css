@@ -144,6 +144,12 @@ section {
     align-items: start;
 }
 
+.inicio-recientes {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    background-color: #fafafa;
+}
+
 .inicio-recientes h3 {
     font-size: 0.8rem;
     font-weight: bold;
