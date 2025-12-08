@@ -168,6 +168,12 @@ section {
     margin-bottom: 0.5rem;
 }
 
+.ultima-abstract {
+    color: #444;
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+}
+
 .ultima-link {
     font-size: 0.75rem;
     color: #0066cc;
