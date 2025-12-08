@@ -104,6 +104,10 @@ section {
     flex-direction: column;
 }
 
+.spacer {
+    height: 12rem;
+}
+
 #inicio {
     margin-bottom: 2.5rem;
 }
