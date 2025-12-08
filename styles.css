@@ -153,21 +153,24 @@ section {
     letter-spacing: 0.05em;
 }
 
-.recientes-list {
-    list-style: none;
-    padding-left: 0;
-    font-size: 0.75rem;
+.ultima-pub {
+    font-size: 0.8rem;
     line-height: 1.4;
 }
 
-.recientes-list li {
-    margin-bottom: 0.6rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid #eee;
+.ultima-titulo {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
 }
 
-.recientes-list li:last-child {
-    border-bottom: none;
+.ultima-meta {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.ultima-link {
+    font-size: 0.75rem;
+    color: #0066cc;
 }
 
 h2 {

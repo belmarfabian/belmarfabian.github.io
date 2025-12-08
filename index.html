@@ -83,8 +83,8 @@
                 <p class="update-notice">Sitio en construcción. Última actualización: 17 de noviembre de 2025.</p>
             </div>
             <div class="inicio-recientes">
-                <h3>Últimas publicaciones</h3>
-                <ul id="ultimas-pub" class="recientes-list"></ul>
+                <h3>Última publicación</h3>
+                <div id="ultima-pub" class="ultima-pub"></div>
             </div>
         </section>
 
@@ -177,13 +177,22 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const articulos = document.querySelectorAll('#articulos .scrollable-list li');
-            const ultimas = document.getElementById('ultimas-pub');
+            const articulo = document.querySelector('#articulos .scrollable-list li');
+            const container = document.getElementById('ultima-pub');
 
-            for (let i = 0; i < Math.min(3, articulos.length); i++) {
-                const li = document.createElement('li');
-                li.innerHTML = articulos[i].innerHTML;
-                ultimas.appendChild(li);
+            if (articulo) {
+                const texto = articulo.innerHTML;
+                const match = texto.match(/\((\d{4})\)\.\s*([^.]+\.)/);
+                const año = match ? match[1] : '';
+                const titulo = match ? match[2].trim() : '';
+                const revista = articulo.querySelector('em') ? articulo.querySelector('em').textContent : '';
+                const link = articulo.querySelector('a') ? articulo.querySelector('a').href : '';
+
+                container.innerHTML = `
+                    <p class="ultima-titulo">${titulo}</p>
+                    <p class="ultima-meta"><em>${revista}</em> (${año})</p>
+                    ${link ? `<a href="${link}" class="ultima-link">Ver artículo →</a>` : ''}
+                `;
             }
         });
     </script>
