@@ -51,6 +51,31 @@ body {
     border-left: 3px solid #ff0000;
 }
 
+/* Colores Bauhaus para navegación */
+.sidebar a[href="#inicio"]:hover {
+    border-left-color: #ff0000;
+}
+
+.sidebar a[href="#articulos"]:hover {
+    border-left-color: #ff0000;
+}
+
+.sidebar a[href="#otros-articulos"]:hover {
+    border-left-color: #ffcc00;
+}
+
+.sidebar a[href="#capitulos"]:hover {
+    border-left-color: #0000ff;
+}
+
+.sidebar a[href="#documentos"]:hover {
+    border-left-color: #ff0000;
+}
+
+.sidebar a[href="#prensa"]:hover {
+    border-left-color: #0000ff;
+}
+
 .content {
     margin-left: 120px;
     padding: 2rem;
