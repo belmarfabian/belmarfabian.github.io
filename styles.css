@@ -165,19 +165,20 @@ h2 + p {
 }
 
 .scrollable-list::-webkit-scrollbar {
-    width: 8px;
+    width: 4px;
 }
 
 .scrollable-list::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: transparent;
 }
 
 .scrollable-list::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #ccc;
+    border-radius: 2px;
 }
 
 .scrollable-list::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #999;
 }
 
 .media-note {
