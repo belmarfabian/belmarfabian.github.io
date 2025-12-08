@@ -134,6 +134,13 @@ h2 + p {
     color: #666;
 }
 
+.media-note {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
 h3 {
     font-size: 1rem;
     font-weight: bold;
