@@ -112,6 +112,26 @@ section {
     margin-bottom: 2.5rem;
 }
 
+.inicio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.inicio-recientes h2 {
+    border-left-color: #ffcc00;
+}
+
+.recientes-list {
+    padding-left: 1.5rem;
+    font-size: 0.85rem;
+}
+
+.recientes-list li {
+    margin-bottom: 0.75rem;
+}
+
 h2 {
     font-size: 1.1rem;
     font-weight: bold;
@@ -251,6 +271,10 @@ a:hover {
     }
 
     .two-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .inicio-grid {
         grid-template-columns: 1fr;
     }
 }
