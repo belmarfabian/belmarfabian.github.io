@@ -139,49 +139,50 @@ section {
 
 .inicio-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: start;
 }
 
 .inicio-recientes {
     border: 1px solid #ddd;
-    padding: 1rem;
+    padding: 0.75rem;
     background-color: #fafafa;
 }
 
 .inicio-recientes h3 {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     color: #666;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
 .ultima-pub {
-    font-size: 0.8rem;
-    line-height: 1.4;
+    font-size: 0.75rem;
+    line-height: 1.3;
 }
 
 .ultima-titulo {
     font-weight: bold;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
 }
 
 .ultima-meta {
     color: #666;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.7rem;
 }
 
 .ultima-abstract {
     color: #444;
-    margin-bottom: 0.5rem;
-    font-size: 0.75rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.7rem;
 }
 
 .ultima-link {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #0066cc;
 }
 
