@@ -139,22 +139,35 @@ section {
 
 .inicio-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
     align-items: start;
 }
 
-.inicio-recientes h2 {
-    border-left-color: #ffcc00;
+.inicio-recientes h3 {
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .recientes-list {
-    padding-left: 1.5rem;
-    font-size: 0.85rem;
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.75rem;
+    line-height: 1.4;
 }
 
 .recientes-list li {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid #eee;
+}
+
+.recientes-list li:last-child {
+    border-bottom: none;
 }
 
 h2 {

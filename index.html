@@ -83,14 +83,8 @@
                 <p class="update-notice">Sitio en construcción. Última actualización: 17 de noviembre de 2025.</p>
             </div>
             <div class="inicio-recientes">
-                <h2>Últimas publicaciones</h2>
-                <ol reversed class="recientes-list">
-                    <li><strong>Belmar, F.</strong>, & Mascareño, A. (2025). Corruption: An uneven field of research. <em>Societies</em>. <a href="https://doi.org/10.3390/soc15070186">DOI</a></li>
-                    <li><strong>Belmar, F.</strong>, & Morales, M. (2025). Ethnic solidarity in the non-programmatic distribution of benefits. <em>Ethnic and Racial Studies</em>. <a href="https://doi.org/10.1080/01419870.2025.2470896">DOI</a></li>
-                    <li><strong>Belmar, F.</strong>, Lara, B., & Miguieles, J. (2024). Unpacking electoral competition. <em>Policy Studies</em>. <a href="https://doi.org/10.1080/01442872.2024.2427280">DOI</a></li>
-                    <li><strong>Belmar, F.</strong>, Maldonado, F., & Morales, M. (2024). In search of the missing link. <em>Public Integrity</em>. <a href="https://doi.org/10.1080/10999922.2024.2364384">DOI</a></li>
-                    <li><strong>Belmar, F.</strong>, & Herrera, M. (2024). Descentralización y participación ciudadana en Chile. En <em>La revolución silente</em>. Tirant Lo Blanch.</li>
-                </ol>
+                <h3>Últimas publicaciones</h3>
+                <ul id="ultimas-pub" class="recientes-list"></ul>
             </div>
         </section>
 
@@ -180,5 +174,18 @@
             </div>
         </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const articulos = document.querySelectorAll('#articulos .scrollable-list li');
+            const ultimas = document.getElementById('ultimas-pub');
+
+            for (let i = 0; i < Math.min(3, articulos.length); i++) {
+                const li = document.createElement('li');
+                li.innerHTML = articulos[i].innerHTML;
+                ultimas.appendChild(li);
+            }
+        });
+    </script>
 </body>
 </html>
