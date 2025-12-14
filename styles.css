@@ -76,12 +76,11 @@ body {
 }
 
 .content {
-    margin-left: 120px;
-    padding: 2rem 3rem;
-    max-width: 800px;
+    padding: 2rem;
+    max-width: 1200px;
     margin-right: auto;
     /* Centrar en el espacio disponible */
-    margin-left: max(120px, calc((100vw - 800px) / 2));
+    margin-left: max(120px, calc((100vw - 1200px) / 2));
 }
 
 .two-columns {
