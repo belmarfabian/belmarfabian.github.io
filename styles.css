@@ -12,7 +12,6 @@ body {
     word-spacing: -0.12em;
     color: #000;
     background-color: #fff;
-    display: flex;
     min-height: 100vh;
 }
 
@@ -78,8 +77,11 @@ body {
 
 .content {
     margin-left: 120px;
-    padding: 2rem;
-    max-width: 1200px;
+    padding: 2rem 3rem;
+    max-width: 800px;
+    margin-right: auto;
+    /* Centrar en el espacio disponible */
+    margin-left: max(120px, calc((100vw - 800px) / 2));
 }
 
 .two-columns {
@@ -337,7 +339,9 @@ a:hover {
 
 @media (max-width: 1024px) {
     .content {
-        max-width: 800px;
+        margin-left: 120px;
+        margin-right: 1rem;
+        max-width: none;
     }
 
     .two-columns {
@@ -350,10 +354,6 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-    body {
-        flex-direction: column;
-    }
-
     .sidebar {
         position: static;
         width: 100%;
@@ -372,7 +372,9 @@ a:hover {
 
     .content {
         margin-left: 0;
+        margin-right: 0;
         padding: 1.5rem 1rem;
+        max-width: none;
     }
 
     h1 {
