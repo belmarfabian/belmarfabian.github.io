@@ -461,29 +461,24 @@ a:hover {
     font-weight: bold;
     padding: 0.1rem 0.35rem;
     border-radius: 2px;
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface);
-    color: var(--color-text-muted);
+    color: #fff;
 }
 
 .pub-quartile-q1 {
-    border-color: var(--color-red);
-    color: var(--color-red);
+    background-color: #60CA46;
 }
 
 .pub-quartile-q2 {
-    border-color: var(--color-blue);
-    color: var(--color-blue);
+    background-color: #E8D559;
+    color: #333;
 }
 
 .pub-quartile-q3 {
-    border-color: var(--color-yellow);
-    color: var(--color-text-body);
+    background-color: #FBA353;
 }
 
 .pub-quartile-q4 {
-    border-color: var(--color-border);
-    color: var(--color-text-muted);
+    background-color: #DD5A4E;
 }
 
 .pub-score {
