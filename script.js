@@ -49,6 +49,17 @@ function initTabs() {
     });
 }
 
+/* ===== Journal database (quartile = best SJR quartile, citescore) ===== */
+var JOURNAL_DB = {
+    'Societies': { quartile: 'Q2', citescore: 3.0 },
+    'Ethnic and Racial Studies': { quartile: 'Q1', citescore: 5.5 },
+    'Policy Studies': { quartile: 'Q1', citescore: 5.8 },
+    'Public Integrity': { quartile: 'Q1', citescore: 1.9 },
+    'Politics': { quartile: 'Q1', citescore: 4.8 },
+    'Social Sciences': { quartile: 'Q2', citescore: 3.1 },
+    'Política y Sociedad': { quartile: 'Q3', citescore: 0.9 }
+};
+
 /* ===== Metadata columns (year, journal, quartile, score) ===== */
 function initMetadata() {
     var items = document.querySelectorAll('.scrollable-list li');
@@ -62,14 +73,16 @@ function initMetadata() {
 
         // Extract journal from <em>
         var emEl = li.querySelector('em');
-        var journal = emEl ? emEl.textContent : '';
-        if (journal.length > 25) {
-            journal = journal.substring(0, 22) + '...';
+        var journalFull = emEl ? emEl.textContent : '';
+        var journalDisplay = journalFull;
+        if (journalDisplay.length > 25) {
+            journalDisplay = journalDisplay.substring(0, 22) + '...';
         }
 
-        // Optional: quartile and score from data attributes
-        var quartile = li.dataset.quartile || '';
-        var score = li.dataset.score || '';
+        // Lookup quartile and citescore from database, fallback to data attributes
+        var dbEntry = JOURNAL_DB[journalFull] || {};
+        var quartile = li.dataset.quartile || dbEntry.quartile || '';
+        var citescore = li.dataset.score || (dbEntry.citescore ? 'CiteScore ' + dbEntry.citescore : '');
 
         var meta = document.createElement('div');
         meta.className = 'pub-meta';
@@ -81,10 +94,10 @@ function initMetadata() {
             meta.appendChild(yearSpan);
         }
 
-        if (journal) {
+        if (journalDisplay) {
             var journalSpan = document.createElement('span');
             journalSpan.className = 'pub-journal';
-            journalSpan.textContent = journal;
+            journalSpan.textContent = journalDisplay;
             meta.appendChild(journalSpan);
         }
 
@@ -95,10 +108,10 @@ function initMetadata() {
             meta.appendChild(qSpan);
         }
 
-        if (score) {
+        if (citescore) {
             var sSpan = document.createElement('span');
             sSpan.className = 'pub-score';
-            sSpan.textContent = score;
+            sSpan.textContent = citescore;
             meta.appendChild(sSpan);
         }
 
