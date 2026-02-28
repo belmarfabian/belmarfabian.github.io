@@ -51,23 +51,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Prevent flash of wrong theme (FOWT) -->
+    <script>
+    (function() {
+        var saved = localStorage.getItem('theme');
+        if (saved) {
+            document.documentElement.setAttribute('data-theme', saved);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    })();
+    </script>
 </head>
 <body>
-    <nav class="sidebar" aria-label="Navegación principal">
-        <div class="nav-content">
-            <a href="#inicio" aria-label="Ir a sección de inicio">Inicio</a>
-            <a href="#articulos" aria-label="Ir a artículos WoS y Scopus">Artículos</a>
-            <a href="#otros-articulos" aria-label="Ir a artículos en otras indexaciones">Otros</a>
-            <a href="#capitulos" aria-label="Ir a capítulos de libro">Capítulos</a>
-            <a href="#documentos" aria-label="Ir a documentos de trabajo">Documentos</a>
-            <a href="#prensa" aria-label="Ir a apariciones en prensa">Prensa</a>
-        </div>
-    </nav>
-
     <main class="content">
         <section id="inicio" class="inicio-grid">
             <div class="inicio-info">
-                <h1>Fabián Belmar</h1>
+                <div class="inicio-header">
+                    <h1>Fabián Belmar</h1>
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar a modo oscuro">◐</button>
+                </div>
                 <p class="info">Licenciado en Ciencia Política y Administración Pública, Universidad de Talca</p>
                 <p class="info">Doctor en Procesos e Instituciones Políticas, Universidad Adolfo Ibáñez (UAI) <a href="https://gobierno.uai.cl/">↗</a></p>
                 <p class="info">Investigador Posdoctoral, Núcleo Milenio para la Ciencia de Datos Sociales (SODAS) <a href="https://sodas.cl/">↗</a></p>
@@ -95,108 +99,143 @@
             </div>
         </section>
 
-        <div class="two-columns">
-            <div class="column">
-                <section id="articulos">
-                    <h2>Artículos I <span class="subtitle">(WoS y/o Scopus)</span></h2>
-                    <p>Publicaciones científicas revisadas por pares en revistas académicas de alto impacto, indexadas en bases de datos internacionales como Web of Science y Scopus.</p>
-                    <ol start="8" reversed class="scrollable-list">
-                        <li data-abstract="La investigación sobre corrupción se ha concentrado principalmente en el sector público, dejando de lado la corrupción privada. Este artículo analiza esta asimetría y propone un marco integrador para el estudio de la corrupción en ambos sectores."><strong>Belmar, F.</strong>, & Mascareño, A. (2025). Corruption: An uneven field of research—Between state and private topics. <em>Societies</em>, 15(7), 186. <a href="https://doi.org/10.3390/soc15070186">https://doi.org/10.3390/soc15070186</a></li>
+        <!-- Search bar -->
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Buscar publicaciones por título, año, coautor..." aria-label="Buscar publicaciones">
+            <div class="search-counter"></div>
+        </div>
 
-                        <li><strong>Belmar, F.</strong>, & Morales, M. (2025). Ethnic solidarity in the non-programmatic distribution of benefits: The case of Mapuche mayors in Chile. <em>Ethnic and Racial Studies</em>. <a href="https://doi.org/10.1080/01419870.2025.2470896">https://doi.org/10.1080/01419870.2025.2470896</a></li>
+        <!-- Tabs -->
+        <nav class="tabs" aria-label="Navegación principal">
+            <button class="tab active" data-tab="articulos">Artículos</button>
+            <button class="tab" data-tab="otros-articulos">Otros</button>
+            <button class="tab" data-tab="capitulos">Capítulos</button>
+            <button class="tab" data-tab="documentos">Documentos</button>
+            <button class="tab" data-tab="prensa">Prensa</button>
+            <button class="tab" data-tab="desarrollo">Desarrollo</button>
+        </nav>
 
-                        <li><strong>Belmar, F.</strong>, Lara, B., & Miguieles, J. (2024). Unpacking electoral competition: Campaign spending, vote distribution and turnout in Chilean mayoral elections. <em>Policy Studies</em>. <a href="https://doi.org/10.1080/01442872.2024.2427280">https://doi.org/10.1080/01442872.2024.2427280</a></li>
+        <!-- Panel: Artículos -->
+        <div class="tab-panel active" id="panel-articulos">
+            <section id="articulos">
+                <h2>Artículos I <span class="subtitle">(WoS y/o Scopus)</span></h2>
+                <p>Publicaciones científicas revisadas por pares en revistas académicas de alto impacto, indexadas en bases de datos internacionales como Web of Science y Scopus.</p>
+                <ol start="8" reversed class="scrollable-list">
+                    <li data-abstract="La investigación sobre corrupción se ha concentrado principalmente en el sector público, dejando de lado la corrupción privada. Este artículo analiza esta asimetría y propone un marco integrador para el estudio de la corrupción en ambos sectores."><strong>Belmar, F.</strong>, & Mascareño, A. (2025). Corruption: An uneven field of research—Between state and private topics. <em>Societies</em>, 15(7), 186. <a href="https://doi.org/10.3390/soc15070186">https://doi.org/10.3390/soc15070186</a></li>
 
-                        <li><strong>Belmar, F.</strong>, Maldonado, F., & Morales, M. (2024). In search of the missing link: Election law infractions and candidate sanctions. <em>Public Integrity</em>. <a href="https://doi.org/10.1080/10999922.2024.2364384">https://doi.org/10.1080/10999922.2024.2364384</a></li>
+                    <li><strong>Belmar, F.</strong>, & Morales, M. (2025). Ethnic solidarity in the non-programmatic distribution of benefits: The case of Mapuche mayors in Chile. <em>Ethnic and Racial Studies</em>. <a href="https://doi.org/10.1080/01419870.2025.2470896">https://doi.org/10.1080/01419870.2025.2470896</a></li>
 
-                        <li><strong>Belmar, F.</strong>, Morales, M., & Villarroel, B. (2023). Writing constitution without parties? The programmatic weakness of party-voter linkages in the Chilean political change. <em>Politics</em>, 45(1). <a href="https://doi.org/10.1177/02633957231158073">https://doi.org/10.1177/02633957231158073</a></li>
+                    <li><strong>Belmar, F.</strong>, Lara, B., & Miguieles, J. (2024). Unpacking electoral competition: Campaign spending, vote distribution and turnout in Chilean mayoral elections. <em>Policy Studies</em>. <a href="https://doi.org/10.1080/01442872.2024.2427280">https://doi.org/10.1080/01442872.2024.2427280</a></li>
 
-                        <li><strong>Belmar, F.</strong>, Contreras, G., Morales, M., & Troncoso, C. (2023). Demanding non-programmatic distribution: Evidence from local governments in Chile. <em>Policy Studies</em>. <a href="https://doi.org/10.1080/01442872.2023.2172718">https://doi.org/10.1080/01442872.2023.2172718</a></li>
+                    <li><strong>Belmar, F.</strong>, Maldonado, F., & Morales, M. (2024). In search of the missing link: Election law infractions and candidate sanctions. <em>Public Integrity</em>. <a href="https://doi.org/10.1080/10999922.2024.2364384">https://doi.org/10.1080/10999922.2024.2364384</a></li>
 
-                        <li>Morales, M., & <strong>Belmar, F.</strong> (2022). Clientelism, turnout and incumbents' performance in Chilean local government elections. <em>Social Sciences</em>, 11(8), 361. <a href="https://doi.org/10.3390/socsci11080361">https://doi.org/10.3390/socsci11080361</a></li>
+                    <li><strong>Belmar, F.</strong>, Morales, M., & Villarroel, B. (2023). Writing constitution without parties? The programmatic weakness of party-voter linkages in the Chilean political change. <em>Politics</em>, 45(1). <a href="https://doi.org/10.1177/02633957231158073">https://doi.org/10.1177/02633957231158073</a></li>
 
-                        <li><strong>Belmar, F.</strong>, & Morales, M. (2020). Clientelismo en la gestión local: El caso de los alcaldes en Chile, 2015-2016. <em>Política y Sociedad</em>, 57(2), 567-591. <a href="https://doi.org/10.5209/poso.62315">https://doi.org/10.5209/poso.62315</a></li>
-                    </ol>
-                </section>
+                    <li><strong>Belmar, F.</strong>, Contreras, G., Morales, M., & Troncoso, C. (2023). Demanding non-programmatic distribution: Evidence from local governments in Chile. <em>Policy Studies</em>. <a href="https://doi.org/10.1080/01442872.2023.2172718">https://doi.org/10.1080/01442872.2023.2172718</a></li>
 
-                <section id="capitulos">
-                    <h2>Capítulos de libro</h2>
-                    <p>Contribuciones a libros académicos y volúmenes colectivos editados, desarrollados en colaboración con instituciones académicas nacionales e internacionales.</p>
-                    <ol start="4" reversed class="scrollable-list">
-                        <li><strong>Belmar, F.</strong>, & Herrera, M. (2024). Descentralización y participación ciudadana en Chile: evaluación de la autonomía de los gobiernos locales. En Lagos Rojas, F. (Ed.), <em>La revolución silente: Primer Congreso Patagónico de Descentralización en Chile</em> (pp. 49-70). Tirant Lo Blanch.</li>
+                    <li>Morales, M., & <strong>Belmar, F.</strong> (2022). Clientelism, turnout and incumbents' performance in Chilean local government elections. <em>Social Sciences</em>, 11(8), 361. <a href="https://doi.org/10.3390/socsci11080361">https://doi.org/10.3390/socsci11080361</a></li>
 
-                        <li><strong>Belmar, F.</strong> (2020). Las tecnologías al servicio de la comunicación y el funcionamiento interno de los parlamentos. En Benamor Rivas, M., Fernández Collado, C., Galguera García, L., Rubio Núñez, R., & Ocampo Jaramillo, E. (Dirs.), <em>Parlamentos conectados: Estrategias para lograr una mejor comunicación política de los Parlamentos de Iberoamérica</em>. Universidad de Oviedo.</li>
+                    <li><strong>Belmar, F.</strong>, & Morales, M. (2020). Clientelismo en la gestión local: El caso de los alcaldes en Chile, 2015-2016. <em>Política y Sociedad</em>, 57(2), 567-591. <a href="https://doi.org/10.5209/poso.62315">https://doi.org/10.5209/poso.62315</a></li>
+                </ol>
+            </section>
+        </div>
 
-                        <li><strong>Belmar, F.</strong> (2020). La estrategia de comunicación de los representantes: la construcción de la imagen de los políticos. En Benamor Rivas, M., Fernández Collado, C., Galguera García, L., Rubio Núñez, R., & Ocampo Jaramillo, E. (Dirs.), <em>Parlamentos conectados: Estrategias para lograr una mejor comunicación política de los Parlamentos de Iberoamérica</em>. Universidad de Oviedo.</li>
+        <!-- Panel: Otros artículos -->
+        <div class="tab-panel" id="panel-otros-articulos">
+            <section id="otros-articulos">
+                <h2>Artículos II <span class="subtitle">(otras indexaciones)</span></h2>
+                <p>Publicaciones científicas revisadas por pares en revistas académicas indexadas en bases de datos regionales e internacionales como Latindex, SciELO, DOAJ, Dialnet, entre otras.</p>
+                <ol start="1" reversed class="scrollable-list">
+                    <li>Mañán Arce, O., <strong>Belmar, F.</strong>, & Troncoso Lagos, B. (2025). La discrecionalidad en la administración pública de Chile: Legitimidad, control y ética en la gestión pública contemporánea. <em>Revista Chilena de la Administración del Estado</em>, 14(14). <a href="https://doi.org/10.57211/revista.v14i14.255">https://doi.org/10.57211/revista.v14i14.255</a></li>
+                </ol>
+            </section>
+        </div>
 
-                        <li><strong>Belmar, F.</strong>, Herrera, M., & Obregón, M. (2018). El efecto de la elección de concejales sobre la elección de consejeros regionales 2017. En Morales, M., Navarrete, B., & Vial, C. (Eds.), <em>Política subnacional en Chile: Instituciones, partidos y elecciones</em>. RIL Editores.</li>
-                    </ol>
-                </section>
-            </div>
+        <!-- Panel: Capítulos -->
+        <div class="tab-panel" id="panel-capitulos">
+            <section id="capitulos">
+                <h2>Capítulos de libro</h2>
+                <p>Contribuciones a libros académicos y volúmenes colectivos editados, desarrollados en colaboración con instituciones académicas nacionales e internacionales.</p>
+                <ol start="4" reversed class="scrollable-list">
+                    <li><strong>Belmar, F.</strong>, & Herrera, M. (2024). Descentralización y participación ciudadana en Chile: evaluación de la autonomía de los gobiernos locales. En Lagos Rojas, F. (Ed.), <em>La revolución silente: Primer Congreso Patagónico de Descentralización en Chile</em> (pp. 49-70). Tirant Lo Blanch.</li>
 
-            <div class="column">
-                <section id="otros-articulos">
-                    <h2>Artículos II <span class="subtitle">(otras indexaciones)</span></h2>
-                    <p>Publicaciones científicas revisadas por pares en revistas académicas indexadas en bases de datos regionales e internacionales como Latindex, SciELO, DOAJ, Dialnet, entre otras.</p>
-                    <ol start="1" reversed class="scrollable-list">
-                        <li>Mañán Arce, O., <strong>Belmar, F.</strong>, & Troncoso Lagos, B. (2025). La discrecionalidad en la administración pública de Chile: Legitimidad, control y ética en la gestión pública contemporánea. <em>Revista Chilena de la Administración del Estado</em>, 14(14). <a href="https://doi.org/10.57211/revista.v14i14.255">https://doi.org/10.57211/revista.v14i14.255</a></li>
-                    </ol>
-                </section>
+                    <li><strong>Belmar, F.</strong> (2020). Las tecnologías al servicio de la comunicación y el funcionamiento interno de los parlamentos. En Benamor Rivas, M., Fernández Collado, C., Galguera García, L., Rubio Núñez, R., & Ocampo Jaramillo, E. (Dirs.), <em>Parlamentos conectados: Estrategias para lograr una mejor comunicación política de los Parlamentos de Iberoamérica</em>. Universidad de Oviedo.</li>
 
-                <section id="documentos">
-                    <h2>Documentos</h2>
-                    <p>Documentos de trabajo, policy papers y publicaciones de divulgación científica y técnica dirigidas a audiencias especializadas, tomadores de decisiones y actores del sector público.</p>
-                    <ol start="10" reversed class="scrollable-list">
-                        <li>Mascareño, A., <strong>Belmar, F.</strong>, Rozas, J., & Henríquez, P. A. (2025). Elecciones 2025. Sexto Informe C22-CEP, el agotamiento de la seguridad. <em>Puntos de Referencia</em>, 748. Centro de Estudios Públicos. <a href="https://www.cepchile.cl/investigacion/elecciones-2025-sexto-informe-c22-cep-el-agotamiento-de-la-seguridad/">Enlace</a></li>
+                    <li><strong>Belmar, F.</strong> (2020). La estrategia de comunicación de los representantes: la construcción de la imagen de los políticos. En Benamor Rivas, M., Fernández Collado, C., Galguera García, L., Rubio Núñez, R., & Ocampo Jaramillo, E. (Dirs.), <em>Parlamentos conectados: Estrategias para lograr una mejor comunicación política de los Parlamentos de Iberoamérica</em>. Universidad de Oviedo.</li>
 
-                        <li><strong>Belmar, F.</strong>, Mascareño, A., Rozas, J., & Henríquez, P. A. (2025). Elecciones 2025. Quinto Informe C22-CEP, programas presidenciales. <em>Puntos de Referencia</em>, 747. Centro de Estudios Públicos. <a href="https://www.cepchile.cl/investigacion/elecciones-2025-quinto-informe-c22-cep-programas-presidenciales/">Enlace</a></li>
+                    <li><strong>Belmar, F.</strong>, Herrera, M., & Obregón, M. (2018). El efecto de la elección de concejales sobre la elección de consejeros regionales 2017. En Morales, M., Navarrete, B., & Vial, C. (Eds.), <em>Política subnacional en Chile: Instituciones, partidos y elecciones</em>. RIL Editores.</li>
+                </ol>
+            </section>
+        </div>
 
-                        <li>Mascareño, A., <strong>Belmar, F.</strong>, Rozas, J., & Henríquez, P. A. (2025). Elecciones 2025. Cuarto Informe C22-CEP, autorreferencia política. <em>Puntos de Referencia</em>, 738. Centro de Estudios Públicos. <a href="https://www.cepchile.cl/investigacion/elecciones-2025-cuarto-informe-c22-cep-autorreferencia-politica/">Enlace</a></li>
+        <!-- Panel: Documentos -->
+        <div class="tab-panel" id="panel-documentos">
+            <section id="documentos">
+                <h2>Documentos</h2>
+                <p>Documentos de trabajo, policy papers y publicaciones de divulgación científica y técnica dirigidas a audiencias especializadas, tomadores de decisiones y actores del sector público.</p>
+                <ol start="10" reversed class="scrollable-list">
+                    <li>Mascareño, A., <strong>Belmar, F.</strong>, Rozas, J., & Henríquez, P. A. (2025). Elecciones 2025. Sexto Informe C22-CEP, el agotamiento de la seguridad. <em>Puntos de Referencia</em>, 748. Centro de Estudios Públicos. <a href="https://www.cepchile.cl/investigacion/elecciones-2025-sexto-informe-c22-cep-el-agotamiento-de-la-seguridad/">Enlace</a></li>
 
-                        <li>Mascareño, A., Rozas, J., <strong>Belmar, F.</strong>, & Henríquez, P. A. (2025). Elecciones 2025. Tercer Informe C22-CEP, primarias junio. <em>Puntos de Referencia</em>, 732. Centro de Estudios Públicos. <a href="https://www.cepchile.cl/investigacion/elecciones-2025-tercer-informe-c22-cep-primarias-junio/">Enlace</a></li>
+                    <li><strong>Belmar, F.</strong>, Mascareño, A., Rozas, J., & Henríquez, P. A. (2025). Elecciones 2025. Quinto Informe C22-CEP, programas presidenciales. <em>Puntos de Referencia</em>, 747. Centro de Estudios Públicos. <a href="https://www.cepchile.cl/investigacion/elecciones-2025-quinto-informe-c22-cep-programas-presidenciales/">Enlace</a></li>
 
-                        <li><strong>Belmar, F.</strong>, & VV.AA. (2023). Ciudadanía digital: Derechos y prácticas responsables para una convivencia virtual positiva. INACAP.</li>
+                    <li>Mascareño, A., <strong>Belmar, F.</strong>, Rozas, J., & Henríquez, P. A. (2025). Elecciones 2025. Cuarto Informe C22-CEP, autorreferencia política. <em>Puntos de Referencia</em>, 738. Centro de Estudios Públicos. <a href="https://www.cepchile.cl/investigacion/elecciones-2025-cuarto-informe-c22-cep-autorreferencia-politica/">Enlace</a></li>
 
-                        <li><strong>Belmar, F.</strong>, & Morales, M. (2020). Derecha tradicional vs derecha social: La fisura socioeconómica y generacional que abrió el retiro del 10%. <em>Documento de Análisis</em>. Centro de Análisis Político, Universidad de Talca.</li>
+                    <li>Mascareño, A., Rozas, J., <strong>Belmar, F.</strong>, & Henríquez, P. A. (2025). Elecciones 2025. Tercer Informe C22-CEP, primarias junio. <em>Puntos de Referencia</em>, 732. Centro de Estudios Públicos. <a href="https://www.cepchile.cl/investigacion/elecciones-2025-tercer-informe-c22-cep-primarias-junio/">Enlace</a></li>
 
-                        <li><strong>Belmar, F.</strong>, Morales, M., & Herrera, M. (2019). Reformas iban, reformas venían. <em>Documento de Análisis</em>. Centro de Análisis Político, Universidad de Talca.</li>
+                    <li><strong>Belmar, F.</strong>, & VV.AA. (2023). Ciudadanía digital: Derechos y prácticas responsables para una convivencia virtual positiva. INACAP.</li>
 
-                        <li><strong>Belmar, F.</strong>, & Morales, M. (2018). Cambio al sistema electoral: ¿Qué sucedería en caso de aplicarse la propuesta de Piñera (2013)? <em>Documento de Análisis</em>. Centro de Análisis Político, Universidad de Talca.</li>
+                    <li><strong>Belmar, F.</strong>, & Morales, M. (2020). Derecha tradicional vs derecha social: La fisura socioeconómica y generacional que abrió el retiro del 10%. <em>Documento de Análisis</em>. Centro de Análisis Político, Universidad de Talca.</li>
 
-                        <li><strong>Belmar, F.</strong>, & VV.AA. (2017). Lobby ciudadano. Desafíos y oportunidades a nivel municipal. Fundación Multitudes.</li>
+                    <li><strong>Belmar, F.</strong>, Morales, M., & Herrera, M. (2019). Reformas iban, reformas venían. <em>Documento de Análisis</em>. Centro de Análisis Político, Universidad de Talca.</li>
 
-                        <li><strong>Belmar, F.</strong> (2017). Manual de procedimientos administrativos. Departamento de Capacitación, Servicio de Salud Metropolitano Sur Oriente.</li>
-                    </ol>
-                </section>
+                    <li><strong>Belmar, F.</strong>, & Morales, M. (2018). Cambio al sistema electoral: ¿Qué sucedería en caso de aplicarse la propuesta de Piñera (2013)? <em>Documento de Análisis</em>. Centro de Análisis Político, Universidad de Talca.</li>
 
-                <section id="prensa">
-                    <h2>Prensa <span class="subtitle">(en construcción)</span></h2>
-                    <p>Columnas de opinión, artículos de divulgación, entrevistas y apariciones en medios de comunicación escritos, radiales y televisivos, tanto nacionales como internacionales.</p>
-                </section>
-            </div>
+                    <li><strong>Belmar, F.</strong>, & VV.AA. (2017). Lobby ciudadano. Desafíos y oportunidades a nivel municipal. Fundación Multitudes.</li>
+
+                    <li><strong>Belmar, F.</strong> (2017). Manual de procedimientos administrativos. Departamento de Capacitación, Servicio de Salud Metropolitano Sur Oriente.</li>
+                </ol>
+            </section>
+        </div>
+
+        <!-- Panel: Prensa -->
+        <div class="tab-panel" id="panel-prensa">
+            <section id="prensa">
+                <h2>Prensa <span class="subtitle">(en construcción)</span></h2>
+                <p>Columnas de opinión, artículos de divulgación, entrevistas y apariciones en medios de comunicación escritos, radiales y televisivos, tanto nacionales como internacionales.</p>
+            </section>
+        </div>
+
+        <!-- Panel: Desarrollo -->
+        <div class="tab-panel" id="panel-desarrollo">
+            <section id="proyectos">
+                <h2>Proyectos <span class="subtitle">(en construcción)</span></h2>
+                <p>Plataformas web y herramientas de visualización de datos para la investigación y el análisis político.</p>
+                <div class="project-cards">
+                    <div class="project-card">
+                        <h3>Ranking de ciencias sociales</h3>
+                        <p>Plataforma de visualización de datos para el posicionamiento y comparación de programas e investigadores en ciencias sociales.</p>
+                        <span class="project-status">En desarrollo</span>
+                    </div>
+                    <div class="project-card">
+                        <h3>Seguimiento de votaciones del Congreso</h3>
+                        <p>Plataforma de monitoreo de las votaciones en la Cámara de Diputados y el Senado de Chile.</p>
+                        <span class="project-status">En desarrollo</span>
+                    </div>
+                    <div class="project-card">
+                        <h3>Análisis NLP del Congreso</h3>
+                        <p>Herramienta de procesamiento de lenguaje natural aplicada al análisis de sesiones parlamentarias a partir de videos de YouTube.</p>
+                        <span class="project-status">En desarrollo</span>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 
+    <script src="script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const articulo = document.querySelector('#articulos .scrollable-list li');
-            const container = document.getElementById('ultima-pub');
-
-            if (articulo) {
-                const texto = articulo.innerHTML;
-                const match = texto.match(/\((\d{4})\)\.\s*([^.]+\.)/);
-                const año = match ? match[1] : '';
-                const titulo = match ? match[2].trim() : '';
-                const revista = articulo.querySelector('em') ? articulo.querySelector('em').textContent : '';
-                const link = articulo.querySelector('a') ? articulo.querySelector('a').href : '';
-                const abstract = articulo.dataset.abstract || '';
-
-                container.innerHTML = `
-                    <p class="ultima-titulo">${titulo}</p>
-                    <p class="ultima-meta"><em>${revista}</em> (${año})${link ? ` <a href="${link}" class="ultima-link">Ver artículo →</a>` : ''}</p>
-                    ${abstract ? `<p class="ultima-abstract">${abstract}</p>` : ''}
-                `;
-            }
+            var theme = document.documentElement.getAttribute('data-theme') || 'light';
+            updateThemeButton(theme);
         });
     </script>
 </body>
