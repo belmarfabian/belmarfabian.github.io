@@ -658,4 +658,8 @@ a:hover {
         font-size: 0.65rem;
         padding: 0.5rem 0.8rem;
     }
+
+    .scrollable-list a[href^="https://doi.org/"] {
+        display: none;
+    }
 }
