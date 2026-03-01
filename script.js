@@ -1,5 +1,16 @@
-/* ===== Última publicación (migrated from inline) ===== */
+/* ===== Init ===== */
 document.addEventListener('DOMContentLoaded', function () {
+    initUltimaPub();
+    initUltimaPrensa();
+    initTabs();
+    initMetadata();
+    initAbstracts();
+    initSearch();
+    initUpdateDate();
+});
+
+/* ===== Última publicación (auto from first article) ===== */
+function initUltimaPub() {
     var articulo = document.querySelector('#articulos .scrollable-list li');
     var container = document.getElementById('ultima-pub');
 
@@ -23,16 +34,54 @@ document.addEventListener('DOMContentLoaded', function () {
             '</p>' +
             (abstract ? '<p class="ultima-abstract">' + abstract + '</p>' : '');
     }
+}
 
-    initTabs();
-    initMetadata();
-    initAbstracts();
-    initSearch();
-});
+/* ===== Última prensa (auto from first press item) ===== */
+function initUltimaPrensa() {
+    var prensaItem = document.querySelector('#prensa .scrollable-list li');
+    var container = document.getElementById('ultima-prensa');
 
-/* ===== Tabs ===== */
+    if (prensaItem && container) {
+        var texto = prensaItem.innerHTML;
+        var match = texto.match(/\((\d{4})\)\.\s*([^.]+\.)/);
+        var titulo = match ? match[2].trim() : '';
+        var emEl = prensaItem.querySelector('em');
+        var medio = emEl ? emEl.textContent : '';
+        var linkEl = prensaItem.querySelector('a');
+        var link = linkEl ? linkEl.href : '';
+        var yearMatch = texto.match(/\((\d{4})\)/);
+        var año = yearMatch ? yearMatch[1] : '';
+
+        container.innerHTML =
+            '<p class="ultima-prensa-titulo">' + titulo + '</p>' +
+            '<p class="ultima-prensa-meta"><em>' + medio + '</em> (' + año + ')' +
+            (link ? ' <a href="' + link + '" class="ultima-link">Ver →</a>' : '') +
+            '</p>';
+    }
+}
+
+/* ===== Tabs with item counts ===== */
 function initTabs() {
     var tabs = document.querySelectorAll('.tab');
+
+    // Add item counts to each tab
+    tabs.forEach(function (tab) {
+        var target = tab.getAttribute('data-tab');
+        var panel = document.getElementById('panel-' + target);
+        if (panel) {
+            var items = panel.querySelectorAll('.scrollable-list li');
+            var cards = panel.querySelectorAll('.project-card');
+            var count = items.length + cards.length;
+            if (count > 0) {
+                var countSpan = document.createElement('span');
+                countSpan.className = 'tab-count';
+                countSpan.textContent = count;
+                tab.appendChild(countSpan);
+            }
+        }
+    });
+
+    // Tab click handlers
     tabs.forEach(function (tab) {
         tab.addEventListener('click', function () {
             var target = tab.getAttribute('data-tab');
@@ -153,9 +202,33 @@ function initSearch() {
     var counter = document.querySelector('.search-counter');
     if (!input) return;
 
-    var sections = document.querySelectorAll('.tab-panel section');
-    var allItems = [];
+    var tabs = document.querySelectorAll('.tab');
+    var panels = {};
 
+    // Map tabs to their panels and items
+    tabs.forEach(function (tab) {
+        var target = tab.getAttribute('data-tab');
+        var panel = document.getElementById('panel-' + target);
+        if (panel) {
+            panels[target] = {
+                tab: tab,
+                panel: panel,
+                sections: panel.querySelectorAll('section'),
+                items: []
+            };
+            var items = panel.querySelectorAll('.scrollable-list li');
+            items.forEach(function (li) {
+                panels[target].items.push({
+                    el: li,
+                    text: li.textContent.toLowerCase(),
+                    section: li.closest('section')
+                });
+            });
+        }
+    });
+
+    var allItems = [];
+    var sections = document.querySelectorAll('.tab-panel section');
     sections.forEach(function (section) {
         var items = section.querySelectorAll('.scrollable-list li');
         items.forEach(function (li) {
@@ -174,19 +247,19 @@ function initSearch() {
     input.addEventListener('input', function () {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(function () {
-            filterPublications(input.value, allItems, sections, counter, totalCount);
+            filterPublications(input.value, allItems, sections, counter, totalCount, panels);
         }, 150);
     });
 
     input.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             input.value = '';
-            filterPublications('', allItems, sections, counter, totalCount);
+            filterPublications('', allItems, sections, counter, totalCount, panels);
         }
     });
 }
 
-function filterPublications(query, allItems, sections, counter, totalCount) {
+function filterPublications(query, allItems, sections, counter, totalCount, panels) {
     var tokens = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
     var visibleCount = 0;
 
@@ -216,6 +289,31 @@ function filterPublications(query, allItems, sections, counter, totalCount) {
         }
     });
 
+    // Update per-tab match counts
+    Object.keys(panels).forEach(function (key) {
+        var p = panels[key];
+        var countSpan = p.tab.querySelector('.tab-count');
+        if (!countSpan) return;
+
+        if (tokens.length === 0) {
+            // No search: show total items
+            var totalItems = p.panel.querySelectorAll('.scrollable-list li').length +
+                             p.panel.querySelectorAll('.project-card').length;
+            countSpan.textContent = totalItems;
+            countSpan.classList.remove('tab-count-filtered');
+        } else {
+            // Search active: show matching items
+            var matchCount = 0;
+            p.items.forEach(function (item) {
+                if (!item.el.classList.contains('search-hidden')) {
+                    matchCount++;
+                }
+            });
+            countSpan.textContent = matchCount;
+            countSpan.classList.toggle('tab-count-filtered', matchCount > 0);
+        }
+    });
+
     updateCounter(counter, visibleCount, totalCount);
 }
 
@@ -226,6 +324,17 @@ function updateCounter(counter, visible, total) {
     } else {
         counter.textContent = visible + ' de ' + total + ' publicaciones';
     }
+}
+
+/* ===== Auto-update date ===== */
+function initUpdateDate() {
+    var el = document.querySelector('.update-notice');
+    if (!el) return;
+    var meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    var now = new Date();
+    var fecha = now.getDate() + ' de ' + meses[now.getMonth()] + ' de ' + now.getFullYear();
+    el.textContent = 'Última actualización: ' + fecha + '.';
 }
 
 /* ===== Dark Mode ===== */

@@ -327,6 +327,25 @@ h2 + p {
     border-bottom-color: var(--color-yellow);
 }
 
+.tab-count {
+    font-size: 0.55rem;
+    font-weight: normal;
+    color: var(--color-text-faint);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.05rem 0.3rem;
+    border-radius: 8px;
+    margin-left: 0.3rem;
+    vertical-align: middle;
+    transition: var(--theme-transition);
+}
+
+.tab-count-filtered {
+    background-color: var(--color-red);
+    color: #fff;
+    border-color: var(--color-red);
+}
+
 .tab-panel {
     display: none;
 }
