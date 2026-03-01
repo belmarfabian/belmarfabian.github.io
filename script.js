@@ -154,12 +154,14 @@ function initMetadata() {
             var qSpan = document.createElement('span');
             qSpan.className = 'pub-quartile pub-quartile-' + quartile.toLowerCase();
             qSpan.textContent = quartile;
+            qSpan.setAttribute('data-tooltip', 'Mejor cuartil SJR');
             meta.appendChild(qSpan);
         }
 
         if (citescore) {
             var sSpan = document.createElement('span');
             sSpan.className = 'pub-score';
+            sSpan.setAttribute('data-tooltip', 'Scopus CiteScore 2024');
             sSpan.textContent = citescore;
             meta.appendChild(sSpan);
         }
@@ -314,7 +316,76 @@ function filterPublications(query, allItems, sections, counter, totalCount, pane
         }
     });
 
+    // Highlight matching text
+    highlightMatches(allItems, tokens);
+
     updateCounter(counter, visibleCount, totalCount);
+}
+
+function highlightMatches(allItems, tokens) {
+    allItems.forEach(function (item) {
+        // Remove previous highlights
+        var marks = item.el.querySelectorAll('.search-highlight');
+        marks.forEach(function (mark) {
+            var parent = mark.parentNode;
+            parent.replaceChild(document.createTextNode(mark.textContent), mark);
+            parent.normalize();
+        });
+
+        if (tokens.length === 0 || item.el.classList.contains('search-hidden')) return;
+
+        // Only highlight in text nodes of .pub-citation or direct li children
+        var walker = document.createTreeWalker(item.el, NodeFilter.SHOW_TEXT, null, false);
+        var textNodes = [];
+        var node;
+        while (node = walker.nextNode()) {
+            if (node.parentNode.tagName === 'A' || node.parentNode.classList.contains('pub-meta') ||
+                node.parentNode.classList.contains('abstract-content') ||
+                node.parentNode.classList.contains('search-highlight')) continue;
+            textNodes.push(node);
+        }
+
+        textNodes.forEach(function (textNode) {
+            var text = textNode.textContent;
+            var lowerText = text.toLowerCase();
+            var hasMatch = tokens.some(function (t) { return lowerText.indexOf(t) !== -1; });
+            if (!hasMatch) return;
+
+            var frag = document.createDocumentFragment();
+            var remaining = text;
+            var lowerRemaining = remaining.toLowerCase();
+
+            while (remaining.length > 0) {
+                var earliest = -1;
+                var earliestToken = '';
+                tokens.forEach(function (t) {
+                    var idx = lowerRemaining.indexOf(t);
+                    if (idx !== -1 && (earliest === -1 || idx < earliest)) {
+                        earliest = idx;
+                        earliestToken = t;
+                    }
+                });
+
+                if (earliest === -1) {
+                    frag.appendChild(document.createTextNode(remaining));
+                    break;
+                }
+
+                if (earliest > 0) {
+                    frag.appendChild(document.createTextNode(remaining.substring(0, earliest)));
+                }
+                var span = document.createElement('span');
+                span.className = 'search-highlight';
+                span.textContent = remaining.substring(earliest, earliest + earliestToken.length);
+                frag.appendChild(span);
+
+                remaining = remaining.substring(earliest + earliestToken.length);
+                lowerRemaining = remaining.toLowerCase();
+            }
+
+            textNode.parentNode.replaceChild(frag, textNode);
+        });
+    });
 }
 
 function updateCounter(counter, visible, total) {

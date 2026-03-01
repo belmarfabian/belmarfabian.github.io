@@ -352,6 +352,12 @@ h2 + p {
 
 .tab-panel.active {
     display: block;
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ===== Lists ===== */
@@ -614,6 +620,52 @@ a:hover {
 
 .search-hidden {
     display: none !important;
+}
+
+.search-highlight {
+    background-color: var(--color-highlight);
+    padding: 0 1px;
+    border-radius: 1px;
+}
+
+/* ===== Tooltips ===== */
+.pub-quartile,
+.pub-score {
+    position: relative;
+    cursor: help;
+}
+
+.pub-quartile::after,
+.pub-score::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-text);
+    color: var(--color-bg);
+    font-size: 0.55rem;
+    font-weight: normal;
+    padding: 0.2rem 0.4rem;
+    border-radius: 2px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+    margin-bottom: 4px;
+}
+
+.pub-quartile:hover::after,
+.pub-score:hover::after {
+    opacity: 1;
+}
+
+/* ===== Avatar ===== */
+.inicio-avatar {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    margin-right: 1rem;
 }
 
 .section-hidden {
