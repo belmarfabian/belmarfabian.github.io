@@ -546,8 +546,8 @@ a:hover {
 }
 
 .pub-quartile-q2 {
-    background-color: #E8D559;
-    color: #333;
+    background-color: #d4c14a;
+    color: #fff;
 }
 
 .pub-quartile-q3 {
@@ -831,12 +831,6 @@ a:hover {
     margin-left: 0.3rem;
 }
 
-/* ===== Citation Badge ===== */
-.citation-count {
-    font-size: 0.6rem;
-    color: var(--color-text-faint);
-    margin-left: 0.2rem;
-}
 
 /* ===== Footer ===== */
 .site-footer {

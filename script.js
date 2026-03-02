@@ -493,10 +493,7 @@ function initCitations() {
         .then(function (data) {
             var count = data.cited_by_count;
             if (count) {
-                var badge = document.createElement('span');
-                badge.className = 'citation-count';
-                badge.textContent = '(' + count + ' citas)';
-                scholarLink.parentNode.insertBefore(badge, scholarLink.nextSibling);
+                scholarLink.textContent = 'Google Scholar (' + count + ')';
             }
         })
         .catch(function () {});
