@@ -31,7 +31,7 @@
     --color-scrollbar-hover: #999;
 
     /* Transitions */
-    --theme-transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+    --theme-transition: color 0.5s ease, background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 /* ===== Dark Mode ===== */
@@ -129,12 +129,13 @@ body::before {
     cursor: pointer;
     padding: 0.2rem 0.4rem;
     border-radius: 3px;
-    transition: var(--theme-transition);
+    transition: color 0.5s ease, background-color 0.5s ease, border-color 0.5s ease, transform 0.3s ease;
     flex-shrink: 0;
 }
 
 .theme-toggle:hover {
     background-color: var(--color-highlight);
+    transform: rotate(180deg);
 }
 
 .inicio-header {
@@ -150,16 +151,18 @@ body::before {
 
 /* ===== Typography ===== */
 h1 {
-    font-size: 1.3rem;
-    font-weight: bold;
+    font-size: 1.6rem;
+    font-weight: 700;
     margin-bottom: 0.4rem;
     border-left: 5px solid var(--color-red);
     padding-left: 0.5rem;
+    letter-spacing: 0.02em;
 }
 
 .info {
     margin-bottom: 0.3rem;
     line-height: 1.4;
+    font-weight: 300;
 }
 
 .contact {
@@ -200,9 +203,21 @@ section {
 
 .inicio-recientes {
     border: 1px solid var(--color-border);
+    border-left: none;
     padding: 0.75rem 1rem 1rem 1rem;
     background-color: var(--color-surface);
     transition: var(--theme-transition);
+    position: relative;
+}
+
+.inicio-recientes::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--color-red) 33.33%, var(--color-blue) 33.33% 66.66%, var(--color-yellow) 66.66%);
 }
 
 .inicio-recientes h3 {
@@ -262,7 +277,7 @@ section {
 /* ===== Section Headings ===== */
 h2 {
     font-size: 0.9rem;
-    font-weight: bold;
+    font-weight: 500;
     margin-bottom: 0.4rem;
     border-bottom: 2px solid var(--color-border-dark);
     padding-bottom: 0.4rem;
@@ -425,6 +440,11 @@ h2 + p {
     border: 1px solid var(--color-border);
     padding: 0.25rem 1rem 0.25rem 2.5rem;
     transition: var(--theme-transition);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .scrollable-list {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .scrollable-list::-webkit-scrollbar {
@@ -496,20 +516,54 @@ a:hover {
 }
 
 /* Colores distintivos para enlaces académicos */
+.scholar,
+.orcid,
+.scopus,
+.researchgate {
+    position: relative;
+    padding-left: 0.7rem;
+}
+
+.scholar::before,
+.orcid::before,
+.scopus::before,
+.researchgate::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
 .scholar {
     color: var(--color-scholar);
+}
+.scholar::before {
+    background-color: var(--color-scholar);
 }
 
 .orcid {
     color: var(--color-orcid);
 }
+.orcid::before {
+    background-color: var(--color-orcid);
+}
 
 .scopus {
     color: var(--color-scopus);
 }
+.scopus::before {
+    background-color: var(--color-scopus);
+}
 
 .researchgate {
     color: var(--color-researchgate);
+}
+.researchgate::before {
+    background-color: var(--color-researchgate);
 }
 
 .scholar:hover,
@@ -879,18 +933,20 @@ a:hover {
 .site-footer {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
+    padding: 2rem 2rem;
     border-top: 1px solid var(--color-border);
     font-size: 0.6rem;
     color: var(--color-text-faint);
     text-align: center;
     transition: var(--theme-transition);
+    letter-spacing: 0.03em;
 }
 
 .site-footer a {
-    color: var(--color-text-faint);
+    color: var(--color-text-muted);
     text-decoration: none;
     transition: color 0.2s;
+    padding: 0 0.3rem;
 }
 
 .site-footer a:hover {
