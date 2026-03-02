@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initBackToTop();
     initTimeline();
     initCitations();
+    initEqualHeight();
 });
 
 /* ===== Última publicación (auto from first article) ===== */
@@ -426,6 +427,41 @@ function updateThemeButton(theme) {
         btn.textContent = theme === 'dark' ? '◑' : '◐';
         btn.setAttribute('aria-label',
             theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+    }
+}
+
+/* ===== Equal Height for Publications ===== */
+function initEqualHeight() {
+    // Need all panels visible momentarily to measure
+    var panels = document.querySelectorAll('.tab-panel');
+    panels.forEach(function (p) {
+        if (!p.classList.contains('active')) {
+            p.style.display = 'block';
+            p.style.visibility = 'hidden';
+            p.style.position = 'absolute';
+        }
+    });
+
+    var items = document.querySelectorAll('.scrollable-list li');
+    var maxHeight = 0;
+    items.forEach(function (li) {
+        var h = li.offsetHeight;
+        if (h > maxHeight) maxHeight = h;
+    });
+
+    // Restore panels
+    panels.forEach(function (p) {
+        if (!p.classList.contains('active')) {
+            p.style.display = '';
+            p.style.visibility = '';
+            p.style.position = '';
+        }
+    });
+
+    if (maxHeight > 0) {
+        items.forEach(function (li) {
+            li.style.minHeight = maxHeight + 'px';
+        });
     }
 }
 
