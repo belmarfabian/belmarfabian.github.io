@@ -377,6 +377,31 @@ h2 + p {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* ===== Entry Animation ===== */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#inicio {
+    animation: slideUp 0.4s ease both;
+}
+
+.search-container {
+    animation: slideUp 0.4s ease 0.1s both;
+}
+
+.tabs {
+    animation: slideUp 0.4s ease 0.15s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 /* ===== Lists ===== */
 .scrollable-list {
     border: 1px solid var(--color-border);
@@ -689,6 +714,128 @@ a:hover {
 
 .section-hidden {
     display: none !important;
+}
+
+/* ===== Back to Top ===== */
+.back-to-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 36px;
+    height: 36px;
+    background-color: var(--color-text);
+    color: var(--color-bg);
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top.visible {
+    opacity: 0.6;
+    pointer-events: auto;
+}
+
+.back-to-top:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+/* ===== Timeline ===== */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--color-border);
+}
+
+.timeline-year {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-year-label {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.timeline-year-label::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-red);
+    border: 2px solid var(--color-bg);
+}
+
+.timeline-year:nth-child(3n+2) .timeline-year-label::before {
+    background-color: var(--color-blue);
+}
+
+.timeline-year:nth-child(3n) .timeline-year-label::before {
+    background-color: var(--color-yellow);
+}
+
+.timeline-items {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline-item {
+    font-size: 0.7rem;
+    line-height: 1.4;
+    padding: 0.4rem 0.6rem;
+    margin-bottom: 0.25rem;
+    border-left: 2px solid var(--color-border);
+    color: var(--color-text-body);
+    transition: background-color 0.15s;
+}
+
+.timeline-item:hover {
+    background-color: var(--color-surface);
+}
+
+.timeline-item-type {
+    font-size: 0.55rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-text-faint);
+    margin-right: 0.3rem;
+}
+
+.timeline-item a {
+    color: var(--color-link);
+    font-size: 0.6rem;
+    margin-left: 0.3rem;
+}
+
+/* ===== Citation Badge ===== */
+.citation-count {
+    font-size: 0.6rem;
+    color: var(--color-text-faint);
+    margin-left: 0.2rem;
 }
 
 /* ===== Footer ===== */

@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
     initAbstracts();
     initSearch();
     initUpdateDate();
+    initBackToTop();
+    initTimeline();
+    initCitations();
 });
 
 /* ===== Última publicación (auto from first article) ===== */
@@ -424,4 +427,150 @@ function updateThemeButton(theme) {
         btn.setAttribute('aria-label',
             theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
     }
+}
+
+/* ===== Back to Top ===== */
+function initBackToTop() {
+    var btn = document.querySelector('.back-to-top');
+    if (!btn) return;
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    });
+
+    btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+/* ===== Citation Count (OpenAlex) ===== */
+function initCitations() {
+    var scholarLink = document.querySelector('.scholar');
+    if (!scholarLink) return;
+
+    fetch('https://api.openalex.org/authors/orcid:0000-0003-4239-1874')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            var count = data.cited_by_count;
+            if (count) {
+                var badge = document.createElement('span');
+                badge.className = 'citation-count';
+                badge.textContent = '(' + count + ' citas)';
+                scholarLink.parentNode.insertBefore(badge, scholarLink.nextSibling);
+            }
+        })
+        .catch(function () {});
+}
+
+/* ===== Timeline ===== */
+function initTimeline() {
+    var container = document.getElementById('timeline-container');
+    if (!container) return;
+
+    var TYPE_LABELS = {
+        'articulos': 'Artículo',
+        'otros-articulos': 'Artículo',
+        'capitulos': 'Capítulo',
+        'documentos': 'Documento',
+        'prensa': 'Prensa'
+    };
+
+    // Collect all publications from all panels
+    var items = [];
+    var panels = document.querySelectorAll('.tab-panel');
+
+    panels.forEach(function (panel) {
+        var panelId = panel.id.replace('panel-', '');
+        var type = TYPE_LABELS[panelId];
+        if (!type) return;
+
+        var lis = panel.querySelectorAll('.scrollable-list li');
+        lis.forEach(function (li) {
+            var yearMatch = li.textContent.match(/\((\d{4})\)/);
+            if (!yearMatch) return;
+            var year = parseInt(yearMatch[1]);
+
+            // Extract short title
+            var text = li.textContent;
+            var titleMatch = text.match(/\(\d{4}\)\.\s*([^.]+\.)/);
+            var title = titleMatch ? titleMatch[1].trim() : '';
+            if (title.length > 80) title = title.substring(0, 77) + '...';
+
+            // Get source
+            var emEl = li.querySelector('em');
+            var source = emEl ? emEl.textContent : '';
+
+            // Get link
+            var linkEl = li.querySelector('a');
+            var link = linkEl ? linkEl.href : '';
+
+            items.push({
+                year: year,
+                type: type,
+                title: title,
+                source: source,
+                link: link
+            });
+        });
+    });
+
+    // Sort by year descending
+    items.sort(function (a, b) { return b.year - a.year; });
+
+    // Group by year
+    var years = {};
+    items.forEach(function (item) {
+        if (!years[item.year]) years[item.year] = [];
+        years[item.year].push(item);
+    });
+
+    // Render
+    var sortedYears = Object.keys(years).sort(function (a, b) { return b - a; });
+    sortedYears.forEach(function (year) {
+        var yearDiv = document.createElement('div');
+        yearDiv.className = 'timeline-year';
+
+        var label = document.createElement('div');
+        label.className = 'timeline-year-label';
+        label.textContent = year;
+        yearDiv.appendChild(label);
+
+        var list = document.createElement('div');
+        list.className = 'timeline-items';
+
+        years[year].forEach(function (item) {
+            var itemDiv = document.createElement('div');
+            itemDiv.className = 'timeline-item';
+
+            var typeSpan = document.createElement('span');
+            typeSpan.className = 'timeline-item-type';
+            typeSpan.textContent = item.type;
+            itemDiv.appendChild(typeSpan);
+
+            itemDiv.appendChild(document.createTextNode(item.title));
+
+            if (item.source) {
+                var sourceEm = document.createElement('em');
+                sourceEm.textContent = ' ' + item.source;
+                sourceEm.style.color = 'var(--color-text-muted)';
+                itemDiv.appendChild(sourceEm);
+            }
+
+            if (item.link) {
+                var a = document.createElement('a');
+                a.href = item.link;
+                a.textContent = '→';
+                itemDiv.appendChild(a);
+            }
+
+            list.appendChild(itemDiv);
+        });
+
+        yearDiv.appendChild(list);
+        container.appendChild(yearDiv);
+    });
 }
