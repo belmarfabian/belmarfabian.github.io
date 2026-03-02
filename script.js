@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     initBackToTop();
     initTimeline();
     initEqualHeight();
+    initScrollProgress();
+    initCopyCite();
 });
 
 /* ===== Última publicación (auto from first article) ===== */
@@ -184,20 +186,24 @@ function initAbstracts() {
         if (!abstract) return;
 
         // Wrap citation content
-        var wrapper = document.createElement('div');
-        wrapper.className = 'pub-citation';
+        var citation = document.createElement('div');
+        citation.className = 'pub-citation';
         while (li.firstChild) {
-            wrapper.appendChild(li.firstChild);
+            citation.appendChild(li.firstChild);
         }
-        li.appendChild(wrapper);
 
-        // Abstract always visible
+        // Abstract
         var content = document.createElement('div');
         content.className = 'abstract-content';
         content.textContent = abstract;
-        li.appendChild(content);
 
-        li.classList.add('abstract-open');
+        // Layout wrapper (flex container instead of li)
+        var layout = document.createElement('div');
+        layout.className = 'abstract-layout';
+        layout.appendChild(citation);
+        layout.appendChild(content);
+
+        li.appendChild(layout);
     });
 }
 
@@ -462,6 +468,57 @@ function initEqualHeight() {
             li.style.minHeight = maxHeight + 'px';
         });
     }
+}
+
+/* ===== Scroll Progress ===== */
+function initScrollProgress() {
+    var bar = document.querySelector('.scroll-progress');
+    if (!bar) return;
+
+    window.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = progress + '%';
+    });
+}
+
+/* ===== Copy Citation ===== */
+function initCopyCite() {
+    var items = document.querySelectorAll('.scrollable-list li');
+
+    items.forEach(function (li) {
+        var btn = document.createElement('button');
+        btn.className = 'copy-cite';
+        btn.textContent = 'Copiar';
+        btn.setAttribute('aria-label', 'Copiar cita');
+
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            // Get clean citation text (without metadata badges)
+            var citation = li.querySelector('.pub-citation');
+            var text = citation ? citation.textContent.trim() : li.textContent.trim();
+            // Clean up extra whitespace
+            text = text.replace(/\s+/g, ' ').replace(/ (Copiar|Copiado)/g, '').trim();
+
+            navigator.clipboard.writeText(text).then(function () {
+                btn.textContent = 'Copiado';
+                btn.classList.add('copied');
+                setTimeout(function () {
+                    btn.textContent = 'Copiar';
+                    btn.classList.remove('copied');
+                }, 1500);
+            });
+        });
+
+        // Add button to the pub-meta row if it exists, otherwise at the end
+        var meta = li.querySelector('.pub-meta');
+        if (meta) {
+            meta.appendChild(btn);
+        } else {
+            li.appendChild(btn);
+        }
+    });
 }
 
 /* ===== Back to Top ===== */

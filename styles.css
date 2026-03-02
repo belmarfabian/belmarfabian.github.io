@@ -73,6 +73,24 @@ html {
     scroll-behavior: smooth;
 }
 
+/* ===== Selection Color ===== */
+::selection {
+    background-color: var(--color-yellow);
+    color: #000;
+}
+
+/* ===== Scroll Progress ===== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--color-red), var(--color-blue), var(--color-yellow));
+    width: 0%;
+    z-index: 200;
+    transition: width 0.1s linear;
+}
+
 body {
     font-family: 'Roboto Mono', monospace;
     font-size: 0.75rem;
@@ -294,6 +312,12 @@ h2 + p {
     gap: 0;
     margin-bottom: 2rem;
     border-bottom: 2px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    background-color: var(--color-bg);
+    z-index: 50;
+    padding-top: 0.5rem;
+    transition: var(--theme-transition);
 }
 
 .tab {
@@ -606,34 +630,34 @@ a:hover {
     transition: var(--theme-transition);
 }
 
-.abstract-open {
+.abstract-layout {
     display: flex;
     gap: 1.5rem;
     align-items: start;
 }
 
-.abstract-open > .pub-citation {
+.abstract-layout > .pub-citation {
     flex: 1;
     min-width: 0;
 }
 
-.abstract-open > .abstract-content {
+.abstract-layout > .abstract-content {
     flex: 0 0 40%;
 }
 
 @media (max-width: 768px) {
-    .abstract-open {
+    .abstract-layout {
         display: block;
     }
 
-    .abstract-open > .abstract-content {
+    .abstract-layout > .abstract-content {
         margin-top: 0.5rem;
     }
 }
 
 /* ===== Search Bar ===== */
 .search-container {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     position: relative;
 }
 
@@ -704,6 +728,31 @@ a:hover {
 .pub-quartile:hover::after,
 .pub-score:hover::after {
     opacity: 1;
+}
+
+/* ===== Copy Citation ===== */
+.copy-cite {
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-faint);
+    font-family: inherit;
+    font-size: 0.55rem;
+    cursor: pointer;
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+    margin-left: 0.4rem;
+    transition: color 0.15s, border-color 0.15s;
+    vertical-align: middle;
+}
+
+.copy-cite:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-muted);
+}
+
+.copy-cite.copied {
+    color: #60CA46;
+    border-color: #60CA46;
 }
 
 .section-hidden {
