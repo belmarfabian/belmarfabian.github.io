@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initUpdateDate();
     initBackToTop();
     initTimeline();
-    initCitations();
     initEqualHeight();
 });
 
@@ -481,22 +480,6 @@ function initBackToTop() {
     btn.addEventListener('click', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-}
-
-/* ===== Citation Count (OpenAlex) ===== */
-function initCitations() {
-    var scholarLink = document.querySelector('.scholar');
-    if (!scholarLink) return;
-
-    fetch('https://api.openalex.org/authors/orcid:0000-0003-4239-1874')
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-            var count = data.cited_by_count;
-            if (count) {
-                scholarLink.textContent = 'Google Scholar (' + count + ')';
-            }
-        })
-        .catch(function () {});
 }
 
 /* ===== Timeline ===== */
