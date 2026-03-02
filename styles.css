@@ -395,12 +395,6 @@ h2 + p {
     animation: slideUp 0.4s ease 0.15s both;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-    }
-}
 
 /* ===== Lists ===== */
 .scrollable-list {
