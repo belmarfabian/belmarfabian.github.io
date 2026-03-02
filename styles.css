@@ -89,7 +89,7 @@ body {
 body::before {
     content: '';
     display: block;
-    height: 4px;
+    height: 8px;
     background: linear-gradient(to right, var(--color-red) 33.33%, var(--color-blue) 33.33% 66.66%, var(--color-yellow) 66.66%);
 }
 
