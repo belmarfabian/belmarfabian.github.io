@@ -333,11 +333,12 @@ h2 + p {
     cursor: pointer;
     padding: 0.5rem 1.2rem;
     margin-bottom: -2px;
-    transition: color 0.2s;
+    transition: color 0.2s, border-bottom-color 0.2s;
 }
 
 .tab:hover {
     color: var(--color-text);
+    border-bottom-color: var(--color-border);
 }
 
 .tab:focus-visible {
@@ -699,6 +700,8 @@ a:hover {
 /* ===== Search Bar ===== */
 .search-container {
     margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
     position: relative;
 }
 
@@ -807,28 +810,30 @@ a:hover {
     right: 1.5rem;
     width: 36px;
     height: 36px;
-    background-color: var(--color-text);
-    color: var(--color-bg);
-    border: none;
+    background: linear-gradient(to bottom, var(--color-red) 33.33%, var(--color-blue) 33.33% 66.66%, var(--color-yellow) 66.66%);
+    color: #fff;
+    border: 2px solid var(--color-bg);
     font-size: 1rem;
     cursor: pointer;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: opacity 0.3s, transform 0.3s;
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .back-to-top.visible {
-    opacity: 0.6;
+    opacity: 0.8;
     pointer-events: auto;
 }
 
 .back-to-top:hover {
     opacity: 1;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== Timeline ===== */
