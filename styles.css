@@ -385,6 +385,10 @@ h2 + p {
     border-bottom-color: var(--color-yellow);
 }
 
+.tab[data-tab="timeline"].active {
+    border-bottom-color: var(--color-red);
+}
+
 .tab-count {
     font-size: 0.55rem;
     font-weight: normal;
@@ -498,7 +502,7 @@ li {
     margin-bottom: 0;
     padding: 0.75rem 0.5rem;
     border-bottom: 1px solid var(--color-border);
-    transition: background-color 0.15s;
+    transition: background-color 0.15s, opacity 0.2s ease, max-height 0.3s ease;
 }
 
 li:last-child {
@@ -699,6 +703,18 @@ a:hover {
     line-height: 1.5;
     color: var(--color-text-body);
     transition: var(--theme-transition);
+    font-style: italic;
+    position: relative;
+}
+
+.abstract-content::before {
+    content: '\201C';
+    font-size: 1.5rem;
+    font-style: normal;
+    color: var(--color-yellow);
+    line-height: 1;
+    margin-right: 0.15rem;
+    vertical-align: -0.15em;
 }
 
 .abstract-layout {
@@ -771,7 +787,14 @@ a:hover {
 }
 
 .search-hidden {
-    display: none !important;
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0;
+    border-bottom: none;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 .search-highlight {
@@ -964,12 +987,20 @@ a:hover {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 2rem;
-    border-top: 1px solid var(--color-border);
+    border-top: none;
     font-size: 0.6rem;
     color: var(--color-text-faint);
     text-align: center;
     transition: var(--theme-transition);
     letter-spacing: 0.03em;
+}
+
+.site-footer::before {
+    content: '';
+    display: block;
+    height: 4px;
+    background: linear-gradient(to right, var(--color-red) 33.33%, var(--color-blue) 33.33% 66.66%, var(--color-yellow) 66.66%);
+    margin-bottom: 1.5rem;
 }
 
 .site-footer a {

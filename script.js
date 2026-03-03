@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initAbstracts();
     initSearch();
     initUpdateDate();
+    initEmail();
     initBackToTop();
     initTimeline();
     initEqualHeight();
@@ -99,6 +100,10 @@ function initTabs() {
             });
             var panel = document.getElementById('panel-' + target);
             if (panel) panel.classList.add('active');
+
+            // Update page title
+            var tabText = tab.textContent.replace(/\d+/g, '').trim();
+            document.title = 'Fabián Belmar — ' + tabText;
         });
     });
 }
@@ -403,6 +408,28 @@ function updateCounter(counter, visible, total) {
         counter.textContent = total + ' publicaciones';
     } else {
         counter.textContent = visible + ' de ' + total + ' publicaciones';
+    }
+}
+
+/* ===== Email (JS-rendered to avoid spam) ===== */
+function initEmail() {
+    var el = document.getElementById('email-contact');
+    if (!el) return;
+    var user = 'fbelmar';
+    var domain = 'cepchile.cl';
+    var addr = user + '@' + domain;
+    var a = document.createElement('a');
+    a.href = 'mailto:' + addr;
+    a.textContent = addr;
+    el.appendChild(a);
+
+    // Footer email too
+    var footer = document.getElementById('footer-email');
+    if (footer) {
+        var a2 = document.createElement('a');
+        a2.href = 'mailto:' + addr;
+        a2.textContent = addr;
+        footer.appendChild(a2);
     }
 }
 
