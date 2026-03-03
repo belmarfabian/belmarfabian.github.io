@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initEqualHeight();
     initScrollProgress();
     initCopyCite();
+    initSortToggle();
 });
 
 /* ===== Última publicación (auto from first article) ===== */
@@ -89,22 +90,43 @@ function initTabs() {
     // Tab click handlers
     tabs.forEach(function (tab) {
         tab.addEventListener('click', function () {
-            var target = tab.getAttribute('data-tab');
-
-            tabs.forEach(function (t) { t.classList.remove('active'); });
-            tab.classList.add('active');
-
-            document.querySelectorAll('.tab-panel').forEach(function (panel) {
-                panel.classList.remove('active');
-            });
-            var panel = document.getElementById('panel-' + target);
-            if (panel) panel.classList.add('active');
-
-            // Update page title
-            var tabText = tab.textContent.replace(/\d+/g, '').trim();
-            document.title = 'Fabián Belmar — ' + tabText;
+            activateTab(tab, tabs);
         });
     });
+
+    // Load tab from URL hash
+    var hash = window.location.hash.replace('#', '');
+    if (hash) {
+        var hashTab = document.querySelector('.tab[data-tab="' + hash + '"]');
+        if (hashTab) activateTab(hashTab, tabs);
+    }
+
+    // Handle back/forward
+    window.addEventListener('hashchange', function () {
+        var h = window.location.hash.replace('#', '');
+        var t = document.querySelector('.tab[data-tab="' + h + '"]');
+        if (t) activateTab(t, tabs);
+    });
+}
+
+function activateTab(tab, tabs) {
+    var target = tab.getAttribute('data-tab');
+
+    tabs.forEach(function (t) { t.classList.remove('active'); });
+    tab.classList.add('active');
+
+    document.querySelectorAll('.tab-panel').forEach(function (panel) {
+        panel.classList.remove('active');
+    });
+    var panel = document.getElementById('panel-' + target);
+    if (panel) panel.classList.add('active');
+
+    // Update URL hash
+    history.replaceState(null, '', '#' + target);
+
+    // Update page title
+    var tabText = tab.textContent.replace(/\d+/g, '').trim();
+    document.title = 'Fabián Belmar — ' + tabText;
 }
 
 /* ===== Journal database (quartile = best SJR quartile, citescore) ===== */
@@ -345,6 +367,27 @@ function filterPublications(query, allItems, sections, counter, totalCount, pane
         }
     });
 
+    // Auto-switch to tab with most results
+    if (tokens.length > 0) {
+        var bestTab = null;
+        var bestCount = 0;
+        Object.keys(panels).forEach(function (key) {
+            var p = panels[key];
+            var mc = 0;
+            p.items.forEach(function (item) {
+                if (!item.el.classList.contains('search-hidden')) mc++;
+            });
+            if (mc > bestCount) {
+                bestCount = mc;
+                bestTab = p.tab;
+            }
+        });
+        if (bestTab && bestCount > 0 && !bestTab.classList.contains('active')) {
+            var allTabs = document.querySelectorAll('.tab');
+            activateTab(bestTab, allTabs);
+        }
+    }
+
     // Highlight matching text
     highlightMatches(allItems, tokens);
 
@@ -458,6 +501,26 @@ function updateThemeButton(theme) {
         btn.setAttribute('aria-label',
             theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
     }
+}
+
+/* ===== Sort Toggle ===== */
+function initSortToggle() {
+    var btn = document.querySelector('.sort-toggle');
+    if (!btn) return;
+    var reversed = true; // default: newest first
+
+    btn.addEventListener('click', function () {
+        reversed = !reversed;
+        btn.textContent = reversed ? '↕' : '↕';
+        btn.title = reversed ? 'Orden: más reciente primero' : 'Orden: más antiguo primero';
+
+        var lists = document.querySelectorAll('.scrollable-list');
+        lists.forEach(function (ol) {
+            var items = Array.from(ol.querySelectorAll('li'));
+            items.reverse();
+            items.forEach(function (li) { ol.appendChild(li); });
+        });
+    });
 }
 
 /* ===== Equal Height for Publications ===== */
@@ -611,7 +674,9 @@ function initTimeline() {
                 type: type,
                 title: title,
                 source: source,
-                link: link
+                link: link,
+                originalLi: li,
+                tabId: panelId
             });
         });
     });
@@ -664,6 +729,24 @@ function initTimeline() {
                 a.textContent = '→';
                 itemDiv.appendChild(a);
             }
+
+            // Click to navigate to original
+            itemDiv.style.cursor = 'pointer';
+            itemDiv.addEventListener('click', (function (itm) {
+                return function (e) {
+                    if (e.target.tagName === 'A') return;
+                    var tab = document.querySelector('.tab[data-tab="' + itm.tabId + '"]');
+                    var tabs = document.querySelectorAll('.tab');
+                    if (tab) activateTab(tab, tabs);
+                    // Highlight original item
+                    itm.originalLi.style.transition = 'background-color 0.3s';
+                    itm.originalLi.style.backgroundColor = 'var(--color-highlight)';
+                    itm.originalLi.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    setTimeout(function () {
+                        itm.originalLi.style.backgroundColor = '';
+                    }, 1500);
+                };
+            })(item));
 
             list.appendChild(itemDiv);
         });
