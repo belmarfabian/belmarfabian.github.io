@@ -493,6 +493,11 @@ ol {
     padding-left: 2rem;
 }
 
+.scrollable-list li::marker {
+    color: var(--color-text-faint);
+    font-weight: bold;
+}
+
 ul {
     padding-left: 1.5rem;
     margin-bottom: 1rem;
@@ -780,6 +785,41 @@ a:hover {
     box-shadow: 0 0 0 1px var(--color-blue);
 }
 
+.search-clear {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.4rem;
+    background: none;
+    border: none;
+    color: var(--color-text-faint);
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0 0.2rem;
+    display: none;
+    font-family: inherit;
+    transition: color 0.15s;
+}
+
+.search-clear:hover {
+    color: var(--color-text);
+}
+
+.search-clear.visible {
+    display: block;
+}
+
+.search-no-results {
+    text-align: center;
+    color: var(--color-text-faint);
+    font-size: 0.7rem;
+    padding: 2rem 1rem;
+    display: none;
+}
+
+.search-no-results.visible {
+    display: block;
+}
+
 .search-counter {
     font-size: 0.65rem;
     color: var(--color-text-muted);
@@ -959,11 +999,20 @@ a:hover {
     margin-bottom: 0.25rem;
     border-left: 2px solid var(--color-border);
     color: var(--color-text-body);
-    transition: background-color 0.15s;
+    transition: background-color 0.15s, border-left-color 0.15s;
 }
 
 .timeline-item:hover {
     background-color: var(--color-surface);
+    border-left-color: var(--color-red);
+}
+
+.timeline-year:nth-child(3n+2) .timeline-item:hover {
+    border-left-color: var(--color-blue);
+}
+
+.timeline-year:nth-child(3n) .timeline-item:hover {
+    border-left-color: var(--color-yellow);
 }
 
 .timeline-item-type {

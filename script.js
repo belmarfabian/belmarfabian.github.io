@@ -215,6 +215,8 @@ function initAbstracts() {
 function initSearch() {
     var input = document.querySelector('.search-input');
     var counter = document.querySelector('.search-counter');
+    var clearBtn = document.querySelector('.search-clear');
+    var noResults = document.querySelector('.search-no-results');
     if (!input) return;
 
     var tabs = document.querySelectorAll('.tab');
@@ -262,19 +264,33 @@ function initSearch() {
     input.addEventListener('input', function () {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(function () {
-            filterPublications(input.value, allItems, sections, counter, totalCount, panels);
+            filterPublications(input.value, allItems, sections, counter, totalCount, panels, noResults);
         }, 150);
+        // Show/hide clear button
+        if (clearBtn) {
+            clearBtn.classList.toggle('visible', input.value.length > 0);
+        }
     });
 
     input.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             input.value = '';
-            filterPublications('', allItems, sections, counter, totalCount, panels);
+            filterPublications('', allItems, sections, counter, totalCount, panels, noResults);
+            if (clearBtn) clearBtn.classList.remove('visible');
         }
     });
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+            input.value = '';
+            filterPublications('', allItems, sections, counter, totalCount, panels, noResults);
+            clearBtn.classList.remove('visible');
+            input.focus();
+        });
+    }
 }
 
-function filterPublications(query, allItems, sections, counter, totalCount, panels) {
+function filterPublications(query, allItems, sections, counter, totalCount, panels, noResults) {
     var tokens = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
     var visibleCount = 0;
 
@@ -331,6 +347,11 @@ function filterPublications(query, allItems, sections, counter, totalCount, pane
 
     // Highlight matching text
     highlightMatches(allItems, tokens);
+
+    // No results message
+    if (noResults) {
+        noResults.classList.toggle('visible', visibleCount === 0 && tokens.length > 0);
+    }
 
     updateCounter(counter, visibleCount, totalCount);
 }
