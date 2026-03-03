@@ -85,7 +85,7 @@ html {
     top: 0;
     left: 0;
     height: 3px;
-    background: linear-gradient(to right, var(--color-red), var(--color-blue), var(--color-yellow));
+    background: linear-gradient(to right, var(--color-red) 33.33%, var(--color-blue) 33.33% 66.66%, var(--color-yellow) 66.66%);
     width: 0%;
     z-index: 200;
     transition: width 0.1s linear;
@@ -204,7 +204,11 @@ section {
     border: 1px solid var(--color-border);
     padding: 0.75rem 1rem 1rem 1rem;
     background-color: var(--color-surface);
-    transition: var(--theme-transition);
+    transition: var(--theme-transition), border-color 0.2s;
+}
+
+.inicio-recientes:hover {
+    border-color: var(--color-text-faint);
 }
 
 .inicio-recientes h3 {
@@ -251,9 +255,19 @@ section {
 }
 
 .ultima-link {
-    font-size: 0.65rem;
-    color: var(--color-link);
-    margin-left: 0.3rem;
+    font-size: 0.6rem;
+    color: var(--color-bg);
+    background-color: var(--color-text);
+    padding: 0.15rem 0.5rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 0.3rem;
+    transition: opacity 0.2s;
+}
+
+.ultima-link:hover {
+    opacity: 0.8;
+    text-decoration: none;
 }
 
 .ultima-prensa {
@@ -640,7 +654,18 @@ a:hover {
     border-left: 4px solid var(--color-yellow);
     padding: 1rem 1.2rem;
     background-color: var(--color-surface);
-    transition: var(--theme-transition);
+    transition: var(--theme-transition), transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-left-color: var(--color-yellow);
+}
+
+[data-theme="dark"] .project-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .project-card h3 {
@@ -659,6 +684,10 @@ a:hover {
     font-size: 0.6rem;
     color: var(--color-text-faint);
     font-style: italic;
+    display: inline-block;
+    border: 1px solid var(--color-border);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
 }
 
 /* ===== Abstracts (always open, side layout) ===== */
@@ -703,9 +732,20 @@ a:hover {
     position: relative;
 }
 
+.search-container::before {
+    content: '⌕';
+    position: absolute;
+    left: 0.6rem;
+    top: 0.45rem;
+    font-size: 0.85rem;
+    color: var(--color-text-faint);
+    pointer-events: none;
+    z-index: 1;
+}
+
 .search-input {
     width: 100%;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.75rem 0.5rem 2rem;
     font-family: 'Roboto Mono', monospace;
     font-size: 0.7rem;
     border: 1px solid var(--color-border);
@@ -962,6 +1002,12 @@ a:hover {
     .tabs {
         overflow-x: auto;
         flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+        display: none;
     }
 
     .tab {
@@ -972,5 +1018,33 @@ a:hover {
 
     .scrollable-list a[href^="https://doi.org/"] {
         display: none;
+    }
+
+    .pub-meta {
+        flex-wrap: wrap;
+    }
+
+    .pub-journal {
+        max-width: 140px;
+    }
+
+    .project-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .back-to-top {
+        bottom: 1rem;
+        right: 1rem;
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+    }
+
+    .copy-cite {
+        display: none;
+    }
+
+    .timeline {
+        padding-left: 1.5rem;
     }
 }
