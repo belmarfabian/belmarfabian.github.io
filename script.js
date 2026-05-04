@@ -239,8 +239,6 @@ function initSearch() {
 
     var tabs = document.querySelectorAll('.tab');
     var panels = {};
-
-    // Map tabs to their panels and items
     tabs.forEach(function (tab) {
         var target = tab.getAttribute('data-tab');
         var panel = document.getElementById('panel-' + target);
@@ -251,49 +249,46 @@ function initSearch() {
                 sections: panel.querySelectorAll('section'),
                 items: []
             };
-            var items = panel.querySelectorAll('.scrollable-list li');
-            items.forEach(function (li) {
-                panels[target].items.push({
-                    el: li,
-                    text: li.textContent.toLowerCase(),
-                    section: li.closest('section')
-                });
-            });
         }
     });
 
     var allItems = [];
     var sections = document.querySelectorAll('.tab-panel section');
-    sections.forEach(function (section) {
-        var items = section.querySelectorAll('.scrollable-list li');
-        items.forEach(function (li) {
-            allItems.push({
-                el: li,
-                text: li.textContent.toLowerCase(),
-                section: section
-            });
-        });
-    });
 
-    var totalCount = allItems.length;
-    updateCounter(counter, totalCount, totalCount);
+    function rebuildIndex() {
+        allItems.length = 0;
+        Object.keys(panels).forEach(function (k) { panels[k].items.length = 0; });
+
+        document.querySelectorAll('.tab-panel section .scrollable-list li').forEach(function (li) {
+            var section = li.closest('section');
+            var entry = { el: li, text: li.textContent.toLowerCase(), section: section };
+            allItems.push(entry);
+
+            var panel = li.closest('.tab-panel');
+            var key = panel ? panel.id.replace('panel-', '') : null;
+            if (key && panels[key]) panels[key].items.push(entry);
+        });
+        updateCounter(counter, allItems.length, allItems.length);
+    }
+
+    rebuildIndex();
+    window.__rebuildSearchIndex = rebuildIndex;
+
+    function runFilter() {
+        filterPublications(input.value, allItems, sections, counter, allItems.length, panels, noResults);
+    }
 
     var debounceTimer;
     input.addEventListener('input', function () {
         clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(function () {
-            filterPublications(input.value, allItems, sections, counter, totalCount, panels, noResults);
-        }, 150);
-        // Show/hide clear button
-        if (clearBtn) {
-            clearBtn.classList.toggle('visible', input.value.length > 0);
-        }
+        debounceTimer = setTimeout(runFilter, 150);
+        if (clearBtn) clearBtn.classList.toggle('visible', input.value.length > 0);
     });
 
     input.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             input.value = '';
-            filterPublications('', allItems, sections, counter, totalCount, panels, noResults);
+            runFilter();
             if (clearBtn) clearBtn.classList.remove('visible');
         }
     });
@@ -301,7 +296,7 @@ function initSearch() {
     if (clearBtn) {
         clearBtn.addEventListener('click', function () {
             input.value = '';
-            filterPublications('', allItems, sections, counter, totalCount, panels, noResults);
+            runFilter();
             clearBtn.classList.remove('visible');
             input.focus();
         });
@@ -340,7 +335,6 @@ function filterPublications(query, allItems, sections, counter, totalCount, pane
 
     // Update per-tab match counts
     Object.keys(panels).forEach(function (key) {
-        if (key === 'prensa') return; // gestionado por prensa-feed.js
         var p = panels[key];
         var countSpan = p.tab.querySelector('.tab-count');
         if (!countSpan) return;

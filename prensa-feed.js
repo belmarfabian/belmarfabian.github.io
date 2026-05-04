@@ -1,40 +1,18 @@
-/* Feed embebido en la pestaña "Prensa y columnas" del sitio principal.
-   Lee archivo/entradas.json y muestra solo seccion = 'prensa' o 'columnas'. */
+/* Renderiza prensa + columnas dentro de #panel-prensa con el mismo formato
+   que las demás pestañas (ol.scrollable-list con li tipo cita). Filtros
+   internos por sección/medio/tag ocultan items mediante .feed-hidden. */
 (() => {
   const root = document.getElementById('panel-prensa');
   if (!root) return;
 
-  const feed = document.getElementById('pf-feed');
-  const tpl = document.getElementById('tpl-pf-articulo');
-  const input = document.getElementById('pf-q');
-  const conteo = document.getElementById('pf-conteo');
+  const list = document.getElementById('pf-list');
+  const pillsBox = document.getElementById('pf-pills');
+  const tagsBox = document.getElementById('pf-tags');
   const vacio = document.getElementById('pf-vacio');
-  const fin = document.getElementById('pf-fin');
-  const centinela = document.getElementById('pf-centinela');
-  const subbar = document.getElementById('pf-subbar');
-  const tagbar = document.getElementById('pf-tagbar');
   const chipsSeccion = root.querySelectorAll('.pf-chip');
   const tabBtn = document.querySelector('.tab[data-tab="prensa"]');
   let tabBadge = tabBtn ? tabBtn.querySelector('.tab-count') : null;
-  if (tabBtn && !tabBadge) {
-    tabBadge = document.createElement('span');
-    tabBadge.className = 'tab-count';
-    tabBtn.appendChild(tabBadge);
-  }
 
-  const FMT_FECHA = new Intl.DateTimeFormat('es-CL', {
-    day: 'numeric', month: 'long', year: 'numeric'
-  });
-
-  const NOMBRE_TIPO = {
-    columna: 'Columna',
-    analisis: 'Análisis',
-    paper: 'Paper',
-    proyecto: 'Proyecto',
-    video: 'Video',
-    aparicion: 'Aparición',
-    otro: 'Nota',
-  };
   const NOMBRE_FUENTE = {
     ciper: 'CIPER Chile',
     cep: 'CEP Chile',
@@ -43,30 +21,25 @@
     otros: 'Otros',
     utprensa: 'Reporte de Prensa UTalca',
   };
-  const PAGE = 6;
-  const ASSET_BASE = 'archivo/';
-  const FALLBACK_IMG = ASSET_BASE + 'fabian.jpg';
 
   const state = {
     todas: [],
-    filtradas: [],
     seccion: 'todas',
     fuente: 'todas',
     tag: '',
-    q: '',
-    cargadas: 0,
     expandirTags: false,
   };
 
-  function fechaLegible(c) {
-    if (!c.fecha) return '';
-    const [y, m, d] = c.fecha.split('-').map(Number);
-    if (!y) return '';
-    return FMT_FECHA.format(new Date(y, (m || 1) - 1, d || 1));
-  }
+  function añoDe(c) { return (c.fecha || '').slice(0, 4); }
 
-  function normaliza(s) {
-    return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  function medioDe(c) {
+    // Para columnas suele ser el nombre del medio en NOMBRE_FUENTE.
+    // Para apariciones en prensa la "bajada" suele traer el medio real.
+    if (c.seccion === 'prensa' && c.bajada) {
+      const m = c.bajada.replace(/\.$/, '').trim();
+      if (m && m.length < 80) return m;
+    }
+    return NOMBRE_FUENTE[c.fuente] || c.fuente;
   }
 
   function fuentesDisponibles() {
@@ -80,239 +53,138 @@
   }
 
   function tagsConteoEnContexto() {
-    const q = normaliza(state.q.trim());
     const cnt = new Map();
     for (const c of state.todas) {
       if (state.seccion !== 'todas' && c.seccion !== state.seccion) continue;
       if (state.fuente !== 'todas' && c.fuente !== state.fuente) continue;
-      if (q) {
-        const blob = normaliza(c.titulo + ' ' + (c.bajada || '') + ' ' + (c.parrafos || []).join(' '));
-        if (!blob.includes(q)) continue;
-      }
       if (!Array.isArray(c.tags)) continue;
       for (const t of c.tags) cnt.set(t, (cnt.get(t) || 0) + 1);
     }
     return [...cnt.entries()].sort((a, b) => b[1] - a[1]);
   }
 
-  function renderTagbar() {
+  function aplicarFiltros() {
+    let visibles = 0;
+    for (const li of list.querySelectorAll('li')) {
+      const sec = li.dataset.pfSeccion;
+      const fnt = li.dataset.pfFuente;
+      const tgs = (li.dataset.pfTags || '').split('|').filter(Boolean);
+
+      let mostrar = true;
+      if (state.seccion !== 'todas' && sec !== state.seccion) mostrar = false;
+      if (state.fuente !== 'todas' && fnt !== state.fuente) mostrar = false;
+      if (state.tag && !tgs.includes(state.tag)) mostrar = false;
+
+      li.classList.toggle('feed-hidden', !mostrar);
+      if (mostrar) visibles++;
+    }
+    if (vacio) vacio.hidden = visibles > 0;
+    renderPills();
+    renderTags();
+  }
+
+  function renderPills() {
+    if (!pillsBox) return;
+    const fuentes = fuentesDisponibles();
+    pillsBox.replaceChildren();
+    if (fuentes.length <= 1) return;
+
+    const items = [['todas', 'Todas las fuentes']].concat(
+      fuentes.map(f => [f, NOMBRE_FUENTE[f] || f])
+    );
+    for (const [key, label] of items) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pf-pill' + (state.fuente === key ? ' active' : '');
+      b.textContent = label;
+      b.addEventListener('click', () => {
+        state.fuente = key;
+        aplicarFiltros();
+      });
+      pillsBox.appendChild(b);
+    }
+  }
+
+  function renderTags() {
+    if (!tagsBox) return;
     const ranking = tagsConteoEnContexto();
-    tagbar.replaceChildren();
+    tagsBox.replaceChildren();
     if (!ranking.length) return;
 
     const TOPN = 10;
     const visibles = state.expandirTags ? ranking : ranking.slice(0, TOPN);
 
     const lab = document.createElement('span');
-    lab.className = 'pf-tagbar__label';
+    lab.className = 'pf-tags__label';
     lab.textContent = 'Tags';
-    tagbar.appendChild(lab);
+    tagsBox.appendChild(lab);
 
     if (state.tag) {
       const quitar = document.createElement('button');
-      quitar.className = 'pf-tagbar__more';
+      quitar.type = 'button';
+      quitar.className = 'pf-tag pf-tag--clear';
       quitar.textContent = '× quitar tag';
       quitar.addEventListener('click', () => { state.tag = ''; aplicarFiltros(); });
-      tagbar.appendChild(quitar);
+      tagsBox.appendChild(quitar);
     }
 
     for (const [t, n] of visibles) {
       const b = document.createElement('button');
-      b.className = 'pf-tagbar__tag' + (state.tag === t ? ' active' : '');
-      b.innerHTML = `${t}<span class="pf-count">${n}</span>`;
+      b.type = 'button';
+      b.className = 'pf-tag' + (state.tag === t ? ' active' : '');
+      b.innerHTML = `${t} <span class="pf-tag__count">${n}</span>`;
       b.addEventListener('click', () => {
         state.tag = (state.tag === t ? '' : t);
         aplicarFiltros();
       });
-      tagbar.appendChild(b);
+      tagsBox.appendChild(b);
     }
 
     if (ranking.length > TOPN && !state.expandirTags) {
       const more = document.createElement('button');
-      more.className = 'pf-tagbar__more';
+      more.type = 'button';
+      more.className = 'pf-tag pf-tag--more';
       more.textContent = `+${ranking.length - TOPN} más…`;
-      more.addEventListener('click', () => { state.expandirTags = true; renderTagbar(); });
-      tagbar.appendChild(more);
+      more.addEventListener('click', () => { state.expandirTags = true; renderTags(); });
+      tagsBox.appendChild(more);
     }
   }
 
-  function renderSubbar() {
-    const fuentes = fuentesDisponibles();
-    subbar.replaceChildren();
-    if (fuentes.length <= 1) return;
-    const items = [['todas', 'Todas las fuentes']].concat(
-      fuentes.map(f => [f, NOMBRE_FUENTE[f] || f])
-    );
-    for (const [key, label] of items) {
-      const b = document.createElement('button');
-      b.className = 'pf-pill' + (state.fuente === key ? ' active' : '');
-      b.textContent = label;
-      b.dataset.fuente = key;
-      b.addEventListener('click', () => {
-        state.fuente = key;
-        renderSubbar();
-        aplicarFiltros();
-      });
-      subbar.appendChild(b);
-    }
+  function escapeHtml(s) {
+    return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
-  function aplicarFiltros() {
-    const q = normaliza(state.q.trim());
-    state.filtradas = state.todas.filter(c => {
-      if (state.seccion !== 'todas' && c.seccion !== state.seccion) return false;
-      if (state.fuente !== 'todas' && c.fuente !== state.fuente) return false;
-      if (state.tag && !(Array.isArray(c.tags) && c.tags.includes(state.tag))) return false;
-      if (!q) return true;
-      const blob = normaliza(c.titulo + ' ' + (c.bajada || '') + ' ' + (c.parrafos || []).join(' '));
-      return blob.includes(q);
-    });
-    state.cargadas = 0;
-    feed.replaceChildren();
-    fin.hidden = true;
-    vacio.hidden = state.filtradas.length > 0;
-    actualizarConteo();
-    renderTagbar();
-    cargarSiguiente();
-  }
-
-  function actualizarConteo() {
-    const total = state.todas.length;
-    const f = state.filtradas.length;
-    conteo.textContent = (f === total) ? `${total} entradas` : `${f} de ${total}`;
-  }
-
-  const PATRONES_TEMPLATE = [
-    /^revisa en detalle la columna/i,
-    /^revisa la columna/i,
-    /^revisa el an[aá]lisis/i,
-    /columna dominical del doctor en ciencia pol[ií]tica/i,
-    /profesor titular de la universidad de talca/i,
-  ];
-  function esBajadaPlantilla(s) {
-    if (!s) return true;
-    return PATRONES_TEMPLATE.some(re => re.test(s));
-  }
-
-  function truncar(s, n) {
-    if (!s) return '';
-    s = s.trim();
-    if (s.length <= n) return s;
-    return s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…';
-  }
-
-  function previewTexto(c) {
-    if (Array.isArray(c.parrafos) && c.parrafos.length) return truncar(c.parrafos[0], 240);
-    if (c.bajada && !esBajadaPlantilla(c.bajada)) return truncar(c.bajada, 240);
-    return '';
-  }
-
-  function pintar(c) {
-    const node = tpl.content.cloneNode(true);
-    const post = node.querySelector('.pf-post');
-    post.dataset.id = c.id;
-    post.dataset.fuente = c.fuente;
-    if (!c.cuerpo_html) post.classList.add('pf-sin-cuerpo');
-
-    const aImg = node.querySelector('.pf-post__imagen');
-    const img = node.querySelector('.pf-post__imagen img');
-    aImg.href = c.url;
-
-    if (c.seccion === 'prensa' && !c.imagen) {
-      img.remove();
-      const medio = (c.bajada || 'Aparición').replace(/\.$/, '');
-      const thumb = document.createElement('div');
-      thumb.className = 'pf-post__thumb-prensa';
-      thumb.innerHTML = `
-        <span class="pf-tp-medio">${medio}</span>
-        <span class="pf-tp-tipo">Aparición</span>
-      `;
-      aImg.appendChild(thumb);
-    } else {
-      const src = c.imagen ? (c.imagen.startsWith('http') ? c.imagen : ASSET_BASE + c.imagen) : FALLBACK_IMG;
-      img.src = src;
-      img.alt = c.titulo;
-      img.addEventListener('error', () => {
-        if (!img.src.endsWith(FALLBACK_IMG)) img.src = FALLBACK_IMG;
-      }, { once: true });
-    }
-
-    const fecha = node.querySelector('.pf-post__fecha');
-    const t = fechaLegible(c);
-    if (t) {
-      fecha.dateTime = c.fecha;
-      fecha.textContent = t;
-    } else {
-      const sep = fecha.nextElementSibling;
-      fecha.remove();
-      if (sep && sep.classList.contains('pf-post__sep')) sep.remove();
-    }
-
-    node.querySelector('.pf-post__tipo').textContent = NOMBRE_TIPO[c.tipo] || 'Nota';
-
-    const fav = node.querySelector('.pf-post__favicon');
-    fav.src = ASSET_BASE + `fav-${c.fuente}.png`;
-    fav.addEventListener('error', () => fav.remove(), { once: true });
-    node.querySelector('.pf-post__fuente-nombre').textContent = NOMBRE_FUENTE[c.fuente] || c.fuente;
-
-    const tituloA = node.querySelector('.pf-post__titulo a');
-    tituloA.textContent = c.titulo;
-    tituloA.href = c.url;
-
-    const excerpt = node.querySelector('.pf-post__excerpt');
-    excerpt.textContent = previewTexto(c) || '';
-
-    const orig = node.querySelector('.pf-post__original');
-    orig.href = c.url;
-    orig.textContent = `Leer en ${NOMBRE_FUENTE[c.fuente] || c.fuente} »`;
-
-    const ul = node.querySelector('.pf-post__tags');
-    const tagList = (c.tags || []).slice(0, 6);
-    for (const tg of tagList) {
+  function renderLista() {
+    list.replaceChildren();
+    state.todas.forEach((c, idx) => {
       const li = document.createElement('li');
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.textContent = tg;
-      b.addEventListener('click', (ev) => {
-        ev.preventDefault();
-        ev.stopPropagation();
-        state.tag = tg;
-        aplicarFiltros();
-      });
-      li.appendChild(b);
-      ul.appendChild(li);
-    }
+      li.dataset.pfId = c.id;
+      li.dataset.pfSeccion = c.seccion;
+      li.dataset.pfFuente = c.fuente;
+      li.dataset.pfFecha = c.fecha || '';
+      li.dataset.pfTags = (c.tags || []).join('|');
 
-    feed.appendChild(node);
-  }
+      const año = añoDe(c);
+      const titulo = escapeHtml(c.titulo);
+      const medio = escapeHtml(medioDe(c));
+      const url = escapeHtml(c.url || '');
+      const link = url
+        ? ` <a href="${url}" target="_blank" rel="noopener">Enlace</a>`
+        : '';
+      const añoTxt = año ? ` (${año})` : '';
 
-  function cargarSiguiente() {
-    const restante = state.filtradas.slice(state.cargadas, state.cargadas + PAGE);
-    for (const c of restante) pintar(c);
-    state.cargadas += restante.length;
-    if (state.cargadas >= state.filtradas.length) {
-      fin.hidden = false;
-      io.unobserve(centinela);
-    } else {
-      fin.hidden = true;
-      io.observe(centinela);
+      li.innerHTML = `<strong>Belmar, F.</strong>${añoTxt}. ${titulo}. <em>${medio}</em>.${link}`;
+      list.appendChild(li);
+    });
+
+    // Numeración descendente (igual que las demás listas)
+    if (state.todas.length) {
+      list.setAttribute('start', String(state.todas.length));
+      list.setAttribute('reversed', '');
     }
   }
-
-  const io = new IntersectionObserver(entries => {
-    for (const e of entries) {
-      if (e.isIntersecting) cargarSiguiente();
-    }
-  }, { rootMargin: '600px 0px' });
 
   function bind() {
-    let tQ;
-    input.addEventListener('input', e => {
-      state.q = e.target.value;
-      clearTimeout(tQ);
-      tQ = setTimeout(aplicarFiltros, 120);
-    });
-
     chipsSeccion.forEach(chip => {
       chip.addEventListener('click', () => {
         chipsSeccion.forEach(c => c.classList.remove('active'));
@@ -324,19 +196,17 @@
         if (state.fuente !== 'todas' && !disp.includes(state.fuente)) {
           state.fuente = 'todas';
         }
-        renderSubbar();
         aplicarFiltros();
       });
     });
   }
 
-  // Promesa global para que script.js (timeline) pueda usar los mismos datos.
   let resolveReady;
   window.__prensaFeedReady = new Promise(res => { resolveReady = res; });
 
   async function init() {
     try {
-      const r = await fetch(ASSET_BASE + 'entradas.json', { cache: 'no-cache' });
+      const r = await fetch('archivo/entradas.json', { cache: 'no-cache' });
       if (!r.ok) throw new Error('HTTP ' + r.status);
       const data = await r.json();
       const items = (data.items || data.columnas || [])
@@ -345,17 +215,31 @@
         (b.fecha || '0000-00-00').localeCompare(a.fecha || '0000-00-00')
       );
     } catch (e) {
-      conteo.textContent = 'No se pudo cargar el archivo de entradas.';
+      if (vacio) {
+        vacio.hidden = false;
+        vacio.textContent = 'No se pudo cargar el archivo de entradas.';
+      }
       console.error(e);
       resolveReady([]);
       return;
     }
+
+    renderLista();
     bind();
-    renderSubbar();
     aplicarFiltros();
 
-    // Actualizar badge de la pestaña con el total
+    // Crear el badge si no existía y actualizar conteo
+    if (tabBtn && !tabBadge) {
+      tabBadge = document.createElement('span');
+      tabBadge.className = 'tab-count';
+      tabBtn.appendChild(tabBadge);
+    }
     if (tabBadge) tabBadge.textContent = state.todas.length;
+
+    // Re-indexar la búsqueda global del sitio para que también encuentre estos items
+    if (typeof window.__rebuildSearchIndex === 'function') {
+      window.__rebuildSearchIndex();
+    }
 
     resolveReady(state.todas);
   }
