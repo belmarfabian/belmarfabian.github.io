@@ -32,12 +32,26 @@
 
   function añoDe(c) { return (c.fecha || '').slice(0, 4); }
 
+  function esDominio(s) {
+    return !s.includes(' ') && /\.[a-zA-Z]{2,}$/.test(s);
+  }
+
+  function aTitleCase(s) {
+    return s.toLowerCase().replace(/(^|\s|«|"|')([\wáéíóúñ])/g, function (_, sp, c) {
+      return sp + c.toUpperCase();
+    });
+  }
+
   function medioDe(c) {
-    // Para columnas suele ser el nombre del medio en NOMBRE_FUENTE.
-    // Para apariciones en prensa la "bajada" suele traer el medio real.
     if (c.seccion === 'prensa' && c.bajada) {
-      const m = c.bajada.replace(/\.$/, '').trim();
-      if (m && m.length < 80) return m;
+      let m = c.bajada.replace(/\.$/, '').trim();
+      if (m.includes('·')) m = m.split('·')[0].trim();
+      if (m && m.length < 80) {
+        if (esDominio(m)) return m.toLowerCase();
+        // Todo mayúsculas → Title Case ("LAS ÚLTIMAS NOTICIAS" → "Las Últimas Noticias")
+        if (m.length > 3 && m === m.toUpperCase()) return aTitleCase(m);
+        return m;
+      }
     }
     return NOMBRE_FUENTE[c.fuente] || c.fuente;
   }
@@ -209,8 +223,11 @@
       const r = await fetch('archivo/entradas.json', { cache: 'no-cache' });
       if (!r.ok) throw new Error('HTTP ' + r.status);
       const data = await r.json();
-      const items = (data.items || data.columnas || [])
-        .filter(c => c.seccion === 'prensa' || c.seccion === 'columnas');
+      const items = (data.items || data.columnas || []).filter(c =>
+        (c.seccion === 'prensa' || c.seccion === 'columnas')
+        && c.fuente !== 'cep'   // los CEP son Informes C22, ya en pestaña Documentos
+        && c.fecha               // requiere fecha para ordenar y mostrar año
+      );
       state.todas = items.slice().sort((a, b) =>
         (b.fecha || '0000-00-00').localeCompare(a.fecha || '0000-00-00')
       );
