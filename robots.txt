@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://belmarfabian.github.io/sitemap.xml
