@@ -42,28 +42,24 @@ function initUltimaPub() {
     }
 }
 
-/* ===== Última prensa (auto from first press item) ===== */
+/* ===== Última prensa (desde archivo/entradas.json, vía prensa-feed) ===== */
 function initUltimaPrensa() {
-    var prensaItem = document.querySelector('#prensa .scrollable-list li');
     var container = document.getElementById('ultima-prensa');
+    if (!container || !window.__prensaFeedReady) return;
 
-    if (prensaItem && container) {
-        var texto = prensaItem.innerHTML;
-        var match = texto.match(/\((\d{4})\)\.\s*([^.]+\.)/);
-        var titulo = match ? match[2].trim() : '';
-        var emEl = prensaItem.querySelector('em');
-        var medio = emEl ? emEl.textContent : '';
-        var linkEl = prensaItem.querySelector('a');
-        var link = linkEl ? linkEl.href : '';
-        var yearMatch = texto.match(/\((\d{4})\)/);
-        var año = yearMatch ? yearMatch[1] : '';
-
+    window.__prensaFeedReady.then(function (items) {
+        var ultimo = items.find(function (i) { return i.seccion === 'prensa'; })
+                  || items.find(function (i) { return i.seccion === 'columnas'; });
+        if (!ultimo) return;
+        var año = (ultimo.fecha || '').slice(0, 4);
+        var medio = (ultimo.bajada || '').replace(/\.$/, '') || 'Aparición';
         container.innerHTML =
-            '<p class="ultima-prensa-titulo">' + titulo + '</p>' +
-            '<p class="ultima-prensa-meta"><em>' + medio + '</em> (' + año + ')' +
-            (link ? ' <a href="' + link + '" class="ultima-link">Ver →</a>' : '') +
+            '<p class="ultima-prensa-titulo">' + ultimo.titulo + '</p>' +
+            '<p class="ultima-prensa-meta"><em>' + medio + '</em>' +
+            (año ? ' (' + año + ')' : '') +
+            (ultimo.url ? ' <a href="' + ultimo.url + '" class="ultima-link" target="_blank" rel="noopener">Ver →</a>' : '') +
             '</p>';
-    }
+    });
 }
 
 /* ===== Tabs with item counts ===== */
@@ -344,6 +340,7 @@ function filterPublications(query, allItems, sections, counter, totalCount, pane
 
     // Update per-tab match counts
     Object.keys(panels).forEach(function (key) {
+        if (key === 'prensa') return; // gestionado por prensa-feed.js
         var p = panels[key];
         var countSpan = p.tab.querySelector('.tab-count');
         if (!countSpan) return;
@@ -681,77 +678,104 @@ function initTimeline() {
         });
     });
 
-    // Sort by year descending
-    items.sort(function (a, b) { return b.year - a.year; });
-
-    // Group by year
-    var years = {};
-    items.forEach(function (item) {
-        if (!years[item.year]) years[item.year] = [];
-        years[item.year].push(item);
-    });
-
-    // Render
-    var sortedYears = Object.keys(years).sort(function (a, b) { return b - a; });
-    sortedYears.forEach(function (year) {
-        var yearDiv = document.createElement('div');
-        yearDiv.className = 'timeline-year';
-
-        var label = document.createElement('div');
-        label.className = 'timeline-year-label';
-        label.textContent = year;
-        yearDiv.appendChild(label);
-
-        var list = document.createElement('div');
-        list.className = 'timeline-items';
-
-        years[year].forEach(function (item) {
-            var itemDiv = document.createElement('div');
-            itemDiv.className = 'timeline-item';
-
-            var typeSpan = document.createElement('span');
-            typeSpan.className = 'timeline-item-type';
-            typeSpan.textContent = item.type;
-            itemDiv.appendChild(typeSpan);
-
-            itemDiv.appendChild(document.createTextNode(item.title));
-
-            if (item.source) {
-                var sourceEm = document.createElement('em');
-                sourceEm.textContent = ' ' + item.source;
-                sourceEm.style.color = 'var(--color-text-muted)';
-                itemDiv.appendChild(sourceEm);
-            }
-
-            if (item.link) {
-                var a = document.createElement('a');
-                a.href = item.link;
-                a.textContent = '→';
-                itemDiv.appendChild(a);
-            }
-
-            // Click to navigate to original
-            itemDiv.style.cursor = 'pointer';
-            itemDiv.addEventListener('click', (function (itm) {
-                return function (e) {
-                    if (e.target.tagName === 'A') return;
-                    var tab = document.querySelector('.tab[data-tab="' + itm.tabId + '"]');
-                    var tabs = document.querySelectorAll('.tab');
-                    if (tab) activateTab(tab, tabs);
-                    // Highlight original item
-                    itm.originalLi.style.transition = 'background-color 0.3s';
-                    itm.originalLi.style.backgroundColor = 'var(--color-highlight)';
-                    itm.originalLi.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    setTimeout(function () {
-                        itm.originalLi.style.backgroundColor = '';
-                    }, 1500);
-                };
-            })(item));
-
-            list.appendChild(itemDiv);
+    function renderTimeline() {
+        items.sort(function (a, b) { return b.year - a.year; });
+        var years = {};
+        items.forEach(function (item) {
+            if (!years[item.year]) years[item.year] = [];
+            years[item.year].push(item);
         });
+        container.replaceChildren();
 
-        yearDiv.appendChild(list);
-        container.appendChild(yearDiv);
-    });
+        Object.keys(years).sort(function (a, b) { return b - a; }).forEach(function (year) {
+            var yearDiv = document.createElement('div');
+            yearDiv.className = 'timeline-year';
+
+            var label = document.createElement('div');
+            label.className = 'timeline-year-label';
+            label.textContent = year;
+            yearDiv.appendChild(label);
+
+            var list = document.createElement('div');
+            list.className = 'timeline-items';
+
+            years[year].forEach(function (item) {
+                var itemDiv = document.createElement('div');
+                itemDiv.className = 'timeline-item';
+
+                var typeSpan = document.createElement('span');
+                typeSpan.className = 'timeline-item-type';
+                typeSpan.textContent = item.type;
+                itemDiv.appendChild(typeSpan);
+
+                itemDiv.appendChild(document.createTextNode(item.title));
+
+                if (item.source) {
+                    var sourceEm = document.createElement('em');
+                    sourceEm.textContent = ' ' + item.source;
+                    sourceEm.style.color = 'var(--color-text-muted)';
+                    itemDiv.appendChild(sourceEm);
+                }
+
+                if (item.link) {
+                    var a = document.createElement('a');
+                    a.href = item.link;
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                    a.textContent = '→';
+                    itemDiv.appendChild(a);
+                }
+
+                itemDiv.style.cursor = 'pointer';
+                itemDiv.addEventListener('click', (function (itm) {
+                    return function (e) {
+                        if (e.target.tagName === 'A') return;
+                        var tab = document.querySelector('.tab[data-tab="' + itm.tabId + '"]');
+                        var tabs = document.querySelectorAll('.tab');
+                        if (tab) activateTab(tab, tabs);
+                        if (itm.originalLi) {
+                            itm.originalLi.style.transition = 'background-color 0.3s';
+                            itm.originalLi.style.backgroundColor = 'var(--color-highlight)';
+                            itm.originalLi.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            setTimeout(function () {
+                                itm.originalLi.style.backgroundColor = '';
+                            }, 1500);
+                        } else {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    };
+                })(item));
+
+                list.appendChild(itemDiv);
+            });
+
+            yearDiv.appendChild(list);
+            container.appendChild(yearDiv);
+        });
+    }
+
+    renderTimeline();
+
+    // Añadir items de prensa + columnas desde el JSON, una vez cargados
+    if (window.__prensaFeedReady) {
+        window.__prensaFeedReady.then(function (jsonItems) {
+            if (!jsonItems || !jsonItems.length) return;
+            jsonItems.forEach(function (j) {
+                var year = parseInt((j.fecha || '').slice(0, 4));
+                if (!year) return;
+                var title = (j.titulo || '').trim();
+                if (title.length > 80) title = title.substring(0, 77) + '...';
+                items.push({
+                    year: year,
+                    type: j.seccion === 'columnas' ? 'Columna' : 'Prensa',
+                    title: title,
+                    source: (j.bajada || '').replace(/\.$/, ''),
+                    link: j.url,
+                    originalLi: null,
+                    tabId: 'prensa'
+                });
+            });
+            renderTimeline();
+        });
+    }
 }
