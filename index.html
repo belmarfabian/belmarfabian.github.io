@@ -56,6 +56,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="prensa-feed.css">
 
     <!-- Prevent flash of wrong theme (FOWT) -->
     <script>
@@ -88,7 +89,7 @@
                     <a href="https://orcid.org/0000-0003-4239-1874" class="orcid" title="Identificador único de investigador">ORCID</a> ·
                     <a href="https://www.scopus.com/authid/detail.uri?authorId=57220090371" class="scopus" title="Base de datos Elsevier de publicaciones indexadas">Scopus</a> ·
                     <a href="https://www.researchgate.net/profile/Fabian-Belmar-3" class="researchgate" title="Red social académica">ResearchGate</a> ·
-                    <a href="archivo/" class="archivo" title="Archivo de columnas, papers y apariciones">Archivo</a>
+                    <a href="#prensa" class="archivo" title="Columnas, apariciones y notas de prensa">Archivo</a>
                 </p>
                 <p class="update-notice"></p>
             </div>
@@ -115,7 +116,7 @@
             <button class="tab" data-tab="otros-articulos">Otros</button>
             <button class="tab" data-tab="capitulos">Capítulos</button>
             <button class="tab" data-tab="documentos">Documentos</button>
-            <button class="tab" data-tab="prensa">Prensa</button>
+            <button class="tab" data-tab="prensa">Prensa y columnas</button>
             <!-- <button class="tab" data-tab="desarrollo">Desarrollo</button> -->
             <button class="tab" data-tab="timeline">Cronología</button>
         </nav>
@@ -204,24 +205,58 @@
             </section>
         </div>
 
-        <!-- Panel: Prensa -->
+        <!-- Panel: Prensa y columnas (feed dinámico desde archivo/entradas.json) -->
         <div class="tab-panel" id="panel-prensa">
             <section id="prensa">
-                <h2>Prensa</h2>
-                <p>Columnas de opinión, artículos de divulgación, entrevistas y apariciones en medios de comunicación escritos, radiales y televisivos, tanto nacionales como internacionales.</p>
-                <ol start="5" reversed class="scrollable-list">
-                    <li><strong>Belmar, F.</strong> (2026). Citado en «La relación entre Blanco y Negro y la Garra Blanca está documentada». <em>Lunmas</em>. <a href="https://lunmas.cl/la-relacion-entre-blanco-y-negro-y-la-garra-blanca-esta-documentada/">Enlace</a></li>
+                <h2>Prensa y columnas</h2>
+                <p>Columnas de opinión, artículos de divulgación, entrevistas y apariciones en medios de comunicación. Buscador, filtros por medio y por tema.</p>
 
-                    <li><strong>Belmar, F.</strong> (2025). Las otras 110 Zandra. <em>El Mostrador</em>, Cartas. <a href="https://www.elmostrador.cl/noticias/opinion/cartas/2025/11/24/las-otras-110-zandra/">Enlace</a></li>
+                <div class="pf-controls">
+                    <div class="pf-chips" role="tablist" aria-label="Filtrar por sección">
+                        <button class="pf-chip active" data-pf-seccion="todas">Todas</button>
+                        <button class="pf-chip" data-pf-seccion="columnas">Columnas</button>
+                        <button class="pf-chip" data-pf-seccion="prensa">Apariciones</button>
+                    </div>
+                    <input id="pf-q" class="pf-search" type="search" placeholder="Buscar en prensa y columnas…" autocomplete="off" aria-label="Buscar en prensa y columnas">
+                </div>
+                <div class="pf-subbar" id="pf-subbar"></div>
+                <div class="pf-tagbar" id="pf-tagbar"></div>
+                <p class="pf-conteo" id="pf-conteo"></p>
 
-                    <li><strong>Belmar, F.</strong> (2025). Citado en nota sobre tensiones entre barrabravas y dirigencia del fútbol chileno. <em>Las Últimas Noticias</em>.</li>
-
-                    <li><strong>Belmar, F.</strong>, & Castro, F. (2024). Copa América 2024: Breve crónica del ocaso del fútbol. <em>CIPER Chile</em>, Opinión. <a href="https://www.ciperchile.cl/2024/07/18/copa-america-2024-breve-cronica-del-ocaso-del-futbol/">Enlace</a></li>
-
-                    <li><strong>Belmar, F.</strong> (2024). Corrupción en el fútbol (más allá de Roldán). <em>CIPER Chile</em>, Opinión. <a href="https://www.ciperchile.cl/2024/07/03/corrupcion-en-el-futbol-mas-alla-de-roldan/">Enlace</a></li>
-                </ol>
+                <div id="pf-feed" class="pf-feed"></div>
+                <p id="pf-vacio" class="pf-vacio" hidden>Nada coincide con tu búsqueda.</p>
+                <div id="pf-centinela" aria-hidden="true"></div>
+                <p id="pf-fin" class="pf-fin" hidden>·  ·  ·</p>
             </section>
         </div>
+
+        <template id="tpl-pf-articulo">
+            <article class="pf-post" data-id="">
+                <a class="pf-post__imagen" target="_blank" rel="noopener">
+                    <img loading="lazy" alt="">
+                </a>
+                <div class="pf-post__main">
+                    <header class="pf-post__head">
+                        <p class="pf-post__meta">
+                            <time class="pf-post__fecha"></time>
+                            <span class="pf-post__sep">·</span>
+                            <span class="pf-post__tipo"></span>
+                            <span class="pf-post__sep">·</span>
+                            <span class="pf-post__fuente">
+                                <img class="pf-post__favicon" alt="" width="14" height="14">
+                                <span class="pf-post__fuente-nombre"></span>
+                            </span>
+                        </p>
+                        <h3 class="pf-post__titulo"><a target="_blank" rel="noopener"></a></h3>
+                        <p class="pf-post__excerpt"></p>
+                    </header>
+                    <ul class="pf-post__tags"></ul>
+                    <footer class="pf-post__foot">
+                        <a class="pf-post__original" target="_blank" rel="noopener"></a>
+                    </footer>
+                </div>
+            </article>
+        </template>
 
         <!-- Panel: Desarrollo (oculto temporalmente hasta tener proyectos publicables)
         <div class="tab-panel" id="panel-desarrollo">
@@ -266,6 +301,7 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="prensa-feed.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var theme = document.documentElement.getAttribute('data-theme') || 'light';
