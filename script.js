@@ -335,6 +335,7 @@ function filterPublications(query, allItems, sections, counter, totalCount, pane
 
     // Update per-tab match counts
     Object.keys(panels).forEach(function (key) {
+        if (key === 'prensa') return; // gestionado por prensa-feed.js (cards dinámicos)
         var p = panels[key];
         var countSpan = p.tab.querySelector('.tab-count');
         if (!countSpan) return;
