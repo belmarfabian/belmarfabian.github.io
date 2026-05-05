@@ -324,13 +324,17 @@
       if (!r.ok) throw new Error('HTTP ' + r.status);
       const data = await r.json();
       const items = (data.items || data.columnas || []).filter(c =>
-        (c.seccion === 'prensa' || c.seccion === 'columnas')
-        && c.fuente !== 'cep'
-        && c.fecha
+        c.seccion === 'prensa' || c.seccion === 'columnas'
       );
-      state.todas = items.slice().sort((a, b) =>
-        (b.fecha || '0000-00-00').localeCompare(a.fecha || '0000-00-00')
-      );
+      // Ordenar por fecha desc; los sin fecha al final
+      state.todas = items.slice().sort((a, b) => {
+        const fa = a.fecha || '';
+        const fb = b.fecha || '';
+        if (!fa && !fb) return 0;
+        if (!fa) return 1;
+        if (!fb) return -1;
+        return fb.localeCompare(fa);
+      });
     } catch (e) {
       if (vacio) {
         vacio.hidden = false;
