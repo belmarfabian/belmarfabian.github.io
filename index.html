@@ -205,7 +205,7 @@
             </section>
         </div>
 
-        <!-- Panel: Prensa y columnas (lista desde archivo/entradas.json) -->
+        <!-- Panel: Prensa y columnas (cards desde archivo/entradas.json) -->
         <div class="tab-panel" id="panel-prensa">
             <section id="prensa">
                 <h2>Prensa y columnas</h2>
@@ -218,11 +218,32 @@
                 </div>
                 <div class="pf-pills" id="pf-pills"></div>
                 <div class="pf-tags" id="pf-tags"></div>
+                <p class="pf-conteo" id="pf-conteo"></p>
 
-                <ol class="scrollable-list" id="pf-list"></ol>
+                <div id="pf-feed" class="pf-feed"></div>
                 <p class="pf-vacio" id="pf-vacio" hidden>Nada coincide con tu filtro.</p>
             </section>
         </div>
+
+        <template id="tpl-pf-articulo">
+            <article class="pf-post">
+                <a class="pf-post__imagen" target="_blank" rel="noopener">
+                    <img loading="lazy" alt="">
+                </a>
+                <div class="pf-post__main">
+                    <p class="pf-post__meta">
+                        <time class="pf-post__fecha"></time>
+                        <span class="pf-post__sep">·</span>
+                        <span class="pf-post__tipo"></span>
+                        <span class="pf-post__sep">·</span>
+                        <em class="pf-post__medio"></em>
+                    </p>
+                    <h3 class="pf-post__titulo"><a target="_blank" rel="noopener"></a></h3>
+                    <p class="pf-post__excerpt"></p>
+                    <ul class="pf-post__tags"></ul>
+                </div>
+            </article>
+        </template>
 
         <!-- Panel: Desarrollo (oculto temporalmente hasta tener proyectos publicables)
         <div class="tab-panel" id="panel-desarrollo">
