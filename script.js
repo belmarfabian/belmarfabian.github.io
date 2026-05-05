@@ -1,211 +1,69 @@
 /* ===== Init ===== */
 document.addEventListener('DOMContentLoaded', function () {
-    convertirLisACards();    // Antes de cualquier cosa que lea/escriba sobre <li>
     initUltimaPub();
     initUltimaPrensa();
     initTabs();
+    initMetadata();
+    initAbstracts();
     initSearch();
     initUpdateDate();
     initBackToTop();
     initTimeline();
+    initEqualHeight();
     initScrollProgress();
+    initCopyCite();
     initSortToggle();
 });
 
-/* ===== Convertir los <li> académicos a estructura .pub-card ===== */
-function convertirLisACards() {
-    var THUMB_COLOR = {
-        'articulos': 'rojo',
-        'otros-articulos': 'amarillo',
-        'capitulos': 'azul',
-        'documentos': 'rojo'
-    };
-    Object.keys(THUMB_COLOR).forEach(function (panelId) {
-        var lis = document.querySelectorAll('#panel-' + panelId + ' .scrollable-list li');
-        lis.forEach(function (li) { transformarLi(li, THUMB_COLOR[panelId]); });
-    });
-}
-
-function escapeHTML(s) {
-    return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
-
-function transformarLi(li, thumbColor) {
-    var html = li.innerHTML.trim();
-
-    var yearMatch = html.match(/\((\d{4})\)/);
-    var año = yearMatch ? yearMatch[1] : '';
-
-    var autoresMatch = html.match(/^([\s\S]*?)\s*\(\d{4}\)/);
-    var autoresHtml = autoresMatch ? autoresMatch[1].trim().replace(/[,\s]+$/, '') : '';
-
-    // Cuerpo después de "(YEAR)."
-    var afterYearMatch = html.match(/\(\d{4}\)\s*\.\s*([\s\S]+)$/);
-    var afterYear = afterYearMatch ? afterYearMatch[1] : '';
-
-    var titulo = '', journal = '', details = '';
-    var emMatch = afterYear.match(/<em>([\s\S]*?)<\/em>/);
-    if (emMatch) {
-        // Caso A: cita con journal/libro en <em>
-        journal = emMatch[1].trim();
-        titulo = afterYear.slice(0, emMatch.index).trim().replace(/\.$/, '');
-        var afterEm = afterYear.slice(emMatch.index + emMatch[0].length);
-        afterEm = afterEm.replace(/<a[^>]*>[\s\S]*?<\/a>/g, '').trim();
-        details = afterEm.replace(/^[,.\s]+/, '').replace(/[,.\s]+$/, '').trim();
-    } else {
-        // Caso B: documento/libro sin <em> ("Título. Editorial.")
-        var sinLink = afterYear.replace(/<a[^>]*>[\s\S]*?<\/a>/g, '').trim().replace(/[,.\s]+$/, '');
-        var sentSplit = sinLink.match(/^([^.]+)\.\s+(.+)$/);
-        if (sentSplit) {
-            titulo = sentSplit[1].trim();
-            details = sentSplit[2].trim().replace(/\.$/, '');
-        } else {
-            titulo = sinLink;
-        }
-    }
-
-    // Capítulos: "TITULO. En EDITOR (Ed.)," — separar editor a details
-    var enMatch = titulo.match(/^(.+?)\.\s+En\s+([\s\S]+)$/);
-    if (enMatch) {
-        titulo = enMatch[1].trim();
-        var enInfo = 'En ' + enMatch[2].replace(/[,\s]+$/, '');
-        details = enInfo + (details ? ' · ' + details : '');
-    }
-
-    var urlMatch = html.match(/<a[^>]*href="([^"]+)"/);
-    var url = urlMatch ? urlMatch[1] : '';
-
-    var abstract = li.dataset.abstract || '';
-
-    var dbEntry = (typeof JOURNAL_DB !== 'undefined' && JOURNAL_DB[journal]) || {};
-    var quartile = li.dataset.quartile || dbEntry.quartile || '';
-    var citescore = li.dataset.score
-        || (dbEntry.citescore ? 'CS ' + dbEntry.citescore : '');
-
-    // Persist for timeline / search / sort
-    li.dataset.year = año;
-    li.dataset.titulo = titulo;
-    li.dataset.journal = journal;
-    li.dataset.url = url;
-
-    var thumbMedio = journal || 'Documento';
-
-    var partes = [];
-    if (año) partes.push('<span class="pub-card__year">' + escapeHTML(año) + '</span>');
-    if (journal) partes.push('<em>' + escapeHTML(journal) + '</em>');
-    if (details) partes.push('<span>' + escapeHTML(details) + '</span>');
-    if (quartile) {
-        partes.push('<span class="pub-card__quartile pub-card__quartile-' + quartile.toLowerCase() +
-                    '" title="Mejor cuartil SJR">' + escapeHTML(quartile) + '</span>');
-    }
-    if (citescore) {
-        partes.push('<span class="pub-card__cs" title="Scopus CiteScore 2024">' +
-                    escapeHTML(citescore) + '</span>');
-    }
-    var metaHtml = partes.join('<span class="pub-card__meta-sep">·</span>');
-
-    var imagenContent =
-        '<div class="pub-card__thumb pub-card__thumb--' + thumbColor + '">' +
-            '<span class="pub-card__thumb-medio">' + escapeHTML(thumbMedio) + '</span>' +
-            (año ? '<span class="pub-card__thumb-año">' + año + '</span>' : '') +
-        '</div>';
-
-    var imagenWrap = url
-        ? '<a class="pub-card__imagen" href="' + escapeHTML(url) + '" target="_blank" rel="noopener">' +
-              imagenContent + '</a>'
-        : '<div class="pub-card__imagen">' + imagenContent + '</div>';
-
-    var tituloHtml = url
-        ? '<a href="' + escapeHTML(url) + '" target="_blank" rel="noopener">' + escapeHTML(titulo) + '</a>'
-        : escapeHTML(titulo);
-
-    var abstractHtml = abstract
-        ? '<p class="pub-card__abstract" title="Click para expandir/colapsar">' +
-            escapeHTML(abstract) +
-          '</p>'
-        : '';
-
-    li.innerHTML =
-        imagenWrap +
-        '<div class="pub-card__main">' +
-            '<p class="pub-card__autores">' + autoresHtml + '</p>' +
-            '<h3 class="pub-card__titulo">' + tituloHtml + '</h3>' +
-            (metaHtml ? '<p class="pub-card__meta">' + metaHtml + '</p>' : '') +
-            abstractHtml +
-            '<button type="button" class="pub-card__copy" aria-label="Copiar cita">Copiar</button>' +
-        '</div>';
-
-    li.classList.add('pub-card');
-
-    // Toggle abstract expansion
-    var abstractEl = li.querySelector('.pub-card__abstract');
-    if (abstractEl) {
-        abstractEl.addEventListener('click', function () {
-            abstractEl.classList.toggle('expanded');
-        });
-    }
-
-    // Wire up copy button
-    var copyBtn = li.querySelector('.pub-card__copy');
-    if (copyBtn) {
-        copyBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var citation = (autoresHtml.replace(/<[^>]+>/g, '').trim()) +
-                ' (' + año + '). ' + titulo + '. ' + journal +
-                (details ? ', ' + details : '') + '.';
-            navigator.clipboard.writeText(citation.replace(/\s+/g, ' ').trim()).then(function () {
-                copyBtn.textContent = 'Copiado';
-                copyBtn.classList.add('copied');
-                setTimeout(function () {
-                    copyBtn.textContent = 'Copiar';
-                    copyBtn.classList.remove('copied');
-                }, 1500);
-            });
-        });
-    }
-}
-
-/* ===== Última publicación (auto from first article, via data-attrs) ===== */
+/* ===== Última publicación (auto from first article) ===== */
 function initUltimaPub() {
     var articulo = document.querySelector('#articulos .scrollable-list li');
     var container = document.getElementById('ultima-pub');
-    if (!articulo || !container) return;
 
-    var año = articulo.dataset.year || '';
-    var titulo = articulo.dataset.titulo || '';
-    var revista = articulo.dataset.journal || '';
-    var link = articulo.dataset.url || '';
-    var abstract = articulo.dataset.abstract || '';
+    if (articulo && container) {
+        var texto = articulo.innerHTML;
+        var match = texto.match(/\((\d{4})\)\.\s*([^.]+\.)/);
+        var año = match ? match[1] : '';
+        var titulo = match ? match[2].trim() : '';
+        var revista = articulo.querySelector('em')
+            ? articulo.querySelector('em').textContent
+            : '';
+        var link = articulo.querySelector('a')
+            ? articulo.querySelector('a').href
+            : '';
+        var abstract = articulo.dataset.abstract || '';
 
-    container.innerHTML =
-        '<p class="ultima-titulo">' + escapeHTML(titulo) + '</p>' +
-        '<p class="ultima-meta"><em>' + escapeHTML(revista) + '</em>' +
-        (año ? ' (' + escapeHTML(año) + ')' : '') +
-        (link ? ' <a href="' + escapeHTML(link) + '" class="ultima-link" target="_blank" rel="noopener">Ver artículo →</a>' : '') +
-        '</p>' +
-        (abstract ? '<p class="ultima-abstract">' + escapeHTML(abstract) + '</p>' : '');
+        container.innerHTML =
+            '<p class="ultima-titulo">' + titulo + '</p>' +
+            '<p class="ultima-meta"><em>' + revista + '</em> (' + año + ')' +
+            (link ? ' <a href="' + link + '" class="ultima-link">Ver artículo →</a>' : '') +
+            '</p>' +
+            (abstract ? '<p class="ultima-abstract">' + abstract + '</p>' : '');
+    }
 }
 
-/* ===== Última prensa (desde archivo/entradas.json, vía prensa-feed) ===== */
+/* ===== Última prensa (auto from first press item) ===== */
 function initUltimaPrensa() {
+    var prensaItem = document.querySelector('#prensa .scrollable-list li');
     var container = document.getElementById('ultima-prensa');
-    if (!container || !window.__prensaFeedReady) return;
 
-    window.__prensaFeedReady.then(function (items) {
-        var ultimo = items.find(function (i) { return i.seccion === 'prensa'; })
-                  || items.find(function (i) { return i.seccion === 'columnas'; });
-        if (!ultimo) return;
-        var año = (ultimo.fecha || '').slice(0, 4);
-        var medio = (ultimo.bajada || '').replace(/\.$/, '') || 'Aparición';
+    if (prensaItem && container) {
+        var texto = prensaItem.innerHTML;
+        var match = texto.match(/\((\d{4})\)\.\s*([^.]+\.)/);
+        var titulo = match ? match[2].trim() : '';
+        var emEl = prensaItem.querySelector('em');
+        var medio = emEl ? emEl.textContent : '';
+        var linkEl = prensaItem.querySelector('a');
+        var link = linkEl ? linkEl.href : '';
+        var yearMatch = texto.match(/\((\d{4})\)/);
+        var año = yearMatch ? yearMatch[1] : '';
+
         container.innerHTML =
-            '<p class="ultima-prensa-titulo">' + ultimo.titulo + '</p>' +
-            '<p class="ultima-prensa-meta"><em>' + medio + '</em>' +
-            (año ? ' (' + año + ')' : '') +
-            (ultimo.url ? ' <a href="' + ultimo.url + '" class="ultima-link" target="_blank" rel="noopener">Ver →</a>' : '') +
+            '<p class="ultima-prensa-titulo">' + titulo + '</p>' +
+            '<p class="ultima-prensa-meta"><em>' + medio + '</em> (' + año + ')' +
+            (link ? ' <a href="' + link + '" class="ultima-link">Ver →</a>' : '') +
             '</p>';
-    });
+    }
 }
 
 /* ===== Tabs with item counts ===== */
@@ -385,6 +243,8 @@ function initSearch() {
 
     var tabs = document.querySelectorAll('.tab');
     var panels = {};
+
+    // Map tabs to their panels and items
     tabs.forEach(function (tab) {
         var target = tab.getAttribute('data-tab');
         var panel = document.getElementById('panel-' + target);
@@ -395,46 +255,49 @@ function initSearch() {
                 sections: panel.querySelectorAll('section'),
                 items: []
             };
+            var items = panel.querySelectorAll('.scrollable-list li');
+            items.forEach(function (li) {
+                panels[target].items.push({
+                    el: li,
+                    text: li.textContent.toLowerCase(),
+                    section: li.closest('section')
+                });
+            });
         }
     });
 
     var allItems = [];
     var sections = document.querySelectorAll('.tab-panel section');
-
-    function rebuildIndex() {
-        allItems.length = 0;
-        Object.keys(panels).forEach(function (k) { panels[k].items.length = 0; });
-
-        document.querySelectorAll('.tab-panel section .scrollable-list li').forEach(function (li) {
-            var section = li.closest('section');
-            var entry = { el: li, text: li.textContent.toLowerCase(), section: section };
-            allItems.push(entry);
-
-            var panel = li.closest('.tab-panel');
-            var key = panel ? panel.id.replace('panel-', '') : null;
-            if (key && panels[key]) panels[key].items.push(entry);
+    sections.forEach(function (section) {
+        var items = section.querySelectorAll('.scrollable-list li');
+        items.forEach(function (li) {
+            allItems.push({
+                el: li,
+                text: li.textContent.toLowerCase(),
+                section: section
+            });
         });
-        updateCounter(counter, allItems.length, allItems.length);
-    }
+    });
 
-    rebuildIndex();
-    window.__rebuildSearchIndex = rebuildIndex;
-
-    function runFilter() {
-        filterPublications(input.value, allItems, sections, counter, allItems.length, panels, noResults);
-    }
+    var totalCount = allItems.length;
+    updateCounter(counter, totalCount, totalCount);
 
     var debounceTimer;
     input.addEventListener('input', function () {
         clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(runFilter, 150);
-        if (clearBtn) clearBtn.classList.toggle('visible', input.value.length > 0);
+        debounceTimer = setTimeout(function () {
+            filterPublications(input.value, allItems, sections, counter, totalCount, panels, noResults);
+        }, 150);
+        // Show/hide clear button
+        if (clearBtn) {
+            clearBtn.classList.toggle('visible', input.value.length > 0);
+        }
     });
 
     input.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             input.value = '';
-            runFilter();
+            filterPublications('', allItems, sections, counter, totalCount, panels, noResults);
             if (clearBtn) clearBtn.classList.remove('visible');
         }
     });
@@ -442,7 +305,7 @@ function initSearch() {
     if (clearBtn) {
         clearBtn.addEventListener('click', function () {
             input.value = '';
-            runFilter();
+            filterPublications('', allItems, sections, counter, totalCount, panels, noResults);
             clearBtn.classList.remove('visible');
             input.focus();
         });
@@ -481,7 +344,6 @@ function filterPublications(query, allItems, sections, counter, totalCount, pane
 
     // Update per-tab match counts
     Object.keys(panels).forEach(function (key) {
-        if (key === 'prensa') return; // gestionado por prensa-feed.js (cards dinámicos)
         var p = panels[key];
         var countSpan = p.tab.querySelector('.tab-count');
         if (!countSpan) return;
@@ -554,13 +416,9 @@ function highlightMatches(allItems, tokens) {
         var textNodes = [];
         var node;
         while (node = walker.nextNode()) {
-            var pn = node.parentNode;
-            if (pn.tagName === 'A' ||
-                pn.classList.contains('pub-card__meta') ||
-                pn.classList.contains('pub-card__copy') ||
-                pn.classList.contains('pub-card__quartile') ||
-                pn.classList.contains('pub-card__cs') ||
-                pn.classList.contains('search-highlight')) continue;
+            if (node.parentNode.tagName === 'A' || node.parentNode.classList.contains('pub-meta') ||
+                node.parentNode.classList.contains('abstract-content') ||
+                node.parentNode.classList.contains('search-highlight')) continue;
             textNodes.push(node);
         }
 
@@ -793,12 +651,23 @@ function initTimeline() {
 
         var lis = panel.querySelectorAll('.scrollable-list li');
         lis.forEach(function (li) {
-            var year = parseInt(li.dataset.year || '');
-            if (!year) return;
-            var title = li.dataset.titulo || '';
+            var yearMatch = li.textContent.match(/\((\d{4})\)/);
+            if (!yearMatch) return;
+            var year = parseInt(yearMatch[1]);
+
+            // Extract short title
+            var text = li.textContent;
+            var titleMatch = text.match(/\(\d{4}\)\.\s*([^.]+\.)/);
+            var title = titleMatch ? titleMatch[1].trim() : '';
             if (title.length > 80) title = title.substring(0, 77) + '...';
-            var source = li.dataset.journal || '';
-            var link = li.dataset.url || '';
+
+            // Get source
+            var emEl = li.querySelector('em');
+            var source = emEl ? emEl.textContent : '';
+
+            // Get link
+            var linkEl = li.querySelector('a');
+            var link = linkEl ? linkEl.href : '';
 
             items.push({
                 year: year,
@@ -812,104 +681,77 @@ function initTimeline() {
         });
     });
 
-    function renderTimeline() {
-        items.sort(function (a, b) { return b.year - a.year; });
-        var years = {};
-        items.forEach(function (item) {
-            if (!years[item.year]) years[item.year] = [];
-            years[item.year].push(item);
+    // Sort by year descending
+    items.sort(function (a, b) { return b.year - a.year; });
+
+    // Group by year
+    var years = {};
+    items.forEach(function (item) {
+        if (!years[item.year]) years[item.year] = [];
+        years[item.year].push(item);
+    });
+
+    // Render
+    var sortedYears = Object.keys(years).sort(function (a, b) { return b - a; });
+    sortedYears.forEach(function (year) {
+        var yearDiv = document.createElement('div');
+        yearDiv.className = 'timeline-year';
+
+        var label = document.createElement('div');
+        label.className = 'timeline-year-label';
+        label.textContent = year;
+        yearDiv.appendChild(label);
+
+        var list = document.createElement('div');
+        list.className = 'timeline-items';
+
+        years[year].forEach(function (item) {
+            var itemDiv = document.createElement('div');
+            itemDiv.className = 'timeline-item';
+
+            var typeSpan = document.createElement('span');
+            typeSpan.className = 'timeline-item-type';
+            typeSpan.textContent = item.type;
+            itemDiv.appendChild(typeSpan);
+
+            itemDiv.appendChild(document.createTextNode(item.title));
+
+            if (item.source) {
+                var sourceEm = document.createElement('em');
+                sourceEm.textContent = ' ' + item.source;
+                sourceEm.style.color = 'var(--color-text-muted)';
+                itemDiv.appendChild(sourceEm);
+            }
+
+            if (item.link) {
+                var a = document.createElement('a');
+                a.href = item.link;
+                a.textContent = '→';
+                itemDiv.appendChild(a);
+            }
+
+            // Click to navigate to original
+            itemDiv.style.cursor = 'pointer';
+            itemDiv.addEventListener('click', (function (itm) {
+                return function (e) {
+                    if (e.target.tagName === 'A') return;
+                    var tab = document.querySelector('.tab[data-tab="' + itm.tabId + '"]');
+                    var tabs = document.querySelectorAll('.tab');
+                    if (tab) activateTab(tab, tabs);
+                    // Highlight original item
+                    itm.originalLi.style.transition = 'background-color 0.3s';
+                    itm.originalLi.style.backgroundColor = 'var(--color-highlight)';
+                    itm.originalLi.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    setTimeout(function () {
+                        itm.originalLi.style.backgroundColor = '';
+                    }, 1500);
+                };
+            })(item));
+
+            list.appendChild(itemDiv);
         });
-        container.replaceChildren();
 
-        Object.keys(years).sort(function (a, b) { return b - a; }).forEach(function (year) {
-            var yearDiv = document.createElement('div');
-            yearDiv.className = 'timeline-year';
-
-            var label = document.createElement('div');
-            label.className = 'timeline-year-label';
-            label.textContent = year;
-            yearDiv.appendChild(label);
-
-            var list = document.createElement('div');
-            list.className = 'timeline-items';
-
-            years[year].forEach(function (item) {
-                var itemDiv = document.createElement('div');
-                itemDiv.className = 'timeline-item';
-
-                var typeSpan = document.createElement('span');
-                typeSpan.className = 'timeline-item-type';
-                typeSpan.textContent = item.type;
-                itemDiv.appendChild(typeSpan);
-
-                itemDiv.appendChild(document.createTextNode(item.title));
-
-                if (item.source) {
-                    var sourceEm = document.createElement('em');
-                    sourceEm.textContent = ' ' + item.source;
-                    sourceEm.style.color = 'var(--color-text-muted)';
-                    itemDiv.appendChild(sourceEm);
-                }
-
-                if (item.link) {
-                    var a = document.createElement('a');
-                    a.href = item.link;
-                    a.target = '_blank';
-                    a.rel = 'noopener';
-                    a.textContent = '→';
-                    itemDiv.appendChild(a);
-                }
-
-                itemDiv.style.cursor = 'pointer';
-                itemDiv.addEventListener('click', (function (itm) {
-                    return function (e) {
-                        if (e.target.tagName === 'A') return;
-                        var tab = document.querySelector('.tab[data-tab="' + itm.tabId + '"]');
-                        var tabs = document.querySelectorAll('.tab');
-                        if (tab) activateTab(tab, tabs);
-                        if (itm.originalLi) {
-                            itm.originalLi.style.transition = 'background-color 0.3s';
-                            itm.originalLi.style.backgroundColor = 'var(--color-highlight)';
-                            itm.originalLi.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            setTimeout(function () {
-                                itm.originalLi.style.backgroundColor = '';
-                            }, 1500);
-                        } else {
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }
-                    };
-                })(item));
-
-                list.appendChild(itemDiv);
-            });
-
-            yearDiv.appendChild(list);
-            container.appendChild(yearDiv);
-        });
-    }
-
-    renderTimeline();
-
-    // Añadir items de prensa + columnas desde el JSON, una vez cargados
-    if (window.__prensaFeedReady) {
-        window.__prensaFeedReady.then(function (jsonItems) {
-            if (!jsonItems || !jsonItems.length) return;
-            jsonItems.forEach(function (j) {
-                var year = parseInt((j.fecha || '').slice(0, 4));
-                if (!year) return;
-                var title = (j.titulo || '').trim();
-                if (title.length > 80) title = title.substring(0, 77) + '...';
-                items.push({
-                    year: year,
-                    type: j.seccion === 'columnas' ? 'Columna' : 'Prensa',
-                    title: title,
-                    source: (j.bajada || '').replace(/\.$/, ''),
-                    link: j.url,
-                    originalLi: null,
-                    tabId: 'prensa'
-                });
-            });
-            renderTimeline();
-        });
-    }
+        yearDiv.appendChild(list);
+        container.appendChild(yearDiv);
+    });
 }
