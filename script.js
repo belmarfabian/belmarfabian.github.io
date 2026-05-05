@@ -40,19 +40,38 @@ function transformarLi(li, thumbColor) {
     var autoresMatch = html.match(/^([\s\S]*?)\s*\(\d{4}\)/);
     var autoresHtml = autoresMatch ? autoresMatch[1].trim().replace(/[,\s]+$/, '') : '';
 
-    var tituloMatch = html.match(/\(\d{4}\)\.\s*([\s\S]*?)\s*<em>/);
-    var titulo = tituloMatch ? tituloMatch[1].trim().replace(/\.$/, '') : '';
-    // En capítulos el formato es "TITULO. En EDITOR (Ed.), <em>LIBRO</em>" — cortar antes de "En"
-    var enMatch = titulo.match(/^(.+?)\.\s+En\s+/);
-    if (enMatch) titulo = enMatch[1];
+    // Cuerpo después de "(YEAR)."
+    var afterYearMatch = html.match(/\(\d{4}\)\s*\.\s*([\s\S]+)$/);
+    var afterYear = afterYearMatch ? afterYearMatch[1] : '';
 
-    var journalMatch = html.match(/<em>([\s\S]*?)<\/em>/);
-    var journal = journalMatch ? journalMatch[1].trim() : '';
+    var titulo = '', journal = '', details = '';
+    var emMatch = afterYear.match(/<em>([\s\S]*?)<\/em>/);
+    if (emMatch) {
+        // Caso A: cita con journal/libro en <em>
+        journal = emMatch[1].trim();
+        titulo = afterYear.slice(0, emMatch.index).trim().replace(/\.$/, '');
+        var afterEm = afterYear.slice(emMatch.index + emMatch[0].length);
+        afterEm = afterEm.replace(/<a[^>]*>[\s\S]*?<\/a>/g, '').trim();
+        details = afterEm.replace(/^[,.\s]+/, '').replace(/[,.\s]+$/, '').trim();
+    } else {
+        // Caso B: documento/libro sin <em> ("Título. Editorial.")
+        var sinLink = afterYear.replace(/<a[^>]*>[\s\S]*?<\/a>/g, '').trim().replace(/[,.\s]+$/, '');
+        var sentSplit = sinLink.match(/^([^.]+)\.\s+(.+)$/);
+        if (sentSplit) {
+            titulo = sentSplit[1].trim();
+            details = sentSplit[2].trim().replace(/\.$/, '');
+        } else {
+            titulo = sinLink;
+        }
+    }
 
-    var detailsMatch = html.match(/<\/em>([\s\S]*?)(?:<a|$)/);
-    var details = detailsMatch
-        ? detailsMatch[1].replace(/<[^>]+>/g, '').replace(/^[,.\s]+/, '').replace(/[,.\s]+$/, '').trim()
-        : '';
+    // Capítulos: "TITULO. En EDITOR (Ed.)," — separar editor a details
+    var enMatch = titulo.match(/^(.+?)\.\s+En\s+([\s\S]+)$/);
+    if (enMatch) {
+        titulo = enMatch[1].trim();
+        var enInfo = 'En ' + enMatch[2].replace(/[,\s]+$/, '');
+        details = enInfo + (details ? ' · ' + details : '');
+    }
 
     var urlMatch = html.match(/<a[^>]*href="([^"]+)"/);
     var url = urlMatch ? urlMatch[1] : '';
@@ -73,6 +92,7 @@ function transformarLi(li, thumbColor) {
     var thumbMedio = journal || 'Documento';
 
     var partes = [];
+    if (año) partes.push('<span class="pub-card__year">' + escapeHTML(año) + '</span>');
     if (journal) partes.push('<em>' + escapeHTML(journal) + '</em>');
     if (details) partes.push('<span>' + escapeHTML(details) + '</span>');
     if (quartile) {
@@ -101,7 +121,9 @@ function transformarLi(li, thumbColor) {
         : escapeHTML(titulo);
 
     var abstractHtml = abstract
-        ? '<p class="pub-card__abstract">' + escapeHTML(abstract) + '</p>'
+        ? '<p class="pub-card__abstract" title="Click para expandir/colapsar">' +
+            escapeHTML(abstract) +
+          '</p>'
         : '';
 
     li.innerHTML =
@@ -115,6 +137,14 @@ function transformarLi(li, thumbColor) {
         '</div>';
 
     li.classList.add('pub-card');
+
+    // Toggle abstract expansion
+    var abstractEl = li.querySelector('.pub-card__abstract');
+    if (abstractEl) {
+        abstractEl.addEventListener('click', function () {
+            abstractEl.classList.toggle('expanded');
+        });
+    }
 
     // Wire up copy button
     var copyBtn = li.querySelector('.pub-card__copy');
