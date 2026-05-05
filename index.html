@@ -226,21 +226,20 @@
         </div>
 
         <template id="tpl-pf-articulo">
-            <article class="pf-post">
-                <a class="pf-post__imagen" target="_blank" rel="noopener">
+            <article class="pub-card">
+                <a class="pub-card__imagen" target="_blank" rel="noopener">
                     <img loading="lazy" alt="">
                 </a>
-                <div class="pf-post__main">
-                    <p class="pf-post__meta">
-                        <time class="pf-post__fecha"></time>
-                        <span class="pf-post__sep">·</span>
-                        <span class="pf-post__tipo"></span>
-                        <span class="pf-post__sep">·</span>
-                        <em class="pf-post__medio"></em>
+                <div class="pub-card__main">
+                    <p class="pub-card__autores"></p>
+                    <h3 class="pub-card__titulo"><a target="_blank" rel="noopener"></a></h3>
+                    <p class="pub-card__meta">
+                        <time class="pub-card__fecha"></time>
+                        <span class="pub-card__meta-sep">·</span>
+                        <em class="pub-card__medio"></em>
                     </p>
-                    <h3 class="pf-post__titulo"><a target="_blank" rel="noopener"></a></h3>
-                    <p class="pf-post__excerpt"></p>
-                    <ul class="pf-post__tags"></ul>
+                    <p class="pub-card__abstract"></p>
+                    <ul class="pub-card__tags"></ul>
                 </div>
             </article>
         </template>

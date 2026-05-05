@@ -1,6 +1,5 @@
-/* Renderiza prensa + columnas dentro de #panel-prensa como cards con imagen.
-   Estilo coherente con el sitio principal (Roboto Mono, paleta Bauhaus).
-   Filtros internos por sección/medio/tag y escucha la búsqueda global. */
+/* Renderiza prensa + columnas dentro de #panel-prensa como cards unificadas
+   (clase .pub-card, mismo estilo que las pestañas académicas). */
 (() => {
   const root = document.getElementById('panel-prensa');
   if (!root) return;
@@ -20,15 +19,6 @@
     day: 'numeric', month: 'long', year: 'numeric'
   });
 
-  const NOMBRE_TIPO = {
-    columna: 'Columna',
-    analisis: 'Análisis',
-    paper: 'Paper',
-    proyecto: 'Proyecto',
-    video: 'Video',
-    aparicion: 'Aparición',
-    otro: 'Nota',
-  };
   const NOMBRE_FUENTE = {
     ciper: 'CIPER Chile',
     cep: 'CEP Chile',
@@ -38,7 +28,6 @@
     utprensa: 'Reporte de Prensa UTalca',
   };
   const ASSET_BASE = 'archivo/';
-  const FALLBACK_IMG = ASSET_BASE + 'fabian.jpg';
 
   const state = {
     todas: [],
@@ -55,6 +44,7 @@
     if (!y) return '';
     return FMT_FECHA.format(new Date(y, (m || 1) - 1, d || 1));
   }
+  function añoDe(c) { return (c.fecha || '').slice(0, 4); }
 
   function normaliza(s) {
     return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -82,9 +72,7 @@
   function fuentesDisponibles() {
     const set = new Set();
     for (const c of state.todas) {
-      if (state.seccion === 'todas' || c.seccion === state.seccion) {
-        set.add(c.fuente);
-      }
+      if (state.seccion === 'todas' || c.seccion === state.seccion) set.add(c.fuente);
     }
     return [...set];
   }
@@ -109,7 +97,7 @@
   function aplicarFiltros() {
     const q = normaliza(state.q.trim());
     let visibles = 0;
-    for (const post of feed.querySelectorAll('.pf-post')) {
+    for (const post of feed.querySelectorAll('.pub-card')) {
       const id = post.dataset.id;
       const c = state.todas.find(x => x.id === id);
       if (!c) continue;
@@ -189,48 +177,98 @@
     }
   }
 
+  function generarThumb(aImg, c) {
+    aImg.replaceChildren();
+    const thumb = document.createElement('div');
+    const colorClase = c.seccion === 'columnas' ? 'rojo' : 'azul';
+    thumb.className = 'pub-card__thumb pub-card__thumb--' + colorClase;
+    const medio = medioDe(c);
+    const año = añoDe(c);
+    const m = document.createElement('span');
+    m.className = 'pub-card__thumb-medio';
+    m.textContent = medio;
+    thumb.appendChild(m);
+    if (año) {
+      const y = document.createElement('span');
+      y.className = 'pub-card__thumb-año';
+      y.textContent = año;
+      thumb.appendChild(y);
+    }
+    aImg.appendChild(thumb);
+  }
+
+  const PATRONES_TEMPLATE = [
+    /^revisa en detalle la columna/i,
+    /^revisa la columna/i,
+    /^revisa el an[aá]lisis/i,
+    /columna dominical del doctor en ciencia pol[ií]tica/i,
+    /profesor titular de la universidad de talca/i,
+    /^lee\s+["“]/i,
+  ];
+  function esBajadaPlantilla(s) { return !s || PATRONES_TEMPLATE.some(re => re.test(s)); }
+  function truncar(s, n) {
+    if (!s) return '';
+    s = s.trim();
+    if (s.length <= n) return s;
+    return s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…';
+  }
+  function previewTexto(c) {
+    if (Array.isArray(c.parrafos) && c.parrafos.length) return truncar(c.parrafos[0], 220);
+    if (c.bajada && !esBajadaPlantilla(c.bajada) && !esDominio(c.bajada.replace(/\.$/, '').trim())) {
+      return truncar(c.bajada, 220);
+    }
+    return '';
+  }
+
   function pintar(c) {
     const node = tpl.content.cloneNode(true);
-    const post = node.querySelector('.pf-post');
+    const post = node.querySelector('.pub-card');
     post.dataset.id = c.id;
     post.dataset.fuente = c.fuente;
     post.dataset.seccion = c.seccion;
 
-    const aImg = node.querySelector('.pf-post__imagen');
-    const img = node.querySelector('.pf-post__imagen img');
+    const aImg = node.querySelector('.pub-card__imagen');
+    const img = node.querySelector('.pub-card__imagen img');
     aImg.href = c.url || '#';
+    if (!c.url) aImg.removeAttribute('target');
 
     if (c.imagen && c.imagen.startsWith('http')) {
       img.src = c.imagen;
       img.alt = c.titulo;
-      img.addEventListener('error', () => generarThumb(aImg, img, c), { once: true });
+      img.addEventListener('error', () => generarThumb(aImg, c), { once: true });
     } else {
-      generarThumb(aImg, img, c);
+      generarThumb(aImg, c);
     }
 
-    const fecha = node.querySelector('.pf-post__fecha');
-    const t = fechaLegible(c);
-    if (t) {
-      fecha.dateTime = c.fecha;
-      fecha.textContent = t;
-    } else {
-      const sep = fecha.nextElementSibling;
-      fecha.remove();
-      if (sep && sep.classList.contains('pf-post__sep')) sep.remove();
-    }
+    // Autores: solo "Belmar, F." (el JSON no detalla coautores)
+    const autores = node.querySelector('.pub-card__autores');
+    autores.innerHTML = '<strong>Belmar, F.</strong>';
 
-    node.querySelector('.pf-post__tipo').textContent = NOMBRE_TIPO[c.tipo] || 'Nota';
-    node.querySelector('.pf-post__medio').textContent = medioDe(c);
-
-    const tituloA = node.querySelector('.pf-post__titulo a');
+    const tituloA = node.querySelector('.pub-card__titulo a');
     tituloA.textContent = c.titulo;
     tituloA.href = c.url || '#';
 
-    const excerpt = node.querySelector('.pf-post__excerpt');
-    excerpt.textContent = previewTexto(c) || '';
-    if (!excerpt.textContent) excerpt.remove();
+    // Meta: fecha · medio
+    const fechaEl = node.querySelector('.pub-card__fecha');
+    const t = fechaLegible(c);
+    if (t) {
+      fechaEl.dateTime = c.fecha;
+      fechaEl.textContent = t;
+    } else {
+      fechaEl.remove();
+      const sep = node.querySelector('.pub-card__meta-sep');
+      if (sep) sep.remove();
+    }
+    node.querySelector('.pub-card__medio').textContent = medioDe(c);
 
-    const ul = node.querySelector('.pf-post__tags');
+    // Excerpt
+    const excerpt = node.querySelector('.pub-card__abstract');
+    const txt = previewTexto(c);
+    if (txt) excerpt.textContent = txt;
+    else excerpt.remove();
+
+    // Tags
+    const ul = node.querySelector('.pub-card__tags');
     const tagList = (c.tags || []).slice(0, 5);
     for (const tg of tagList) {
       const li = document.createElement('li');
@@ -251,45 +289,6 @@
     feed.appendChild(node);
   }
 
-  function generarThumb(aImg, img, c) {
-    if (img && img.parentNode) img.remove();
-    const thumb = document.createElement('div');
-    thumb.className = 'pf-thumb pf-thumb--' + c.seccion;
-    const medio = medioDe(c);
-    const año = (c.fecha || '').slice(0, 4);
-    thumb.innerHTML = `
-      <span class="pf-thumb__medio">${medio}</span>
-      ${año ? `<span class="pf-thumb__año">${año}</span>` : ''}
-    `;
-    aImg.appendChild(thumb);
-  }
-
-  const PATRONES_TEMPLATE = [
-    /^revisa en detalle la columna/i,
-    /^revisa la columna/i,
-    /^revisa el an[aá]lisis/i,
-    /columna dominical del doctor en ciencia pol[ií]tica/i,
-    /profesor titular de la universidad de talca/i,
-    /^lee\s+["“]/i,
-  ];
-  function esBajadaPlantilla(s) {
-    if (!s) return true;
-    return PATRONES_TEMPLATE.some(re => re.test(s));
-  }
-  function truncar(s, n) {
-    if (!s) return '';
-    s = s.trim();
-    if (s.length <= n) return s;
-    return s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…';
-  }
-  function previewTexto(c) {
-    if (Array.isArray(c.parrafos) && c.parrafos.length) return truncar(c.parrafos[0], 220);
-    if (c.bajada && !esBajadaPlantilla(c.bajada) && !esDominio(c.bajada.replace(/\.$/, '').trim())) {
-      return truncar(c.bajada, 220);
-    }
-    return '';
-  }
-
   function bind() {
     chipsSeccion.forEach(chip => {
       chip.addEventListener('click', () => {
@@ -304,17 +303,15 @@
       });
     });
 
-    // Sincronizar con la búsqueda global del sitio (debounced)
     if (globalSearch) {
       let t;
-      const sync = () => {
+      globalSearch.addEventListener('input', () => {
         clearTimeout(t);
         t = setTimeout(() => {
           state.q = globalSearch.value;
           aplicarFiltros();
         }, 120);
-      };
-      globalSearch.addEventListener('input', sync);
+      });
     }
   }
 
