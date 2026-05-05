@@ -1,45 +1,161 @@
 /* ===== Init ===== */
 document.addEventListener('DOMContentLoaded', function () {
+    convertirLisACards();    // Antes de cualquier cosa que lea/escriba sobre <li>
     initUltimaPub();
     initUltimaPrensa();
     initTabs();
-    initMetadata();
-    initAbstracts();
     initSearch();
     initUpdateDate();
     initBackToTop();
     initTimeline();
-    initEqualHeight();
     initScrollProgress();
-    initCopyCite();
     initSortToggle();
 });
 
-/* ===== Última publicación (auto from first article) ===== */
+/* ===== Convertir los <li> académicos a estructura .pub-card ===== */
+function convertirLisACards() {
+    var THUMB_COLOR = {
+        'articulos': 'rojo',
+        'otros-articulos': 'amarillo',
+        'capitulos': 'azul',
+        'documentos': 'rojo'
+    };
+    Object.keys(THUMB_COLOR).forEach(function (panelId) {
+        var lis = document.querySelectorAll('#panel-' + panelId + ' .scrollable-list li');
+        lis.forEach(function (li) { transformarLi(li, THUMB_COLOR[panelId]); });
+    });
+}
+
+function escapeHTML(s) {
+    return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function transformarLi(li, thumbColor) {
+    var html = li.innerHTML.trim();
+
+    var yearMatch = html.match(/\((\d{4})\)/);
+    var año = yearMatch ? yearMatch[1] : '';
+
+    var autoresMatch = html.match(/^([\s\S]*?)\s*\(\d{4}\)/);
+    var autoresHtml = autoresMatch ? autoresMatch[1].trim().replace(/[,\s]+$/, '') : '';
+
+    var tituloMatch = html.match(/\(\d{4}\)\.\s*([\s\S]*?)\s*<em>/);
+    var titulo = tituloMatch ? tituloMatch[1].trim().replace(/\.$/, '') : '';
+    // En capítulos el formato es "TITULO. En EDITOR (Ed.), <em>LIBRO</em>" — cortar antes de "En"
+    var enMatch = titulo.match(/^(.+?)\.\s+En\s+/);
+    if (enMatch) titulo = enMatch[1];
+
+    var journalMatch = html.match(/<em>([\s\S]*?)<\/em>/);
+    var journal = journalMatch ? journalMatch[1].trim() : '';
+
+    var detailsMatch = html.match(/<\/em>([\s\S]*?)(?:<a|$)/);
+    var details = detailsMatch
+        ? detailsMatch[1].replace(/<[^>]+>/g, '').replace(/^[,.\s]+/, '').replace(/[,.\s]+$/, '').trim()
+        : '';
+
+    var urlMatch = html.match(/<a[^>]*href="([^"]+)"/);
+    var url = urlMatch ? urlMatch[1] : '';
+
+    var abstract = li.dataset.abstract || '';
+
+    var dbEntry = (typeof JOURNAL_DB !== 'undefined' && JOURNAL_DB[journal]) || {};
+    var quartile = li.dataset.quartile || dbEntry.quartile || '';
+    var citescore = li.dataset.score
+        || (dbEntry.citescore ? 'CS ' + dbEntry.citescore : '');
+
+    // Persist for timeline / search / sort
+    li.dataset.year = año;
+    li.dataset.titulo = titulo;
+    li.dataset.journal = journal;
+    li.dataset.url = url;
+
+    var thumbMedio = journal || 'Documento';
+
+    var partes = [];
+    if (journal) partes.push('<em>' + escapeHTML(journal) + '</em>');
+    if (details) partes.push('<span>' + escapeHTML(details) + '</span>');
+    if (quartile) {
+        partes.push('<span class="pub-card__quartile pub-card__quartile-' + quartile.toLowerCase() +
+                    '" title="Mejor cuartil SJR">' + escapeHTML(quartile) + '</span>');
+    }
+    if (citescore) {
+        partes.push('<span class="pub-card__cs" title="Scopus CiteScore 2024">' +
+                    escapeHTML(citescore) + '</span>');
+    }
+    var metaHtml = partes.join('<span class="pub-card__meta-sep">·</span>');
+
+    var imagenContent =
+        '<div class="pub-card__thumb pub-card__thumb--' + thumbColor + '">' +
+            '<span class="pub-card__thumb-medio">' + escapeHTML(thumbMedio) + '</span>' +
+            (año ? '<span class="pub-card__thumb-año">' + año + '</span>' : '') +
+        '</div>';
+
+    var imagenWrap = url
+        ? '<a class="pub-card__imagen" href="' + escapeHTML(url) + '" target="_blank" rel="noopener">' +
+              imagenContent + '</a>'
+        : '<div class="pub-card__imagen">' + imagenContent + '</div>';
+
+    var tituloHtml = url
+        ? '<a href="' + escapeHTML(url) + '" target="_blank" rel="noopener">' + escapeHTML(titulo) + '</a>'
+        : escapeHTML(titulo);
+
+    var abstractHtml = abstract
+        ? '<p class="pub-card__abstract">' + escapeHTML(abstract) + '</p>'
+        : '';
+
+    li.innerHTML =
+        imagenWrap +
+        '<div class="pub-card__main">' +
+            '<p class="pub-card__autores">' + autoresHtml + '</p>' +
+            '<h3 class="pub-card__titulo">' + tituloHtml + '</h3>' +
+            (metaHtml ? '<p class="pub-card__meta">' + metaHtml + '</p>' : '') +
+            abstractHtml +
+            '<button type="button" class="pub-card__copy" aria-label="Copiar cita">Copiar</button>' +
+        '</div>';
+
+    li.classList.add('pub-card');
+
+    // Wire up copy button
+    var copyBtn = li.querySelector('.pub-card__copy');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var citation = (autoresHtml.replace(/<[^>]+>/g, '').trim()) +
+                ' (' + año + '). ' + titulo + '. ' + journal +
+                (details ? ', ' + details : '') + '.';
+            navigator.clipboard.writeText(citation.replace(/\s+/g, ' ').trim()).then(function () {
+                copyBtn.textContent = 'Copiado';
+                copyBtn.classList.add('copied');
+                setTimeout(function () {
+                    copyBtn.textContent = 'Copiar';
+                    copyBtn.classList.remove('copied');
+                }, 1500);
+            });
+        });
+    }
+}
+
+/* ===== Última publicación (auto from first article, via data-attrs) ===== */
 function initUltimaPub() {
     var articulo = document.querySelector('#articulos .scrollable-list li');
     var container = document.getElementById('ultima-pub');
+    if (!articulo || !container) return;
 
-    if (articulo && container) {
-        var texto = articulo.innerHTML;
-        var match = texto.match(/\((\d{4})\)\.\s*([^.]+\.)/);
-        var año = match ? match[1] : '';
-        var titulo = match ? match[2].trim() : '';
-        var revista = articulo.querySelector('em')
-            ? articulo.querySelector('em').textContent
-            : '';
-        var link = articulo.querySelector('a')
-            ? articulo.querySelector('a').href
-            : '';
-        var abstract = articulo.dataset.abstract || '';
+    var año = articulo.dataset.year || '';
+    var titulo = articulo.dataset.titulo || '';
+    var revista = articulo.dataset.journal || '';
+    var link = articulo.dataset.url || '';
+    var abstract = articulo.dataset.abstract || '';
 
-        container.innerHTML =
-            '<p class="ultima-titulo">' + titulo + '</p>' +
-            '<p class="ultima-meta"><em>' + revista + '</em> (' + año + ')' +
-            (link ? ' <a href="' + link + '" class="ultima-link">Ver artículo →</a>' : '') +
-            '</p>' +
-            (abstract ? '<p class="ultima-abstract">' + abstract + '</p>' : '');
-    }
+    container.innerHTML =
+        '<p class="ultima-titulo">' + escapeHTML(titulo) + '</p>' +
+        '<p class="ultima-meta"><em>' + escapeHTML(revista) + '</em>' +
+        (año ? ' (' + escapeHTML(año) + ')' : '') +
+        (link ? ' <a href="' + escapeHTML(link) + '" class="ultima-link" target="_blank" rel="noopener">Ver artículo →</a>' : '') +
+        '</p>' +
+        (abstract ? '<p class="ultima-abstract">' + escapeHTML(abstract) + '</p>' : '');
 }
 
 /* ===== Última prensa (desde archivo/entradas.json, vía prensa-feed) ===== */
@@ -408,9 +524,13 @@ function highlightMatches(allItems, tokens) {
         var textNodes = [];
         var node;
         while (node = walker.nextNode()) {
-            if (node.parentNode.tagName === 'A' || node.parentNode.classList.contains('pub-meta') ||
-                node.parentNode.classList.contains('abstract-content') ||
-                node.parentNode.classList.contains('search-highlight')) continue;
+            var pn = node.parentNode;
+            if (pn.tagName === 'A' ||
+                pn.classList.contains('pub-card__meta') ||
+                pn.classList.contains('pub-card__copy') ||
+                pn.classList.contains('pub-card__quartile') ||
+                pn.classList.contains('pub-card__cs') ||
+                pn.classList.contains('search-highlight')) continue;
             textNodes.push(node);
         }
 
@@ -643,23 +763,12 @@ function initTimeline() {
 
         var lis = panel.querySelectorAll('.scrollable-list li');
         lis.forEach(function (li) {
-            var yearMatch = li.textContent.match(/\((\d{4})\)/);
-            if (!yearMatch) return;
-            var year = parseInt(yearMatch[1]);
-
-            // Extract short title
-            var text = li.textContent;
-            var titleMatch = text.match(/\(\d{4}\)\.\s*([^.]+\.)/);
-            var title = titleMatch ? titleMatch[1].trim() : '';
+            var year = parseInt(li.dataset.year || '');
+            if (!year) return;
+            var title = li.dataset.titulo || '';
             if (title.length > 80) title = title.substring(0, 77) + '...';
-
-            // Get source
-            var emEl = li.querySelector('em');
-            var source = emEl ? emEl.textContent : '';
-
-            // Get link
-            var linkEl = li.querySelector('a');
-            var link = linkEl ? linkEl.href : '';
+            var source = li.dataset.journal || '';
+            var link = li.dataset.url || '';
 
             items.push({
                 year: year,
