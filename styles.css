@@ -111,6 +111,20 @@ body::before {
     background: linear-gradient(to right, var(--color-red) 33.33%, var(--color-blue) 33.33% 66.66%, var(--color-yellow) 66.66%);
 }
 
+/* ===== Construction Banner ===== */
+.construction-banner {
+    background-color: var(--color-yellow);
+    color: #000;
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid #000;
+    text-transform: uppercase;
+}
+
 /* ===== Content ===== */
 .content {
     padding: 2rem;
@@ -309,6 +323,7 @@ h2 {
 #proyectos h2 {
     border-left-color: var(--color-yellow);
 }
+
 
 h2 .subtitle {
     font-size: 0.65rem;
@@ -597,6 +612,11 @@ a:hover {
 .scopus:hover,
 .researchgate:hover {
     text-decoration: underline;
+}
+
+/* ===== Publication Titles ===== */
+.pub-title-text {
+    font-weight: bold;
 }
 
 /* ===== Publication Metadata ===== */
