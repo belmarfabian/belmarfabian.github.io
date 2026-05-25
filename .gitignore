@@ -2,3 +2,17 @@
 .Rhistory
 .RData
 .Ruserdata
+
+# LaTeX (archivos temporales de compilación)
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+
+# Basura de Windows
+nul

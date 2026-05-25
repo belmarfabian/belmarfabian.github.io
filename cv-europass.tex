@@ -1,0 +1,133 @@
+\documentclass[a4paper,11pt]{article}
+
+% Paquetes básicos
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+% Configuración de página estilo Europass
+\geometry{left=2.5cm, right=2cm, top=2cm, bottom=2cm}
+
+% Colores Europass
+\definecolor{europassblue}{RGB}{0,68,148}
+\definecolor{europassgray}{RGB}{128,128,128}
+
+% Configuración de hipervínculos
+\hypersetup{
+    colorlinks=true,
+    linkcolor=europassblue,
+    urlcolor=europassblue
+}
+
+% Estilo de tabla Europass
+\newcolumntype{L}{>{\raggedright\arraybackslash}p{3.5cm}}
+\newcolumntype{R}{>{\raggedright\arraybackslash}p{12cm}}
+
+% Comando para secciones
+\newcommand{\europasssection}[1]{%
+    \vspace{12pt}
+    {\large\color{europassblue}\textbf{\MakeUppercase{#1}}}\\[-2pt]
+    \textcolor{europassblue}{\rule{\textwidth}{1pt}}
+    \vspace{6pt}
+}
+
+% Comando para entradas
+\newcommand{\europassentry}[2]{%
+    \begin{tabular}{@{}L R@{}}
+    \textcolor{europassgray}{#1} & #2 \\
+    \end{tabular}
+    \vspace{4pt}
+}
+
+\begin{document}
+
+\pagestyle{empty}
+
+% ============================================
+% ENCABEZADO
+% ============================================
+\begin{center}
+{\Huge\color{europassblue}\textbf{Fabián Belmar}}\\[8pt]
+{\large Doctor en Procesos e Instituciones Políticas}
+\end{center}
+
+\vspace{10pt}
+
+% ============================================
+% INFORMACIÓN PERSONAL
+% ============================================
+\europasssection{Información Personal}
+
+\europassentry{Correo electrónico}{\href{mailto:fbelmar@cepchile.cl}{fbelmar@cepchile.cl}}
+\europassentry{Teléfono}{+56 9 76371608}
+\europassentry{Sitio web}{\href{https://belmarfabian.github.io}{belmarfabian.github.io}}
+\europassentry{ORCID}{\href{https://orcid.org/0000-0003-4239-1874}{0000-0003-4239-1874}}
+\europassentry{Nacionalidad}{Chilena}
+
+% ============================================
+% EXPERIENCIA PROFESIONAL
+% ============================================
+\europasssection{Experiencia Profesional}
+
+\europassentry{2025 -- Presente}{\textbf{Investigador Asistente}\\Centro de Estudios Públicos (CEP), Santiago, Chile\\Proyecto C22 - Métodos Digitales. Análisis de procesos sociales mediante ciencia de datos y machine learning.}
+
+\europassentry{2023 -- 2024}{\textbf{Investigador Pasante}\\Instituto de Investigaciones Gino Germani, Universidad de Buenos Aires\\Grupo de Estudios de Culturas Populares Contemporáneas.}
+
+\europassentry{2018 -- 2023}{\textbf{Coordinador de Proyectos de Investigación}\\Centro de Análisis Político, Universidad de Talca\\Recolección, sistematización y análisis de datos. Artículos académicos e informes.}
+
+% ============================================
+% EDUCACIÓN Y FORMACIÓN
+% ============================================
+\europasssection{Educación y Formación}
+
+\europassentry{2020 -- 2025}{\textbf{Doctorado en Procesos e Instituciones Políticas}\\Universidad Adolfo Ibáñez, Chile\\Aprobado con distinción máxima.\\Tesis: ``Corrupción al margen del Estado. El caso de la FIFA''}
+
+\europassentry{2013 -- 2018}{\textbf{Licenciatura en Ciencia Política y Administración Pública}\\Universidad de Talca, Chile\\Aprobado con distinción máxima. Mejor egresado de la generación.}
+
+% ============================================
+% PUBLICACIONES
+% ============================================
+\europasssection{Publicaciones Científicas}
+
+\europassentry{Artículos WoS/Scopus}{8 artículos publicados, 3 en prensa. Revistas: \textit{Ethnic and Racial Studies}, \textit{Policy Studies}, \textit{Public Integrity}, \textit{Politics}, \textit{Social Sciences}, \textit{Política y Sociedad}, \textit{Societies}.}
+
+\europassentry{Capítulos de libro}{4 capítulos publicados en editoriales académicas.}
+
+% ============================================
+% COMPETENCIAS
+% ============================================
+\europasssection{Competencias Personales}
+
+\europassentry{Lengua materna}{Español}
+
+\europassentry{Otros idiomas}{\textbf{Inglés:} Comprensión escrita B2, Expresión oral A2.}
+
+\europassentry{Competencias digitales}{
+\textbf{Programación:} R (Avanzado), Python (Intermedio), SQL (Intermedio), \LaTeX\ (Avanzado)\\
+\textbf{Análisis estadístico:} SPSS, STATA, Jamovi (Avanzado)\\
+\textbf{Análisis geoespacial:} QGIS (Avanzado)\\
+\textbf{Análisis cualitativo:} ATLAS.ti, VOSviewer (Avanzado)}
+
+% ============================================
+% INFORMACIÓN ADICIONAL
+% ============================================
+\europasssection{Información Adicional}
+
+\europassentry{Becas y premios}{
+$\bullet$ Beca Pasantía Internacional ANID (2023-2024): 12,000 USD\\
+$\bullet$ Beca Doctorado Nacional ANID (2020): 8,000 USD\\
+$\bullet$ Mejor Egresado de la Generación 2018, Universidad de Talca}
+
+\europassentry{Docencia}{Cátedras en universidades: Talca, Diego Portales, Central, Adolfo Ibáñez, INACAP.\\Áreas: Métodos cuantitativos, Análisis de datos, Políticas públicas.}
+
+\europassentry{Árbitro en revistas}{\textit{Ethnic and Racial Studies}, \textit{PLOSone}, \textit{Economies}, \textit{Sustainability}, entre otras.}
+
+\end{document}

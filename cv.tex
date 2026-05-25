@@ -1,0 +1,238 @@
+\documentclass[11pt,a4paper]{article}
+
+% Paquetes
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% Configuración de página
+\geometry{left=2.5cm, right=2.5cm, top=2cm, bottom=2cm}
+
+% Colores
+\definecolor{linkblue}{RGB}{0,102,204}
+
+% Configuración de hipervínculos
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkblue,
+    urlcolor=linkblue,
+    pdfauthor={Fabián Belmar},
+    pdftitle={Curriculum Vitae - Fabián Belmar}
+}
+
+% Formato de secciones
+\titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{12pt}{6pt}
+
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titlespacing{\subsection}{0pt}{8pt}{4pt}
+
+% Encabezado y pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\thepage\ de \pageref{LastPage}}
+
+% Comandos personalizados
+\newcommand{\cventry}[2]{\noindent\textbf{#1}\hfill #2\\}
+\newcommand{\cventrysub}[1]{\noindent\hspace{0.5cm}#1\par\vspace{2pt}}
+
+\begin{document}
+
+% ============================================
+% ENCABEZADO
+% ============================================
+\begin{center}
+    {\LARGE\bfseries FABIÁN BELMAR}\\[8pt]
+    \href{https://orcid.org/0000-0003-4239-1874}{ORCID} |
+    \href{https://www.scopus.com/authid/detail.uri?authorId=57220090371}{Scopus} |
+    \href{https://www.researchgate.net/profile/Fabian-Belmar-3}{ResearchGate} |
+    \href{https://scholar.google.es/citations?user=wr6beBsAAAAJ}{Google Scholar}\\[4pt]
+    Correo: \href{mailto:fbelmar@cepchile.cl}{fbelmar@cepchile.cl}\\
+    Tel/Whatsapp: +56 9 76371608
+\end{center}
+
+\vspace{10pt}
+
+% ============================================
+% 1. FORMACIÓN ACADÉMICA
+% ============================================
+\section{Formación Académica}
+
+\cventry{2020 -- 2025}{Doctorado en Procesos e Instituciones Políticas}
+\cventrysub{Universidad Adolfo Ibáñez, Chile. Aprobado con distinción máxima.}
+\cventrysub{Tesis: ``Corrupción al margen del Estado. El caso de la FIFA''. Dirigida por Dr. Aldo Mascareño.}
+
+\vspace{6pt}
+
+\cventry{2013 -- 2018}{Licenciado en Ciencia Política y Administración Pública. Administrador Público}
+\cventrysub{Universidad de Talca, Chile. Aprobado con distinción máxima.}
+\cventrysub{Tesis: ``Vinculación no programática en la gestión municipal. La agenda de los alcaldes, 2015-2016''. Dirigida por Dr. Mauricio Morales.}
+
+% ============================================
+% 2. EXPERIENCIA ACADÉMICA
+% ============================================
+\section{Experiencia en la Academia}
+
+\cventry{2025 --}{Centro de Estudios Públicos (CEP)}
+\cventrysub{Investigador asistente del proyecto C22 - Métodos Digitales. Análisis de procesos sociales mediante herramientas de ciencia de datos y técnicas de machine learning.}
+
+\vspace{4pt}
+
+\cventry{2023 -- 2024}{Instituto de Investigaciones Gino Germani, Universidad de Buenos Aires (IIGG)}
+\cventrysub{Investigador pasante en el Grupo de Estudios de Culturas Populares Contemporáneas a cargo de la Dra. Verónica Moreira.}
+
+\vspace{4pt}
+
+\cventry{2022 -- 2023}{Proyecto FONDECYT Regular \#1220004}
+\cventrysub{Asistente de investigación del proyecto ``Vinculación entre representantes y representados en ambientes formales y virtuales de mediación'' a cargo del Dr. Mauricio Morales.}
+
+\vspace{4pt}
+
+\cventry{2018 -- 2023}{Centro de Análisis Político, Universidad de Talca (CAP-UTALCA)}
+\cventrysub{Coordinador de proyectos de investigación y actividades de vinculación con el medio.}
+
+\vspace{4pt}
+
+\cventry{2018 -- 2020}{Proyecto FONDECYT Regular \#1180009}
+\cventrysub{Asistente de investigación del proyecto ``Los Partidos Demócrata Cristianos en América Latina'' a cargo del Dr. Mauricio Morales.}
+
+% ============================================
+% 3. ARTÍCULOS CIENTÍFICOS
+% ============================================
+\section{Artículos Científicos}
+
+\subsection{En prensa / En revisión}
+
+\begin{enumerate}[leftmargin=*, label=\arabic*., start=11]
+    \item \textbf{Belmar, F.}, \& Mascareño, A. FIFA: Between couplings and hypertrophy. The evolution of the system in the 20th and 21st centuries. \textit{International Journal of Sport Policy and Politics}. [En revisión, 2da ronda]
+
+    \item \textbf{Belmar, F.}, Contreras, G., \& Morales, M. (2025). Who demands clientelism? Differences between individual and organizational demand making. \textit{Political Science Research \& Methods}. [En prensa]
+
+    \item \textbf{Belmar, F.}, \& Mascareño, A. (2025). Corruption: An uneven field of research—Between state and private topics. \textit{Societies}, 15(7), 186. \href{https://doi.org/10.3390/soc15070186}{DOI}
+
+    \item \textbf{Belmar, F.}, Morales, M., \& Villarroel, B. (2025). The Impact of Emotions on Voting Intention in a Constitutional Referendum. \textit{Political Studies Review}. [En prensa]
+\end{enumerate}
+
+\subsection{Publicados}
+
+\begin{enumerate}[leftmargin=*, label=\arabic*., start=7]
+    \item \textbf{Belmar, F.}, \& Morales, M. (2025). Ethnic solidarity in the non-programmatic distribution of benefits: The case of Mapuche mayors in Chile. \textit{Ethnic and Racial Studies}. \href{https://doi.org/10.1080/01419870.2025.2470896}{DOI}
+
+    \item \textbf{Belmar, F.}, Lara, B., \& Miguieles, J. (2024). Unpacking electoral competition: Campaign spending, vote distribution and turnout in Chilean mayoral elections. \textit{Policy Studies}. \href{https://doi.org/10.1080/01442872.2024.2427280}{DOI}
+
+    \item \textbf{Belmar, F.}, Maldonado, F., \& Morales, M. (2024). In search of the missing link: Election law infractions and candidate sanctions. \textit{Public Integrity}. \href{https://doi.org/10.1080/10999922.2024.2364384}{DOI}
+
+    \item \textbf{Belmar, F.}, Morales, M., \& Villarroel, B. (2023). Writing constitution without parties? The programmatic weakness of party-voter linkages in the Chilean political change. \textit{Politics}, 45(1). \href{https://doi.org/10.1177/02633957231158073}{DOI}
+
+    \item \textbf{Belmar, F.}, Contreras, G., Morales, M., \& Troncoso, C. (2023). Demanding non-programmatic distribution. Evidence from local governments in Chile. \textit{Policy Studies}. \href{https://doi.org/10.1080/01442872.2023.2172718}{DOI}
+
+    \item \textbf{Belmar, F.}, \& Morales, M. (2022). Clientelism, turnout and incumbents' performance in Chilean local government elections. \textit{Social Sciences}, 11(8), 361. \href{https://doi.org/10.3390/socsci11080361}{DOI}
+
+    \item \textbf{Belmar, F.}, \& Morales, M. (2020). Clientelismo en la gestión local. El caso de los alcaldes en Chile, 2015-2016. \textit{Política y Sociedad}, 57(2), 567-591. \href{https://doi.org/10.5209/poso.62315}{DOI}
+\end{enumerate}
+
+% ============================================
+% 4. CAPÍTULOS DE LIBRO
+% ============================================
+\section{Capítulos de Libro}
+
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+    \item \textbf{Belmar, F.} (2024). Descentralización y participación ciudadana en Chile: evaluación de la autonomía de los gobiernos locales. En VV.AA. \textit{La Revolución Silente: Descentralización en Chile}.
+
+    \item \textbf{Belmar, F.} (2020). Las tecnologías al servicio de la comunicación y el funcionamiento interno de los parlamentos. En VV.AA. \textit{Parlamentos Conectados}. Universidad de Oviedo, España.
+
+    \item \textbf{Belmar, F.} (2020). La estrategia de comunicación de los representantes: la construcción de la imagen de los políticos. En VV.AA. \textit{Parlamentos Conectados}. Universidad de Oviedo, España.
+
+    \item \textbf{Belmar, F.}, Herrera, M., \& Obregón, M. (2018). El efecto de la elección de concejales sobre la elección de consejeros regionales 2017. En Morales, M., Navarrete, B. \& Vial, C. \textit{Política Subnacional en Chile}. RIL Editores.
+\end{enumerate}
+
+% ============================================
+% 5. DOCENCIA
+% ============================================
+\section{Docencia}
+
+\cventry{2025}{Universidad de Talca}
+\cventrysub{Evaluación de Políticas, Programas y Proyectos (Cátedra); Ciencia de la Administración Pública (Cátedra).}
+
+\cventry{2025}{Universidad Diego Portales}
+\cventrysub{Métodos Cuantitativos Introductorios (Cátedra); Métodos Cuantitativos Avanzados (Cátedra).}
+
+\cventry{2025}{INACAP}
+\cventrysub{Introducción a las Políticas Públicas (Cátedra); Sistemas de Compras Públicas (Cátedra).}
+
+\cventry{2023 -- 2024}{Universidad Central}
+\cventrysub{Análisis de Datos Cuantitativos (Cátedra); Métodos Cuantitativos para la Investigación (Cátedra).}
+
+\cventry{2021 -- 2022}{Universidad de Talca}
+\cventrysub{Métodos Cualitativos para las Ciencias Sociales (Taller); Análisis de Datos para las Ciencias Sociales (Cátedra).}
+
+\cventry{2022}{Universidad Adolfo Ibáñez}
+\cventrysub{Redes Sociales, Democracia y Ciudadanía Digital (Taller).}
+
+% ============================================
+% 6. PONENCIAS (SELECCIÓN)
+% ============================================
+\section{Ponencias (Selección)}
+
+\begin{itemize}[leftmargin=*]
+    \item (2024) I Congreso Internacional de Evaluación de la Gobernanza. Universidad Católica de Temuco, Chile.
+    \item (2024) I Congreso RELASSC. Recife, Brasil.
+    \item (2023) XIV Congreso Chileno de Ciencia Política. Universidad de Santiago, Chile.
+    \item (2023) VIII Congreso Uruguayo de Ciencia Política. Universidad Católica del Uruguay.
+    \item (2022) IV Congreso Internacional ICCA. Universidad Complutense de Madrid, España.
+    \item (2022) V Congreso Latinoamericano FLACSO. Montevideo, Uruguay.
+\end{itemize}
+
+% ============================================
+% 7. BECAS Y DISTINCIONES
+% ============================================
+\section{Becas, Distinciones y Fondos}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{2023--2024}: Beca Pasantía Internacional ANID (12,000 USD). IIGG, Universidad de Buenos Aires.
+    \item \textbf{2021--2022}: Beca Beneficios Complementarios ANID (6,000 USD).
+    \item \textbf{2020}: Beca Doctorado Nacional ANID (8,000 USD).
+    \item \textbf{2019}: Fondo de Desarrollo Institucional, Ministerio de Educación (7,000 USD).
+    \item \textbf{2018}: Mejor Egresado de la Generación, Universidad de Talca.
+\end{itemize}
+
+% ============================================
+% 8. HABILIDADES
+% ============================================
+\section{Software e Idiomas}
+
+\textbf{Programación:} R (Avanzado), Python (Intermedio), SQL (Intermedio), \LaTeX\ (Avanzado).\\
+\textbf{Análisis cuantitativo:} SPSS, STATA, R, Jamovi (Avanzado).\\
+\textbf{Análisis geoespacial:} QGIS (Avanzado).\\
+\textbf{Análisis cualitativo:} ATLAS.ti (Avanzado), VOSviewer (Intermedio).\\
+\textbf{Idiomas:} Español (Nativo), Inglés (Intermedio escrito, Básico oral).
+
+% ============================================
+% 9. ÁRBITRO EN REVISTAS
+% ============================================
+\section{Árbitro en Revistas Académicas}
+
+\textit{Ethnic and Racial Studies}; \textit{Journal of Infrastructure, Policy and Development}; \textit{PLOSone}; \textit{Economía y Política}; \textit{Economies}; \textit{Sustainability}; \textit{Revista Desarrollo y Sociedad}; \textit{Revista Iberoamericana de Estudios Municipales (RIEM)}.
+
+% ============================================
+% 10. REFERENCIAS
+% ============================================
+\section{Referencias}
+
+\textbf{Mauricio Morales}. Universidad de Talca. Doctor en Ciencia Política, PUC. \href{mailto:mmoralesq@utalca.cl}{mmoralesq@utalca.cl}
+
+\textbf{Aldo Mascareño}. Universidad Adolfo Ibáñez. Doctor en Sociología, U. Bielefeld. \href{mailto:amascareno@cepchile.cl}{amascareno@cepchile.cl}
+
+\textbf{Bernardita Escobar}. Universidad de Valparaíso. Doctora en Economía, Cambridge. \href{mailto:beni.escobar.andrae@gmail.com}{beni.escobar.andrae@gmail.com}
+
+\textbf{Daniel Chernilo}. Universidad Adolfo Ibáñez. Doctor en Sociología, U. Warwick. \href{mailto:daniel.chernilo.s@uai.cl}{daniel.chernilo.s@uai.cl}
+
+\end{document}

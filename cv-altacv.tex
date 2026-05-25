@@ -1,0 +1,183 @@
+\documentclass[10pt,a4paper]{article}
+
+% Paquetes
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{paracol}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{enumitem}
+
+% Configuración de página
+\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
+\pagestyle{empty}
+
+% Colores
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+\definecolor{DarkBlue}{HTML}{0066CC}
+\definecolor{Golden}{HTML}{E7A800}
+
+% Configuración de hipervínculos
+\hypersetup{
+    colorlinks=true,
+    urlcolor=DarkBlue
+}
+
+% Comandos personalizados
+\newcommand{\cvsection}[1]{%
+    \vspace{10pt}
+    {\Large\bfseries\color{DarkBlue}#1}\\[-4pt]
+    {\color{Golden}\rule{\linewidth}{2pt}}
+    \vspace{6pt}
+}
+
+\newcommand{\cvevent}[4]{%
+    \textbf{\color{DarkBlue}#1}\hfill{\footnotesize #3}\\
+    \textit{#2}\hfill{\footnotesize #4}\\[2pt]
+}
+
+\newcommand{\cvtag}[1]{%
+    \tikz[baseline]\node[anchor=base,draw=DarkBlue!30,rounded corners,inner xsep=4pt,inner ysep=1pt,text height=1.2em,text depth=.25ex,fill=DarkBlue!10]{\footnotesize #1};
+}
+
+\newcommand{\cvachievement}[3]{%
+    {\color{Golden}#1} \textbf{#2} -- #3\\[3pt]
+}
+
+\newcommand{\cvskill}[2]{%
+    #1 \hfill
+    \foreach \x in {1,...,5}{%
+        \ifdim \x pt > #2 pt
+            {\color{LightGrey!30}\faCircle}%
+        \else
+            {\color{DarkBlue}\faCircle}%
+        \fi
+    }\\[3pt]
+}
+
+\newcommand{\cvpub}[1]{\noindent\hangindent=1em\hangafter=1 #1\\[4pt]}
+
+\begin{document}
+
+% ============================================
+% ENCABEZADO
+% ============================================
+\begin{center}
+{\Huge\bfseries Fabián Belmar}\\[6pt]
+{\large\color{DarkBlue}Doctor en Procesos e Instituciones Políticas}\\[8pt]
+{\footnotesize
+\faEnvelope\ \href{mailto:fbelmar@cepchile.cl}{fbelmar@cepchile.cl} \quad
+\faPhone\ +56 9 76371608 \quad
+\faGlobe\ \href{https://belmarfabian.github.io}{belmarfabian.github.io} \quad
+\faOrcid\ \href{https://orcid.org/0000-0003-4239-1874}{0000-0003-4239-1874}
+}
+\end{center}
+
+\vspace{10pt}
+
+\columnratio{0.6}
+\begin{paracol}{2}
+
+% ============================================
+% COLUMNA IZQUIERDA
+% ============================================
+
+\cvsection{Experiencia Académica}
+
+\cvevent{Investigador Asistente}{Centro de Estudios Públicos}{2025 -- Presente}{Santiago, Chile}
+Proyecto C22 - Métodos Digitales. Ciencia de datos y machine learning aplicados a fenómenos político-sociales.
+
+\vspace{6pt}
+
+\cvevent{Investigador Pasante}{Instituto Gino Germani, UBA}{2023 -- 2024}{Buenos Aires, Argentina}
+Grupo de Estudios de Culturas Populares Contemporáneas.
+
+\vspace{6pt}
+
+\cvevent{Coordinador de Proyectos}{Centro de Análisis Político, UTALCA}{2018 -- 2023}{Talca, Chile}
+Investigación, vinculación con el medio, análisis de datos electorales.
+
+\cvsection{Publicaciones Destacadas}
+
+\cvpub{\textbf{Corruption: An uneven field of research.} \textit{Societies}, 2025. Con A. Mascareño.}
+
+\cvpub{\textbf{Ethnic solidarity in the non-programmatic distribution of benefits.} \textit{Ethnic and Racial Studies}, 2025.}
+
+\cvpub{\textbf{Unpacking electoral competition.} \textit{Policy Studies}, 2024.}
+
+\cvpub{\textbf{In search of the missing link.} \textit{Public Integrity}, 2024.}
+
+\cvpub{\textbf{Writing constitution without parties?} \textit{Politics}, 2023.}
+
+\cvpub{\textbf{Demanding non-programmatic distribution.} \textit{Policy Studies}, 2023.}
+
+\cvpub{\textbf{Clientelism, turnout and incumbents' performance.} \textit{Social Sciences}, 2022.}
+
+\cvpub{\textbf{Clientelismo en la gestión local.} \textit{Política y Sociedad}, 2020.}
+
+\medskip
+\textit{Total: 8 artículos WoS/Scopus publicados, 3 en prensa.}
+
+% ============================================
+% COLUMNA DERECHA
+% ============================================
+
+\switchcolumn
+
+\cvsection{Formación}
+
+\cvevent{Ph.D. Procesos e Instituciones Políticas}{Universidad Adolfo Ibáñez}{2020 -- 2025}{}
+Distinción máxima. Tesis sobre corrupción y FIFA.
+
+\vspace{6pt}
+
+\cvevent{Lic. Ciencia Política y Adm. Pública}{Universidad de Talca}{2013 -- 2018}{}
+Distinción máxima. Mejor egresado.
+
+\cvsection{Habilidades}
+
+\cvtag{R}
+\cvtag{Python}
+\cvtag{SQL}
+\cvtag{STATA}
+\cvtag{SPSS}
+\cvtag{QGIS}
+\cvtag{\LaTeX}
+\cvtag{ATLAS.ti}
+
+\vspace{8pt}
+
+\cvtag{Análisis cuantitativo}
+\cvtag{Machine Learning}
+\cvtag{Ciencia de datos}
+\cvtag{Análisis electoral}
+
+\cvsection{Becas y Premios}
+
+\cvachievement{\faTrophy}{Beca Pasantía ANID}{2023-24, 12,000 USD}
+\cvachievement{\faTrophy}{Beca Doctorado ANID}{2020, 8,000 USD}
+\cvachievement{\faTrophy}{Mejor Egresado}{U. de Talca, 2018}
+
+\cvsection{Docencia}
+
+\cvtag{Métodos Cuantitativos}
+\cvtag{Análisis de Datos}
+\cvtag{Políticas Públicas}
+\cvtag{Administración Pública}
+
+\medskip
+Universidades: Talca, Diego Portales, Central, UAI, INACAP.
+
+\cvsection{Idiomas}
+
+\cvskill{Español}{5}
+\cvskill{Inglés (escrito)}{3}
+
+\end{paracol}
+
+\end{document}

@@ -1,0 +1,69 @@
+% cv.sty - Estilo minimalista académico
+% Basado en la plantilla de Pascal Michaillat (UC Santa Cruz)
+
+\ProvidesPackage{cv-michaillat}
+
+% --- Codificación y fuentes ---
+\RequirePackage[T1]{fontenc}
+\RequirePackage{sourceserifpro}
+\RequirePackage[semibold]{sourcecodepro}
+\newcommand{\textsb}[1]{{\fontseries{sb}\selectfont#1}}
+
+% --- Matemáticas (opcional) ---
+\RequirePackage{MnSymbol}
+\RequirePackage[cal=euler, bb=fourier]{mathalpha}
+\RequirePackage[italic, eulergreek]{mathastext}
+
+% --- Diseño de página ---
+\RequirePackage[letterpaper, top=0.9in, bottom=1.1in, left=1.2in, right=1.2in]{geometry}
+\RequirePackage{setspace}
+\setstretch{1.1}
+
+% --- Hipervínculos ---
+\RequirePackage[colorlinks=true, allcolors=black, pdfusetitle]{hyperref}
+
+% --- Colores ---
+\RequirePackage{xcolor}
+\definecolor{gray}{HTML}{666666}
+
+% --- Encabezado y pie ---
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhf{}
+\newcommand{\grayfoot}[2]{\fancyfoot[L]{\textcolor{gray}{\footnotesize #1}}\fancyfoot[R]{\textcolor{gray}{\footnotesize #2}}}
+\fancyfootoffset{0pt}
+
+% --- Secciones ---
+\RequirePackage{titlesec}
+\titleformat{\section}{\color{gray}\large\scshape}{}{0pt}{}[\color{gray}\titlerule]
+\titlespacing{\section}{0pt}{12pt}{6pt}
+
+% --- Listas ---
+\RequirePackage{enumitem}
+\setlist{leftmargin=2em, labelsep=0.5em, itemsep=0pt, parsep=0pt, topsep=3pt}
+\setlist[itemize]{label={\textcolor{gray}{\textbullet}}}
+\setlist[enumerate]{label={\textcolor{gray}{\arabic*.}}}
+
+% --- Comandos personalizados ---
+
+% Nombre centrado
+\newcommand{\name}[1]{%
+    \begin{center}
+    {\Large\textsc{#1}}
+    \end{center}
+    \vspace{6pt}
+}
+
+% Separador inline
+\newcommand{\sep}{\hspace{0.5em}{\textcolor{gray}{\textbullet}}\hspace{0.5em}}
+
+% Bloque de sección
+\newcommand{\block}[1]{\section{#1}}
+
+% Entrada con año
+\newcommand{\entry}[2]{\noindent\textcolor{gray}{#1}\hspace{1em}#2\\[2pt]}
+
+% Publicación
+\newcommand{\pub}[1]{\item #1}
