@@ -111,13 +111,23 @@ body {
 /* ===== Header (inicio) ===== */
 .inicio-header {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
+    align-items: center;
+    gap: 0.9rem;
     margin-bottom: 1.25rem;
 }
 
 .inicio-header h1 {
     margin-bottom: 0;
+    flex: 1;
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    image-rendering: pixelated;
+    flex-shrink: 0;
 }
 
 h1 {
