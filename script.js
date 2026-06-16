@@ -1,5 +1,6 @@
 /* ===== Init ===== */
 document.addEventListener('DOMContentLoaded', function () {
+    initTitleBold();
     initUltimaPub();
     initUltimaPrensa();
     initTabs();
@@ -9,11 +10,35 @@ document.addEventListener('DOMContentLoaded', function () {
     initUpdateDate();
     initBackToTop();
     initTimeline();
-    initEqualHeight();
     initScrollProgress();
     initCopyCite();
     initSortToggle();
+    initCleanLinks();
 });
+
+/* ===== Acortar enlaces DOI largos a "DOI ↗" ===== */
+function initCleanLinks() {
+    var links = document.querySelectorAll('.scrollable-list a[href*="doi.org"]');
+    links.forEach(function (a) {
+        a.classList.add('doi-link');
+        a.textContent = 'DOI ↗';
+    });
+}
+
+/* ===== Bold publication titles ===== */
+function initTitleBold() {
+    var items = document.querySelectorAll('.scrollable-list li');
+    items.forEach(function (li) {
+        var html = li.innerHTML;
+        var updated = html.replace(
+            /(\(\d{4}\)\.\s*)(.+)(\.\s*(?:<em|En\s))/,
+            '$1<span class="pub-title-text">$2</span>$3'
+        );
+        if (updated !== html) {
+            li.innerHTML = updated;
+        }
+    });
+}
 
 /* ===== Última publicación (auto from first article) ===== */
 function initUltimaPub() {
@@ -37,8 +62,7 @@ function initUltimaPub() {
             '<p class="ultima-titulo">' + titulo + '</p>' +
             '<p class="ultima-meta"><em>' + revista + '</em> (' + año + ')' +
             (link ? ' <a href="' + link + '" class="ultima-link">Ver artículo →</a>' : '') +
-            '</p>' +
-            (abstract ? '<p class="ultima-abstract">' + abstract + '</p>' : '');
+            '</p>';
     }
 }
 
@@ -218,18 +242,25 @@ function initAbstracts() {
             citation.appendChild(li.firstChild);
         }
 
-        // Abstract
+        // Abstract — bloque debajo de la cita
         var content = document.createElement('div');
         content.className = 'abstract-content';
         content.textContent = abstract;
 
-        // Layout wrapper (flex container instead of li)
-        var layout = document.createElement('div');
-        layout.className = 'abstract-layout';
-        layout.appendChild(citation);
-        layout.appendChild(content);
+        li.appendChild(citation);
+        li.appendChild(content);
+    });
 
-        li.appendChild(layout);
+    // Citas sin abstract: envolver para limitar la medida de lectura
+    var plain = document.querySelectorAll('.scrollable-list li:not([data-abstract])');
+    plain.forEach(function (li) {
+        if (li.querySelector('.pub-citation')) return;
+        var citation = document.createElement('div');
+        citation.className = 'pub-citation';
+        while (li.firstChild) {
+            citation.appendChild(li.firstChild);
+        }
+        li.appendChild(citation);
     });
 }
 
