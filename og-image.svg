@@ -1,10 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#fff"/>
-  <rect width="8" height="630" x="0" y="0" fill="#ff0000"/>
-  <rect width="8" height="630" x="8" y="0" fill="#0000ff"/>
-  <rect width="8" height="630" x="16" y="0" fill="#ffcc00"/>
-  <text x="60" y="280" font-family="monospace" font-size="64" font-weight="700" fill="#000">Fabián Belmar</text>
-  <text x="60" y="340" font-family="monospace" font-size="24" fill="#555">Doctor en Ciencia Política</text>
-  <text x="60" y="380" font-family="monospace" font-size="20" fill="#999">Investigador Posdoctoral · SODAS · CEP</text>
-  <text x="60" y="560" font-family="monospace" font-size="16" fill="#ccc">belmarfabian.github.io</text>
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <text x="80" y="290" font-family="Helvetica, Arial, sans-serif" font-size="78" font-weight="600" fill="#111111" letter-spacing="-2">Fabián Belmar</text>
+  <rect x="84" y="320" width="120" height="5" rx="2.5" fill="#3a5f87"/>
+  <text x="80" y="392" font-family="Helvetica, Arial, sans-serif" font-size="32" fill="#383838">Doctor en Ciencia Política</text>
+  <text x="80" y="438" font-family="Helvetica, Arial, sans-serif" font-size="25" fill="#666666">Investigador Posdoctoral · SODAS · CEP</text>
+  <text x="80" y="560" font-family="Helvetica, Arial, sans-serif" font-size="21" fill="#9a9a9a">belmarfabian.github.io</text>
 </svg>
