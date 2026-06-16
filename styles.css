@@ -493,19 +493,15 @@ a:hover {
 .pub-journal {
     font-size: 0.7rem;
     color: var(--color-text-faint);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 220px;
 }
 
-/* Cuartil — color funcional semántico, discreto (solo texto + borde) */
+/* Cuartil — color funcional semántico (Rams: color cuando aporta información) */
 .pub-quartile {
     font-size: 0.7rem;
     font-weight: 700;
     padding: 0.02rem 0.32rem;
     border-radius: 3px;
-    border: 1px solid var(--color-border-strong);
+    border: 1px solid currentColor;
     letter-spacing: 0.02em;
 }
 
