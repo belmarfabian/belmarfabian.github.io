@@ -184,7 +184,6 @@ h1 {
     line-height: 1;
     cursor: pointer;
     padding: 0.3rem 0.45rem;
-    border-radius: 4px;
     transition: var(--theme-transition);
     flex-shrink: 0;
 }
@@ -206,7 +205,6 @@ h1 {
 .inicio-recientes {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 10px;
     padding: 1rem 1.2rem;
 }
 
@@ -338,7 +336,6 @@ h3 {
 .tab:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: -2px;
-    border-radius: 2px;
 }
 
 .tab.active {
@@ -500,7 +497,6 @@ a:hover {
     font-size: 0.7rem;
     font-weight: 700;
     padding: 0.02rem 0.32rem;
-    border-radius: 3px;
     border: 1px solid currentColor;
     letter-spacing: 0.02em;
 }
@@ -537,7 +533,6 @@ a:hover {
     color: var(--color-text);
     background-color: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-radius: 4px;
     outline: none;
     transition: border-color 0.2s;
 }
@@ -631,7 +626,6 @@ a:hover {
 .search-highlight {
     background-color: var(--accent-soft);
     color: var(--color-text);
-    border-radius: 1px;
     padding: 0 1px;
 }
 
@@ -654,7 +648,6 @@ a:hover {
     font-size: 0.62rem;
     font-weight: 400;
     padding: 0.25rem 0.45rem;
-    border-radius: 3px;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
@@ -676,7 +669,6 @@ a:hover {
     font-size: 0.65rem;
     cursor: pointer;
     padding: 0.1rem 0.4rem;
-    border-radius: 3px;
     transition: color 0.15s, border-color 0.15s, opacity 0.15s;
     opacity: 0;
 }
@@ -711,7 +703,6 @@ a:hover {
     background-color: var(--color-bg);
     color: var(--color-text-muted);
     border: 1px solid var(--color-border-strong);
-    border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
     opacity: 0;
