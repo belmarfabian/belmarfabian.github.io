@@ -444,23 +444,28 @@ a:hover {
     display: inline-block;
 }
 
-/* Enlaces académicos — sin colores de marca, monocromo discreto */
+/* Enlaces académicos — color de marca, función identitaria (Rams: color cuando aporta información) */
 .scholar,
 .orcid,
 .scopus,
 .researchgate,
 .archivo {
-    color: var(--color-text-muted);
     text-decoration: none;
+    font-weight: 500;
 }
+
+.scholar       { color: var(--color-scholar); }
+.orcid         { color: var(--color-orcid); }
+.scopus        { color: var(--color-scopus); }
+.researchgate  { color: var(--color-researchgate); }
+.archivo       { color: var(--color-text-muted); }
 
 .scholar:hover,
 .orcid:hover,
 .scopus:hover,
 .researchgate:hover,
 .archivo:hover {
-    color: var(--accent);
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 /* ===== Publication Titles ===== */
