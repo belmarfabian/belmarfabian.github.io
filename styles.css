@@ -163,9 +163,27 @@ h1 {
 
 .social-links {
     margin-bottom: 0.15rem;
-    font-size: 0.85rem;
-    color: var(--color-text-faint);
-    line-height: 1.5;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    line-height: 1;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s, opacity 0.15s;
+}
+
+.social-links a:hover {
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.social-links a:hover svg {
+    opacity: 0.85;
 }
 
 .update-notice {
@@ -442,29 +460,12 @@ a:hover {
     display: inline-block;
 }
 
-/* Enlaces académicos — color de marca, función identitaria (Rams: color cuando aporta información) */
-.scholar,
-.orcid,
-.scopus,
-.researchgate,
-.archivo {
-    text-decoration: none;
-    font-weight: 500;
-}
-
+/* Iconos académicos — color de marca (Rams: color cuando aporta información) */
 .scholar       { color: var(--color-scholar); }
 .orcid         { color: var(--color-orcid); }
 .scopus        { color: var(--color-scopus); }
 .researchgate  { color: var(--color-researchgate); }
 .archivo       { color: var(--color-text-muted); }
-
-.scholar:hover,
-.orcid:hover,
-.scopus:hover,
-.researchgate:hover,
-.archivo:hover {
-    text-decoration: underline;
-}
 
 /* ===== Publication Titles ===== */
 .pub-title-text {
