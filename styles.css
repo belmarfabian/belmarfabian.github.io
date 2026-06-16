@@ -224,26 +224,26 @@ h1 {
 .inicio-recientes {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
-    padding: 1rem 1.2rem;
+    padding: 0.8rem 1rem;
 }
 
 .inicio-recientes h3 {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 600;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.35rem 0;
     color: var(--color-text-faint);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
 
 .inicio-recientes h3:not(:first-child) {
-    margin-top: 1.1rem;
+    margin-top: 0.8rem;
 }
 
 .ultima-pub,
 .ultima-prensa {
-    font-size: 0.85rem;
-    line-height: 1.5;
+    font-size: 0.8rem;
+    line-height: 1.4;
 }
 
 .ultima-pub {
@@ -524,13 +524,13 @@ a:hover {
 
 /* ===== Search Bar ===== */
 .search-container {
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.75rem;
     position: relative;
 }
 
 .search-input {
     width: 100%;
-    padding: 0.65rem 5rem 0.65rem 0.9rem;
+    padding: 0.45rem 5rem 0.45rem 0.8rem;
     font-family: inherit;
     font-size: 0.9rem;
     color: var(--color-text);
@@ -612,7 +612,7 @@ a:hover {
 .search-counter {
     font-size: 0.72rem;
     color: var(--color-text-faint);
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
 }
 
 .search-hidden {
