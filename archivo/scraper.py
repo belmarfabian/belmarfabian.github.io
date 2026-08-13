@@ -939,12 +939,12 @@ def main():
     if "utprensa" in fuentes:
         todos += utprensa_descubrir_y_parse(sess, args.pausa)
 
-    # Mantener cache de fuentes no procesadas
+    # Mantener cache de items no re-encontrados en esta corrida (fuente no
+    # procesada, o procesada pero fallida/parcial: p.ej. sitio caído, bloqueo
+    # anti-bot, HTML inyectado con malware). Una fuente que falla no debe
+    # borrar lo que ya se había descubierto de ella.
     presentes = {it.id for it in todos}
     for iid, c in cache.items():
-        f = iid.split(":", 1)[0] if ":" in iid else ""
-        if f in fuentes:
-            continue
         if iid in presentes:
             continue
         try:
@@ -982,7 +982,7 @@ def main():
     todos.sort(key=lambda c: (c.fecha or "0000-00-00", c.id), reverse=True)
 
     payload = {
-        "fuentes": ["scholar", "academia", "ciper"],
+        "fuentes": sorted({it.fuente for it in todos}),
         "total": len(todos),
         "items": [asdict(c) for c in todos],
     }
