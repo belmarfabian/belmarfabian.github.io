@@ -1,10 +1,14 @@
 {
   "fuentes": [
+    "cep",
+    "ciper",
+    "crossref",
+    "openalex",
+    "otros",
     "scholar",
-    "academia",
-    "ciper"
+    "utprensa"
   ],
-  "total": 61,
+  "total": 67,
   "items": [
     {
       "id": "ciper:por-que-el-futbol-y-el-deporte-chileno-necesita-mas-que-una-ley",
@@ -15,7 +19,7 @@
       "fecha": "2026-04-04",
       "imagen": "https://www.ciperchile.cl/wp-content/uploads/A_UNO_1731537-scaled.jpg",
       "tipo": "columna",
-      "bajada": "Medio de investigación periodística independiente en Chile, enfocado en reportajes de actualidad y brindar información de calidad a la ciudadanía.",
+      "bajada": "",
       "cuerpo_html": "",
       "parrafos": [],
       "tags": [
@@ -44,6 +48,55 @@
       "tags": [
         "Elecciones"
       ]
+    },
+    {
+      "id": "scholar:wr6beBsAAAAJwMgC3FpKEyYC",
+      "fuente": "scholar",
+      "seccion": "academico",
+      "titulo": "Crecer en campamentos. El drama de un doble vínculo",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=es&user=wr6beBsAAAAJ&pagesize=100&citation_for_view=wr6beBsAAAAJ:wMgC3FpKEyYC",
+      "fecha": "2026-01-01",
+      "imagen": null,
+      "tipo": "paper",
+      "bajada": "Puntos de Referencia , 2026",
+      "cuerpo_html": "<p>Puntos de Referencia , 2026</p>",
+      "parrafos": [
+        "Puntos de Referencia , 2026"
+      ],
+      "tags": []
+    },
+    {
+      "id": "scholar:wr6beBsAAAAJCaZNVDsoPx4C",
+      "fuente": "scholar",
+      "seccion": "academico",
+      "titulo": "El mundo según Polymarket: Control del futuro en mercados de eventos",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=es&user=wr6beBsAAAAJ&pagesize=100&citation_for_view=wr6beBsAAAAJ:CaZNVDsoPx4C",
+      "fecha": "2026-01-01",
+      "imagen": null,
+      "tipo": "paper",
+      "bajada": "Puntos de Referencia , 2026",
+      "cuerpo_html": "<p>Puntos de Referencia , 2026</p>",
+      "parrafos": [
+        "Puntos de Referencia , 2026"
+      ],
+      "tags": []
+    },
+    {
+      "id": "openalex:W7161720180",
+      "fuente": "openalex",
+      "seccion": "academico",
+      "titulo": "De la reconciliación a la seguridad: la ampliación semántica de la democracia en los discursos inaugurales de Chile (1990-2026)",
+      "url": "https://doi.org/10.5281/zenodo.20275390",
+      "fecha": "2026-01-01",
+      "imagen": null,
+      "tipo": "paper",
+      "bajada": "Open MIND · 2026",
+      "cuerpo_html": "<p>Fabián Belmar, Aldo Mascareño, Juan Rozas, Andrés Araya</p><p><em>Open MIND</em></p>",
+      "parrafos": [
+        "Fabián Belmar, Aldo Mascareño, Juan Rozas, Andrés Araya",
+        "Open MIND"
+      ],
+      "tags": []
     },
     {
       "id": "openalex:W7134116883",
@@ -225,6 +278,25 @@
       ]
     },
     {
+      "id": "openalex:W7161694327",
+      "fuente": "openalex",
+      "seccion": "academico",
+      "titulo": "Elecciones 2025. Tercer Informe C22-CEP, primarias junio",
+      "url": "https://doi.org/10.5281/zenodo.20276420",
+      "fecha": "2025-01-01",
+      "imagen": null,
+      "tipo": "paper",
+      "bajada": "Open MIND · 2025",
+      "cuerpo_html": "<p>Aldo Mascareño, Fabián Belmar, Juan Rozas, Pablo A. Henríquez</p><p><em>Open MIND</em></p>",
+      "parrafos": [
+        "Aldo Mascareño, Fabián Belmar, Juan Rozas, Pablo A. Henríquez",
+        "Open MIND"
+      ],
+      "tags": [
+        "Elecciones"
+      ]
+    },
+    {
       "id": "openalex:W7134141178",
       "fuente": "openalex",
       "seccion": "academico",
@@ -349,25 +421,6 @@
       "tags": []
     },
     {
-      "id": "academia:164987028",
-      "fuente": "academia",
-      "seccion": "academico",
-      "titulo": "Elecciones 2025. Tercer Informe C22-CEP, primarias junio",
-      "url": "https://www.academia.edu/164987028/Elecciones_2025_Tercer_Informe_C22_CEP_primarias_junio",
-      "fecha": "2025-01-01",
-      "imagen": null,
-      "tipo": "paper",
-      "bajada": "Por medio de técnicas digitales y estadísticas, en este Tercer Informe C22-CEP sobre las elecciones 2025 observamos los resultados de estas elecciones primarias y sus efectos para el escenario político general. Analizamos también el comportamiento de la comunicación en redes sociales (Instagram y Facebook) en torno a los siete principales candidatos presidenciales durante el mes de junio 2025. Ellos son",
-      "cuerpo_html": "<p>Por medio de técnicas digitales y estadísticas, en este Tercer Informe C22-CEP sobre las elecciones 2025 observamos los resultados de estas elecciones primarias y sus efectos para el escenario político general. Analizamos también el comportamiento de la comunicación en redes sociales (Instagram y Facebook) en torno a los siete principales candidatos presidenciales durante el mes de junio 2025. Ellos son</p>",
-      "parrafos": [
-        "Por medio de técnicas digitales y estadísticas, en este Tercer Informe C22-CEP sobre las elecciones 2025 observamos los resultados de estas elecciones primarias y sus efectos para el escenario político general. Analizamos también el comportamiento de la comunicación en redes sociales (Instagram y Facebook) en torno a los siete principales candidatos presidenciales durante el mes de junio 2025. Ellos son"
-      ],
-      "tags": [
-        "Elecciones",
-        "Computacional"
-      ]
-    },
-    {
       "id": "otros:-y-que-acelerarian-la-reforma-a-las-sad-",
       "fuente": "otros",
       "seccion": "prensa",
@@ -392,7 +445,7 @@
       "fecha": "2024-07-18",
       "imagen": "https://www.ciperchile.cl/wp-content/uploads/futbol-1024x694.png",
       "tipo": "columna",
-      "bajada": "Medio de investigación periodística independiente en Chile, enfocado en reportajes de actualidad y brindar información de calidad a la ciudadanía.",
+      "bajada": "",
       "cuerpo_html": "",
       "parrafos": [],
       "tags": [
@@ -408,7 +461,7 @@
       "fecha": "2024-07-03",
       "imagen": "https://www.ciperchile.cl/wp-content/uploads/copa-america.webp",
       "tipo": "columna",
-      "bajada": "Medio de investigación periodística independiente en Chile, enfocado en reportajes de actualidad y brindar información de calidad a la ciudadanía.",
+      "bajada": "",
       "cuerpo_html": "",
       "parrafos": [],
       "tags": [
@@ -864,18 +917,18 @@
       "tags": []
     },
     {
-      "id": "openalex:W7126946430",
-      "fuente": "openalex",
+      "id": "scholar:wr6beBsAAAAJILKRHgRFtOwC",
+      "fuente": "scholar",
       "seccion": "academico",
-      "titulo": "Clientelismo en los gobiernos locales. El caso de los alcaldes en Chile, 2015-2016",
-      "url": "https://openalex.org/W7126946430",
+      "titulo": "Clientelismo en la gestión local. El caso de los alcaldes en Chile, 2015-2016.",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=es&user=wr6beBsAAAAJ&pagesize=100&citation_for_view=wr6beBsAAAAJ:ILKRHgRFtOwC",
       "fecha": "2020-01-01",
       "imagen": null,
       "tipo": "paper",
-      "bajada": " · 2020",
-      "cuerpo_html": "",
+      "bajada": "Política y Sociedad 57 (2), 567 , 2020",
+      "cuerpo_html": "<p>Política y Sociedad 57 (2), 567 , 2020</p>",
       "parrafos": [
-        "Fabián Belmar, Mauricio Morales"
+        "Política y Sociedad 57 (2), 567 , 2020"
       ],
       "tags": [
         "Clientelismo"
@@ -885,7 +938,7 @@
       "id": "crossref:105209poso62315",
       "fuente": "crossref",
       "seccion": "academico",
-      "titulo": "Clientelismo en la gestión local. El caso de los alcaldes en Chile, 2015-2016",
+      "titulo": "Clientelismo en los gobiernos locales. El caso de los alcaldes en Chile, 2015-2016",
       "url": "https://doi.org/10.5209/poso.62315",
       "fecha": "2020-01-01",
       "imagen": null,
@@ -899,6 +952,62 @@
       "tags": [
         "Clientelismo"
       ]
+    },
+    {
+      "id": "scholar:wr6beBsAAAAJuDGL6kOW6j0C",
+      "fuente": "scholar",
+      "seccion": "academico",
+      "titulo": "LA DISCRECIONALIDAD EN LA ADMINISTRACIÓN PÚBLICA DE CHILE: LEGITIMIDAD, CONTROL Y ÉTICA EN LA GESTIÓN PÚBLICA CONTEMPORÁNEA DISCRETION IN CHILEAN",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=es&user=wr6beBsAAAAJ&pagesize=100&citation_for_view=wr6beBsAAAAJ:uDGL6kOW6j0C",
+      "fecha": "",
+      "imagen": null,
+      "tipo": "paper",
+      "bajada": "",
+      "cuerpo_html": "",
+      "parrafos": [],
+      "tags": []
+    },
+    {
+      "id": "scholar:wr6beBsAAAAJsJsF0ZLhtgC",
+      "fuente": "scholar",
+      "seccion": "academico",
+      "titulo": "Palabras clave: discrecionalidad-asignación de recursos-gestión pública-Administración pública-descentralización",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=es&user=wr6beBsAAAAJ&pagesize=100&citation_for_view=wr6beBsAAAAJ:sJsF-0ZLhtgC",
+      "fecha": "",
+      "imagen": null,
+      "tipo": "paper",
+      "bajada": "",
+      "cuerpo_html": "",
+      "parrafos": [],
+      "tags": []
+    },
+    {
+      "id": "scholar:wr6beBsAAAAJotzGkya1bYkC",
+      "fuente": "scholar",
+      "seccion": "academico",
+      "titulo": "Apuestas en Chile: regulación y peso económico de un mercado en expansión",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=es&user=wr6beBsAAAAJ&pagesize=100&citation_for_view=wr6beBsAAAAJ:otzGkya1bYkC",
+      "fecha": "",
+      "imagen": null,
+      "tipo": "paper",
+      "bajada": "",
+      "cuerpo_html": "",
+      "parrafos": [],
+      "tags": []
+    },
+    {
+      "id": "scholar:wr6beBsAAAAJPVgj2kMGcgYC",
+      "fuente": "scholar",
+      "seccion": "academico",
+      "titulo": "La cuenta pública del presidente Kast: una cuestión doctrinaria",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=es&user=wr6beBsAAAAJ&pagesize=100&citation_for_view=wr6beBsAAAAJ:PVgj2kMGcgYC",
+      "fecha": "",
+      "imagen": null,
+      "tipo": "paper",
+      "bajada": "",
+      "cuerpo_html": "",
+      "parrafos": [],
+      "tags": []
     },
     {
       "id": "scholar:wr6beBsAAAAJLgRImbQfgY4C",
@@ -917,6 +1026,20 @@
       "tags": []
     },
     {
+      "id": "scholar:wr6beBsAAAAJ4xDN1ZYqzskC",
+      "fuente": "scholar",
+      "seccion": "academico",
+      "titulo": "El lado B de la megarreforma: señales de alerta temprana sobre problemas futuros",
+      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=es&user=wr6beBsAAAAJ&pagesize=100&citation_for_view=wr6beBsAAAAJ:4xDN1ZYqzskC",
+      "fecha": "",
+      "imagen": null,
+      "tipo": "paper",
+      "bajada": "",
+      "cuerpo_html": "",
+      "parrafos": [],
+      "tags": []
+    },
+    {
       "id": "scholar:wr6beBsAAAAJ2tRrZ1ZAMYUC",
       "fuente": "scholar",
       "seccion": "academico",
@@ -931,20 +1054,6 @@
       "tags": [
         "Elecciones"
       ]
-    },
-    {
-      "id": "scholar:wr6beBsAAAAJ0CzhzZyukY4C",
-      "fuente": "scholar",
-      "seccion": "academico",
-      "titulo": "De la reconciliación a la seguridad: la ampliación semántica de la democracia en los discursos inaugurales de Chile (1990-2026)",
-      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=es&user=wr6beBsAAAAJ&pagesize=100&citation_for_view=wr6beBsAAAAJ:0CzhzZyukY4C",
-      "fecha": "",
-      "imagen": null,
-      "tipo": "paper",
-      "bajada": "",
-      "cuerpo_html": "",
-      "parrafos": [],
-      "tags": []
     },
     {
       "id": "otros:internacionales-en-tan-solo-un-semestre-",
@@ -984,20 +1093,6 @@
       "imagen": null,
       "tipo": "aparicion",
       "bajada": "juridicasysociales.utalca.cl",
-      "cuerpo_html": "",
-      "parrafos": [],
-      "tags": []
-    },
-    {
-      "id": "academia:164992771",
-      "fuente": "academia",
-      "seccion": "academico",
-      "titulo": "Palabras clave: discrecionalidad -asignación de recursos -gestión pública -Administración pública -descentralización",
-      "url": "https://www.academia.edu/164992771/Palabras_clave_discrecionalidad_asignaci%C3%B3n_de_recursos_gesti%C3%B3n_p%C3%BAblica_Administraci%C3%B3n_p%C3%BAblica_descentralizaci%C3%B3n",
-      "fecha": "",
-      "imagen": null,
-      "tipo": "paper",
-      "bajada": "",
       "cuerpo_html": "",
       "parrafos": [],
       "tags": []
