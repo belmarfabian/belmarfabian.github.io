@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initMetadata();
     initAbstracts();
     initSearch();
-    initUpdateDate();
     initBackToTop();
     initTimeline();
     initScrollProgress();
@@ -503,17 +502,6 @@ function updateCounter(counter, visible, total) {
     } else {
         counter.textContent = visible + ' de ' + total + ' publicaciones';
     }
-}
-
-/* ===== Auto-update date ===== */
-function initUpdateDate() {
-    var el = document.querySelector('.update-notice');
-    if (!el) return;
-    var meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-                 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-    var now = new Date();
-    var fecha = now.getDate() + ' de ' + meses[now.getMonth()] + ' de ' + now.getFullYear();
-    el.textContent = 'Última actualización: ' + fecha + '.';
 }
 
 /* ===== Dark Mode ===== */
