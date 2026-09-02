@@ -54,6 +54,17 @@ class Item:
     tags: list[str] = field(default_factory=list)
 
 
+def _sin_tildes(s: str) -> str:
+    """Minúsculas y sin diacríticos, para comparar nombres."""
+    return unicodedata.normalize("NFD", s or "").encode("ascii", "ignore").decode().lower()
+
+
+# Ids verificados como NO pertenecientes a Fabián en esta corrida (la página
+# se descargó bien y la autoría no coincide). A diferencia de una fuente
+# caída, estos sí deben eliminarse del cache.
+RECHAZADOS: set[str] = set()
+
+
 def descargar(sess: requests.Session, url: str, timeout: int = 30) -> str:
     r = sess.get(url, headers=HEADERS, timeout=timeout)
     r.raise_for_status()
@@ -379,23 +390,35 @@ def openalex_descubrir(sess: requests.Session) -> list[Item]:
 # ---------- CEP Chile ----------
 
 CEP_AUTOR_HINT = "fabián belmar"
+CEP_AUTOR_PAGE = "https://www.cepchile.cl/equipo/fabian-belmar/"
 
 
 def cep_descubrir(sess: requests.Session, pausa: float,
                   cache: dict[str, dict], refrescar: bool) -> list[Item]:
-    """Busca en la API REST de CEP por términos vinculados a Fabián
-    (Informe C22-CEP, primarias 2025, etc) y verifica autoría leyendo
-    cada post."""
+    """Descubre publicaciones de Fabián en CEP. Fuente principal: la
+    página de autor (/equipo/fabian-belmar/), que lista todos sus
+    Puntos de Referencia. Como respaldo, busca en la API REST por
+    términos vinculados. Verifica autoría leyendo cada post."""
     items: list[Item] = []
+    seen_urls: set[str] = set()
+    candidatas: set[str] = set()
+
+    # 1) Página de autor: la fuente más completa y actualizada
+    try:
+        html_autor = descargar(sess, CEP_AUTOR_PAGE, timeout=30)
+        for u in re.findall(r'https://www\.cepchile\.cl/investigacion/[^"\'\s<>]+', html_autor):
+            candidatas.add(u.rstrip("/") + "/")
+        print(f"[cep] página de autor: {len(candidatas)} URLs", file=sys.stderr)
+    except requests.RequestException as e:
+        print(f"[cep] página de autor error: {e}", file=sys.stderr)
+    time.sleep(pausa)
+
+    # 2) Respaldo: búsqueda en la API REST
     queries = [
         "informe C22 CEP",
-        "elecciones 2025 CEP",
-        "primarias 2025",
         "Fabián Belmar",
         "Mascareño Henríquez Belmar",
     ]
-    seen_urls: set[str] = set()
-    candidatas: set[str] = set()
     for q in queries:
         try:
             r = sess.get(
@@ -410,7 +433,7 @@ def cep_descubrir(sess: requests.Session, pausa: float,
         for d in data:
             u = d.get("url", "")
             if "cepchile.cl" in u and "/investigacion/" in u:
-                candidatas.add(u)
+                candidatas.add(u.rstrip("/") + "/")
         time.sleep(pausa)
 
     print(f"[cep] {len(candidatas)} URLs candidatas", file=sys.stderr)
@@ -431,11 +454,19 @@ def cep_descubrir(sess: requests.Session, pausa: float,
             html = descargar(sess, url, timeout=30)
         except requests.RequestException:
             continue
-        # Verificar autoría: el cuerpo o página debe mencionar "fabián belmar"
-        if "fabián belmar" not in html.lower() and "fabian belmar" not in html.lower():
-            continue
-
         soup = BeautifulSoup(html, "html.parser")
+
+        # Verificar autoría en el bloque de autores del banner (no en toda la
+        # página: los "relacionados" del sidebar generan falsos positivos).
+        autores_div = soup.find("div", class_="banner-authors")
+        autores_txt = _sin_tildes(autores_div.get_text(" ", strip=True)) if autores_div else ""
+        alts = " ".join(
+            _sin_tildes(img.get("alt") or "") for img in (autores_div.find_all("img") if autores_div else [])
+        )
+        if "belmar" not in autores_txt and "belmar" not in alts:
+            print(f"[cep] omitido (sin autoría): {slug}", file=sys.stderr)
+            RECHAZADOS.add(iid)
+            continue
         titulo = ""
         h1 = soup.find("h1")
         if h1:
@@ -945,7 +976,7 @@ def main():
     # borrar lo que ya se había descubierto de ella.
     presentes = {it.id for it in todos}
     for iid, c in cache.items():
-        if iid in presentes:
+        if iid in presentes or iid in RECHAZADOS:
             continue
         try:
             todos.append(Item(**{k: c.get(k, "") for k in Item.__dataclass_fields__}))
