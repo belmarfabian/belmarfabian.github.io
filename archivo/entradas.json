@@ -8,8 +8,114 @@
     "scholar",
     "utprensa"
   ],
-  "total": 67,
+  "total": 71,
   "items": [
+    {
+      "id": "cep:apuestas-en-chile-regulacion-y-peso-economico-de-un-mercado-en-expansion",
+      "fuente": "cep",
+      "seccion": "columnas",
+      "titulo": "Apuestas en Chile: regulación y peso económico de un mercado en expansión",
+      "url": "https://www.cepchile.cl/investigacion/apuestas-en-chile-regulacion-y-peso-economico-de-un-mercado-en-expansion/",
+      "fecha": "2026-07-18",
+      "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/07/16-234400_rxjl_Apuestas-en-Chile-regulación-y-peso-económico-de-un-mercado-en-expansión.jpg",
+      "tipo": "columna",
+      "bajada": "\"Apuestas en Chile: regulación y peso económico de un mercado en expansión\" es una investigación del Centro de Estudios Públicos.",
+      "cuerpo_html": "<p>Andrés Araya C., Fabián Belmar, Xiomara Kuwae, Sebastián Aliaga.</p>",
+      "parrafos": [
+        "Andrés Araya C., Fabián Belmar, Xiomara Kuwae, Sebastián Aliaga."
+      ],
+      "tags": []
+    },
+    {
+      "id": "cep:crecer-en-campamentos-el-drama-de-un-doble-vinculo",
+      "fuente": "cep",
+      "seccion": "columnas",
+      "titulo": "Crecer en campamentos. El drama de un doble vínculo",
+      "url": "https://www.cepchile.cl/investigacion/crecer-en-campamentos-el-drama-de-un-doble-vinculo/",
+      "fecha": "2026-07-13",
+      "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/07/10-175531_9l7b_Crecer-en-campamentos.-El-drama-de-un-doble-vínculo.jpg",
+      "tipo": "columna",
+      "bajada": "\"Crecer en campamentos. El drama de un doble vínculo\" es una investigación de Rosario Palacios, Fabián Belmar y Aldo Mascareño.",
+      "cuerpo_html": "<p>Rosario Palacios R. de G., Fabián Belmar, Aldo Mascareño.</p>",
+      "parrafos": [
+        "Rosario Palacios R. de G., Fabián Belmar, Aldo Mascareño."
+      ],
+      "tags": []
+    },
+    {
+      "id": "cep:el-mundo-segun-polymarket-control-del-futuro-en-mercados-de-eventos",
+      "fuente": "cep",
+      "seccion": "columnas",
+      "titulo": "El mundo según Polymarket: control del futuro en mercados de eventos",
+      "url": "https://www.cepchile.cl/investigacion/el-mundo-segun-polymarket-control-del-futuro-en-mercados-de-eventos/",
+      "fecha": "2026-06-30",
+      "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/07/01-134539_0qsb_El-mundo-según-Polymarket.png",
+      "tipo": "columna",
+      "bajada": "\"El mundo según Polymarket: control del futuro en mercados de eventos\" es una investigación del grupo C22 del CEP.",
+      "cuerpo_html": "<p>Palabras clave: mercado de eventos, mercado de predicción, derivados, futuros, sistema financiero, reducción de incertidumbre, Polymarket, comunidades especulativas, insider trading, insider agency, regulación</p>",
+      "parrafos": [
+        "Palabras clave: mercado de eventos, mercado de predicción, derivados, futuros, sistema financiero, reducción de incertidumbre, Polymarket, comunidades especulativas, insider trading, insider agency, regulación"
+      ],
+      "tags": []
+    },
+    {
+      "id": "cep:el-lado-b-de-la-megarreforma-senales-de-alerta-temprana-sobre-problemas-futuros",
+      "fuente": "cep",
+      "seccion": "columnas",
+      "titulo": "El lado B de la megarreforma: señales de alerta temprana sobre problemas futuros",
+      "url": "https://www.cepchile.cl/investigacion/el-lado-b-de-la-megarreforma-senales-de-alerta-temprana-sobre-problemas-futuros/",
+      "fecha": "2026-06-23",
+      "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/06/23-170827_umkb_El-lado-B-de-la-megarreforma.jpg",
+      "tipo": "columna",
+      "bajada": "\"El lado B de la megarreforma: señales de alerta temprana sobre problemas futuros\" es una investigación del grupo C22 del CEP.",
+      "cuerpo_html": "<p>Aldo Mascareño, Fabián Belmar, Pablo A. Henríquez, Juan Rozas.</p>",
+      "parrafos": [
+        "Aldo Mascareño, Fabián Belmar, Pablo A. Henríquez, Juan Rozas."
+      ],
+      "tags": []
+    },
+    {
+      "id": "cep:la-cuenta-publica-del-presidente-kast-una-cuestion-doctrinaria",
+      "fuente": "cep",
+      "seccion": "columnas",
+      "titulo": "La cuenta pública del presidente Kast: una cuestión doctrinaria",
+      "url": "https://www.cepchile.cl/investigacion/la-cuenta-publica-del-presidente-kast-una-cuestion-doctrinaria/",
+      "fecha": "2026-06-12",
+      "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/06/12-140756_bt10_La-cuenta-pública-del-presidente-Kast-una-cuestión-doctrinaria.jpg",
+      "tipo": "columna",
+      "bajada": "Lee \"La cuenta pública del presidente Kast:una cuestión doctrinaria\" de Aldo Mascareño, Juan Rozas, Pablo Henríquez y Fabián Belmar.",
+      "cuerpo_html": "<p>Las primeras cuentas públicas de cada presidente reflejan su diagnóstico de la situación del país y el sentido programático que le quieren imprimir a su gobierno. Las capacidades de articulación entre los problemas de las personas y una visión de sociedad de largo plazo anclada en principios doctrinarios que orientan la acción política son clave en este tipo de discursos.</p>\n<p>Por medio de distintos procedimientos algorítmicos de análisis de texto, en este artículo argumentamos que la primera cuenta pública del presidente José Antonio Kast muestra selecciones temáticas y lingüísticas que evidencian un sentido doctrinario distinto al expresado por otros gobiernos chilenos desde el retorno a la democracia en 1990.</p>\n<p>Los resultados muestran que hay varias condiciones de continuidad en los pesos programáticos del discurso del presidente Kast en comparación con la primera cuenta de los presidentes anteriores, por ejemplo, en temas políticos y económicos. Sin embargo, una diferencia radical está en el posicionamiento inédito, en el primer lugar, del tema de seguridad, lo que anticipa un conjunto de reformas institucionales y discursivas profundas. Los resultados también muestran que la construcción doctrinaria de este primer discurso se articula sobre los conceptos de familia, patria y esfuerzo, los que funcionan como nodos de legitimación y justificación de las acciones políticas propuestas.</p>\n<p>El artículo concluye que el discurso inaugura un nuevo escenario político que se alinea no solo con la eficacia de las políticas, sino con el tipo de sociedad que impulsan.</p>",
+      "parrafos": [
+        "Las primeras cuentas públicas de cada presidente reflejan su diagnóstico de la situación del país y el sentido programático que le quieren imprimir a su gobierno. Las capacidades de articulación entre los problemas de las personas y una visión de sociedad de largo plazo anclada en principios doctrinarios que orientan la acción política son clave en este tipo de discursos.",
+        "Por medio de distintos procedimientos algorítmicos de análisis de texto, en este artículo argumentamos que la primera cuenta pública del presidente José Antonio Kast muestra selecciones temáticas y lingüísticas que evidencian un sentido doctrinario distinto al expresado por otros gobiernos chilenos desde el retorno a la democracia en 1990.",
+        "Los resultados muestran que hay varias condiciones de continuidad en los pesos programáticos del discurso del presidente Kast en comparación con la primera cuenta de los presidentes anteriores, por ejemplo, en temas políticos y económicos. Sin embargo, una diferencia radical está en el posicionamiento inédito, en el primer lugar, del tema de seguridad, lo que anticipa un conjunto de reformas institucionales y discursivas profundas. Los resultados también muestran que la construcción doctrinaria de este primer discurso se articula sobre los conceptos de familia, patria y esfuerzo, los que funcionan como nodos de legitimación y justificación de las acciones políticas propuestas.",
+        "El artículo concluye que el discurso inaugura un nuevo escenario político que se alinea no solo con la eficacia de las políticas, sino con el tipo de sociedad que impulsan."
+      ],
+      "tags": []
+    },
+    {
+      "id": "cep:de-la-reconciliacion-a-la-seguridad-la-ampliacion-semantica-de-la-democracia-en-los-discursos-inaugurales-de-chile-1990-2026",
+      "fuente": "cep",
+      "seccion": "columnas",
+      "titulo": "De la reconciliación a la seguridad: la ampliación semántica de la democracia en los discursos inaugurales de Chile (1990-2026)",
+      "url": "https://www.cepchile.cl/investigacion/de-la-reconciliacion-a-la-seguridad-la-ampliacion-semantica-de-la-democracia-en-los-discursos-inaugurales-de-chile-1990-2026/",
+      "fecha": "2026-04-15",
+      "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/04/15-202253_0et7_De-la-reconciliación-a-la-seguridad-la-ampliación-semántica-de-la-democracia-en-los-discursos-inaugurales-de-Chile-1024x529.png",
+      "tipo": "columna",
+      "bajada": "Lee \"De la reconciliación a la seguridad: la ampliación semántica de la democracia en los discursos inaugurales de Chile (1990-2026)\" de Fabián Belmar, Aldo Mascareño, Juan Rozas y Andrés Araya.",
+      "cuerpo_html": "<p>Este artículo analiza los nueve discursos inaugurales (‘discursos de balcón’) pronunciados por los presidentes de Chile desde 1990 hasta la actualidad cuando se asoman al balcón de La Moneda por primera vez. Mediante técnicas de análisis computacional de texto, el estudio examina las direcciones semánticas e ideológicas de los discursos.</p>\n<p>Sobre esta base, argumentamos que los ‘discursos de balcón’ ilustran el tránsito desde una <em>comprensión pura</em> de la democracia liberal como oposición al autoritarismo dictatorial en 1990 a un orden posdemocrático que apela a recursos políticos y motivacionales de tipo autoritario e identitario para construir legitimación política y formar programas de acción.</p>\n<p>Los resultados muestran una transición desde un discurso simbólico centrado en la reconciliación, como el de Aylwin en 1990, hacia marcos crecientemente programáticos orientados a la seguridad pública (Piñera II y especialmente Kast). Los encuadres semánticos evolucionan del trauma dictatorial (Aylwin) a la seguridad como macrocategoría (Kast).</p>\n<p>El índice RILE (Right-Left Index) híbrido posiciona a los gobiernos de manera consistente con la clasificación experta: Boric y Bachelet II en el extremo izquierdo, la Concertación histórica en el centro, y Kast en el extremo derecho. Un análisis semántico complementario muestra que palabras como seguridad, libertad y democracia adquieren significados ideológicamente opuestos según el enunciante. Sin embargo, también muestra un hallazgo sustantivo: la disputa política contemporánea no opera por diferenciación léxica, sino por resignificación: las mismas palabras nombran proyectos opuestos (e.g., justicia, seguridad, democracia, entre otros): Boric y Kast, los presidentes ideológicamente más distantes, comparten el mayor vocabulario del corpus.</p>\n<p>Por último, el discurso se ha desplazado de ser un acto simbólico puro hacia el anuncio programático. Aylwin (1990) pronuncia un discurso enteramente abstracto, mientras Bachelet II (2014) invierte esa proporción con vocabulario concreto referido a programas e instituciones. Los discursos recientes combinan ambos registros, pero el ritual republicano ya no es solo ritual —una evolución que se aprecia en sus distintos momentos en el análisis de entidades discursivas.</p>\n<p>El artículo concluye que los discursos reflejan la búsqueda de la semántica democrática por responder a la fragmentación identitaria, al debilitamiento de los mecanismos clásicos de integración política y a la presión por restablecer el orden público.</p>",
+      "parrafos": [
+        "Este artículo analiza los nueve discursos inaugurales (‘discursos de balcón’) pronunciados por los presidentes de Chile desde 1990 hasta la actualidad cuando se asoman al balcón de La Moneda por primera vez. Mediante técnicas de análisis computacional de texto, el estudio examina las direcciones semánticas e ideológicas de los discursos.",
+        "Sobre esta base, argumentamos que los ‘discursos de balcón’ ilustran el tránsito desde una comprensión pura de la democracia liberal como oposición al autoritarismo dictatorial en 1990 a un orden posdemocrático que apela a recursos políticos y motivacionales de tipo autoritario e identitario para construir legitimación política y formar programas de acción.",
+        "Los resultados muestran una transición desde un discurso simbólico centrado en la reconciliación, como el de Aylwin en 1990, hacia marcos crecientemente programáticos orientados a la seguridad pública (Piñera II y especialmente Kast). Los encuadres semánticos evolucionan del trauma dictatorial (Aylwin) a la seguridad como macrocategoría (Kast).",
+        "El índice RILE (Right-Left Index) híbrido posiciona a los gobiernos de manera consistente con la clasificación experta: Boric y Bachelet II en el extremo izquierdo, la Concertación histórica en el centro, y Kast en el extremo derecho. Un análisis semántico complementario muestra que palabras como seguridad, libertad y democracia adquieren significados ideológicamente opuestos según el enunciante. Sin embargo, también muestra un hallazgo sustantivo: la disputa política contemporánea no opera por diferenciación léxica, sino por resignificación: las mismas palabras nombran proyectos opuestos (e.g., justicia, seguridad, democracia, entre otros): Boric y Kast, los presidentes ideológicamente más distantes, comparten el mayor vocabulario del corpus.",
+        "Por último, el discurso se ha desplazado de ser un acto simbólico puro hacia el anuncio programático. Aylwin (1990) pronuncia un discurso enteramente abstracto, mientras Bachelet II (2014) invierte esa proporción con vocabulario concreto referido a programas e instituciones. Los discursos recientes combinan ambos registros, pero el ritual republicano ya no es solo ritual —una evolución que se aprecia en sus distintos momentos en el análisis de entidades discursivas.",
+        "El artículo concluye que los discursos reflejan la búsqueda de la semántica democrática por responder a la fragmentación identitaria, al debilitamiento de los mecanismos clásicos de integración política y a la presión por restablecer el orden público."
+      ],
+      "tags": [
+        "Computacional"
+      ]
+    },
     {
       "id": "ciper:por-que-el-futbol-y-el-deporte-chileno-necesita-mas-que-una-ley",
       "fuente": "ciper",
@@ -194,6 +300,27 @@
       ]
     },
     {
+      "id": "cep:muerte-en-el-monumental-gestion-simbolica-de-crisis-y-violencia-organizada",
+      "fuente": "cep",
+      "seccion": "columnas",
+      "titulo": "Muerte en el Monumental: gestión simbólica de crisis y violencia organizada",
+      "url": "https://www.cepchile.cl/investigacion/muerte-en-el-monumental-gestion-simbolica-de-crisis-y-violencia-organizada/",
+      "fecha": "2025-08-13",
+      "imagen": "https://static.cepchile.cl/uploads/cepchile/2025/07/18-200329_80be_Muerte-en-el-Monumental-gestión-simbólica-de-crisis-y-violencia-organizada.png",
+      "tipo": "columna",
+      "bajada": "\"Muerte en el Monumental: gestión simbólica de crisis y violencia organizada\" es un trabajo de investigadores CEP y C22.",
+      "cuerpo_html": "<p>El 10 de abril de 2025, dos jóvenes de 12 y 18 años fallecieron en las inmediaciones del Estadio Monumental durante una ‘avalancha’ organizada y convocada previamente en redes sociales para ingresar al partido contra el equipo brasileño de Fortaleza. La intervención policial habría provocado que las víctimas quedaran atrapadas bajo una reja en uno de los accesos del estadio.</p>\n<p>A través del análisis de 5.585 publicaciones de redes sociales (Facebook e Instagram) procesadas con métodos computacionales (redes, comunidades discursivas, modelamiento de tópicos), examinamos cómo este evento reconfiguró el discurso público y las respuestas gubernamentales sobre la seguridad en estadios y sus inmediaciones. Argumentamos que el acontecimiento constituye el inicio de un nuevo ciclo de crisis-reforma-fracaso que conceptualizamos como <i>gestión simbólica de </i><i>crisis</i>, esto es, una reacción comunicativa inicial seguida de anuncios de reforma y una progresiva dilución operativa que no alcanza a intervenir en el mecanismo de producción de la violencia en los estadios. Este es un doble movimiento circular en el que en una dirección fluye la disposición de las barras bravas al enfrentamiento físico y uso de la violencia para distintas finalidades, y en el otro fluye la disposición de agentes deportivos e institucionales al financiamiento y la provisión de espacios de menor control para que estos grupos operen.</p>\n<p>Los principales resultados muestran la presencia de seis comunidades discursivas diferenciadas que compiten por la hegemonía narrativa del evento. El análisis revela un patrón de disrupción-normalización, caracterizado por un <i>peak</i> inicial del discurso sobre el incidente que se atenúa en diez días, seguido de una rápida recuperación e incluso fortalecimiento de las narrativas histórico-institucionales que funcionan como formas de absorción del evento crítico. A esto lo denominamos <i>desplazamiento discursivo</i>: el concepto de ‘barras bravas’ queda sistemáticamente ausente del discurso público postragedia. Esta omisión permite proteger la continuidad del mecanismo que conduce al evento crítico y ocultar las relaciones que lo producen.</p>\n<p>El artículo concluye que la gestión simbólica de crisis opera como tecnología de normalización que sostiene la reproducción de las condiciones estructurales de violencia, convirtiendo cada evento crítico en una oportunidad perdida para la intervención de la política pública.</p>",
+      "parrafos": [
+        "El 10 de abril de 2025, dos jóvenes de 12 y 18 años fallecieron en las inmediaciones del Estadio Monumental durante una ‘avalancha’ organizada y convocada previamente en redes sociales para ingresar al partido contra el equipo brasileño de Fortaleza. La intervención policial habría provocado que las víctimas quedaran atrapadas bajo una reja en uno de los accesos del estadio.",
+        "A través del análisis de 5.585 publicaciones de redes sociales (Facebook e Instagram) procesadas con métodos computacionales (redes, comunidades discursivas, modelamiento de tópicos), examinamos cómo este evento reconfiguró el discurso público y las respuestas gubernamentales sobre la seguridad en estadios y sus inmediaciones. Argumentamos que el acontecimiento constituye el inicio de un nuevo ciclo de crisis-reforma-fracaso que conceptualizamos como gestión simbólica de crisis , esto es, una reacción comunicativa inicial seguida de anuncios de reforma y una progresiva dilución operativa que no alcanza a intervenir en el mecanismo de producción de la violencia en los estadios. Este es un doble movimiento circular en el que en una dirección fluye la disposición de las barras bravas al enfrentamiento físico y uso de la violencia para distintas finalidades, y en el otro fluye la disposición de agentes deportivos e institucionales al financiamiento y la provisión de espacios de menor control para que estos grupos operen.",
+        "Los principales resultados muestran la presencia de seis comunidades discursivas diferenciadas que compiten por la hegemonía narrativa del evento. El análisis revela un patrón de disrupción-normalización, caracterizado por un peak inicial del discurso sobre el incidente que se atenúa en diez días, seguido de una rápida recuperación e incluso fortalecimiento de las narrativas histórico-institucionales que funcionan como formas de absorción del evento crítico. A esto lo denominamos desplazamiento discursivo : el concepto de ‘barras bravas’ queda sistemáticamente ausente del discurso público postragedia. Esta omisión permite proteger la continuidad del mecanismo que conduce al evento crítico y ocultar las relaciones que lo producen.",
+        "El artículo concluye que la gestión simbólica de crisis opera como tecnología de normalización que sostiene la reproducción de las condiciones estructurales de violencia, convirtiendo cada evento crítico en una oportunidad perdida para la intervención de la política pública."
+      ],
+      "tags": [
+        "Computacional"
+      ]
+    },
+    {
       "id": "cep:elecciones-2025-cuarto-informe-c22-cep-autorreferencia-politica",
       "fuente": "cep",
       "seccion": "columnas",
@@ -235,46 +362,6 @@
       "tags": [
         "Elecciones",
         "Computacional"
-      ]
-    },
-    {
-      "id": "cep:elecciones-2025-segundo-informe-c22-cep-mayo",
-      "fuente": "cep",
-      "seccion": "columnas",
-      "titulo": "Elecciones 2025. Segundo Informe C22-CEP, mayo",
-      "url": "https://www.cepchile.cl/investigacion/elecciones-2025-segundo-informe-c22-cep-mayo/",
-      "fecha": "2025-06-10",
-      "imagen": "https://static.cepchile.cl/uploads/cepchile/2025/05/23-153036_0l8s_Elecciones-2025.-Primer-Informe-C22-CEP-marzo-abril.jpg",
-      "tipo": "columna",
-      "bajada": "Lee el estudio \"Elecciones 2025, Segundo Informe C22-CEP, mayo\" de Aldo Mascareño, Juan Rozas y Pablo Henríquez.",
-      "cuerpo_html": "<p><span>En un contexto político marcado por el descenso histórico de la preferencia por la democracia como forma de gobierno a un 44,2% y un aumento constante de los indiferentes (a quienes da lo mismo un gobierno autoritario o uno democrático), quienes alcanzan en la actualidad a un 33,5%, las elecciones presidenciales y parlamentarias de 2025 adquieren una relevancia particular: ellas pueden fortalecer el sentimiento democrático o incrementar la indiferencia política y el autoritarismo.</span></p>\n<p>Por medio de técnicas digitales y estadísticas, en este Segundo Informe C22-CEP sobre las elecciones 2025 observamos el comportamiento de la comunicación en redes sociales (Instagram y Facebook) en torno a los seis principales candidatos presidenciales durante los meses de marzo, abril y mayo 2025. Ellos son Johannes Kaiser, José Antonio Kast, Evelyn Matthei, Gonzalo Winter, Jeannette Jara y Carolina Tohá. Exploramos sus visualizaciones y la comunicación de sentimientos, emociones y semánticas en torno a ellos.</p>\n<p><span>Los resultados indican que Carolina Tohá y Evelyn Matthei alcanzan los niveles de visualización más altos en el período marzo a mayo, con 93 millones. En cuanto a sentimientos, en la derecha se mantiene el predominio de inclinaciones negativas, sentimientos positivos bajos y el enojo como rasgo emocional dominante. La izquierda tiene un rango menor de oscilación de sentimientos y emociones; manejan de mejor modo la comunicación sobre la emoción de alegría. La red de mayor densidad semántica es de Carolina Tohá. Esto indica mayor atracción </span><span>comunicacional, pero también más riesgo de que el foco de los mensajes se diluya. Jeannette Jara y Evelyn Matthei siguen a Tohá en densidad de red. La red de menor densidad es la de Johannes Kaiser.</span></p>\n<p>El Informe concluye que la comunicación de tipo positivo y emociones alegres tiene determinados patrones de regularidad y expresiones concretas (saludos, anuncios de medidas, encuentros en regiones) que los candidatos pueden aprovechar para alternar con sentimientos negativos predominantes. Del mismo modo, el Informe anticipa que junio es un mes con mayor presencia comunicacional de candidatos de izquierda como efecto de la primaria el 29 de junio, frente a lo cual la derecha podrá ser reactiva o diseñar una variante comunicacional <i>ad hoc</i>.</p>",
-      "parrafos": [
-        "En un contexto político marcado por el descenso histórico de la preferencia por la democracia como forma de gobierno a un 44,2% y un aumento constante de los indiferentes (a quienes da lo mismo un gobierno autoritario o uno democrático), quienes alcanzan en la actualidad a un 33,5%, las elecciones presidenciales y parlamentarias de 2025 adquieren una relevancia particular: ellas pueden fortalecer el sentimiento democrático o incrementar la indiferencia política y el autoritarismo.",
-        "Por medio de técnicas digitales y estadísticas, en este Segundo Informe C22-CEP sobre las elecciones 2025 observamos el comportamiento de la comunicación en redes sociales (Instagram y Facebook) en torno a los seis principales candidatos presidenciales durante los meses de marzo, abril y mayo 2025. Ellos son Johannes Kaiser, José Antonio Kast, Evelyn Matthei, Gonzalo Winter, Jeannette Jara y Carolina Tohá. Exploramos sus visualizaciones y la comunicación de sentimientos, emociones y semánticas en torno a ellos.",
-        "Los resultados indican que Carolina Tohá y Evelyn Matthei alcanzan los niveles de visualización más altos en el período marzo a mayo, con 93 millones. En cuanto a sentimientos, en la derecha se mantiene el predominio de inclinaciones negativas, sentimientos positivos bajos y el enojo como rasgo emocional dominante. La izquierda tiene un rango menor de oscilación de sentimientos y emociones; manejan de mejor modo la comunicación sobre la emoción de alegría. La red de mayor densidad semántica es de Carolina Tohá. Esto indica mayor atracción comunicacional, pero también más riesgo de que el foco de los mensajes se diluya. Jeannette Jara y Evelyn Matthei siguen a Tohá en densidad de red. La red de menor densidad es la de Johannes Kaiser.",
-        "El Informe concluye que la comunicación de tipo positivo y emociones alegres tiene determinados patrones de regularidad y expresiones concretas (saludos, anuncios de medidas, encuentros en regiones) que los candidatos pueden aprovechar para alternar con sentimientos negativos predominantes. Del mismo modo, el Informe anticipa que junio es un mes con mayor presencia comunicacional de candidatos de izquierda como efecto de la primaria el 29 de junio, frente a lo cual la derecha podrá ser reactiva o diseñar una variante comunicacional ad hoc ."
-      ],
-      "tags": [
-        "Elecciones",
-        "Computacional"
-      ]
-    },
-    {
-      "id": "cep:elecciones-2025-primer-informe-c22-cep-marzo-abril",
-      "fuente": "cep",
-      "seccion": "columnas",
-      "titulo": "Elecciones 2025. Primer Informe C22-CEP, marzo-abril",
-      "url": "https://www.cepchile.cl/investigacion/elecciones-2025-primer-informe-c22-cep-marzo-abril/",
-      "fecha": "2025-05-23",
-      "imagen": "https://static.cepchile.cl/uploads/cepchile/2025/05/23-153036_0l8s_Elecciones-2025.-Primer-Informe-C22-CEP-marzo-abril.jpg",
-      "tipo": "columna",
-      "bajada": "Lee el estudio \"Elecciones 2025, Primer Informe C22-CEP, marzo-abril\" de Aldo Mascareño, Juan Rozas y Pablo Henríquez.",
-      "cuerpo_html": "<p>Aldo Mascareño, Juan Rozas, Pablo A. Henríquez.</p>",
-      "parrafos": [
-        "Aldo Mascareño, Juan Rozas, Pablo A. Henríquez."
-      ],
-      "tags": [
-        "Elecciones"
       ]
     },
     {
@@ -343,11 +430,10 @@
       "fecha": "2025-01-01",
       "imagen": null,
       "tipo": "paper",
-      "bajada": "Open MIND · 2025",
-      "cuerpo_html": "<p>Aldo Mascareño, Fabián Belmar, Juan Rozas, Pablo Henríquez</p><p><em>Open MIND</em></p>",
+      "bajada": " · 2025",
+      "cuerpo_html": "",
       "parrafos": [
-        "Aldo Mascareño, Fabián Belmar, Juan Rozas, Pablo Henríquez",
-        "Open MIND"
+        "Aldo Mascareño, Fabián Belmar, Juan Rozas, Pablo Henríquez"
       ],
       "tags": [
         "Elecciones"
@@ -952,20 +1038,6 @@
       "tags": [
         "Clientelismo"
       ]
-    },
-    {
-      "id": "scholar:wr6beBsAAAAJuDGL6kOW6j0C",
-      "fuente": "scholar",
-      "seccion": "academico",
-      "titulo": "LA DISCRECIONALIDAD EN LA ADMINISTRACIÓN PÚBLICA DE CHILE: LEGITIMIDAD, CONTROL Y ÉTICA EN LA GESTIÓN PÚBLICA CONTEMPORÁNEA DISCRETION IN CHILEAN",
-      "url": "https://scholar.google.com/citations?view_op=view_citation&hl=es&user=wr6beBsAAAAJ&pagesize=100&citation_for_view=wr6beBsAAAAJ:uDGL6kOW6j0C",
-      "fecha": "",
-      "imagen": null,
-      "tipo": "paper",
-      "bajada": "",
-      "cuerpo_html": "",
-      "parrafos": [],
-      "tags": []
     },
     {
       "id": "scholar:wr6beBsAAAAJsJsF0ZLhtgC",
