@@ -533,3 +533,41 @@ body { background: #fff; }
 @media (prefers-reduced-motion: reduce) { .slide.is-on { animation: none; } }
 .card-s .kicker time, .agenda .kicker time { flex-basis: 100%; margin-top: 2px; }
 .card-s .kicker time::before { content: none; }
+
+/* Vistas previas con la figura de la publicación */
+.thumb.fig { background: #fff; border: 1px solid var(--rule); padding: 8px; }
+.thumb.fig img { object-fit: contain; object-position: center; }
+.thumb.fig.fig-tall img { object-fit: cover; object-position: top center; }
+a.thumb.fig:hover img { transform: none; }
+a.thumb.fig:hover { border-color: var(--navy); }
+.thumb-lead.fig { padding: 14px; aspect-ratio: 16 / 9; }
+.fig-cap { margin: -4px 0 12px; font: 500 12px/1.45 var(--sans); color: var(--muted); }
+.fig-cap::before { content: ''; display: inline-block; width: 18px; height: 2px; background: var(--c-pub); vertical-align: middle; margin-right: 8px; }
+.hero-fig { border: 1px solid var(--rule); padding: 18px 18px 12px; background: #fff; }
+.hero-fig img { max-height: 560px; width: auto; margin: 0 auto; }
+.hero-fig figcaption { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule); font: 500 12.5px/1.5 var(--sans); color: var(--muted); }
+
+/* Tipografía del CEP: Circe en titulares, Montserrat en texto,
+   Libre Baskerville solo en fechas, cifras y bajadas */
+.hl, .art-title, .newsband h2, .page-head h1 { font-family: var(--circe); letter-spacing: -.005em; }
+.hl { font-weight: 700; }
+.hl-xl { font-size: 36px; line-height: 1.08; font-weight: 800; }
+.hl-l { font-size: 26px; line-height: 1.12; }
+.hl-m { font-size: 20px; line-height: 1.2; }
+.hl-s { font-size: 17.5px; line-height: 1.22; }
+.art-title { font: 800 44px/1.06 var(--circe); }
+.prose { font: 400 17px/1.75 var(--sans); color: #262626; }
+.surveys a { font-family: var(--circe); }
+@media (max-width: 760px) {
+  .hl-xl { font-size: 30px; }
+  .art-title { font-size: 32px; }
+  .prose { font-size: 16px; }
+}
+@media (max-width: 760px) {
+  .row .thumb.fig, .card-s .thumb.fig { padding: 3px; }
+  .row .thumb.fig img, .card-s .thumb.fig img { object-fit: cover; object-position: 55% 45%; transform: scale(1.35); }
+}
+@media (max-width: 760px) {
+  .row .kicker time { flex-basis: 100%; margin-top: 2px; }
+  .row .kicker time::before { content: none; }
+}
