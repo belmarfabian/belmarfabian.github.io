@@ -901,3 +901,52 @@ a.thumb.fig:hover { border-color: var(--navy); }
   .team-search input { width: 100%; }
   .team-search { flex: 1 1 100%; }
 }
+
+/* ===== Monogramas de sección: colgados en el margen izquierdo ===== */
+.sec-head.has-mark { display: flex; flex-wrap: nowrap; align-items: flex-end; gap: 12px; position: relative; row-gap: 0; }
+.sec-head.has-mark .mark { position: static; flex: none; margin: 0 2px 0 0; }
+.sec-head.has-mark h2 { flex: 1; }
+.mark img, .mark-temas img, .mark-agenda img, .mark-opinion-publica img { height: 34px; width: auto; }
+/* pantallas anchas: el monograma sale de la columna, al margen */
+@media (min-width: 1400px) {
+  .sec-head.has-mark .mark { position: absolute; right: calc(100% + 22px); bottom: 6px; }
+  .sec-head.has-mark .mark img { height: 46px; }
+  /* salvo donde no hay margen libre: columnas interiores y rieles */
+  .areas > .area + .area .mark, .cols4 > div + div .mark, .rail .mark, .c22-page-head .mark {
+    position: static; }
+  .areas > .area + .area .mark img, .cols4 > div + div .mark img, .rail .mark img { height: 34px; }
+}
+@media (max-width: 760px) { .mark img, .mark-temas img, .mark-agenda img, .mark-opinion-publica img { height: 28px; } }
+.mark img { max-width: none; }
+@media (min-width: 1400px) {
+  .areas > .area + .area .sec-head.has-mark .mark, .cols4 > div + div .sec-head.has-mark .mark,
+  .rail .sec-head.has-mark .mark, .box .sec-head.has-mark .mark { position: static; }
+  .rail .sec-head.has-mark .mark img, .box .sec-head.has-mark .mark img,
+  .areas > .area + .area .sec-head.has-mark .mark img, .cols4 > div + div .sec-head.has-mark .mark img { height: 34px; }
+}
+/* un monograma por fila: las columnas interiores no lo repiten */
+.areas > .area + .area .mark, .cols4 > div + div .mark { display: none; }
+/* en el riel, el monograma va sobre el título */
+.rail .sec-head.has-mark, .box .sec-head.has-mark { flex-wrap: wrap; }
+.rail .sec-head.has-mark .mark, .box .sec-head.has-mark .mark { flex-basis: 100%; margin-bottom: 2px; }
+@media (max-width: 1399px) {
+  /* sin margen libre: monograma a la izquierda del título, pequeño */
+  .sec-head.has-mark .mark img { height: 30px; }
+}
+
+/* ===== Correcciones de la revisión ===== */
+[hidden] { display: none !important; }
+.ev { grid-template-columns: 76px minmax(0, 1fr); }
+.art-main { max-width: 740px; }
+@media (max-width: 1080px) and (min-width: 761px) {
+  .thumb-lead { aspect-ratio: 21 / 9; }
+  .slide .thumb-lead.fig img { object-fit: contain; }
+}
+@media (max-width: 760px) {
+  .surveys thead { display: none; }
+  .surveys tr { display: grid; grid-template-columns: 58px minmax(0, 1fr); column-gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .surveys td { border: 0; padding: 0; }
+  .surveys td:first-child { grid-row: 1 / span 2; }
+  .surveys td:last-child { font-size: 12px; color: var(--muted); }
+  .ev { grid-template-columns: 64px minmax(0, 1fr); }
+}
