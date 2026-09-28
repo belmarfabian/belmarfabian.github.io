@@ -180,6 +180,10 @@
 
   function render(inv, cols, survey, evs) {
     var used = {};
+    // lo que ya muestran las secciones fijas (áreas, Voces, Opinión) no se repite arriba
+    var fixed = {};
+    document.querySelectorAll('.areas a[href], .band-coral a[href], .band-op a[href]').forEach(function (a) { fixed[a.getAttribute('href')] = 1; });
+    inv.concat(cols).forEach(function (it) { if (fixed[it.href]) used[it.link] = 1; });
     function take(list, n, ok) {
       var out = [];
       for (var k = 0; k < list.length && out.length < n; k++) {
@@ -197,7 +201,7 @@
     slides.sort(function (a, b) { return b.date - a.date; });
     var left = take(inv, 2, function (i) { return (i.fig || i.imgS) && i.series !== 'Voces del CEP'; });
     var voces = take(inv, 1, function (i) { return i.series === 'Voces del CEP'; });
-    var right = (voces.length ? voces : take(cols, 1)).concat(survey ? [survey] : []);
+    var right = (voces.length ? voces : []).concat(take(inv, voces.length ? 1 : 2, function (i) { return (i.fig || i.imgS) && i.series !== 'Voces del CEP'; }));
     var latest = take(inv, 6);
 
     function put(name, html) { var el = document.querySelector('[data-live="' + name + '"]'); if (el && html) el.innerHTML = html; }
