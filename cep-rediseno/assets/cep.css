@@ -1018,3 +1018,26 @@ a.thumb.fig:hover { border-color: var(--navy); }
   .band-coral .grid4 > .card { border-bottom: 0 !important; margin-bottom: 0 !important; }
 }
 .band-coral .mark img { filter: brightness(0) saturate(100%) invert(9%) sepia(40%) saturate(2000%) hue-rotate(185deg) brightness(95%); }
+
+/* ===== Opinión en dos filas ===== */
+.op-grid { row-gap: 32px; }
+.op-grid > :nth-child(4n+1)::before { display: none; }
+@media (max-width: 1080px) and (min-width: 761px) { .op-grid > :nth-child(odd)::before { display: none; } .op-grid > :nth-child(even)::before { display: block; } }
+
+/* ===== La Encuesta CEP en cifras ===== */
+.cifras { margin: 8px 0 60px; }
+.cifras-grid { column-gap: 28px; }
+.cifras-grid > *::before { display: none; }
+.cifra { margin: 0; display: flex; flex-direction: column; }
+.cifra-img { display: block; border: 1px solid var(--rule); background: #fff; aspect-ratio: 16 / 9; overflow: hidden; }
+.cifra-img img { width: 100%; height: 100%; object-fit: cover; object-position: left center; transition: transform .3s; }
+.cifra-img:hover img { transform: scale(1.02); }
+.cifra figcaption { padding-top: 12px; border-top: 3px solid var(--navy); margin-top: 12px; }
+.ar-line-economia figcaption { border-color: #0c3f61; }
+.ar-line-politica figcaption { border-color: #8a1d4e; }
+.ar-line-sociedad figcaption { border-color: #00666f; }
+.cifra-dato { margin: 0; font: 400 14.5px/1.5 var(--sans); color: var(--text); }
+.cifra-dato b { display: block; font: 700 40px/1.05 var(--serif); color: var(--ink); margin-bottom: 4px; }
+.topbar .wrap { justify-content: flex-start; }
+@media (max-width: 760px) { .cifras-grid { row-gap: 28px; } .cifra-dato b { font-size: 34px; } }
+@media (max-width: 760px) { .op-grid > :nth-child(n+5) { display: none; } }
