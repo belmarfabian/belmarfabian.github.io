@@ -20,7 +20,12 @@
     var slides = [], i = 0, timer = null, userPaused = reduce, hover = false;
     function show(n) {
       i = (n + slides.length) % slides.length;
-      slides.forEach(function (s, k) { s.hidden = k !== i; s.classList.toggle('is-on', k === i); });
+      slides.forEach(function (s, k) {
+        var on = k === i;
+        s.classList.toggle('is-on', on);
+        s.setAttribute('aria-hidden', String(!on));
+        if ('inert' in s) s.inert = !on;
+      });
       [].forEach.call(dots.children, function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
     }
     function tick() { if (!userPaused && !hover && !document.hidden) show(i + 1); }
@@ -148,13 +153,14 @@
     var aids = [];
     all.forEach(function (i) { if (!i.authors.length) aids = aids.concat(i.authorIds); });
     return Promise.all([
-      mids.length ? get('media?per_page=50&include=' + mids.join(',') + '&_fields=id,media_details') : [],
+      mids.length ? get('media?per_page=50&include=' + mids.join(',') + '&_fields=id,source_url,media_details') : [],
       aids.length ? get('team?per_page=50&include=' + aids.join(',') + '&_fields=id,title').catch(function () { return []; }) : []
     ]).then(function (m) {
       var media = {}, team = {};
       m[0].forEach(function (x) {
         var s = (x.media_details && x.media_details.sizes) || {};
-        media[x.id] = { s: (s.medium || s.medium_large || s.full || {}).source_url, l: (s.medium_large || s.large || s.full || {}).source_url };
+        media[x.id] = { s: (s.medium || s.medium_large || s.full || {}).source_url || x.source_url,
+                        l: (s.medium_large || s.large || s.full || {}).source_url || x.source_url };
       });
       m[1].forEach(function (x) { team[x.id] = txt(x.title.rendered); });
       all.forEach(function (i) {
