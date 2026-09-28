@@ -511,3 +511,25 @@ body { background: #fff; }
   .site-head .mast { padding-top: 12px; padding-bottom: 10px; }
 }
 .kicker time { white-space: nowrap; }
+
+/* Portada dinámica: destacado rotativo y «Lo último» */
+.slide[hidden] { display: none; }
+.slide.is-on { animation: slide-in .45s ease-out; }
+@keyframes slide-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.slide-ctl { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rule); }
+.slide-ctl[hidden] { display: none; }
+.slide-ctl button { background: none; border: 1px solid var(--rule); color: var(--navy); cursor: pointer; font: 600 10.5px var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+.sc-prev, .sc-next { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 13px !important; }
+.sc-pause { margin-left: auto; padding: 6px 12px; border-radius: 3px; }
+.slide-ctl button:hover { border-color: var(--navy); }
+.sc-dots { display: flex; gap: 6px; }
+.sc-dot { width: 22px !important; height: 4px; padding: 0; border: 0 !important; background: var(--rule) !important; border-radius: 2px; }
+.sc-dot[aria-current=true] { background: var(--blue) !important; }
+.latest-line { display: flex; gap: 10px; min-width: 0; text-transform: none; letter-spacing: .02em; font-size: 12px; }
+.latest-line b { color: #fff; text-transform: uppercase; letter-spacing: .1em; font-size: 10.5px; flex: none; background: var(--blue); padding: 2px 8px; border-radius: 2px; }
+.latest-line a { color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.latest-line a:hover { text-decoration: underline; }
+@media (max-width: 1080px) { .topbar p.latest-line { display: flex; } .topbar .wrap { justify-content: space-between; } .topbar ul { display: none; } }
+@media (prefers-reduced-motion: reduce) { .slide.is-on { animation: none; } }
+.card-s .kicker time, .agenda .kicker time { flex-basis: 100%; margin-top: 2px; }
+.card-s .kicker time::before { content: none; }
