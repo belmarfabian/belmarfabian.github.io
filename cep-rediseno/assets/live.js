@@ -208,4 +208,20 @@
     put('ticker', '<b>Lo último</b> <a href="' + esc(newest.href) + '">' + esc(newest.title) + '</a>');
     document.documentElement.setAttribute('data-live-ok', '');
   }
+
+  // C22: últimos análisis online desde la API de c22cepchile.cl
+  var c22 = document.querySelector('[data-live="c22"]');
+  if (c22) {
+    get('https://c22cepchile.cl/wp-json/wp/v2/analisis?per_page=4&_embed=wp:featuredmedia&_fields=id,date,link,title,_links,_embedded')
+      .then(function (xs) {
+        if (!xs.length) return;
+        c22.innerHTML = xs.slice(1, 4).map(function (x) {
+          var fm = ((x._embedded || {})['wp:featuredmedia'] || [{}])[0], sz = (fm.media_details || {}).sizes || {};
+          var src = (sz.medium_large || sz.large || sz.full || {}).source_url || fm.source_url;
+          var it = { kind: 'c22', series: 'Análisis online', title: txt(x.title.rendered), href: x.link, date: new Date(x.date), imgS: src };
+          return '<article class="card card-s">' + (src ? thumb(it, 'thumb') : '<a class="thumb ph ph-c22" href="' + esc(x.link) + '" tabindex="-1" aria-hidden="true"><span>C22</span></a>') +
+            '<p class="kicker"><span class="pill pill-c22">Análisis online</span> <time>' + fecha(it.date) + '</time></p>' + title(it, 'hl-s') + '</article>';
+        }).join('');
+      }).catch(function () {});
+  }
 })();
