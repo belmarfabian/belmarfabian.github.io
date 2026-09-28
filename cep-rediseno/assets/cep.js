@@ -40,3 +40,32 @@
   });
   apply(new URLSearchParams(location.search).get('serie') || '');
 })();
+
+// Equipo: buscador por nombre y filtro por área
+(function () {
+  var box = document.querySelector('[data-team-search]');
+  if (!box) return;
+  var chips = document.querySelectorAll('.team-tools .chip');
+  var people = document.querySelectorAll('.person');
+  var groups = document.querySelectorAll('.team-group');
+  var count = document.querySelector('[data-team-count]');
+  var area = '';
+  function norm(t) { return t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+  function apply() {
+    var q = norm(box.value.trim()), n = 0;
+    people.forEach(function (p) {
+      var ok = (!q || norm(p.dataset.name).indexOf(q) >= 0) && (!area || (' ' + p.dataset.area + ' ').indexOf(' ' + area + ' ') >= 0);
+      p.hidden = !ok; if (ok) n++;
+    });
+    groups.forEach(function (g) { g.hidden = !g.querySelector('.person:not([hidden])'); });
+    count.textContent = n;
+  }
+  box.addEventListener('input', apply);
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      area = c.dataset.area;
+      chips.forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+      apply();
+    });
+  });
+})();
