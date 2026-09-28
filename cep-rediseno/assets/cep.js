@@ -15,9 +15,9 @@
 
 // Filtro por serie en los listados; la serie queda en la URL (?serie=...).
 (function () {
-  var chips = document.querySelectorAll('.filters .chip');
-  if (!chips.length) return;
+  var chips = document.querySelectorAll('.filters .chip[data-serie]');
   var rows = document.querySelectorAll('.list .li');
+  if (!chips.length || !rows.length) return;
   var count = document.querySelector('.count span');
   function apply(serie) {
     var n = 0;

@@ -950,3 +950,51 @@ a.thumb.fig:hover { border-color: var(--navy); }
   .surveys td:last-child { font-size: 12px; color: var(--muted); }
   .ev { grid-template-columns: 64px minmax(0, 1fr); }
 }
+
+/* ===== Auditoría de alineación ===== */
+/* riel: monograma en línea, para que su título quede a la altura del de la columna principal */
+.rail .sec-head.has-mark, .box .sec-head.has-mark { flex-wrap: nowrap; }
+.rail .sec-head.has-mark .mark, .box .sec-head.has-mark .mark { flex-basis: auto; margin: 0; }
+.rail .sec-head.has-mark .mark img, .box .sec-head.has-mark .mark img { height: 30px !important; }
+.sec-head { min-height: 48px; box-sizing: border-box; }
+.sec-head h2 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* opinión: autor y fecha en la misma línea, sobre el título */
+.op-author { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.op-author time { font: 600 10.5px var(--sans); color: var(--muted); letter-spacing: .06em; }
+
+/* ===== Auditoría de alineación (2) ===== */
+/* sombras desplazadas solo donde no tocan el borde de la grilla */
+.newsband, .box-survey .thumb { box-shadow: none !important; }
+.newsband { background: #f3f6f9; border: 1px solid var(--rule); border-radius: 6px; }
+/* eventos: las filas llegan al mismo borde que los filetes de sección */
+.ev { max-width: none; }
+/* C22: el texto del encabezado parte en la grilla; el isotipo cuelga en el margen */
+.c22-page-head { display: block; position: relative; max-width: 860px; }
+.c22-page-head > img { position: absolute; right: calc(100% + 22px); top: 30px; height: 64px; width: auto; }
+@media (max-width: 1399px) {
+  .c22-page-head > img { position: static; display: block; height: 48px; margin-bottom: 10px; }
+}
+
+/* ===== Auditoría de alineación (3): tablet y móvil ===== */
+@media (max-width: 1080px) and (min-width: 761px) {
+  /* áreas: se mantienen en tres columnas, no una de 1.000 px */
+  .areas { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 28px; }
+  .areas > * + *::before { display: block; left: -14px; }
+  .area .card-m .hl-m { font-size: 18px; }
+  /* riel bajo lo más reciente: Encuesta y agenda lado a lado */
+  .split > .rail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; align-items: start; }
+  .split > .rail > section + section { margin-top: 0; }
+}
+@media (max-width: 760px) {
+  /* áreas apiladas: cada una es su propia sección, todas con su monograma */
+  .areas > .area + .area .mark { display: flex; }
+  .areas { row-gap: 40px; }
+}
+.sec-head h2 { white-space: normal; overflow: visible; text-overflow: clip; }
+/* cabezales de una misma fila con la misma altura aunque un título ocupe dos líneas */
+.areas .sec-head, .cols4 .sec-head { min-height: 48px; }
+@media (max-width: 1080px) and (min-width: 761px) {
+  .areas .sec-head, .cols4 .sec-head { min-height: 66px; }
+  .areas .sec-head h2 { font-size: 20px; }
+}
+@media (min-width: 1081px) and (max-width: 1399px) { .cols4 .sec-head { min-height: 66px; } }
