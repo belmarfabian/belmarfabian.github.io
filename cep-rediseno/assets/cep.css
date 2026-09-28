@@ -682,3 +682,88 @@ a.thumb.fig:hover { border-color: var(--navy); }
   .c22x-grid .kicker time::before, .c22-grid .kicker time::before { content: none; }
   .ep { margin-bottom: 0; }
 }
+
+/* ===== Sin retratos: piezas tipográficas por área ===== */
+.ph-op { position: relative; display: grid; align-content: end; justify-items: start; padding: 14px 16px; background: var(--navy); isolation: isolate; overflow: hidden; }
+.ph-op::before { content: ''; position: absolute; inset: 0; background: #fff; opacity: .12; -webkit-mask: url(cep/diagonal-block.svg) top left / 700px auto; mask: url(cep/diagonal-block.svg) top left / 700px auto; z-index: -1; }
+.ph-op i { position: absolute; top: -18px; right: 10px; font: 700 120px/1 var(--serif); color: rgba(255,255,255,.28); font-style: normal; }
+.ph-op span { font: 800 17px/1.1 var(--circe); color: #fff; text-transform: none; letter-spacing: 0; border: 0; padding: 0; }
+.ar-economia { background: #0c3f61 !important; }
+.ar-politica { background: #8a1d4e !important; }
+.ar-sociedad { background: #00666f !important; }
+.ar-x { background: var(--blue-ink) !important; }
+.op-mark { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; padding: 8px 12px; color: #fff; font: 700 12px var(--circe); letter-spacing: .04em; text-transform: uppercase; border-radius: 3px; }
+.op-mark i { font: 700 30px/0.6 var(--serif); font-style: normal; transform: translateY(6px); }
+
+/* ===== Tres áreas con el mismo peso ===== */
+.areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-bottom: 56px; }
+.area { padding: 0 24px; border-left: 1px solid var(--rule); }
+.area:first-child { padding-left: 0; border-left: 0; }
+.area:last-child { padding-right: 0; }
+.area .sec-head { border-bottom-width: 3px; }
+.area-economia .sec-head { border-color: #0c3f61; }
+.area-politica .sec-head { border-color: #8a1d4e; }
+.area-sociedad .sec-head { border-color: #00666f; }
+.area .card-m .hl-m { font-size: 21px; }
+@media (max-width: 1080px) { .areas { grid-template-columns: 1fr; gap: 36px; } .area { padding: 0; border: 0; } }
+
+/* ===== Identidad visual del CEP sobre la grilla editorial ===== */
+/* píldoras de serie, como en cepchile.cl */
+.kicker { gap: 8px; }
+.kicker time::before { content: none; }
+.pill { display: inline-block; background: var(--navy) !important; color: #fff !important; border-radius: 999px; padding: 3px 11px;
+  font: 700 10px/1.4 var(--sans) !important; letter-spacing: .06em !important; text-transform: uppercase; }
+.pill-voces-del-cep { background: #7a4a00 !important; }
+.pill-libros { background: #5b3c8c !important; }
+.pill-publicaciones-indexadas { background: #006e78 !important; }
+.pill-opinion { background: var(--blue-ink) !important; }
+.pill-encuesta-cep, .pill-momento-economico, .pill-documentos-de-trabajo { background: #0c3f61 !important; }
+.pill-seminario { background: #b4520a !important; }
+.pill-arte-y-cultura { background: var(--c-ac) !important; }
+.pill-ep { background: #8a5300 !important; }
+.pill-c22 { background: var(--blue) !important; }
+.agenda .pill, .ev .pill { background: none !important; color: #b4520a !important; padding: 0; }
+.card-s .kicker time, .agenda .kicker time { flex-basis: auto; margin-top: 0; }
+.kicker { row-gap: 4px; }
+
+/* cabezales con monograma grande y la palabra de sección en su color */
+.sec-head.has-mark { display: grid; grid-template-columns: auto 1fr auto; column-gap: 14px; align-items: end; border-bottom: 2px solid var(--navy); padding-bottom: 10px; }
+.sec-head.has-mark .mark { grid-row: 1 / span 2; }
+.mark img, .mark-temas img, .mark-agenda img, .mark-opinion-publica img { height: 52px; }
+.sec-head h2 { font: 800 26px/1.05 var(--circe); letter-spacing: -.01em; }
+.cols4 .sec-head h2, .area .sec-head h2 { font-size: 22px; }
+
+/* «Ver todo» como botón redondeado con flecha */
+.more, .all a { display: inline-flex; align-items: center; gap: 6px; background: var(--navy); color: #fff; border-radius: 999px; padding: 6px 14px;
+  font: 700 10px var(--sans); letter-spacing: .08em; text-decoration: none; }
+.more::after, .all a::after { content: '→'; font-size: 12px; }
+.more:hover, .all a:hover { background: var(--blue); color: #fff; }
+
+/* destacados sobre celeste CEP con la textura diagonal */
+.band-blue { position: relative; margin: 0 calc(50% - 50vw) 36px; padding: 28px calc(50vw - 50%) 32px; background: #eef5fc; border-bottom: 0; isolation: isolate; }
+.band-blue::before { display: block; content: ''; position: absolute; inset: 0; background: var(--blue); opacity: .07;
+  -webkit-mask: url(cep/diagonal-block.svg) bottom center / cover; mask: url(cep/diagonal-block.svg) bottom center / cover; z-index: -1; }
+.lead-main { border-color: #cfdcea; }
+.lead-side .card + .card { border-top-color: #cfdcea; }
+
+/* sombra desplazada del CEP en piezas clave */
+.newsband, .box-survey .thumb, .ep-cover img, .thumb-lead, .hero-fig { box-shadow: 10px 10px 0 var(--shadow) !important; }
+.newsband { border-radius: 14px; border: 0; background: #fff; }
+.newsband h2 em, .newsband h2 { font-family: var(--circe); }
+.newsband p { font: italic 13px var(--serif); }
+
+/* barra de navegación con el filete grueso azul marino */
+.nav { box-shadow: inset 0 -6px 0 var(--navy); }
+.nav-list > li > a, .temas > summary { padding-bottom: 18px; }
+
+@media (max-width: 760px) {
+  .mark img, .mark-temas img, .mark-agenda img, .mark-opinion-publica img { height: 38px; }
+  .sec-head h2 { font-size: 21px; }
+  .band-blue { padding-top: 16px; }
+  .card-s .kicker time, .row .kicker time { flex-basis: 100%; }
+}
+.sec-head.has-mark { grid-template-columns: 1fr auto; row-gap: 6px; }
+.sec-head.has-mark .mark { grid-column: 1 / -1; grid-row: 1; }
+.sec-head.has-mark h2 { grid-row: 2; }
+.sec-head.has-mark .more { grid-row: 2; }
+.mark img, .mark-temas img, .mark-agenda img, .mark-opinion-publica img { height: 44px; }
