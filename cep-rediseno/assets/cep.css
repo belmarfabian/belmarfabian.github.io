@@ -806,3 +806,98 @@ a.thumb.fig:hover { border-color: var(--navy); }
   .topbar p.trend::-webkit-scrollbar { display: none; }
   .topbar .wrap { min-width: 0; }
 }
+
+/* ===== Alturas y anchos parejos en todas las grillas ===== */
+.areas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cols4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.c22x-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.c22x-body { grid-template-columns: minmax(0, 1.35fr) minmax(0, 2fr) minmax(0, 1fr); }
+.ep-body { grid-template-columns: 250px minmax(0, 1fr) 220px; }
+.ep-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.split { grid-template-columns: minmax(0, 1fr) 320px; }
+.feature { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+.tools-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.foot-grid > *, .grid4 > *, .grid3 > *, .cols4 > *, .areas > *, .c22x-grid > * { min-width: 0; }
+/* imagen siempre del mismo alto dentro de cada fila */
+.thumb { aspect-ratio: 16 / 10; width: 100%; }
+.thumb-lead { aspect-ratio: 16 / 9; }
+/* titulares y bajadas de las áreas con largo acotado para que las filas no se desalineen */
+.area .card-m .hl-m, .grid4 .hl-s, .cols4 .card .hl-s { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.area .card-m .dek { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.area .card-m .hl-m { min-height: calc(3 * 1.2em); }
+
+/* ===== Píldoras más chicas ===== */
+.pill { padding: 1px 8px !important; font-size: 8.5px !important; letter-spacing: .07em !important; line-height: 1.6 !important; }
+.kicker { font-size: 11px; gap: 6px; }
+
+/* ===== Opinión: foto del autor + tema ===== */
+.op .thumb { aspect-ratio: 1; width: 64px; border-radius: 50%; margin-bottom: 10px; }
+.row .thumb img[src*="columna" i], .card .thumb img { object-position: center 30%; }
+
+@media (max-width: 1080px) {
+  .areas { grid-template-columns: minmax(0, 1fr); }
+  .grid4, .cols4, .tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .c22x-body { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ep-body { grid-template-columns: 200px minmax(0, 1fr); }
+  .split { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .grid4, .grid3, .cols4, .tools-grid, .c22x-grid, .c22x-body, .ep-body, .ep-list, .feature { grid-template-columns: minmax(0, 1fr); }
+  .grid4 .card .thumb, .grid3 .card .thumb, .cols4 .card .thumb, .row .thumb, .lead .card .thumb, .c22x-grid .card .thumb { width: auto; }
+  .area .card-m .hl-m { min-height: 0; }
+}
+
+/* separación uniforme: gap + filete vertical como pseudo-elemento (anchos idénticos) */
+.areas, .grid4, .grid3 { column-gap: 40px; }
+.areas > *, .grid4 > *, .grid3 > *, .area, .area:first-child, .area:last-child,
+.grid4 > :first-child, .grid4 > :last-child, .grid3 > :first-child, .grid3 > :last-child,
+.band-coral .grid4 > .card, .band-coral .grid4 > .card:first-child, .band-coral .grid4 > .card:last-child,
+.related .grid3 > .card, .related .grid3 > .card:first-child, .related .grid3 > .card:last-child, .op {
+  padding-left: 0 !important; padding-right: 0 !important; border-left: 0 !important; position: relative; }
+.areas > * + *::before, .grid4 > * + *::before, .grid3 > * + *::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: -20px; width: 1px; background: var(--rule); }
+.c22-grid > *::before, .c22x-grid > *::before { display: none; }
+@media (max-width: 1080px) {
+  .grid4 > :nth-child(3)::before, .areas > *::before { display: none; }
+}
+@media (max-width: 760px) {
+  .areas > *::before, .grid4 > *::before, .grid3 > *::before { display: none; }
+}
+
+/* Tendencias: chica, como el «Read our research on» de Pew */
+.topbar { font-size: 10.5px; }
+.topbar .wrap { min-height: 28px; }
+.trend { gap: 2px 14px; font: 500 11px var(--sans); }
+.trend b { display: inline-flex; align-items: center; gap: 5px; font: 700 9.5px var(--sans); letter-spacing: .12em; color: #7fd0ff; margin-right: 2px; }
+.trend a { color: #fff; text-decoration: none; }
+.trend a:hover { text-decoration: underline; }
+.trend a::before { content: '#'; color: rgba(255,255,255,.4); margin-right: 1px; }
+@media (max-width: 760px) { .trend b { display: inline-flex; } }
+
+/* ===== Equipo: directorio compacto ===== */
+.team-head { margin-bottom: 14px; }
+.team-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-bottom: 10px; }
+.team-search input { border: 1px solid #b9c7d6; border-radius: 999px; padding: 8px 16px; font: 14px var(--sans); width: 260px; }
+.team-tools .filters { margin: 0; }
+.team-group { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; padding: 18px 0; border-top: 1px solid var(--rule); }
+.team-group[hidden], .person[hidden] { display: none; }
+.team-group h2 { margin: 6px 0 0; font: 800 17px/1.2 var(--circe); color: var(--ink); }
+.people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 24px; }
+.person { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; align-items: center; padding: 6px 8px 6px 0; border-radius: 8px; }
+.person:hover { background: #eef5fc; }
+.person img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; filter: grayscale(.2); }
+.person b { display: block; font: 700 15px/1.2 var(--circe); color: var(--ink); }
+.person i, .person em { display: block; font: 500 11.5px/1.35 var(--sans); color: var(--muted); font-style: normal; }
+.person i { color: var(--blue-ink); font-weight: 600; }
+.person em::first-letter { text-transform: uppercase; }
+@media (max-width: 1080px) { .people { grid-template-columns: repeat(2, minmax(0, 1fr)); } .team-group { grid-template-columns: 150px minmax(0, 1fr); } }
+@media (max-width: 760px) {
+  .team-group { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 14px 0; }
+  .people { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .person { grid-template-columns: 40px minmax(0, 1fr); }
+  .person img { width: 40px; height: 40px; }
+  .team-search input { width: 100%; }
+  .team-search { flex: 1 1 100%; }
+}
