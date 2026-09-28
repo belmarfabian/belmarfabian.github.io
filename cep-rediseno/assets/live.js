@@ -85,6 +85,10 @@
       (it.kind === 'event' ? '' : ' <time>' + fecha(it.date) + '</time>') + '</p>';
   }
   function thumb(it, cls, big) {
+    if (it.kind === 'post') {
+      return '<a class="' + cls + ' ph ph-op ar-' + slug(it.area || 'x') + '" href="' + esc(it.href) + '" tabindex="-1" aria-hidden="true"><i aria-hidden="true">“</i><span>' +
+        esc(it.topics[0] || 'Opinión') + '</span></a>';
+    }
     if (it.fig) return '<a class="' + cls + ' fig' + (it.figTall ? ' fig-tall' : '') + '" href="' + esc(it.href) + '" tabindex="-1" aria-hidden="true"><img src="' + esc(it.fig) + '" alt="" loading="lazy"></a>';
     var src = big ? (it.imgL || it.imgS) : (it.imgS || it.imgL);
     if (src) return '<a class="' + cls + '" href="' + esc(it.href) + '" tabindex="-1" aria-hidden="true"><img src="' + esc(src) + '" alt="" loading="lazy"></a>';
@@ -130,7 +134,8 @@
     function norm(x, kind, series) {
       var loc = local[x.link] || {};
       var it = {
-        kind: kind, id: x.id, link: x.link, title: txt(x.title.rendered), media: x.featured_media,
+        kind: kind, id: x.id, link: x.link, title: txt(x.title.rendered), area: loc.ar || null,
+        media: kind === 'post' ? 0 : x.featured_media,  // columnas: sin retratos
         date: new Date(x.date), series: series, numero: (x.acf && x.acf.numero) || '',
         href: loc.p || x.link, dek: loc.d || '', fig: loc.f || '', cap: loc.c || '', figTall: !!loc.ft, topics: loc.t || [], authors: loc.a || [],
         authorIds: (x.acf && x.acf.autores) || [], topicHref: function (t) { return 'tema/' + slug(t) + '/'; }
@@ -182,7 +187,13 @@
       }
       return out;
     }
-    var slides = take(inv, 4, function (i) { return i.fig || i.imgL; });
+    // destacados: uno por área (economía, política, sociedad) y el más reciente que falte
+    var slides = [];
+    ['Economía', 'Política', 'Sociedad'].forEach(function (a) {
+      slides = slides.concat(take(inv.slice(0, 30), 1, function (i) { return i.area === a && (i.fig || i.imgL); }));
+    });
+    slides = slides.concat(take(inv, 4 - slides.length, function (i) { return i.fig || i.imgL; }));
+    slides.sort(function (a, b) { return b.date - a.date; });
     var left = take(inv, 2, function (i) { return (i.fig || i.imgS) && i.series !== 'Voces del CEP'; });
     var voces = take(inv, 1, function (i) { return i.series === 'Voces del CEP'; });
     var right = (voces.length ? voces : take(cols, 1)).concat(survey ? [survey] : []);
