@@ -998,3 +998,23 @@ a.thumb.fig:hover { border-color: var(--navy); }
   .areas .sec-head h2 { font-size: 20px; }
 }
 @media (min-width: 1081px) and (max-width: 1399px) { .cols4 .sec-head { min-height: 66px; } }
+
+/* ===== Voces del CEP: vuelve su franja de color a todo el ancho ===== */
+.band-coral { position: relative; isolation: isolate; margin: 8px calc(50% - 50vw) 56px !important;
+  padding: 40px calc(50vw - 50%) 44px !important; background: #f7a35c; border-top: 0; }
+.band-coral::before { display: block; content: ''; position: absolute; right: 0; top: 0; width: 560px; height: 100%; background: #fff; opacity: .2;
+  -webkit-mask: url(cep/diagonal-circle.svg) right center / contain no-repeat; mask: url(cep/diagonal-circle.svg) right center / contain no-repeat; z-index: -1; }
+.band-coral .sec-head { border-color: var(--navy); }
+.band-coral .band-intro { color: var(--navy); }
+.band-coral .grid4 { column-gap: 20px; }
+.band-coral .grid4 > *::before { display: none; }
+.band-coral .grid4 > .card, .band-coral .grid4 > .card:first-child, .band-coral .grid4 > .card:last-child {
+  background: #fff; border-radius: 10px; padding: 10px 10px 14px !important; }
+.band-coral .card .thumb { border-radius: 6px; }
+.band-coral .mark span { color: var(--navy); }
+@media (max-width: 760px) {
+  .band-coral { padding-top: 28px !important; padding-bottom: 30px !important; }
+  .band-coral .grid4 { row-gap: 12px; }
+  .band-coral .grid4 > .card { border-bottom: 0 !important; margin-bottom: 0 !important; }
+}
+.band-coral .mark img { filter: brightness(0) saturate(100%) invert(9%) sepia(40%) saturate(2000%) hue-rotate(185deg) brightness(95%); }
