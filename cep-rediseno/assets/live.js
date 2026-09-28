@@ -80,6 +80,7 @@
       (it.kind === 'event' ? '' : ' <time>' + fecha(it.date) + '</time>') + '</p>';
   }
   function thumb(it, cls, big) {
+    if (it.fig) return '<a class="' + cls + ' fig' + (it.figTall ? ' fig-tall' : '') + '" href="' + esc(it.href) + '" tabindex="-1" aria-hidden="true"><img src="' + esc(it.fig) + '" alt="" loading="lazy"></a>';
     var src = big ? (it.imgL || it.imgS) : (it.imgS || it.imgL);
     if (src) return '<a class="' + cls + '" href="' + esc(it.href) + '" tabindex="-1" aria-hidden="true"><img src="' + esc(src) + '" alt="" loading="lazy"></a>';
     return '<a class="' + cls + ' ph ph-' + slug(it.series) + '" href="' + esc(it.href) + '" tabindex="-1" aria-hidden="true"><span>' + esc(it.series) + '</span></a>';
@@ -101,7 +102,7 @@
   function slide(it, n, total) {
     var topics = it.topics.map(function (t) { return '<a href="' + esc(it.topicHref(t)) + '">' + esc(t) + '</a>'; }).join(' <span>|</span> ');
     return '<article class="slide" role="group" aria-roledescription="diapositiva" aria-label="' + (n + 1) + ' de ' + total + '">' +
-      thumb(it, 'thumb thumb-lead', true) + kicker(it) + title(it, 'hl-xl', 'h2') +
+      thumb(it, 'thumb thumb-lead', true) + (it.cap ? '<p class="fig-cap">' + esc(it.cap) + '</p>' : '') + kicker(it) + title(it, 'hl-xl', 'h2') +
       (it.dek ? '<p class="dek">' + esc(it.dek) + '</p>' : '') + by(it) +
       (topics ? '<p class="sublinks">' + topics + '</p>' : '') + '</article>';
   }
@@ -126,7 +127,7 @@
       var it = {
         kind: kind, id: x.id, link: x.link, title: txt(x.title.rendered), media: x.featured_media,
         date: new Date(x.date), series: series, numero: (x.acf && x.acf.numero) || '',
-        href: loc.p || x.link, dek: loc.d || '', topics: loc.t || [], authors: loc.a || [],
+        href: loc.p || x.link, dek: loc.d || '', fig: loc.f || '', cap: loc.c || '', figTall: !!loc.ft, topics: loc.t || [], authors: loc.a || [],
         authorIds: (x.acf && x.acf.autores) || [], topicHref: function (t) { return 'tema/' + slug(t) + '/'; }
       };
       return it;
@@ -175,8 +176,8 @@
       }
       return out;
     }
-    var slides = take(inv, 4, function (i) { return i.imgL; });
-    var left = take(inv, 2, function (i) { return i.imgS && i.series !== 'Voces del CEP'; });
+    var slides = take(inv, 4, function (i) { return i.fig || i.imgL; });
+    var left = take(inv, 2, function (i) { return (i.fig || i.imgS) && i.series !== 'Voces del CEP'; });
     var voces = take(inv, 1, function (i) { return i.series === 'Voces del CEP'; });
     var right = (voces.length ? voces : take(cols, 1)).concat(survey ? [survey] : []);
     var latest = take(inv, 6);
