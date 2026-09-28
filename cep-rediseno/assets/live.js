@@ -9,6 +9,7 @@
   var EVENT = { 33: 'Seminario', 34: 'Arte y cultura' };
   var MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
   var DIA = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+  var LOCAL = {};
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- rotación del destacado ---------- */
@@ -130,7 +131,7 @@
     get('events?per_page=12&_fields=id,link,title,featured_media,acf.fecha_inicio,acf.horario,acf.tipo_de_evento'),
     get('assets/local.json').catch(function () { return {}; })
   ]).then(function (r) {
-    var local = r[4];
+    var local = r[4]; LOCAL = local;
     function norm(x, kind, series) {
       var loc = local[x.link] || {};
       var it = {
@@ -215,8 +216,41 @@
     if (next.length) put('agenda', next.map(agenda).join(''));
     if (past.length) put('agenda-past', past.map(agenda).join(''));
 
-    var newest = inv.concat(cols).sort(function (a, b) { return b.date - a.date; })[0];
-    put('ticker', '<b>Lo último</b> <a href="' + esc(newest.href) + '">' + esc(newest.title) + '</a>');
+    // temas del momento: lo más frecuente en los últimos 60 días, uno por área primero
+    var T = LOCAL.__trend;
+    if (T) {
+      var all = inv.concat(cols), newest = Math.max.apply(null, all.map(function (i) { return +i.date; }));
+      var groupOf = function (t) { for (var g in T.groups) if (T.groups[g][1].indexOf(t) >= 0) return g; return t; };
+      var count = {};
+      all.forEach(function (i) {
+        if (newest - i.date > 60 * 864e5) return;
+        var seen = {};
+        i.topics.forEach(function (t) {
+          if (T.broad.indexOf(t) >= 0) return;
+          var g = groupOf(t);
+          if (!seen[g]) { count[g] = (count[g] || 0) + 1; seen[g] = 1; }
+        });
+      });
+      var ranked = Object.keys(count).sort(function (a, b) { return count[b] - count[a]; });
+      var areaOf = function (t) {
+        var ts = T.groups[t] ? T.groups[t][1] : [t];
+        for (var a in T.areas) if (ts.some(function (x) { return T.areas[a].indexOf(x) >= 0; })) return a;
+      };
+      var pick = [];
+      ['Economía', 'Política', 'Sociedad'].forEach(function (a) {
+        var t = ranked.filter(function (t) { return areaOf(t) === a && pick.indexOf(t) < 0; })[0];
+        if (t) pick.push(t);
+      });
+      pick = pick.concat(ranked.filter(function (t) { return pick.indexOf(t) < 0; })).slice(0, 4);
+      pick.sort(function (a, b) { return ranked.indexOf(a) - ranked.indexOf(b); });
+      if (pick.length >= 3) {
+        put('trend', '<b>Lea nuestra investigación sobre:</b> ' + pick.map(function (t) {
+          var sl = T.groups[t] ? T.groups[t][0] : slug(t);
+          var h = T.pages.indexOf(sl) >= 0 ? 'tema/' + sl + '/' : 'https://www.cepchile.cl/tema/' + sl + '/';
+          return '<a href="' + h + '">' + esc(t) + '</a>';
+        }).join(' <span>|</span> '));
+      }
+    }
     document.documentElement.setAttribute('data-live-ok', '');
   }
 
