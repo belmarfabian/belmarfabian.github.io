@@ -1,0 +1,234 @@
+/*
+ * Capa de cambios de c22cepchile.cl
+ * ---------------------------------
+ * Cada cambio va en una sección con la misma convención que ya usa el CSS
+ * adicional del sitio (===== C22 … ===== / ===== fin … =====), para pegarlo
+ * tal cual al final de Apariencia → Personalizar → CSS adicional.
+ *
+ * Se ve en http://localhost:8805 y se compara con http://localhost:8804.
+ * Las secciones marcadas «(con JS)» necesitan también su parte de
+ * c22-cambios.js; sin el JS no rompen nada, solo no se activan.
+ *
+ * Colores de la casa: pizarra #657D81 · carbón #303030 · verde #4CCAA5 ·
+ * amarillo #FFB923 · rojo #F20231 · morado #A10856.
+ */
+/* Versión para WordPress: cada regla cuelga de «body.c22-cambios», clase que
+   agrega c22-snippet.js. Sin el JS activo, este CSS no cambia nada. */
+
+
+/* ===== C22 portada: banner con lo último de cada serie (con JS) ===== */
+/* El banner de la foto recortada en forma de C no se entendía. En su lugar,
+   lo más reciente de Puntos de Referencia, Análisis online, Notas y Columnas,
+   rotando con fundido; se pausa con el mouse, el foco o el botón.
+   Sin el JS, el banner original sigue en su lugar. */
+body.c22-cambios.c22-sin-banner main > section.slider-1{ display: none !important; }
+body.c22-cambios.c22-sin-banner main > ul.sticky-header{ margin-top: 0 !important; }
+body.c22-cambios .c22-banner{ width: 90%; max-width: 1296px; margin: 30px auto 34px; font-family: "DM Sans", sans-serif; }
+body.c22-cambios .c22-banner__lema{ display: flex; align-items: center; gap: 14px; margin: 0 0 14px; font: 700 13px/1.2 "DM Sans", sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #657D81; }
+body.c22-cambios .c22-banner__lema::after{ content: ''; width: 150px; height: 5px; background: linear-gradient(90deg, #657D81 0 20%, #4CCAA5 20% 40%, #FFB923 40% 60%, #F20231 60% 80%, #A10856 80%); }
+body.c22-cambios .c22-banner__slides{ position: relative; display: grid; background: #fff; border-radius: 22px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); }
+body.c22-cambios .c22-slide, body.c22-cambios .c22-banner__ctl{ grid-area: 1 / 1; }
+body.c22-cambios .c22-slide{ display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }
+body.c22-cambios .c22-slide.is-on{ opacity: 1; visibility: visible; transition: opacity .8s ease; }
+body.c22-cambios .c22-slide__img{ position: relative; display: block; min-height: 420px; background: #1B1C1E; overflow: hidden; }
+body.c22-cambios .c22-slide__img img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+body.c22-cambios .c22-slide__img::after{ content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, .85)); }
+body.c22-cambios .c22-slide__img.sin-foto::before{ content: ''; position: absolute; inset: 0; opacity: .25; background: repeating-linear-gradient(135deg, currentColor 0 2px, transparent 2px 12px); }
+body.c22-cambios .c22-slide__num{ position: absolute; z-index: 1; left: 28px; bottom: 22px; font: 700 64px/1 Georgia, "Times New Roman", serif; }
+body.c22-cambios .c22-slide__num small{ display: block; margin-top: 6px; font: 700 12px "DM Sans", sans-serif; letter-spacing: .08em; }
+body.c22-cambios .c22-slide__txt{ display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 40px 44px 92px; }
+body.c22-cambios .c22-slide__serie{ margin: 0 0 12px; font: 700 12px "DM Sans", sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+body.c22-cambios .c22-slide__serie span{ color: #657D81; font-weight: 500; }
+body.c22-cambios .c22-slide h2{ margin: 0 0 14px; font: 700 32px/1.15 "DM Sans", sans-serif; color: #1B1C1E; }
+body.c22-cambios .c22-slide h2 a{ color: inherit; text-decoration: none; }
+body.c22-cambios .c22-slide h2 a:hover{ text-decoration: underline; text-underline-offset: 4px; }
+body.c22-cambios .c22-slide__resumen{ margin: 0 0 14px; font: 400 15.5px/1.6 Montserrat, sans-serif; color: #41454A; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+body.c22-cambios .c22-slide__resumen:empty{ display: none; }
+body.c22-cambios .c22-slide__autores{ margin: 0 0 18px; font: 600 13px "DM Sans", sans-serif; color: #657D81; }
+body.c22-cambios .c22-slide__btn{ display: inline-block; padding: 10px 22px; border-radius: 999px; font: 700 13px "DM Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #fff; text-decoration: none; }
+/* color de cada serie (el mismo de las tarjetas); en texto, tonos más oscuros para que se lean */
+body.c22-cambios .s-pdr .c22-slide__num, body.c22-cambios .s-pdr .c22-slide__img{ color: #8fa6aa; } body.c22-cambios .s-pdr .c22-slide__serie{ color: #4f6569; } body.c22-cambios .s-pdr .c22-slide__btn{ background: #657D81; }
+body.c22-cambios .s-ana .c22-slide__num, body.c22-cambios .s-ana .c22-slide__img{ color: #4CCAA5; } body.c22-cambios .s-ana .c22-slide__serie{ color: #1f7a60; } body.c22-cambios .s-ana .c22-slide__btn{ background: #1f8f6f; }
+body.c22-cambios .s-not .c22-slide__num, body.c22-cambios .s-not .c22-slide__img{ color: #FFB923; } body.c22-cambios .s-not .c22-slide__serie{ color: #8a5d00; } body.c22-cambios .s-not .c22-slide__btn{ background: #FFB923; color: #1B1C1E; }
+body.c22-cambios .s-col .c22-slide__num, body.c22-cambios .s-col .c22-slide__img{ color: #F20231; } body.c22-cambios .s-col .c22-slide__serie{ color: #c10028; } body.c22-cambios .s-col .c22-slide__btn{ background: #d0021f; }
+body.c22-cambios .c22-banner__ctl{ z-index: 2; align-self: end; justify-self: end; display: flex; align-items: center; gap: 10px; margin: 0 40px 28px 0; }
+body.c22-cambios .c22-banner__ctl button{ cursor: pointer; font-family: "DM Sans", sans-serif; }
+body.c22-cambios .c22-banner__ctl .prev, body.c22-cambios .c22-banner__ctl .next{ width: 38px; height: 38px; border: 0; border-radius: 50%; background: #e3e8e8; color: #303030; font-size: 22px; line-height: 1; }
+body.c22-cambios .c22-banner__ctl .dots{ display: flex; gap: 6px; }
+body.c22-cambios .c22-banner__ctl .dot{ width: 10px; height: 10px; padding: 0; border: 0; border-radius: 999px; background: #c9d2d3; transition: width .3s; }
+body.c22-cambios .c22-banner__ctl .dot[aria-current="true"]{ width: 26px; }
+body.c22-cambios .c22-banner__ctl .dot.s-pdr[aria-current="true"]{ background: #657D81; }
+body.c22-cambios .c22-banner__ctl .dot.s-ana[aria-current="true"]{ background: #4CCAA5; }
+body.c22-cambios .c22-banner__ctl .dot.s-not[aria-current="true"]{ background: #FFB923; }
+body.c22-cambios .c22-banner__ctl .dot.s-col[aria-current="true"]{ background: #F20231; }
+body.c22-cambios .c22-banner__ctl .pause{ margin-left: 6px; padding: 7px 12px; border: 1px solid #c9d2d3; border-radius: 999px; background: #fff; color: #41454A; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+@media (prefers-reduced-motion: reduce) { body.c22-cambios .c22-slide, body.c22-cambios .c22-slide.is-on{ transition: none; } }
+@media (max-width: 900px) {
+	body.c22-cambios .c22-banner{ margin: 20px auto 26px; }
+	body.c22-cambios .c22-slide{ grid-template-columns: minmax(0, 1fr); }
+	body.c22-cambios .c22-slide__img{ min-height: 210px; }
+	body.c22-cambios .c22-slide__num{ font-size: 46px; left: 20px; bottom: 16px; }
+	body.c22-cambios .c22-slide__txt{ padding: 22px 20px 78px; }
+	body.c22-cambios .c22-slide h2{ font-size: 23px; }
+	body.c22-cambios .c22-slide__resumen{ -webkit-line-clamp: 3; font-size: 14.5px; }
+	body.c22-cambios .c22-banner__ctl{ justify-self: start; margin: 0 0 20px 20px; }
+}
+/* ===== fin banner ===== */
+
+/* ===== C22 portada: cada sección muestra sus cuatro tarjetas (con JS) ===== */
+/* Antes: seis carruseles con una tarjeta a la vista y el resto escondido.
+   El JS desarma el carrusel y marca la sección con .c22-grid. */
+body.c22-cambios main section.cards-slider.c22-grid{
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+body.c22-cambios main section.cards-slider.c22-grid > .content{
+	float: none;
+	width: 100%;
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	column-gap: 40px;
+	padding: 36px 48px 8px !important;
+	text-align: left;
+	order: -1;
+}
+body.c22-cambios main section.cards-slider.c22-grid > .content > *{ float: none; width: auto; margin: 0; }
+body.c22-cambios main section.cards-slider.c22-grid > .content .wysiwyg p{ margin: 0; max-width: 56ch; }
+body.c22-cambios main section.cards-slider.c22-grid > .carrousel-slider{
+	float: none;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(var(--c22-n, 4), minmax(0, 1fr));
+	gap: 24px;
+	padding: 20px 48px 40px !important;
+}
+body.c22-cambios main section.cards-slider.c22-grid .fake-card,
+body.c22-cambios main section.cards-slider.c22-grid .slick-dots,
+body.c22-cambios main section.cards-slider.c22-grid .slick-arrow{ display: none !important; }
+body.c22-cambios main section.cards-slider.c22-grid a.card{ width: auto !important; margin: 0 !important; }
+/* el carrusel ya no está: las tarjetas no esperan la animación de entrada */
+body.c22-cambios main section.cards-slider.c22-grid a.card[data-aos],
+body.c22-cambios main section.cards-slider.c22-grid a.card.aos-init{ opacity: 1 !important; transform: none !important; }
+body.c22-cambios main section.cards-slider.c22-grid > .texture{ opacity: .55; }
+@media (max-width: 1100px) {
+	body.c22-cambios main section.cards-slider.c22-grid > .carrousel-slider{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* ===== fin portada: cuatro tarjetas ===== */
+
+/* ===== C22 portada: Comparte sin «Lo ultimo» ===== */
+/* La lista de lo último no es central en C22 (la cumple el sitio del CEP).
+   Comparte queda como una franja: título y redes en una fila. */
+body.c22-cambios #comparte .c22-ultimo{ display: none !important; }
+@media (min-width: 761px) {
+	body.c22-cambios #comparte > .iframe-container{ display: none !important; }
+	body.c22-cambios #comparte > .content{ width: 100% !important; float: none; display: flex; flex-wrap: wrap; align-items: center; column-gap: 32px; row-gap: 12px; padding: 36px 48px 36px 225px !important; }
+	body.c22-cambios #comparte > .content > .col-100{ width: auto; margin: 0; }
+	body.c22-cambios #comparte .follow-us{ margin: 0; }
+	body.c22-cambios #comparte ul.social{ width: auto; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+	body.c22-cambios #comparte ul.social li{ width: auto; margin: 0; }
+}
+/* ===== fin Comparte ===== */
+
+/* ===== C22 tarjetas: pie alineado y títulos parejos ===== */
+/* Autores, fecha y flecha quedaban a distinta altura según el largo del
+   título. Ahora el pie va al fondo y todas las tarjetas de una fila miden lo mismo. */
+body.c22-cambios .slick-track{ display: flex !important; }
+body.c22-cambios .slick-track > .slick-slide{ height: auto !important; }
+body.c22-cambios a.card{ display: flex !important; flex-direction: column; }
+body.c22-cambios a.card > .content{
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	grid-template-rows: auto 1fr auto;
+	column-gap: 12px;
+	flex: 1 1 auto;
+}
+body.c22-cambios a.card > .content > .title{
+	grid-row: 1; grid-column: 1 / -1;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	line-height: 1.35;
+	min-height: calc(3 * 1.35em);
+}
+body.c22-cambios a.card > .content > .author{ grid-row: 2; grid-column: 1 / -1; align-self: end; margin: 12px 0 0 !important; }
+body.c22-cambios a.card > .content > .date{ grid-row: 3; grid-column: 1; align-self: center; margin: 14px 0 0 !important; float: none !important; }
+body.c22-cambios a.card > .content > .arrow{ grid-row: 3; grid-column: 2; align-self: center; margin: 14px 0 0 !important; float: none !important; position: static !important; }
+/* Tarjetas sin foto: la trama de la serie sobre fondo carbón, en vez de un
+   recuadro blanco que parecía una imagen que no cargó. */
+body.c22-cambios .card .photo-container:not(:has(img.photo)){ background: #1B1C1E; }
+body.c22-cambios .card .photo-container:not(:has(img.photo)) > .texture-c22{ opacity: .5; }
+/* ===== fin tarjetas ===== */
+
+/* ===== C22 listados de publicaciones: menos aire entre la intro y las tarjetas ===== */
+body.c22-cambios .categories-tabs > .intro{ padding-bottom: 12px !important; }
+body.c22-cambios .categories-tabs .tab-content > .slider{ margin-top: 62px !important; }
+/* ===== fin listados ===== */
+
+/* ===== C22 ficha: título sin choque y lectura cómoda ===== */
+/* El título tenía interlineado 1.0 y la segunda línea pisaba el subrayado. */
+body.c22-cambios .single-header h1.main-title{ line-height: 1.14; padding-bottom: 14px; }
+body.c22-cambios .single-header .veil{ background: linear-gradient(180deg, rgba(20, 24, 26, .55), rgba(20, 24, 26, .78)) !important; }
+/* Medida de lectura: el texto llegaba a ~110 caracteres por línea. */
+/* Solo en las fichas (publicaciones, análisis, eventos, noticias); las
+   páginas largas como Sobre C22 tienen su propio armado a todo el ancho. */
+body.c22-cambios.single article > .wrap-s{ max-width: 700px; }
+body.c22-cambios.single article .wysiwyg > p,
+body.c22-cambios.single article .wysiwyg > ul,
+body.c22-cambios.single article .wysiwyg > ol{ font-size: 17px; line-height: 1.7; }
+/* «Cómo citar» salía dos veces: se deja el bloque bajo el texto y, arriba, solo el PDF. */
+body.c22-cambios .single-header .c22-cita-prov__rotulo,
+body.c22-cambios .single-header .c22-cita-prov__texto{ display: none !important; }
+/* ===== fin ficha ===== */
+
+/* ===== C22 personas: fichas compactas ===== */
+/* Menos scroll: seis por fila en escritorio y dos en el teléfono (antes una,
+   casi 12.000 px de largo). La flecha va siempre al pie de la ficha. */
+body.c22-cambios .alm-listing:has(> .person){
+	display: grid !important;
+	grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+	gap: 20px !important;
+}
+body.c22-cambios .alm-listing > .person{ width: auto !important; margin: 0 !important; display: flex; flex-direction: column; }
+body.c22-cambios .alm-listing > .person > .content{ display: flex; flex-direction: column; flex: 1 1 auto; }
+body.c22-cambios .alm-listing > .person .title{ font-size: 17px; line-height: 1.25; }
+body.c22-cambios .alm-listing > .person .arrow{ margin-top: auto !important; align-self: flex-end; }
+/* La trama del equipo histórico quedaba detrás del nombre. */
+body.c22-cambios .alm-listing > .person > .texture{ opacity: .35; }
+@media (max-width: 1100px) { body.c22-cambios .alm-listing:has(> .person){ grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } }
+@media (max-width: 760px) {
+	body.c22-cambios .alm-listing:has(> .person){ grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px !important; }
+	body.c22-cambios .alm-listing > .person{ padding: 12px !important; }
+	body.c22-cambios .alm-listing > .person .title{ font-size: 15px; }
+	body.c22-cambios .alm-listing > .person .institution,
+	body.c22-cambios .alm-listing > .person .arrow span{ display: none; }
+}
+/* ===== fin personas ===== */
+
+/* ===== C22 eventos y noticias: sin caja vacía, fechas legibles ===== */
+/* Ajax Load More deja el listado con opacidad 0 y, si no hay eventos
+   próximos, nunca lo muestra: el aviso «No hay próximos eventos agendados…»
+   quedaba invisible y la columna parecía rota. */
+body.c22-cambios .events .alm-paging-content{ opacity: 1 !important; }
+body.c22-cambios .card-news .date{ background: rgba(20, 24, 26, .6); padding: 2px 8px; border-radius: 999px; }
+/* ===== fin eventos y noticias ===== */
+
+/* ===== C22 sin desplazamiento horizontal ===== */
+/* La trama decorativa de la esquina (.texture) asomaba 225 px por la derecha
+   en Análisis online, Personas y Eventos, y la página se movía de lado.
+   «clip» recorta sin romper el menú de colores pegajoso. */
+body.c22-cambios main{ overflow-x: clip; }
+/* ===== fin sin desplazamiento horizontal ===== */
+
+/* ===== C22 accesibilidad: foco visible y menos movimiento ===== */
+body.c22-cambios a:focus-visible, body.c22-cambios button:focus-visible, body.c22-cambios input:focus-visible, body.c22-cambios select:focus-visible, body.c22-cambios [tabindex]:focus-visible{
+	outline: 3px solid #FFB923 !important;
+	outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+	body.c22-cambios [data-aos]{ opacity: 1 !important; transform: none !important; transition: none !important; }
+	body.c22-cambios .simpleParallax img{ transform: none !important; }
+	html:has(> body.c22-cambios){ scroll-behavior: auto !important; }
+}
+/* ===== fin accesibilidad ===== */
