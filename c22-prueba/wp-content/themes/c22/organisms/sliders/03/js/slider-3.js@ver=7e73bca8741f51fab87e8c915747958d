@@ -1,0 +1,39 @@
+$(document).ready(function() {
+	$('.related .slider').slick({
+		slidesToShow: 4.05,
+		slidesToScroll: 2,
+		arrows: false,
+		fade: false,
+		speed: 700,
+		arrows: true,
+		infinite: false,
+		responsive: [
+		{
+		  breakpoint: 1251,
+		  settings: {
+				arrows: false,
+				slidesToShow: 3.5,
+				slidesToScroll: 1,
+		  }
+		},
+		{
+		  breakpoint: 851,
+		  settings: {
+				arrows: false,
+				slidesToShow: 2.5,
+				slidesToScroll: 1,
+		  }
+		},
+		{
+		  breakpoint: 551,
+		  settings: {
+				arrows: false,
+				slidesToShow: 1.05,
+				slidesToScroll: 1,
+		  }
+		}
+		]
+	});
+	equalOuterHeight($(".related .slide .content"));
+	equalOuterHeight($(".related .event"));
+})

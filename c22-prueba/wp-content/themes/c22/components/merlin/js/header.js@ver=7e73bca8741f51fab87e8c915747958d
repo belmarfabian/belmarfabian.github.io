@@ -1,0 +1,43 @@
+$(document).ready(function(){
+	//Le añado una clase al header después de 50px
+	var lastScrollTop = 0;
+	var delta = 50;
+	var navbarHeight = $('header').outerHeight();
+
+	$(window).scroll(function(){
+			var st = $(this).scrollTop();
+			if(Math.abs(lastScrollTop - st) <= delta)
+				return;
+			if (st > lastScrollTop && st > navbarHeight){
+				// Scroll Down
+				$('body, header, .menu-trigger').removeClass('nav-up').addClass('nav-down');
+			} else {
+				// Scroll Up
+				if(st + $(window).height() < $(document).height()) {
+					$('body, header, .menu-trigger').removeClass('nav-down').addClass('nav-up');
+				}
+			}
+
+			lastScrollTop = st;
+			if(st < 300){
+				$('body, header, .menu-trigger').addClass('nav-top');
+			}else{
+				$('body, header, .menu-trigger').removeClass('nav-top');
+			}
+	});
+
+
+	//Menú responsive
+	$('#hamburger').click(function () {
+		if($('.menu-responsive').css('right') != '0px' ){
+			$(this).addClass('close');
+			$('.menu-responsive').addClass('opened');
+			$('body').addClass('overflow-hidden');
+		}else{
+			$(this).removeClass('close');
+			$('header a.logo').removeClass('menu-open');
+			$('.menu-responsive').removeClass('opened');
+			$('body').removeClass('overflow-hidden');
+		}
+	});
+});

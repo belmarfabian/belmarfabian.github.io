@@ -1,0 +1,51 @@
+$(document).ready(function() {
+	var slider5 = $(".cards-slider")
+
+	$(slider5).each(function() {
+		var data_id = $(this).attr('id');
+		$("#"+data_id+".cards-slider .carrousel-slider").slick({
+			fade: false,
+			dots: true,
+			speed: 0,
+			arrows: true,
+			autoplay: false,
+			infinite: false,
+			lazyLoad: 'ondemand',
+			responsive: [
+			{
+				breakpoint: 851,
+				settings: {
+					slidesToShow: 1.5,
+					arrows: false,
+					dots: true,
+					centerMode: true,
+					speed: 400,
+				}
+			},
+			{
+				breakpoint: 851,
+				settings: {
+					slidesToShow: 1.025,
+					arrows: false,
+					dots: true,
+					centerMode: true,
+					speed: 400,
+				}
+			}
+		],
+		}).on({
+			afterChange: function(event, slick, nextSlide, previousSlide) {
+				if ($(window).width() > 850) {
+					$('.carrousel-slider .slide.slick-current.slick-active, .carrousel-slider .slide.slick-current.slick-active .fake-card').addClass('aos-animate');
+				}
+			}
+		}).on({
+			beforeChange: function(event, slick, currentSlide, previousSlide, nextSlide) {
+				if ($(window).width() > 850) {
+					$('.carrousel-slider .slide, .carrousel-slider .slide .fake-card').removeClass('aos-animate');
+				}
+			}
+		})
+		equalOuterHeight($("#"+data_id+".cards-slider .carrousel-slider .slide"));
+	})
+})

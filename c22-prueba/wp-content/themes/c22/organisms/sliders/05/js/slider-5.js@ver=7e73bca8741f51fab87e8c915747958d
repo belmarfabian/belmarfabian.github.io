@@ -1,0 +1,51 @@
+$(document).ready(function() {
+	var slider5 = $(".tab-content .slider")
+
+	$(slider5).each(function() {
+		var data_id = $(this).attr('data-id');
+		$(".tab-content .slider[data-id='"+data_id+"']").slick({
+			fade: false,
+			dots: false,
+			slidesToShow: 4.05,
+			slidesToScroll: 2,
+			arrows: true,
+			autoplay: false,
+			infinite: false,
+			lazyLoad: 'ondemand',
+			responsive: [
+			{
+				breakpoint: 951,
+				settings: {
+					arrows: false,
+					dots: true,
+					slidesToShow: 3.05,
+				}
+			},
+			{
+				breakpoint: 651,
+				settings: {
+					arrows: false,
+					dots: true,
+					slidesToShow: 1.05,
+					slidesToScroll: 1,
+				}
+			}
+		]
+		});
+		equalOuterHeight($(".tab-content .slider[data-id='"+data_id+"'] .slide"));
+	})
+
+
+
+	$( function() {
+		$( ".tabs" ).tabs({
+			activate: function( event, ui ){
+				var data_id = (ui.newPanel.attr('id'));
+					$(".tab-content .slider[data-id='"+data_id+"']").resize();
+					$(".tab-content .slider[data-id='"+data_id+"']").slick('slickGoTo', 0);
+					$(".tab-content .slider[data-id='"+data_id+"']").slick('setPosition', 0);
+					equalOuterHeight($(".tab-content .slider[data-id='"+data_id+"'] .slide"));
+			}
+		});
+	});
+})

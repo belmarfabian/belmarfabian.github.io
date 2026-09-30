@@ -1,0 +1,63 @@
+$(document).ready(function() {
+	var slideWrapper = $(".slider-1")
+	// DOM Ready
+	$(function() {
+	  //start the slider
+	  slideWrapper.slick({
+			dots: false,
+			speed: 300,
+			arrows: true,
+			autoplay: true,
+			autoplaySpeed: 12500,
+			pauseOnHover: false,
+			pauseOnFocus: false,
+			lazyLoad: 'ondemand',
+			responsive: [
+			{
+				breakpoint: 851,
+				settings: {
+					arrows: false,
+					dots: true
+				}
+			}
+		],
+		}).on({
+			afterChange: function(event, slick, nextSlide) {
+			$(event.target).find('.slick-current').find('.counter').addClass('transform-time');
+			$(event.target).find('.slick-current').find('.counter');
+			$('.slider-1 .slick-current.slick-active .ribbon, .slider-1 .slick-current.slick-active .title, .slider-1 .slick-current.slick-active .description, .slider-1 .slick-current.slick-active .btn').addClass('aos-animate');
+			}
+		}).on({
+			beforeChange: function(event, slick, currentSlide) {
+				$('.slider-1 .slide .ribbon, .slider-1 .slide .title, .slider-1 .slide .description, .slider-1 .slide .btn').removeClass('aos-animate');
+				$('.slider-1 .counter').removeClass('transform-time');
+				$('.slider-1 .counter').removeClass('col-100');
+			}
+		})
+		//slideWrapper.slickGoTo(0);
+	});
+
+	$('.slider-1').on('init', function (event, slick, direction) {
+		if (!($('.slider-1 .slick-slide').length > 1)) {
+			$('.slick-dots').hide();
+		}
+	});
+
+	var $status = $('.slider-1 .slider-numbers');
+	var $slider = $('.slider-1');
+	if($('.slider-1').length ){
+		$('.slider-1').on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
+		 	$(event.target).find('.slick-current').find('.counter').addClass('transform-time');
+			$(event.target).find('.slick-current').find('.counter').addClass('col-100');
+			var i = (currentSlide ? currentSlide : 0) + 1;
+			$status.html('<span class="current">0' + i + '</span><span class="total">0' + slick.slideCount + '</span>');
+		});
+	}
+
+	$('.slider-1.slick-initialized').css({
+	    'opacity': '1',
+	    'height': 'auto'
+	});
+
+	equalOuterHeight($(".slider-1 .slide .content"));
+})
