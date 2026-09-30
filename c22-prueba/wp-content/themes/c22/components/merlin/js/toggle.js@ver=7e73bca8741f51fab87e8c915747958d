@@ -1,0 +1,7 @@
+$(document).ready(function(){
+	//Toggles. Puedes abrir más de un toggle a la vez.
+	$(".toggle-content").slideUp();
+	$(".toggle-trigger").click(function(){
+	    $(this).next(".toggle-content").slideToggle(500);
+	  });
+});

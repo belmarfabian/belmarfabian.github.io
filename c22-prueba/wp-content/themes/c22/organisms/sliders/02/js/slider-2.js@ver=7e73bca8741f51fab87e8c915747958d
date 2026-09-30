@@ -1,0 +1,20 @@
+$(document).ready(function() {
+	$('.slider-testimonials').slick({
+		dots: true,
+		arrows: true,
+		infinite: true,
+		speed: 1000,
+		autoplay: false,
+		slidesToShow: 1,
+		pauseOnHover: false,
+		pauseOnFocus: false,
+		responsive: [
+		{
+		  breakpoint: 851,
+		  settings: {
+			arrows: false
+		  }
+		},
+		]
+	});
+})

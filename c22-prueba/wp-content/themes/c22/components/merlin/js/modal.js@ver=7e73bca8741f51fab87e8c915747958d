@@ -1,0 +1,47 @@
+// Youtube
+function playButtonEvent(){
+	var getData;
+	$('.modal-trigger').click(function(){
+		getData = $(this).attr('data-video-url');
+		var player;
+		function onYouTubeIframeAPIReady() {
+			player = new YT.Player('player', {
+				videoId: getData,
+				playerVars: {
+					color: 'white',
+					controls: 1,
+					modestbranding: 1,
+					rel: 0,
+					showinfo: 0
+				},
+				events: {
+					'onReady': onPlayerReady
+				}
+			});
+		}
+		onYouTubeIframeAPIReady();
+		function onPlayerReady(event) {
+			event.target.playVideo();
+		}
+		return false;
+	});
+}
+
+$(document).ready(function(){
+	$(".modal-trigger").click(function () {
+		var modal = $(this).attr('data-id');
+		$(".modal[data-id='"+modal+"'], .modal-background").fadeIn(100);
+		$('.modal .iframeVideo ').append("<div id='player-'"+modal+"''></div>");
+		$('body').addClass('overflow-hidden');
+	});
+
+	$(".modal-background, .close").click(function () {
+		$(".modal-background").fadeOut(100);
+		$(".modal").fadeOut(100);
+		$('.modal-background').removeClass().addClass('modal-background');
+		$('body').removeClass('overflow-hidden');
+		//Para la reproducción de video
+		$('.modal iframe#player').remove();
+	});
+	playButtonEvent();
+});

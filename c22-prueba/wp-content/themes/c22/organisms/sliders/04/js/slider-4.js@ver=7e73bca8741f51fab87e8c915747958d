@@ -1,0 +1,27 @@
+$(document).ready(function() {
+	$('.slider-text-document-photo').slick({
+		dots: true,
+		arrows: true,
+		infinite: true,
+		speed: 1000,
+		autoplay: false,
+		pauseOnHover: false,
+		pauseOnFocus: false,
+		responsive: [
+		{
+		  breakpoint: 851,
+		  settings: {
+			arrows: false
+		  }
+		},
+		{
+		  breakpoint: 651,
+		  settings: {
+			arrows: false,
+			adaptiveHeight: true
+		  }
+		},
+		]
+	});
+	equalOuterHeight($(".slider-text-document-photo .slide, .slider-text-document-photo .slide .content"));
+})

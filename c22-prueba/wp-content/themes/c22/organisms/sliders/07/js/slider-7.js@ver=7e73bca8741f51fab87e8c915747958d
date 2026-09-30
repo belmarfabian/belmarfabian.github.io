@@ -1,0 +1,55 @@
+$(document).ready(function() {
+	var $sliderNumbers = $('.slider-7-container .slider-numbers-container .slider-numbers');
+	$('.slider-7.desktop').on('init', function (event, slick, currentSlide, nextSlide) {
+		var i = (currentSlide ? currentSlide : 0) + 1;
+		initialPercent = (100/(slick.slideCount/1));
+		$('.slider-7-container .slider-numbers-container .line').css('width', initialPercent+'%');
+		$sliderNumbers.html('<span class="total">0' + i + '</span><span class="current">0' + slick.slideCount + '</span>');
+	});
+
+	$('.slider-7.desktop').slick({
+		dots: true,
+		arrows: true,
+		infinite: true,
+		speed: 1000,
+		autoplay: false,
+		pauseOnHover: false,
+		pauseOnFocus: false,
+		}).on({
+			afterChange: function(event, slick, currentSlide, nextSlide) {
+				i = (currentSlide ? currentSlide : 0) + 1;
+				$sliderNumbers.html('<span class="total">0' + i + '</span><span class="current">0' + slick.slideCount + '</span>');
+			}
+		}).on({
+			beforeChange: function(event, slick, currentSlide, nextSlide) {
+				percent = Math.min((100*((nextSlide/1) + 1))/(slick.slideCount/1), 100);
+				$('.slider-7-container .slider-numbers-container .line').css('width', percent+'%');
+			}
+		});
+
+	$('.slider-7.mobile').slick({
+		dots: false,
+		arrows: false,
+		infinite: true,
+		speed: 1000,
+		autoplay: false,
+		pauseOnHover: false,
+		pauseOnFocus: false,
+		slidesToShow: 3,
+		slidesToScroll: 3,
+		responsive: [
+		{
+		  breakpoint: 550,
+		  settings: {
+		    slidesToShow: 1,
+				slidesToScroll: 1,
+		  }
+		},
+		],
+		}).on({
+			beforeChange: function(event, slick, currentSlide, nextSlide) {
+				percent = Math.min((100*((nextSlide/1) + 1))/(slick.slideCount/1), 100);
+				$('.slider-7-container .slider-numbers-container .line').css('width', percent+'%');
+			}
+	});
+})

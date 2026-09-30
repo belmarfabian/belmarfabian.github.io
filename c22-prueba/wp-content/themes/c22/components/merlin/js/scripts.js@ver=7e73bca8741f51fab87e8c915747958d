@@ -1,0 +1,50 @@
+//Función para igualar el alto de columnas (con padding)
+function equalOuterHeight(group){
+	tallest = 0;
+	group.each(function() {
+		thisHeight = $(this).outerHeight();
+		if(thisHeight > tallest) {
+					 tallest = thisHeight;
+		}
+	});
+	group.outerHeight(tallest);
+};
+
+$(document).ready(function(){
+	//Tabs jQuery UI
+	$( function() {
+		$( ".tabs" ).tabs({
+			show: 'fade',
+			hide: 'fade',
+			activate: function( event, ui ) {
+				newTab = $(ui['newTab'][0]).attr('data-tab');
+			}
+		});
+	});
+
+	//Menú responsive
+	$('.menu-button').click(function () {
+		if($('.menu-left').css('left') != '0px' ){
+			$('body').addClass('left-transition');
+			$('.menu-button').addClass('close');
+			$('.menu-button p span').show();
+		}else{
+			$('body').removeClass('left-transition');
+			$('.menu-button').removeClass('close');
+			$('.menu-button p span').hide();
+		}
+	});
+	
+	//Se genera un div para las tablas, de manera que en dispositivos móviles se genere
+	//un overflow-auto y la tabla no genere que el body quede más ancho de lo que debiese
+	$( "table" ).wrap( "<div class='table-container'></div>" );
+});
+
+// Menú responsive
+$(document).click(function(e) {
+    if (!$(e.target).is('.menu-button, .menu-button *, .menu-left, .menu-left *')) {
+        $('body').removeClass('left-transition');
+        $('.menu-button').removeClass('close');
+		$('.menu-button p span').hide();
+    }
+});

@@ -1,0 +1,1 @@
+{"version":"Contact Form 7 SWV Schema 2023-07","locale":"es_ES","rules":[{"rule":"required","field":"email","error":"El campo es obligatorio."},{"rule":"email","field":"email","error":"La direcci\u00f3n de correo electr\u00f3nico que has introducido no es v\u00e1lida."}]}
