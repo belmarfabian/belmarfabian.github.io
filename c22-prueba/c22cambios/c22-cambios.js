@@ -163,6 +163,99 @@
     });
   });
 
+  function norm(t) { return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+
+  /* ===== C22 publicaciones: cada serie muestra sus cuatro más recientes ===== */
+  ready(function () {
+    if (!document.body.classList.contains('page-template-plantilla-publicaciones')) return;
+    if (window.matchMedia && matchMedia('(max-width: 760px)').matches) return;
+    document.querySelectorAll('.categories-tabs .tab-content > .slider').forEach(function (sl) {
+      try { if ($ && $.fn.slick && $(sl).hasClass('slick-initialized')) $(sl).slick('unslick'); } catch (e) { return; }
+      sl.classList.add('c22-grid4');
+    });
+  });
+
+  /* ===== C22 sobre C22: catálogo con filtros, buscador y «Mostrar más» ===== */
+  ready(function () {
+    var cat = document.querySelector('.c22cat');
+    if (!cat) return;
+    var POR_SERIE = 6, PASO = 12;
+    var series = [].map.call(cat.querySelectorAll('h3.c22cat-serie'), function (h) {
+      var ol = h.nextElementSibling;
+      if (!ol || ol.tagName !== 'OL') return null;
+      var items = [].slice.call(ol.children);
+      items.forEach(function (li) { li._t = norm(li.textContent); });
+      return { h: h, ol: ol, items: items, name: (h.firstChild.textContent || '').trim(), lim: POR_SERIE };
+    }).filter(Boolean);
+    if (!series.length) return;
+    var total = series.reduce(function (a, s) { return a + s.items.length; }, 0);
+    var sel = -1, q = '';
+    var bar = document.createElement('div');
+    bar.className = 'c22cat-barra';
+    bar.innerHTML = '<div class="chips" role="group" aria-label="Filtrar por serie"><button type="button" data-i="-1" aria-pressed="true">Todas<span>' + total + '</span></button>' +
+      series.map(function (s, i) { return '<button type="button" data-i="' + i + '" aria-pressed="false">' + esc(s.name) + '<span>' + s.items.length + '</span></button>'; }).join('') +
+      '</div><input type="search" placeholder="Buscar por título, autor o año" aria-label="Buscar en el catálogo"><p class="c22cat-cuenta" aria-live="polite"></p>';
+    cat.parentNode.insertBefore(bar, cat);
+    series.forEach(function (s, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'c22cat-mas';
+      b.addEventListener('click', function () { s.lim += PASO; render(); });
+      s.ol.parentNode.insertBefore(b, s.ol.nextSibling);
+      s.mas = b;
+    });
+    function render() {
+      var shown = 0;
+      series.forEach(function (s, i) {
+        var on = sel === -1 || sel === i, m = 0, v = 0;
+        s.items.forEach(function (li) {
+          var hit = !q || li._t.indexOf(q) >= 0;
+          if (hit) m++;
+          var show = on && hit && (q || m <= s.lim);
+          li.hidden = !show;
+          if (show) v++;
+        });
+        s.h.hidden = s.ol.hidden = !on || (q && !m);
+        var rest = m - s.lim;
+        s.mas.hidden = !on || !!q || rest <= 0;
+        s.mas.textContent = 'Mostrar más ' + s.name.toLowerCase() + ' (' + Math.max(rest, 0) + ')';
+        shown += v;
+      });
+      bar.querySelector('.c22cat-cuenta').textContent = q ? shown + (shown === 1 ? ' resultado' : ' resultados') : 'Mostrando ' + shown + ' de ' + total + ' publicaciones';
+    }
+    bar.querySelectorAll('.chips button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        sel = +b.getAttribute('data-i');
+        bar.querySelectorAll('.chips button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        series.forEach(function (s, i) { s.lim = sel === i ? 20 : POR_SERIE; });
+        render();
+      });
+    });
+    bar.querySelector('input').addEventListener('input', function (e) { q = norm(e.target.value.trim()); render(); });
+    render();
+  });
+
+  /* ===== C22 personas: buscador ===== */
+  ready(function () {
+    if (!document.body.classList.contains('page-template-plantilla-personas')) return;
+    var first = document.querySelector('main .alm-listing');
+    if (!first) return;
+    var wrap = first.closest('.ajax-load-more-wrap') || first;
+    var box = document.createElement('div');
+    box.className = 'c22-personas-buscar';
+    box.innerHTML = '<input type="search" placeholder="Buscar por nombre, formación o cargo" aria-label="Buscar personas"><p aria-live="polite"></p>';
+    wrap.parentNode.insertBefore(box, wrap);
+    var input = box.querySelector('input'), out = box.querySelector('p');
+    input.addEventListener('input', function () {
+      var q = norm(input.value.trim()), n = 0;
+      document.querySelectorAll('main .alm-listing > .person').forEach(function (p) {
+        var hit = !q || norm(p.textContent).indexOf(q) >= 0;
+        p.hidden = !hit;
+        if (hit) n++;
+      });
+      out.textContent = q ? n + (n === 1 ? ' persona' : ' personas') : '';
+    });
+  });
+
   /* ===== C22 fechas legibles: 13/07/2026 → 13 jul 2026 ===== */
   var FECHA = /^\s*(\d{1,2})\/(\d{1,2})\/(\d{4})\s*$/;
   function fechas(root) {
