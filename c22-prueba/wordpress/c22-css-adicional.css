@@ -101,6 +101,33 @@ body.c22-cambios .c22-dest .s-col .c22-num, body.c22-cambios .c22-dest .s-col.si
 	body.c22-cambios .c22-dest--b .c22-dest__small > div{ padding: 0; }
 	body.c22-cambios .c22-dest--b .c22-dest__thumb{ aspect-ratio: 4 / 3; border-radius: 10px; }
 }
+/* diseño b, compacto: la barra de colores tiene que verse sin bajar */
+body.c22-cambios .c22-dest--b{ gap: 18px; margin: 24px auto 22px; }
+body.c22-cambios .c22-dest--b > .c22-dest__big{ height: 300px; }
+body.c22-cambios .c22-dest--b .c22-dest__img{ min-height: 0; height: 100%; }
+body.c22-cambios .c22-dest--b .c22-dest__txt{ padding: 24px 36px; }
+body.c22-cambios .c22-dest--b .c22-dest__big h2{ font-size: 28px; margin-bottom: 10px; }
+body.c22-cambios .c22-dest--b .c22-dest__resumen{ -webkit-line-clamp: 3; margin-bottom: 14px; }
+body.c22-cambios .c22-dest--b .c22-dest__autores{ display: none; }
+body.c22-cambios .c22-dest--b .c22-dest__small{ display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; align-items: center; padding: 10px; }
+body.c22-cambios .c22-dest--b .c22-dest__small > div{ padding: 0 6px 0 0; }
+body.c22-cambios .c22-dest--b .c22-dest__thumb{ aspect-ratio: 4 / 3; border-radius: 8px; }
+body.c22-cambios .c22-dest--b .c22-dest__thumb .c22-num{ font-size: 24px; left: 10px; bottom: 8px; }
+body.c22-cambios .c22-dest--b .c22-dest__small h3{ font-size: 15px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+body.c22-cambios .c22-dest--b .c22-dest__small .c22-dest__serie{ margin-bottom: 4px; font-size: 10.5px; }
+@media (max-width: 1000px) {
+	body.c22-cambios .c22-dest--b > .c22-dest__big{ height: auto; }
+	body.c22-cambios .c22-dest--b .c22-dest__img{ height: auto; aspect-ratio: 16 / 9; }
+}
+@media (max-width: 600px) {
+	body.c22-cambios .c22-dest--b{ gap: 10px; margin: 16px auto 18px; }
+	body.c22-cambios .c22-dest--b .c22-dest__img{ aspect-ratio: 16 / 8; }
+	body.c22-cambios .c22-dest--b .c22-dest__txt{ padding: 16px 18px 18px; }
+	body.c22-cambios .c22-dest--b .c22-dest__big h2{ font-size: 21px; }
+	body.c22-cambios .c22-dest--b .c22-dest__resumen{ display: none; }
+	body.c22-cambios .c22-dest--b .c22-dest__small{ grid-template-columns: 84px minmax(0, 1fr); padding: 0 0 10px; }
+	body.c22-cambios .c22-dest--b .c22-dest__small h3{ font-size: 14px; -webkit-line-clamp: 2; }
+}
 /* ===== fin destacados ===== */
 
 /* ===== C22 portada: cada sección muestra sus cuatro tarjetas (con JS) ===== */

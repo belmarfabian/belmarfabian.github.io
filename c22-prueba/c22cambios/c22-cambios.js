@@ -54,8 +54,8 @@
   // Revisa, Analiza, Lee y Mira (las mismas que ya trae la portada: foto,
   // número de serie, autores y fecha). La más reciente va en grande y las
   // otras tres en chico. Se actualiza solo con cada publicación nueva.
-  // DISENO: 'a' grande + columna · 'b' grande + fila · 'c' grande que rota.
-  var DISENO = 'a';
+  // DISENO: 'b' grande + fila (elegido) · 'a' grande + columna · 'c' grande que rota.
+  var DISENO = 'b';
   try { var qd = /[?&]diseno=([abc])/.exec(location.search); if (qd) DISENO = qd[1]; } catch (e) {}
   var SERIES = {
     revisa: ['Puntos de Referencia', 'pdr'],
@@ -149,6 +149,10 @@
     hero.parentNode.insertBefore(sec, hero);
     try { if ($ && $.fn.slick && $(hero).hasClass('slick-initialized')) $(hero).slick('unslick'); } catch (e) {}
     document.body.classList.add('c22-sin-banner');
+    // mismo ancho que la barra de colores y las secciones de abajo
+    var barra = document.querySelector('main > ul.sticky-header');
+    function alinear() { if (barra && barra.offsetWidth) sec.style.maxWidth = barra.offsetWidth + 'px'; }
+    alinear(); window.addEventListener('resize', alinear);
 
     var bigs = [].slice.call(sec.querySelectorAll('.c22-dest__big'));
     var pedidos = {};
