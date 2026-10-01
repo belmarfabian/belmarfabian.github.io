@@ -269,7 +269,8 @@ body.c22-directorio main .alm-listing { display: block !important; min-height: 0
 .c22-dir__grupo { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; padding: 20px 0; border-top: 1px solid #d7dcdd; }
 .c22-dir__grupo[hidden] { display: none; }
 .c22-dir__grupo h2 { margin: 8px 0 0; padding-left: 12px; border-left: 4px solid var(--g, #657D81); font: 700 17px/1.25 "DM Sans", sans-serif; color: #1B1C1E; }
-.c22-dir__grupo.g-dir { --g: #A10856; } .c22-dir__grupo.g-inv { --g: #2e9e7d; } .c22-dir__grupo.g-asi { --g: #d99a00; } .c22-dir__grupo.g-pas { --g: #F20231; } .c22-dir__grupo.g-his { --g: #657D81; }
+/* colores del escalafón del sitio (para texto, un tono más oscuro que se lea sobre gris claro) */
+.c22-dir__grupo.g-dir { --g: #4f6569; } .c22-dir__grupo.g-inv { --g: #1f8f6f; } .c22-dir__grupo.g-ias { --g: #a87400; } .c22-dir__grupo.g-asi { --g: #d0021f; } .c22-dir__grupo.g-his { --g: #8a9a9c; }
 .c22-dir__people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 24px; }
 .c22-dir .person.c22-p { display: grid !important; grid-template-columns: 52px minmax(0, 1fr); gap: 14px; align-items: center; width: auto !important; height: auto !important; min-height: 0 !important; margin: 0 !important; padding: 8px 10px 8px 0 !important; background: none !important; border: 0 !important; border-radius: 10px; box-shadow: none !important; cursor: pointer; }
 .c22-dir .person.c22-p[hidden] { display: none !important; }

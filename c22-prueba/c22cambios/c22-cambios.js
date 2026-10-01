@@ -255,18 +255,26 @@
   // Grupos con su nombre a la izquierda y personas en filas (foto redonda,
   // nombre, cargo, formación), buscador y filtro actual/histórico. Se mueven las
   // fichas originales, así cada una sigue abriendo su perfil.
+  // Escalafón de C22: los mismos cuatro niveles y colores que ya usa el CSS
+  // adicional del sitio («color por escalón»). Si alguien no está en la lista,
+  // se ubica por su cargo.
   var GRUPOS = [
-    ['Dirección y coordinación', /director|coordina/i, 'g-dir'],
-    ['Investigadores', /investigador|editora/i, 'g-inv', /asistente/i],
-    ['Asistentes de investigación', /asistente/i, 'g-asi'],
-    ['Práctica y pasantías', /pasant|pr[aá]ctic/i, 'g-pas']
+    ['Dirección y coordinación', 'g-dir', ['leonidas-montes', 'macarena-rivas'], /direct|coordinaci[oó]n ejecutiva/i],
+    ['Investigadores', 'g-inv', ['aldo-mascareno', 'rosario-palacios'], null],
+    ['Investigadores asistentes', 'g-ias', ['pablo-a-henriquez', 'juan-rozas', 'fabian-belmar'], /investigador(a)? asistente/i],
+    ['Asistentes de investigación', 'g-asi', ['katherine-aravena', 'nicole-gardella', 'emilio-rogel', 'sebastian-aliaga'], /asistente de investigaci|pasant|pr[aá]ctic/i]
   ];
+  function nivel(p, rol) {
+    var id = (p.getAttribute('data-id') || '').replace(/^modal-/, '');
+    for (var i = 0; i < GRUPOS.length; i++) if (GRUPOS[i][2].indexOf(id) >= 0) return i;
+    for (var j = 0; j < GRUPOS.length; j++) if (GRUPOS[j][3] && GRUPOS[j][3].test(rol)) return j;
+    return 1;
+  }
   ready(function () {
     if (!document.body.classList.contains('page-template-plantilla-personas')) return;
     var lists = document.querySelectorAll('main .alm-listing');
     if (!lists.length) return;
     var actuales = [].slice.call(lists[0].querySelectorAll(':scope > .person'));
-    var historicos = lists[1] ? [].slice.call(lists[1].querySelectorAll(':scope > .person')) : [];
     if (!actuales.length) return;
     function fila(p, hist) {
       p.classList.add('c22-p');
@@ -284,24 +292,19 @@
       p._rol = rol ? rol.textContent.trim() : '';
       return p;
     }
-    var grupos = GRUPOS.map(function (g) { return { name: g[0], cls: g[2], rx: g[1], no: g[3], people: [] }; });
-    actuales.forEach(function (p) {
-      fila(p, false);
-      var g = grupos.filter(function (g) { return g.rx.test(p._rol) && !(g.no && g.no.test(p._rol)); })[0] || grupos[1];
-      g.people.push(p);
-    });
+    var grupos = GRUPOS.map(function (g) { return { name: g[0], cls: g[1], people: [] }; });
+    actuales.forEach(function (p) { fila(p, false); grupos[nivel(p, p._rol)].people.push(p); });
     grupos = grupos.filter(function (g) { return g.people.length; });
-    if (historicos.length) grupos.push({ name: 'Equipo histórico', cls: 'g-his', people: historicos.map(function (p) { return fila(p, true); }), hist: true });
 
-    var total = actuales.length + historicos.length;
+    var total = actuales.length;
     var dir = document.createElement('div');
     dir.className = 'c22-dir';
     dir.innerHTML = '<div class="c22-dir__tools"><input type="search" placeholder="Buscar por nombre, formación o cargo" aria-label="Buscar personas">' +
       '<div class="chips" role="group" aria-label="Filtrar"><button type="button" data-f="" aria-pressed="true">Todos</button>' +
       '<button type="button" data-f="act" aria-pressed="false">Equipo actual <span>' + actuales.length + '</span></button>' +
-      (historicos.length ? '<button type="button" data-f="his" aria-pressed="false">Equipo histórico <span>' + historicos.length + '</span></button>' : '') +
+      '<button type="button" data-f="his" aria-pressed="false" hidden>Equipo histórico <span></span></button>' +
       '</div></div><p class="c22-dir__count" aria-live="polite"></p>';
-    grupos.forEach(function (g) {
+    function seccion(g) {
       var sec = document.createElement('section');
       sec.className = 'c22-dir__grupo ' + g.cls;
       sec.innerHTML = '<h2>' + esc(g.name) + '</h2><div class="c22-dir__people"></div>';
@@ -309,7 +312,8 @@
       g.people.forEach(function (p) { box.appendChild(p); });
       g.sec = sec;
       dir.appendChild(sec);
-    });
+    }
+    grupos.forEach(seccion);
     var wrap = lists[0].closest('.ajax-load-more-wrap') || lists[0];
     wrap.parentNode.insertBefore(dir, wrap);
     document.body.classList.add('c22-directorio');
@@ -334,6 +338,26 @@
       });
     });
     render();
+
+    // el equipo histórico llega por Ajax, a veces después y por partes:
+    // se van agregando las fichas a medida que aparecen
+    var hist = null;
+    function historico() {
+      var hs = lists[1] ? [].slice.call(lists[1].querySelectorAll(':scope > .person')) : [];
+      if (!hs.length) return;
+      if (!hist) {
+        hist = { name: 'Equipo histórico', cls: 'g-his', hist: true, people: [] };
+        grupos.push(hist); seccion(hist);
+        dir.querySelector('[data-f="his"]').hidden = false;
+      }
+      var box = hist.sec.querySelector('.c22-dir__people');
+      hs.forEach(function (p) { hist.people.push(fila(p, true)); box.appendChild(p); });
+      total = actuales.length + hist.people.length;
+      dir.querySelector('[data-f="his"] span').textContent = hist.people.length;
+      render();
+    }
+    historico();
+    if (lists[1] && window.MutationObserver) new MutationObserver(historico).observe(lists[1], { childList: true });
   });
 
   /* ===== C22 fechas legibles: 13/07/2026 → 13 jul 2026 ===== */
