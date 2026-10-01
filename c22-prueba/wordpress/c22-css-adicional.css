@@ -654,3 +654,81 @@ body.c22-cambios a.card-news .title-content, body.c22-cambios a.card-news .title
 	body.c22-cambios.page-template-plantilla-eventos-y-noticias main .news .alm-listing{ grid-template-columns: minmax(0, 1fr) !important; }
 }
 /* ===== fin editorial ===== */
+
+/* ===== C22 identidad: lo propio de C22 dentro de la forma nueva ===== */
+/* La diagramación del CEP se mantiene (grilla, tarjetas planas, fichas sobre
+   claro); vuelve lo que hace reconocible a C22: el fondo gris salvia, el
+   subrayado grueso de color bajo los títulos, los botones del color de cada
+   serie, las tramas diagonales, la franja de cinco colores y los autores con
+   su foto. */
+body.c22-cambios{ background: #F3F5F5 !important; }
+body.c22-cambios{ --c22-filete: #d3dbdc; --c22-cinco: linear-gradient(90deg, #657D81 0 20%, #4CCAA5 20% 40%, #FFB923 40% 60%, #F20231 60% 80%, #A10856 80% 100%); }
+
+/* -- títulos con el subrayado de C22, en el color de su sección -- */
+body.c22-cambios main .title-underline.title-underline.title-underline.title-underline{ border-bottom-style: solid !important; border-bottom-width: 7px !important; padding-bottom: 2px !important; text-decoration: none !important; }
+body.c22-cambios main .title-underline.title-underline.title-underline.title-underline.mini{ border-bottom-width: 5px !important; }
+body.c22-cambios main .title-underline.title-underline.title-underline.title-underline.border-light-gray{ border-bottom-color: #657D81 !important; }
+body.c22-cambios main .title-underline.title-underline.title-underline.title-underline.border-green{ border-bottom-color: #4CCAA5 !important; }
+body.c22-cambios main .title-underline.title-underline.title-underline.title-underline.border-yellow{ border-bottom-color: #FFB923 !important; }
+body.c22-cambios main .title-underline.title-underline.title-underline.title-underline.border-red{ border-bottom-color: #F20231 !important; }
+body.c22-cambios main .title-underline.title-underline.title-underline.title-underline.border-purple{ border-bottom-color: #A10856 !important; }
+body.c22-cambios main .title-underline.title-underline.title-underline.title-underline.border-gray{ border-bottom-color: #303030 !important; }
+/* el filete a todo el ancho pasa a ser una línea fina: el color lo pone el subrayado */
+body.c22-cambios main section.cards-slider > .content{ border-bottom: 1px solid var(--c22-filete) !important; }
+body.c22-cambios main .categories-tabs > .intro{ border-bottom: 1px solid var(--c22-filete) !important; padding-bottom: 14px !important; }
+body.c22-cambios.page-template-plantilla-sobre-c22 main section.buttons-container.has-logo{ border-bottom: 1px solid var(--c22-filete) !important; }
+body.c22-cambios main section.single-header h1.main-title.title-underline{ padding-bottom: 6px !important; }
+
+/* -- botones del color de cada serie, con su flecha -- */
+body.c22-cambios main section.cards-slider > .content .btn.btn.btn-light-gray, body.c22-cambios main .categories-tabs .btn.btn.btn-light-gray, body.c22-cambios main section.buttons-container .btn.btn.btn-light-gray{ background: #657D81 !important; border-color: #657D81 !important; }
+body.c22-cambios main section.cards-slider > .content .btn.btn.btn-green, body.c22-cambios main .categories-tabs .btn.btn.btn-green, body.c22-cambios main section.buttons-container .btn.btn.btn-green{ background: #4CCAA5 !important; border-color: #4CCAA5 !important; }
+body.c22-cambios main section.cards-slider > .content .btn.btn.btn-yellow, body.c22-cambios main .categories-tabs .btn.btn.btn-yellow, body.c22-cambios main section.buttons-container .btn.btn.btn-yellow{ background: #FFB923 !important; border-color: #FFB923 !important; }
+body.c22-cambios main section.cards-slider > .content .btn.btn.btn-red, body.c22-cambios main .categories-tabs .btn.btn.btn-red, body.c22-cambios main section.buttons-container .btn.btn.btn-red{ background: #F20231 !important; border-color: #F20231 !important; }
+body.c22-cambios main section.cards-slider > .content .btn.btn.btn-purple, body.c22-cambios main .categories-tabs .btn.btn.btn-purple, body.c22-cambios main section.buttons-container .btn.btn.btn-purple{ background: #A10856 !important; border-color: #A10856 !important; }
+body.c22-cambios main section.cards-slider > .content .btn.btn.btn-next i{ display: inline-block !important; }
+
+/* -- tramas diagonales en el color de cada sección, asomando por los bordes -- */
+@media (min-width: 1101px) {
+	body.c22-cambios main section.cards-slider.c22-grid > .texture.texture{ display: inline-block !important; opacity: .5 !important; width: 46vmin !important; height: 46vmin !important; top: 0 !important; bottom: 0 !important; margin: auto !important; transform: none !important; z-index: -1; }
+	body.c22-cambios main section.cards-slider.c22-grid.text-column-left > .texture.texture{ left: calc(30px - 46vmin) !important; right: auto !important; }
+	body.c22-cambios main section.cards-slider.c22-grid.text-column-right > .texture.texture{ right: calc(30px - 46vmin) !important; left: auto !important; }
+}
+body.c22-cambios main .texture.background.background{ display: inline-block !important; }
+/* cabeceras de página: la trama asoma por la derecha */
+body.c22-cambios main section.page-header > .texture.texture{ display: inline-block !important; opacity: .55 !important; width: 220px !important; height: 220px !important; right: -70px !important; top: -50px !important; bottom: auto !important; left: auto !important; margin: 0 !important; z-index: 0 !important; }
+body.c22-cambios main section.page-header{ position: relative; overflow: hidden !important; }
+/* fichas: un círculo de trama en el color de la serie, junto al título */
+body.c22-cambios main section.single-header{ position: relative; --sec: #657D81; }
+body.c22-cambios main section.single-header:has(.border-green){ --sec: #4CCAA5; }
+body.c22-cambios main section.single-header:has(.border-yellow){ --sec: #FFB923; }
+body.c22-cambios main section.single-header:has(.border-red){ --sec: #F20231; }
+body.c22-cambios main section.single-header:has(.border-purple){ --sec: #A10856; }
+@media (min-width: 1300px) {
+	body.c22-cambios.single main section.single-header::after{ content: '' !important; display: block !important; visibility: visible !important; z-index: 1; position: absolute; top: 40px; left: calc(50% + 432px + 36px); width: 200px; height: 200px; border-radius: 50%; background: repeating-linear-gradient(-45deg, var(--sec) 0 1.5px, transparent 1.5px 9px); opacity: .55; pointer-events: none; }
+}
+
+/* -- la franja de cinco colores -- */
+body.c22-cambios main section.page-header.page-header{ border-bottom: 0 !important; background: var(--c22-cinco) bottom / 100% 6px no-repeat, transparent !important; }
+body.c22-cambios .c22-dest__big .c22-dest__txt h2::after{ content: ''; display: block; width: 240px; height: 6px; margin-top: 14px; background: var(--c22-cinco); }
+
+/* -- tarjetas: vuelven las fotos de los autores -- */
+body.c22-cambios a.card.card .author .avatar-container{ display: flex !important; }
+body.c22-cambios a.card.card .author{ display: flex !important; align-items: center; gap: 6px; }
+
+/* -- Personas: anillo del color del escalón en cada foto -- */
+body.c22-cambios .c22-dir__grupo:not(.g-his) .person.c22-p > .photo-container{ box-shadow: 0 0 0 2px #F3F5F5, 0 0 0 4px var(--g); }
+
+/* -- noticias y Comparte sobre el gris -- */
+body.c22-cambios #comparte a.btn-social{ background: transparent !important; }
+@media (min-width: 761px) { body.c22-cambios #comparte > .content > .col-100:first-child{ border-bottom: 1px solid var(--c22-filete) !important; } }
+/* el subrayado mide lo que el título, no todo el ancho */
+body.c22-cambios main section.page-header h1.main-title.main-title{ justify-self: start; width: auto !important; display: inline-block !important; }
+body.c22-cambios.page-template-plantilla-eventos-y-noticias main .news > .main-title.main-title, body.c22-cambios.page-template-plantilla-eventos-y-noticias main .events > .main-title.main-title,
+body.c22-cambios.page-template-plantilla-analisis-online main .filters .main-title.main-title, body.c22-cambios.page-template-plantilla-oportunidades main .filters .main-title.main-title{ display: inline-block !important; }
+/* fichas: la cabecera sobre el mismo gris del sitio */
+body.c22-cambios main section.single-header.single-header{ background: transparent !important; }
+body.c22-cambios.page-template-plantilla-eventos-y-noticias main .news .ajax-load-more-wrap, body.c22-cambios.page-template-plantilla-eventos-y-noticias main .news .alm-listing{ background: transparent !important; }
+body.c22-cambios main section.page-header > .texture.texture{ opacity: .8 !important; top: 14px !important; right: -60px !important; }
+body.c22-cambios main section.single-header section.authors, body.c22-cambios main .wrap-s.share-top .share{ background: transparent !important; }
+body.c22-cambios #comparte > .content{ border-top: 0 !important; }
+/* ===== fin identidad ===== */
