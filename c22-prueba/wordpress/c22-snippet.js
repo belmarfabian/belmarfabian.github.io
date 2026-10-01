@@ -358,6 +358,9 @@
           var hist = k > 0 && !enEscalafon(p);
           var cargo = CARGOS[idDe(p)], rolEl = p.querySelector('.rol');
           if (cargo && rolEl) rolEl.textContent = cargo;
+          // el escalafón no tiene prácticas ni pasantías: en el equipo actual
+          // figuran como asistentes de investigación
+          if (!hist && rolEl && /pasant|pr[aá]ctic/i.test(rolEl.textContent)) rolEl.textContent = 'Asistente de investigación';
           p.classList.add('c22-p');
           if (hist) p.classList.add('c22-p-hist');
           if (!p.querySelector('.photo-container')) {  // sin foto: círculo con iniciales
@@ -397,6 +400,10 @@
     var intentos = 0, pedir = setInterval(function () {
       var bs = document.querySelectorAll('main .alm-load-more-btn:not(.done)');
       [].forEach.call(bs, function (b) { if (!b.classList.contains('loading')) b.click(); });
+      // Ajax Load More pone el foco en la primera ficha que llega: sin
+      // interacción, ese recuadro amarillo no corresponde
+      var a = document.activeElement;
+      if (a && a.closest && a.closest('.c22-dir__people')) a.blur();
       if (!bs.length || ++intentos > 20) clearInterval(pedir);
     }, 700);
   });
@@ -449,12 +456,17 @@
     if (window.MutationObserver) new MutationObserver(eventos).observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
   });
 
-  /* ===== C22 fichas de análisis: sin título repetido ===== */
+  /* ===== C22 fichas: sin título repetido ===== */
+  // El texto de análisis y Puntos de Referencia empieza repitiendo el título.
   ready(function () {
-    if (!document.body.classList.contains('single-analisis')) return;
+    if (!document.body.classList.contains('single')) return;
     var h = document.querySelector('.single-header h1');
-    var first = document.querySelector('main article section.wysiwyg > h1, main article section.wysiwyg > h2');
-    if (h && first && norm(first.textContent.trim()) === norm(h.textContent.trim())) first.classList.add('c22-oculto');
+    var first = document.querySelector('main article .wysiwyg > h1:first-child, main article .wysiwyg > h2:first-child');
+    if (h && first && norm(first.textContent.trim()) === norm(h.textContent.trim())) {
+      first.classList.add('c22-oculto');
+      var sig = first.nextElementSibling;  // y el párrafo vacío que lo sigue
+      if (sig && sig.tagName === 'P' && !sig.textContent.replace(/\u00a0/g, '').trim() && !sig.querySelector('img, iframe')) sig.classList.add('c22-oculto');
+    }
   });
 
   /* ===== C22 oportunidades: aviso cuando no hay convocatorias ===== */
