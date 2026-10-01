@@ -401,6 +401,77 @@
     }, 700);
   });
 
+  /* ===== C22 eventos sin foto: fecha del evento en vez del logo ===== */
+  // La tarjeta trae la fecha de publicación, no la del evento: la fecha real se
+  // lee de la página del evento («15 julio 2026, 12:00 pm»). Mientras llega,
+  // el recuadro queda reservado; si no se puede leer, se usa la de la tarjeta.
+  var MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  function tileHtml(dia, mes, anio) { return '<b>' + dia + '</b>' + MES[mes] + '<i>' + anio + '</i>'; }
+  function fechaTarjeta(c) {
+    var d = c.querySelector('.date'), t = d ? (d.getAttribute('title') || d.textContent).trim() : '';
+    var m = /(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(t);
+    if (m) return [+m[1], +m[2] - 1, m[3]];
+    m = /(\d{1,2}) (\w{3}) (\d{4})/.exec(t);
+    return m && MES.indexOf(m[2]) >= 0 ? [+m[1], MES.indexOf(m[2]), m[3]] : null;
+  }
+  // Ajax Load More entrega enlaces absolutos; en una copia del sitio (u otro
+  // dominio) se leen desde la misma dirección base del sitio que se visita.
+  function mismoSitio(href) {
+    try {
+      var u = new URL(href, location.href);
+      if (u.host === location.host) return u.href;
+      var logo = document.querySelector('header a.logo'), base = logo ? new URL(logo.href).pathname : '/';
+      return location.origin + base.replace(/\/$/, '') + u.pathname;
+    } catch (e) { return href; }
+  }
+  function eventos() {
+    document.querySelectorAll('a.card[href*="/evento/"]:not(.c22-ev)').forEach(function (c) {
+      var img = c.querySelector('img.photo');
+      if (img && (img.getAttribute('src') || '').trim()) return;
+      var tile = document.createElement('span');
+      tile.className = 'c22-ev-fecha';
+      tile.style.visibility = 'hidden';
+      tile.innerHTML = tileHtml(1, 0, '0000');
+      c.insertBefore(tile, c.firstChild);
+      c.classList.add('c22-ev');
+      function usar(f) { if (f) tile.innerHTML = tileHtml(f[0], f[1], f[2]); tile.style.visibility = f ? '' : 'hidden'; }
+      if (!window.fetch || !window.DOMParser) return usar(fechaTarjeta(c));
+      fetch(mismoSitio(c.getAttribute('href')), { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var p = doc.querySelector('.single-header p.date'), m = p && /(\d{1,2}) (?:de )?([a-záéíóú]+),? (?:de )?(\d{4})/i.exec(p.textContent.replace(/\s+/g, ' '));
+        var k = m ? MESES.indexOf(m[2].toLowerCase()) : -1;
+        usar(k >= 0 ? [+m[1], k, m[3]] : fechaTarjeta(c));
+      }).catch(function () { usar(fechaTarjeta(c)); });
+    });
+  }
+  ready(function () {
+    eventos();
+    if (window.MutationObserver) new MutationObserver(eventos).observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
+  });
+
+  /* ===== C22 fichas de análisis: sin título repetido ===== */
+  ready(function () {
+    if (!document.body.classList.contains('single-analisis')) return;
+    var h = document.querySelector('.single-header h1');
+    var first = document.querySelector('main article section.wysiwyg > h1, main article section.wysiwyg > h2');
+    if (h && first && norm(first.textContent.trim()) === norm(h.textContent.trim())) first.classList.add('c22-oculto');
+  });
+
+  /* ===== C22 oportunidades: aviso cuando no hay convocatorias ===== */
+  ready(function () {
+    if (!document.body.classList.contains('page-template-plantilla-oportunidades')) return;
+    var f = document.querySelector('main .wrap-xl.filters');
+    if (!f) return;
+    setTimeout(function () {
+      if (document.querySelector('main .alm-listing > *:not(script):not(style)')) return;
+      var c = document.querySelector('header a[href*="contacto"]'), url = c ? c.getAttribute('href') : '/contacto/';
+      var m = document.createElement('p');
+      m.className = 'c22-vacio';
+      m.innerHTML = 'Por ahora no hay convocatorias abiertas. Si te interesa colaborar con C22, <a href="' + esc(url) + '">escríbenos</a> y te avisamos cuando abramos una.';
+      f.appendChild(m);
+    }, 1500);
+  });
+
   /* ===== C22 fechas legibles: 13/07/2026 → 13 jul 2026 ===== */
   var FECHA = /^\s*(\d{1,2})\/(\d{1,2})\/(\d{4})\s*$/;
   function fechas(root) {
