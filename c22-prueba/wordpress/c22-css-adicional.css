@@ -341,6 +341,38 @@ body.c22-cambios .c22-dir .person.c22-p .profession{ margin: 1px 0 0 !important;
 }
 /* ===== fin directorio de personas ===== */
 
+/* ===== C22 fichas: cabecera más baja ===== */
+/* La cabecera de cada ficha medía 750–980 px (135 px de relleno arriba y 180
+   abajo): había que bajar casi una pantalla para empezar a leer. */
+body.c22-cambios main section.single-header > .content{ padding-top: 64px !important; padding-bottom: 96px !important; }
+@media (max-width: 760px) { body.c22-cambios main section.single-header > .content{ padding-top: 40px !important; padding-bottom: 72px !important; } }
+/* análisis: la barra de compartir salía dos veces (arriba y bajo el tablero) */
+body.c22-cambios.single-analisis main article section.iframe .share{ display: none !important; }
+body.c22-cambios .c22-oculto{ display: none !important; }
+/* ===== fin fichas ===== */
+
+/* ===== C22 eventos sin foto: fecha en vez del logo (con JS) ===== */
+/* Los eventos sin imagen mostraban el logo de C22 en grande. Como en la agenda
+   del CEP, ahora llevan la fecha en un recuadro y la tarjeta es compacta. */
+body.c22-cambios a.card.c22-ev{ display: grid !important; grid-template-columns: 70px minmax(0, 1fr); gap: 16px; align-items: start; padding: 18px !important; }
+body.c22-cambios a.card.c22-ev > .photo-container{ display: none !important; }
+body.c22-cambios a.card.c22-ev > .content{ padding: 0 !important; }
+body.c22-cambios a.card.c22-ev > .content > .title{ min-height: 0; }
+body.c22-cambios a.card.c22-ev > .content > .date{ display: none; }
+body.c22-cambios .c22-ev-fecha{ display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 2px; border: 1px solid #d7dcdd; border-radius: 8px; background: #fff; font: 700 11px/1.15 "DM Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #A10856; }
+body.c22-cambios .c22-ev-fecha b{ font: 700 26px/1.05 "DM Sans", sans-serif; color: #1B1C1E; letter-spacing: 0; }
+body.c22-cambios .c22-ev-fecha i{ font-style: normal; font-weight: 500; color: #657D81; }
+/* ===== fin eventos sin foto ===== */
+
+/* ===== C22 análisis online y oportunidades ===== */
+/* el subtítulo «Analízame con estas visualizaciones interactivas» era más
+   grande que el título de la página */
+body.c22-cambios.page-template-plantilla-analisis-online main .filters .main-title,
+body.c22-cambios.page-template-plantilla-oportunidades main .filters .main-title{ font-size: 26px !important; line-height: 1.2 !important; margin-bottom: 6px !important; }
+body.c22-cambios .c22-vacio{ margin: 8px 0 40px; padding: 22px 26px; background: #fff; border-radius: 14px; font: 400 15.5px/1.6 Montserrat, sans-serif; color: #303030; }
+body.c22-cambios .c22-vacio a{ color: #A10856; font-weight: 600; }
+/* ===== fin análisis online y oportunidades ===== */
+
 /* ===== C22 sin desplazamiento horizontal ===== */
 /* La trama decorativa de la esquina (.texture) asomaba 225 px por la derecha
    en Análisis online, Personas y Eventos, y la página se movía de lado.
