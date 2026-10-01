@@ -274,60 +274,68 @@
     if (!document.body.classList.contains('page-template-plantilla-personas')) return;
     var lists = document.querySelectorAll('main .alm-listing');
     if (!lists.length) return;
-    var actuales = [].slice.call(lists[0].querySelectorAll(':scope > .person'));
-    if (!actuales.length) return;
-    function fila(p, hist) {
-      p.classList.add('c22-p');
-      if (hist) p.classList.add('c22-p-hist');
-      p._t = norm(p.textContent);
-      if (!p.querySelector('.photo-container')) {  // sin foto: círculo con iniciales
-        var nom = (p.querySelector('.title') || p).textContent.trim().split(/\s+/);
-        var ini = document.createElement('div');
-        ini.className = 'photo-container c22-ini';
-        ini.setAttribute('aria-hidden', 'true');
-        ini.textContent = (nom[0] || '').charAt(0) + (nom.length > 1 ? nom[nom.length - 1].charAt(0) : '');
-        p.insertBefore(ini, p.firstChild);
-      }
-      var rol = p.querySelector('.rol');
-      p._rol = rol ? rol.textContent.trim() : '';
-      return p;
-    }
     var grupos = GRUPOS.map(function (g) { return { name: g[0], cls: g[1], people: [] }; });
-    actuales.forEach(function (p) { fila(p, false); grupos[nivel(p, p._rol)].people.push(p); });
-    grupos = grupos.filter(function (g) { return g.people.length; });
+    grupos.push({ name: 'Equipo histórico', cls: 'g-his', hist: true, people: [] });
+    var nAct = 0, nHis = 0;
 
-    var total = actuales.length;
     var dir = document.createElement('div');
     dir.className = 'c22-dir';
     dir.innerHTML = '<div class="c22-dir__tools"><input type="search" placeholder="Buscar por nombre, formación o cargo" aria-label="Buscar personas">' +
       '<div class="chips" role="group" aria-label="Filtrar"><button type="button" data-f="" aria-pressed="true">Todos</button>' +
-      '<button type="button" data-f="act" aria-pressed="false">Equipo actual <span>' + actuales.length + '</span></button>' +
-      '<button type="button" data-f="his" aria-pressed="false" hidden>Equipo histórico <span></span></button>' +
+      '<button type="button" data-f="act" aria-pressed="false">Equipo actual <span></span></button>' +
+      '<button type="button" data-f="his" aria-pressed="false">Equipo histórico <span></span></button>' +
       '</div></div><p class="c22-dir__count" aria-live="polite"></p>';
-    function seccion(g) {
+    grupos.forEach(function (g) {
       var sec = document.createElement('section');
       sec.className = 'c22-dir__grupo ' + g.cls;
       sec.innerHTML = '<h2>' + esc(g.name) + '</h2><div class="c22-dir__people"></div>';
-      var box = sec.querySelector('.c22-dir__people');
-      g.people.forEach(function (p) { box.appendChild(p); });
-      g.sec = sec;
+      g.sec = sec; g.box = sec.querySelector('.c22-dir__people');
       dir.appendChild(sec);
-    }
-    grupos.forEach(seccion);
+    });
     var wrap = lists[0].closest('.ajax-load-more-wrap') || lists[0];
     wrap.parentNode.insertBefore(dir, wrap);
     document.body.classList.add('c22-directorio');
 
     var input = dir.querySelector('input'), count = dir.querySelector('.c22-dir__count'), filtro = '';
     function render() {
-      var q = norm(input.value.trim()), n = 0;
+      var q = norm(input.value.trim()), n = 0, total = nAct + nHis;
       grupos.forEach(function (g) {
         var vis = 0, on = !filtro || (filtro === 'his') === !!g.hist;
         g.people.forEach(function (p) { var hit = on && (!q || p._t.indexOf(q) >= 0); p.hidden = !hit; if (hit) vis++; });
         g.sec.hidden = !vis;
         n += vis;
       });
+      dir.querySelector('[data-f="act"] span').textContent = nAct;
+      dir.querySelector('[data-f="his"] span').textContent = nHis;
+      dir.querySelector('[data-f="his"]').hidden = !nHis;
       count.textContent = n === total ? total + ' personas' : n + ' de ' + total + ' personas';
+    }
+
+    // Ajax Load More entrega las fichas por partes (y a veces tarde): cada vez que
+    // llegan, se mueven a su grupo. Se mueven las fichas originales, así cada una
+    // sigue abriendo su perfil.
+    function absorber() {
+      [].forEach.call(lists, function (list, k) {
+        var hist = k > 0;
+        [].slice.call(list.querySelectorAll(':scope > .person')).forEach(function (p) {
+          p.classList.add('c22-p');
+          if (hist) p.classList.add('c22-p-hist');
+          if (!p.querySelector('.photo-container')) {  // sin foto: círculo con iniciales
+            var nom = (p.querySelector('.title') || p).textContent.trim().split(/\s+/);
+            var ini = document.createElement('div');
+            ini.className = 'photo-container c22-ini';
+            ini.setAttribute('aria-hidden', 'true');
+            ini.textContent = (nom[0] || '').charAt(0) + (nom.length > 1 ? nom[nom.length - 1].charAt(0) : '');
+            p.insertBefore(ini, p.firstChild);
+          }
+          p._t = norm(p.textContent);
+          var rol = p.querySelector('.rol');
+          var g = hist ? grupos[grupos.length - 1] : grupos[nivel(p, rol ? rol.textContent.trim() : '')];
+          g.people.push(p); g.box.appendChild(p);
+          if (hist) nHis++; else nAct++;
+        });
+      });
+      render();
     }
     input.addEventListener('input', render);
     dir.querySelectorAll('.chips button').forEach(function (b) {
@@ -337,27 +345,8 @@
         render();
       });
     });
-    render();
-
-    // el equipo histórico llega por Ajax, a veces después y por partes:
-    // se van agregando las fichas a medida que aparecen
-    var hist = null;
-    function historico() {
-      var hs = lists[1] ? [].slice.call(lists[1].querySelectorAll(':scope > .person')) : [];
-      if (!hs.length) return;
-      if (!hist) {
-        hist = { name: 'Equipo histórico', cls: 'g-his', hist: true, people: [] };
-        grupos.push(hist); seccion(hist);
-        dir.querySelector('[data-f="his"]').hidden = false;
-      }
-      var box = hist.sec.querySelector('.c22-dir__people');
-      hs.forEach(function (p) { hist.people.push(fila(p, true)); box.appendChild(p); });
-      total = actuales.length + hist.people.length;
-      dir.querySelector('[data-f="his"] span').textContent = hist.people.length;
-      render();
-    }
-    historico();
-    if (lists[1] && window.MutationObserver) new MutationObserver(historico).observe(lists[1], { childList: true });
+    absorber();
+    if (window.MutationObserver) [].forEach.call(lists, function (l) { new MutationObserver(absorber).observe(l, { childList: true }); });
   });
 
   /* ===== C22 fechas legibles: 13/07/2026 → 13 jul 2026 ===== */
