@@ -12,6 +12,9 @@
  * Colores de la casa: pizarra #657D81 · carbón #303030 · verde #4CCAA5 ·
  * amarillo #FFB923 · rojo #F20231 · morado #A10856.
  */
+/* Versión para WordPress: cada regla cuelga de «body.c22-cambios», clase que
+   agrega c22-snippet.js. Sin el JS activo, este CSS no cambia nada. */
+
 
 /* ===== C22 carga sin parpadeo ===== */
 /* Lo que el JS rearma (portada, series de Publicaciones, catálogo de Sobre C22)
@@ -30,111 +33,111 @@ body:not(.c22-listo) .c22cat { visibility: hidden; animation: c22-ver 0s linear 
    lo último de las otras tres series en chico, como el destacado del CEP.
    Tres diseños (variable DISENO del JS): a) grande + columna, b) grande + fila,
    c) grande que rota con los otros tres al lado. Sin el JS queda el banner original. */
-body.c22-sin-banner main > section.slider-1 { display: none !important; }
-body.c22-sin-banner main > ul.sticky-header { margin-top: 0 !important; }
-.c22-dest { --pad: 30px; position: relative; width: 90%; max-width: 1296px; margin: 34px auto 34px; display: grid; gap: 28px; font-family: "DM Sans", sans-serif; }
-.c22-dest--a, .c22-dest--c { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
-.c22-dest--b { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.c22-dest--b > .c22-dest__big { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
-.c22-dest--b > .c22-dest__side { display: contents; }
-.c22-dest__big { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); }
-.c22-dest__img, .c22-dest__thumb { position: relative; display: block; overflow: hidden; background: #1B1C1E; }
-.c22-dest__img { aspect-ratio: 16 / 8; }
-.c22-dest--b .c22-dest__img { aspect-ratio: auto; min-height: 360px; }
-.c22-dest__img img, .c22-dest__thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.c22-dest__img::after, .c22-dest__thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .8)); }
-.c22-dest .sin-foto::before { content: ''; position: absolute; inset: 0; opacity: .25; background: repeating-linear-gradient(135deg, currentColor 0 2px, transparent 2px 12px); }
-.c22-num { position: absolute; z-index: 1; left: 22px; bottom: 16px; font: 700 54px/1 Georgia, "Times New Roman", serif; }
-.c22-num small { display: block; margin-top: 4px; font: 700 11px "DM Sans", sans-serif; letter-spacing: .08em; }
-.c22-dest__thumb .c22-num { left: 12px; bottom: 9px; font-size: 26px; }
-.c22-dest__thumb .c22-num small { display: none; }
-.c22-dest__txt { padding: 24px var(--pad) 28px; }
-.c22-dest--b .c22-dest__txt { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 34px 38px; }
-.c22-dest__serie { margin: 0 0 8px; font: 700 11.5px "DM Sans", sans-serif; letter-spacing: .08em; text-transform: uppercase; }
-.c22-dest__serie span { color: #657D81; font-weight: 500; }
-.c22-dest__big h2 { margin: 0 0 12px; font: 700 30px/1.15 "DM Sans", sans-serif; color: #1B1C1E; }
-.c22-dest h2 a, .c22-dest h3 a { color: inherit; text-decoration: none; }
-.c22-dest h2 a:hover, .c22-dest h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.c22-dest__resumen { margin: 0 0 12px; font: 400 15px/1.6 Montserrat, sans-serif; color: #41454A; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.c22-dest__resumen:empty { display: none; }
-.c22-dest__autores { margin: 0 0 16px; font: 600 13px "DM Sans", sans-serif; color: #657D81; }
-.c22-dest__btn { display: inline-block; padding: 9px 22px; border-radius: 999px; font: 700 12.5px "DM Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #fff; text-decoration: none; }
+body.c22-cambios.c22-sin-banner main > section.slider-1{ display: none !important; }
+body.c22-cambios.c22-sin-banner main > ul.sticky-header{ margin-top: 0 !important; }
+body.c22-cambios .c22-dest{ --pad: 30px; position: relative; width: 90%; max-width: 1296px; margin: 34px auto 34px; display: grid; gap: 28px; font-family: "DM Sans", sans-serif; }
+body.c22-cambios .c22-dest--a, body.c22-cambios .c22-dest--c{ grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+body.c22-cambios .c22-dest--b{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+body.c22-cambios .c22-dest--b > .c22-dest__big{ grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+body.c22-cambios .c22-dest--b > .c22-dest__side{ display: contents; }
+body.c22-cambios .c22-dest__big{ background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); }
+body.c22-cambios .c22-dest__img, body.c22-cambios .c22-dest__thumb{ position: relative; display: block; overflow: hidden; background: #1B1C1E; }
+body.c22-cambios .c22-dest__img{ aspect-ratio: 16 / 8; }
+body.c22-cambios .c22-dest--b .c22-dest__img{ aspect-ratio: auto; min-height: 360px; }
+body.c22-cambios .c22-dest__img img, body.c22-cambios .c22-dest__thumb img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+body.c22-cambios .c22-dest__img::after, body.c22-cambios .c22-dest__thumb::after{ content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .8)); }
+body.c22-cambios .c22-dest .sin-foto::before{ content: ''; position: absolute; inset: 0; opacity: .25; background: repeating-linear-gradient(135deg, currentColor 0 2px, transparent 2px 12px); }
+body.c22-cambios .c22-num{ position: absolute; z-index: 1; left: 22px; bottom: 16px; font: 700 54px/1 Georgia, "Times New Roman", serif; }
+body.c22-cambios .c22-num small{ display: block; margin-top: 4px; font: 700 11px "DM Sans", sans-serif; letter-spacing: .08em; }
+body.c22-cambios .c22-dest__thumb .c22-num{ left: 12px; bottom: 9px; font-size: 26px; }
+body.c22-cambios .c22-dest__thumb .c22-num small{ display: none; }
+body.c22-cambios .c22-dest__txt{ padding: 24px var(--pad) 28px; }
+body.c22-cambios .c22-dest--b .c22-dest__txt{ display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 34px 38px; }
+body.c22-cambios .c22-dest__serie{ margin: 0 0 8px; font: 700 11.5px "DM Sans", sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+body.c22-cambios .c22-dest__serie span{ color: #657D81; font-weight: 500; }
+body.c22-cambios .c22-dest__big h2{ margin: 0 0 12px; font: 700 30px/1.15 "DM Sans", sans-serif; color: #1B1C1E; }
+body.c22-cambios .c22-dest h2 a, body.c22-cambios .c22-dest h3 a{ color: inherit; text-decoration: none; }
+body.c22-cambios .c22-dest h2 a:hover, body.c22-cambios .c22-dest h3 a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+body.c22-cambios .c22-dest__resumen{ margin: 0 0 12px; font: 400 15px/1.6 Montserrat, sans-serif; color: #41454A; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+body.c22-cambios .c22-dest__resumen:empty{ display: none; }
+body.c22-cambios .c22-dest__autores{ margin: 0 0 16px; font: 600 13px "DM Sans", sans-serif; color: #657D81; }
+body.c22-cambios .c22-dest__btn{ display: inline-block; padding: 9px 22px; border-radius: 999px; font: 700 12.5px "DM Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #fff; text-decoration: none; }
 /* chicos */
-.c22-dest__side { display: flex; flex-direction: column; gap: 16px; }
-.c22-dest__small { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 14px; align-items: start; padding: 0 0 16px; border-bottom: 1px solid #d7dcdd; }
-.c22-dest__small:last-child { border-bottom: 0; padding-bottom: 0; }
-.c22-dest__thumb { aspect-ratio: 4 / 3; border-radius: 10px; }
-.c22-dest__small h3 { margin: 0; font: 700 16px/1.3 "DM Sans", sans-serif; color: #1B1C1E; }
-.c22-dest--b .c22-dest__small { display: block; padding: 0; border: 0; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); }
-.c22-dest--b .c22-dest__small > div { padding: 14px 18px 18px; }
-.c22-dest--b .c22-dest__thumb { aspect-ratio: 16 / 9; border-radius: 0; }
-.c22-dest--b .c22-dest__thumb .c22-num { font-size: 34px; left: 16px; bottom: 12px; }
-.c22-dest--c .c22-dest__small { cursor: pointer; border-radius: 10px; padding: 8px; margin: -8px; border-bottom: 0; transition: background .2s; }
-.c22-dest--c .c22-dest__small:hover { background: #e7ecec; }
+body.c22-cambios .c22-dest__side{ display: flex; flex-direction: column; gap: 16px; }
+body.c22-cambios .c22-dest__small{ display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 14px; align-items: start; padding: 0 0 16px; border-bottom: 1px solid #d7dcdd; }
+body.c22-cambios .c22-dest__small:last-child{ border-bottom: 0; padding-bottom: 0; }
+body.c22-cambios .c22-dest__thumb{ aspect-ratio: 4 / 3; border-radius: 10px; }
+body.c22-cambios .c22-dest__small h3{ margin: 0; font: 700 16px/1.3 "DM Sans", sans-serif; color: #1B1C1E; }
+body.c22-cambios .c22-dest--b .c22-dest__small{ display: block; padding: 0; border: 0; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); }
+body.c22-cambios .c22-dest--b .c22-dest__small > div{ padding: 14px 18px 18px; }
+body.c22-cambios .c22-dest--b .c22-dest__thumb{ aspect-ratio: 16 / 9; border-radius: 0; }
+body.c22-cambios .c22-dest--b .c22-dest__thumb .c22-num{ font-size: 34px; left: 16px; bottom: 12px; }
+body.c22-cambios .c22-dest--c .c22-dest__small{ cursor: pointer; border-radius: 10px; padding: 8px; margin: -8px; border-bottom: 0; transition: background .2s; }
+body.c22-cambios .c22-dest--c .c22-dest__small:hover{ background: #e7ecec; }
 /* c: el grande rota con fundido */
-.c22-dest__stage { display: grid; }
-.c22-dest__stage > .c22-dest__big { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }
-.c22-dest__stage > .c22-dest__big.is-on { opacity: 1; visibility: visible; transition: opacity .8s ease; }
-.c22-dest__pause { position: absolute; right: 0; top: -30px; cursor: pointer; padding: 4px 12px; border: 1px solid #c9d2d3; border-radius: 999px; background: #fff; color: #41454A; font: 700 10.5px "DM Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+body.c22-cambios .c22-dest__stage{ display: grid; }
+body.c22-cambios .c22-dest__stage > .c22-dest__big{ grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }
+body.c22-cambios .c22-dest__stage > .c22-dest__big.is-on{ opacity: 1; visibility: visible; transition: opacity .8s ease; }
+body.c22-cambios .c22-dest__pause{ position: absolute; right: 0; top: -30px; cursor: pointer; padding: 4px 12px; border: 1px solid #c9d2d3; border-radius: 999px; background: #fff; color: #41454A; font: 700 10.5px "DM Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase; }
 /* color de cada serie (el de las tarjetas); en texto, tonos más oscuros que se leen */
-.c22-dest .s-pdr .c22-num, .c22-dest .s-pdr.sin-foto { color: #8fa6aa; } .c22-dest .s-pdr .c22-dest__serie { color: #4f6569; } .c22-dest .s-pdr .c22-dest__btn { background: #657D81; }
-.c22-dest .s-ana .c22-num, .c22-dest .s-ana.sin-foto { color: #4CCAA5; } .c22-dest .s-ana .c22-dest__serie { color: #1f7a60; } .c22-dest .s-ana .c22-dest__btn { background: #1f8f6f; }
-.c22-dest .s-not .c22-num, .c22-dest .s-not.sin-foto { color: #FFB923; } .c22-dest .s-not .c22-dest__serie { color: #8a5d00; } .c22-dest .s-not .c22-dest__btn { background: #FFB923; color: #1B1C1E; }
-.c22-dest .s-col .c22-num, .c22-dest .s-col.sin-foto { color: #F20231; } .c22-dest .s-col .c22-dest__serie { color: #c10028; } .c22-dest .s-col .c22-dest__btn { background: #d0021f; }
-@media (prefers-reduced-motion: reduce) { .c22-dest__stage > .c22-dest__big { transition: none; } }
+body.c22-cambios .c22-dest .s-pdr .c22-num, body.c22-cambios .c22-dest .s-pdr.sin-foto{ color: #8fa6aa; } body.c22-cambios .c22-dest .s-pdr .c22-dest__serie{ color: #4f6569; } body.c22-cambios .c22-dest .s-pdr .c22-dest__btn{ background: #657D81; }
+body.c22-cambios .c22-dest .s-ana .c22-num, body.c22-cambios .c22-dest .s-ana.sin-foto{ color: #4CCAA5; } body.c22-cambios .c22-dest .s-ana .c22-dest__serie{ color: #1f7a60; } body.c22-cambios .c22-dest .s-ana .c22-dest__btn{ background: #1f8f6f; }
+body.c22-cambios .c22-dest .s-not .c22-num, body.c22-cambios .c22-dest .s-not.sin-foto{ color: #FFB923; } body.c22-cambios .c22-dest .s-not .c22-dest__serie{ color: #8a5d00; } body.c22-cambios .c22-dest .s-not .c22-dest__btn{ background: #FFB923; color: #1B1C1E; }
+body.c22-cambios .c22-dest .s-col .c22-num, body.c22-cambios .c22-dest .s-col.sin-foto{ color: #F20231; } body.c22-cambios .c22-dest .s-col .c22-dest__serie{ color: #c10028; } body.c22-cambios .c22-dest .s-col .c22-dest__btn{ background: #d0021f; }
+@media (prefers-reduced-motion: reduce) { body.c22-cambios .c22-dest__stage > .c22-dest__big{ transition: none; } }
 @media (max-width: 1000px) {
-	.c22-dest--a, .c22-dest--c, .c22-dest--b { grid-template-columns: minmax(0, 1fr); }
-	.c22-dest--b > .c22-dest__big { grid-template-columns: minmax(0, 1fr); }
-	.c22-dest--b .c22-dest__img { min-height: 0; aspect-ratio: 16 / 9; }
-	.c22-dest--b > .c22-dest__side { display: flex; }
+	body.c22-cambios .c22-dest--a, body.c22-cambios .c22-dest--c, body.c22-cambios .c22-dest--b{ grid-template-columns: minmax(0, 1fr); }
+	body.c22-cambios .c22-dest--b > .c22-dest__big{ grid-template-columns: minmax(0, 1fr); }
+	body.c22-cambios .c22-dest--b .c22-dest__img{ min-height: 0; aspect-ratio: 16 / 9; }
+	body.c22-cambios .c22-dest--b > .c22-dest__side{ display: flex; }
 }
 @media (max-width: 600px) {
-	.c22-dest { --pad: 20px; margin-top: 20px; gap: 20px; }
-	.c22-dest__big h2 { font-size: 23px; }
-	.c22-dest__img { aspect-ratio: 16 / 10; }
-	.c22-dest__small { grid-template-columns: 104px minmax(0, 1fr); }
-	.c22-dest__small h3 { font-size: 15px; }
-	.c22-dest--b .c22-dest__small { display: grid; grid-template-columns: 104px minmax(0, 1fr); background: none; box-shadow: none; border-radius: 0; border-bottom: 1px solid #d7dcdd; padding-bottom: 14px; }
-	.c22-dest--b .c22-dest__small > div { padding: 0; }
-	.c22-dest--b .c22-dest__thumb { aspect-ratio: 4 / 3; border-radius: 10px; }
+	body.c22-cambios .c22-dest{ --pad: 20px; margin-top: 20px; gap: 20px; }
+	body.c22-cambios .c22-dest__big h2{ font-size: 23px; }
+	body.c22-cambios .c22-dest__img{ aspect-ratio: 16 / 10; }
+	body.c22-cambios .c22-dest__small{ grid-template-columns: 104px minmax(0, 1fr); }
+	body.c22-cambios .c22-dest__small h3{ font-size: 15px; }
+	body.c22-cambios .c22-dest--b .c22-dest__small{ display: grid; grid-template-columns: 104px minmax(0, 1fr); background: none; box-shadow: none; border-radius: 0; border-bottom: 1px solid #d7dcdd; padding-bottom: 14px; }
+	body.c22-cambios .c22-dest--b .c22-dest__small > div{ padding: 0; }
+	body.c22-cambios .c22-dest--b .c22-dest__thumb{ aspect-ratio: 4 / 3; border-radius: 10px; }
 }
 /* diseño b, compacto: la barra de colores tiene que verse sin bajar */
-.c22-dest--b { gap: 18px; margin: 24px auto 22px; }
-.c22-dest--b > .c22-dest__big { height: 300px; }
-.c22-dest--b .c22-dest__img { min-height: 0; height: 100%; }
-.c22-dest--b .c22-dest__txt { padding: 24px 36px; }
-.c22-dest--b .c22-dest__big h2 { font-size: 28px; margin-bottom: 10px; }
-.c22-dest--b .c22-dest__resumen { -webkit-line-clamp: 3; margin-bottom: 14px; }
-.c22-dest--b .c22-dest__autores { display: none; }
-.c22-dest--b .c22-dest__small { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; align-items: center; padding: 10px; }
-.c22-dest--b .c22-dest__small > div { padding: 0 6px 0 0; }
-.c22-dest--b .c22-dest__thumb { aspect-ratio: 4 / 3; border-radius: 8px; }
-.c22-dest--b .c22-dest__thumb .c22-num { font-size: 24px; left: 10px; bottom: 8px; }
-.c22-dest--b .c22-dest__small h3 { font-size: 15px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.c22-dest--b .c22-dest__small .c22-dest__serie { margin-bottom: 4px; font-size: 10.5px; }
+body.c22-cambios .c22-dest--b{ gap: 18px; margin: 24px auto 22px; }
+body.c22-cambios .c22-dest--b > .c22-dest__big{ height: 300px; }
+body.c22-cambios .c22-dest--b .c22-dest__img{ min-height: 0; height: 100%; }
+body.c22-cambios .c22-dest--b .c22-dest__txt{ padding: 24px 36px; }
+body.c22-cambios .c22-dest--b .c22-dest__big h2{ font-size: 28px; margin-bottom: 10px; }
+body.c22-cambios .c22-dest--b .c22-dest__resumen{ -webkit-line-clamp: 3; margin-bottom: 14px; }
+body.c22-cambios .c22-dest--b .c22-dest__autores{ display: none; }
+body.c22-cambios .c22-dest--b .c22-dest__small{ display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; align-items: center; padding: 10px; }
+body.c22-cambios .c22-dest--b .c22-dest__small > div{ padding: 0 6px 0 0; }
+body.c22-cambios .c22-dest--b .c22-dest__thumb{ aspect-ratio: 4 / 3; border-radius: 8px; }
+body.c22-cambios .c22-dest--b .c22-dest__thumb .c22-num{ font-size: 24px; left: 10px; bottom: 8px; }
+body.c22-cambios .c22-dest--b .c22-dest__small h3{ font-size: 15px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+body.c22-cambios .c22-dest--b .c22-dest__small .c22-dest__serie{ margin-bottom: 4px; font-size: 10.5px; }
 @media (max-width: 1000px) {
-	.c22-dest--b > .c22-dest__big { height: auto; }
-	.c22-dest--b .c22-dest__img { height: auto; aspect-ratio: 16 / 9; }
+	body.c22-cambios .c22-dest--b > .c22-dest__big{ height: auto; }
+	body.c22-cambios .c22-dest--b .c22-dest__img{ height: auto; aspect-ratio: 16 / 9; }
 }
 @media (max-width: 600px) {
-	.c22-dest--b { gap: 10px; margin: 16px auto 18px; }
-	.c22-dest--b .c22-dest__img { aspect-ratio: 16 / 8; }
-	.c22-dest--b .c22-dest__txt { padding: 16px 18px 18px; }
-	.c22-dest--b .c22-dest__big h2 { font-size: 21px; }
-	.c22-dest--b .c22-dest__resumen { display: none; }
-	.c22-dest--b .c22-dest__small { grid-template-columns: 84px minmax(0, 1fr); padding: 0 0 10px; }
-	.c22-dest--b .c22-dest__small h3 { font-size: 14px; -webkit-line-clamp: 2; }
+	body.c22-cambios .c22-dest--b{ gap: 10px; margin: 16px auto 18px; }
+	body.c22-cambios .c22-dest--b .c22-dest__img{ aspect-ratio: 16 / 8; }
+	body.c22-cambios .c22-dest--b .c22-dest__txt{ padding: 16px 18px 18px; }
+	body.c22-cambios .c22-dest--b .c22-dest__big h2{ font-size: 21px; }
+	body.c22-cambios .c22-dest--b .c22-dest__resumen{ display: none; }
+	body.c22-cambios .c22-dest--b .c22-dest__small{ grid-template-columns: 84px minmax(0, 1fr); padding: 0 0 10px; }
+	body.c22-cambios .c22-dest--b .c22-dest__small h3{ font-size: 14px; -webkit-line-clamp: 2; }
 }
 /* ===== fin destacados ===== */
 
 /* ===== C22 portada: cada sección muestra sus cuatro tarjetas (con JS) ===== */
 /* Antes: seis carruseles con una tarjeta a la vista y el resto escondido.
    El JS desarma el carrusel y marca la sección con .c22-grid. */
-main section.cards-slider.c22-grid {
+body.c22-cambios main section.cards-slider.c22-grid{
 	flex-wrap: wrap;
 	align-items: flex-start;
 }
-main section.cards-slider.c22-grid > .content {
+body.c22-cambios main section.cards-slider.c22-grid > .content{
 	float: none;
 	width: 100%;
 	display: grid;
@@ -145,9 +148,9 @@ main section.cards-slider.c22-grid > .content {
 	text-align: left;
 	order: -1;
 }
-main section.cards-slider.c22-grid > .content > * { float: none; width: auto; margin: 0; }
-main section.cards-slider.c22-grid > .content .wysiwyg p { margin: 0; max-width: 56ch; }
-main section.cards-slider.c22-grid > .carrousel-slider {
+body.c22-cambios main section.cards-slider.c22-grid > .content > *{ float: none; width: auto; margin: 0; }
+body.c22-cambios main section.cards-slider.c22-grid > .content .wysiwyg p{ margin: 0; max-width: 56ch; }
+body.c22-cambios main section.cards-slider.c22-grid > .carrousel-slider{
 	float: none;
 	width: 100%;
 	display: grid;
@@ -155,47 +158,47 @@ main section.cards-slider.c22-grid > .carrousel-slider {
 	gap: 24px;
 	padding: 20px 48px 40px !important;
 }
-main section.cards-slider.c22-grid .fake-card,
-main section.cards-slider.c22-grid .slick-dots,
-main section.cards-slider.c22-grid .slick-arrow { display: none !important; }
-main section.cards-slider.c22-grid a.card { width: auto !important; margin: 0 !important; }
+body.c22-cambios main section.cards-slider.c22-grid .fake-card,
+body.c22-cambios main section.cards-slider.c22-grid .slick-dots,
+body.c22-cambios main section.cards-slider.c22-grid .slick-arrow{ display: none !important; }
+body.c22-cambios main section.cards-slider.c22-grid a.card{ width: auto !important; margin: 0 !important; }
 /* el carrusel ya no está: las tarjetas no esperan la animación de entrada */
-main section.cards-slider.c22-grid a.card[data-aos],
-main section.cards-slider.c22-grid a.card.aos-init { opacity: 1 !important; transform: none !important; }
-main section.cards-slider.c22-grid > .texture { opacity: .55; }
+body.c22-cambios main section.cards-slider.c22-grid a.card[data-aos],
+body.c22-cambios main section.cards-slider.c22-grid a.card.aos-init{ opacity: 1 !important; transform: none !important; }
+body.c22-cambios main section.cards-slider.c22-grid > .texture{ opacity: .55; }
 @media (max-width: 1100px) {
-	main section.cards-slider.c22-grid > .carrousel-slider { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	body.c22-cambios main section.cards-slider.c22-grid > .carrousel-slider{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 /* ===== fin portada: cuatro tarjetas ===== */
 
 /* ===== C22 portada: Comparte sin «Lo ultimo» ===== */
 /* La lista de lo último no es central en C22 (la cumple el sitio del CEP).
    Comparte queda como una franja: título y redes en una fila. */
-#comparte .c22-ultimo { display: none !important; }
+body.c22-cambios #comparte .c22-ultimo{ display: none !important; }
 @media (min-width: 761px) {
-	#comparte > .iframe-container { display: none !important; }
-	#comparte > .content { width: 100% !important; float: none; display: flex; flex-wrap: wrap; align-items: center; column-gap: 32px; row-gap: 12px; padding: 36px 48px 36px 225px !important; }
-	#comparte > .content > .col-100 { width: auto; margin: 0; }
-	#comparte .follow-us { margin: 0; }
-	#comparte ul.social { width: auto; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
-	#comparte ul.social li { width: auto; margin: 0; }
+	body.c22-cambios #comparte > .iframe-container{ display: none !important; }
+	body.c22-cambios #comparte > .content{ width: 100% !important; float: none; display: flex; flex-wrap: wrap; align-items: center; column-gap: 32px; row-gap: 12px; padding: 36px 48px 36px 225px !important; }
+	body.c22-cambios #comparte > .content > .col-100{ width: auto; margin: 0; }
+	body.c22-cambios #comparte .follow-us{ margin: 0; }
+	body.c22-cambios #comparte ul.social{ width: auto; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+	body.c22-cambios #comparte ul.social li{ width: auto; margin: 0; }
 }
 /* ===== fin Comparte ===== */
 
 /* ===== C22 tarjetas: pie alineado y títulos parejos ===== */
 /* Autores, fecha y flecha quedaban a distinta altura según el largo del
    título. Ahora el pie va al fondo y todas las tarjetas de una fila miden lo mismo. */
-.slick-track { display: flex !important; }
-.slick-track > .slick-slide { height: auto !important; }
-a.card { display: flex !important; flex-direction: column; }
-a.card > .content {
+body.c22-cambios .slick-track{ display: flex !important; }
+body.c22-cambios .slick-track > .slick-slide{ height: auto !important; }
+body.c22-cambios a.card{ display: flex !important; flex-direction: column; }
+body.c22-cambios a.card > .content{
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) auto;
 	grid-template-rows: auto 1fr auto;
 	column-gap: 12px;
 	flex: 1 1 auto;
 }
-a.card > .content > .title {
+body.c22-cambios a.card > .content > .title{
 	grid-row: 1; grid-column: 1 / -1;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
@@ -204,42 +207,42 @@ a.card > .content > .title {
 	line-height: 1.35;
 	min-height: calc(3 * 1.35em);
 }
-a.card > .content > .author { grid-row: 2; grid-column: 1 / -1; align-self: end; margin: 12px 0 0 !important; }
-a.card > .content > .date { grid-row: 3; grid-column: 1; align-self: center; margin: 14px 0 0 !important; float: none !important; }
-a.card > .content > .arrow { grid-row: 3; grid-column: 2; align-self: center; margin: 14px 0 0 !important; float: none !important; position: static !important; }
+body.c22-cambios a.card > .content > .author{ grid-row: 2; grid-column: 1 / -1; align-self: end; margin: 12px 0 0 !important; }
+body.c22-cambios a.card > .content > .date{ grid-row: 3; grid-column: 1; align-self: center; margin: 14px 0 0 !important; float: none !important; }
+body.c22-cambios a.card > .content > .arrow{ grid-row: 3; grid-column: 2; align-self: center; margin: 14px 0 0 !important; float: none !important; position: static !important; }
 /* Tarjetas sin foto: la trama de la serie sobre fondo carbón, en vez de un
    recuadro blanco que parecía una imagen que no cargó. */
-.card .photo-container:not(:has(img.photo)) { background: #1B1C1E; }
-.card .photo-container:not(:has(img.photo)) > .texture-c22 { opacity: .5; }
+body.c22-cambios .card .photo-container:not(:has(img.photo)){ background: #1B1C1E; }
+body.c22-cambios .card .photo-container:not(:has(img.photo)) > .texture-c22{ opacity: .5; }
 /* ===== fin tarjetas ===== */
 
 /* ===== C22 listados de publicaciones: menos aire entre la intro y las tarjetas ===== */
-.categories-tabs > .intro { padding-bottom: 12px !important; }
-.categories-tabs .tab-content > .slider { margin-top: 62px !important; }
+body.c22-cambios .categories-tabs > .intro{ padding-bottom: 12px !important; }
+body.c22-cambios .categories-tabs .tab-content > .slider{ margin-top: 62px !important; }
 /* ===== fin listados ===== */
 
 /* ===== C22 ficha: título sin choque y lectura cómoda ===== */
 /* El título tenía interlineado 1.0 y la segunda línea pisaba el subrayado. */
-.single-header h1.main-title { line-height: 1.14; padding-bottom: 14px; }
-.single-header .veil { background: linear-gradient(180deg, rgba(20, 24, 26, .55), rgba(20, 24, 26, .78)) !important; }
+body.c22-cambios .single-header h1.main-title{ line-height: 1.14; padding-bottom: 14px; }
+body.c22-cambios .single-header .veil{ background: linear-gradient(180deg, rgba(20, 24, 26, .55), rgba(20, 24, 26, .78)) !important; }
 /* Medida de lectura: el texto llegaba a ~110 caracteres por línea. */
 /* Solo en las fichas (publicaciones, análisis, eventos, noticias); las
    páginas largas como Sobre C22 tienen su propio armado a todo el ancho. */
-body.single article > .wrap-s { max-width: 700px; }
-body.single article .wysiwyg > p,
-body.single article .wysiwyg > ul,
-body.single article .wysiwyg > ol { font-size: 17px; line-height: 1.7; }
+body.c22-cambios.single article > .wrap-s{ max-width: 700px; }
+body.c22-cambios.single article .wysiwyg > p,
+body.c22-cambios.single article .wysiwyg > ul,
+body.c22-cambios.single article .wysiwyg > ol{ font-size: 17px; line-height: 1.7; }
 /* «Cómo citar» salía dos veces: se deja el bloque bajo el texto y, arriba, solo el PDF. */
-.single-header .c22-cita-prov__rotulo,
-.single-header .c22-cita-prov__texto { display: none !important; }
+body.c22-cambios .single-header .c22-cita-prov__rotulo,
+body.c22-cambios .single-header .c22-cita-prov__texto{ display: none !important; }
 /* ===== fin ficha ===== */
 
 /* ===== C22 eventos y noticias: sin caja vacía, fechas legibles ===== */
 /* Ajax Load More deja el listado con opacidad 0 y, si no hay eventos
    próximos, nunca lo muestra: el aviso «No hay próximos eventos agendados…»
    quedaba invisible y la columna parecía rota. */
-.events .alm-paging-content { opacity: 1 !important; }
-.card-news .date { background: rgba(20, 24, 26, .6); padding: 2px 8px; border-radius: 999px; }
+body.c22-cambios .events .alm-paging-content{ opacity: 1 !important; }
+body.c22-cambios .card-news .date{ background: rgba(20, 24, 26, .6); padding: 2px 8px; border-radius: 999px; }
 /* ===== fin eventos y noticias ===== */
 
 /* ===== C22 cabeceras de página compactas ===== */
@@ -247,144 +250,307 @@ body.single article .wysiwyg > ol { font-size: 17px; line-height: 1.7; }
    con el título y la descripción, como el banner de la portada: se entra
    directo al contenido. Vale para Publicaciones, Personas, Análisis online,
    Eventos, categorías y Oportunidades. */
-main section.page-header { height: auto !important; min-height: 0 !important; background: #fff !important; border-radius: 22px; overflow: hidden; }
-main section.page-header > .content { position: relative; z-index: 1; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 56px; align-items: end; padding: 34px 44px 30px !important; }
-main section.page-header .simpleParallax,
-main section.page-header img.photo,
-main section.page-header .circle,
-main section.page-header > img.logo,
-main section.page-header .veil { display: none !important; }
-main section.page-header > .texture { opacity: .3; }
-main section.page-header h1.main-title { margin: 0 !important; color: #1B1C1E !important; font-size: 40px !important; line-height: 1.1 !important; }
-main section.page-header .resume { max-width: 62ch; margin: 0 !important; }
-main section.page-header .resume p { margin: 0 !important; color: #41454A !important; font-size: 16px !important; line-height: 1.55 !important; }
+body.c22-cambios main section.page-header{ height: auto !important; min-height: 0 !important; background: #fff !important; border-radius: 22px; overflow: hidden; }
+body.c22-cambios main section.page-header > .content{ position: relative; z-index: 1; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 56px; align-items: end; padding: 34px 44px 30px !important; }
+body.c22-cambios main section.page-header .simpleParallax,
+body.c22-cambios main section.page-header img.photo,
+body.c22-cambios main section.page-header .circle,
+body.c22-cambios main section.page-header > img.logo,
+body.c22-cambios main section.page-header .veil{ display: none !important; }
+body.c22-cambios main section.page-header > .texture{ opacity: .3; }
+body.c22-cambios main section.page-header h1.main-title{ margin: 0 !important; color: #1B1C1E !important; font-size: 40px !important; line-height: 1.1 !important; }
+body.c22-cambios main section.page-header .resume{ max-width: 62ch; margin: 0 !important; }
+body.c22-cambios main section.page-header .resume p{ margin: 0 !important; color: #41454A !important; font-size: 16px !important; line-height: 1.55 !important; }
 /* en Publicaciones la barra de series flota arriba: la franja le deja espacio */
-body.page-template-plantilla-publicaciones main section.page-header > .content { padding-top: 92px !important; }
+body.c22-cambios.page-template-plantilla-publicaciones main section.page-header > .content{ padding-top: 92px !important; }
 @media (max-width: 900px) {
-	main section.page-header > .content { grid-template-columns: minmax(0, 1fr); row-gap: 12px; padding: 24px 20px 22px !important; }
-	main section.page-header h1.main-title { font-size: 30px !important; }
-	body.page-template-plantilla-publicaciones main section.page-header > .content { padding-top: 24px !important; }
+	body.c22-cambios main section.page-header > .content{ grid-template-columns: minmax(0, 1fr); row-gap: 12px; padding: 24px 20px 22px !important; }
+	body.c22-cambios main section.page-header h1.main-title{ font-size: 30px !important; }
+	body.c22-cambios.page-template-plantilla-publicaciones main section.page-header > .content{ padding-top: 24px !important; }
 }
 /* ===== fin cabeceras ===== */
 
 /* ===== C22 publicaciones: cada serie muestra sus cuatro más recientes (con JS) ===== */
 /* Como en la portada: en vez del carrusel, las cuatro últimas de cada serie a la
    vista; «Ver más» sigue llevando a la serie completa. En el teléfono queda el carrusel. */
-.categories-tabs .slider.c22-grid4 { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; width: 90%; max-width: 1296px; margin: 26px auto 30px !important; padding: 0 !important; }
-.categories-tabs .slider.c22-grid4 > a.card { width: auto !important; margin: 0 !important; }
-.categories-tabs .slider.c22-grid4 > a.card:nth-child(n+5),
-.categories-tabs .slider.c22-grid4 .slick-arrow { display: none !important; }
-.categories-tabs .slider.c22-grid4 a.card[data-aos], .categories-tabs .slider.c22-grid4 a.card.aos-init { opacity: 1 !important; transform: none !important; }
-@media (max-width: 1100px) { .categories-tabs .slider.c22-grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+body.c22-cambios .categories-tabs .slider.c22-grid4{ display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; width: 90%; max-width: 1296px; margin: 26px auto 30px !important; padding: 0 !important; }
+body.c22-cambios .categories-tabs .slider.c22-grid4 > a.card{ width: auto !important; margin: 0 !important; }
+body.c22-cambios .categories-tabs .slider.c22-grid4 > a.card:nth-child(n+5),
+body.c22-cambios .categories-tabs .slider.c22-grid4 .slick-arrow{ display: none !important; }
+body.c22-cambios .categories-tabs .slider.c22-grid4 a.card[data-aos], body.c22-cambios .categories-tabs .slider.c22-grid4 a.card.aos-init{ opacity: 1 !important; transform: none !important; }
+@media (max-width: 1100px) { body.c22-cambios .categories-tabs .slider.c22-grid4{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* ===== fin publicaciones ===== */
 
 /* ===== C22 sobre C22: catálogo con filtros, buscador y «Mostrar más» (con JS) ===== */
 /* El catálogo de 182 publicaciones ocupaba ~20.000 px. Ahora se filtra por
    serie, se busca por título o autor y muestra seis por serie, con «Mostrar más». */
-.c22cat-barra { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 8px 0 22px; padding: 14px 16px; background: #fff; border: 1px solid #e3e8e8; border-radius: 14px; box-shadow: 0 2px 10px rgba(0, 0, 0, .05); font-family: "DM Sans", sans-serif; }
-.c22cat-barra .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.c22cat-barra .chips button { cursor: pointer; padding: 6px 12px; border: 1px solid #c9d2d3; border-radius: 999px; background: #fff; color: #303030; font: 700 12px "DM Sans", sans-serif; letter-spacing: .03em; }
-.c22cat-barra .chips button span { margin-left: 4px; font-weight: 500; color: #657D81; }
-.c22cat-barra .chips button[aria-pressed="true"] { background: #303030; border-color: #303030; color: #fff; }
-.c22cat-barra .chips button[aria-pressed="true"] span { color: #c9d2d3; }
-.c22cat-barra input { flex: 1 1 220px; min-width: 0; padding: 8px 14px; border: 1px solid #c9d2d3; border-radius: 999px; font: 400 14px Montserrat, sans-serif; }
-.c22cat-barra .c22cat-cuenta { margin: 0 !important; flex: 0 0 auto; font: 500 12px/1.3 "DM Sans", sans-serif !important; color: #657D81 !important; }
-.c22cat-mas { display: inline-block; cursor: pointer; margin: 4px 0 30px; padding: 8px 18px; border: 0; border-radius: 999px; background: #e3e8e8; color: #303030; font: 700 12px "DM Sans", sans-serif; letter-spacing: .05em; text-transform: uppercase; }
-.c22cat [hidden], .c22cat-mas[hidden] { display: none !important; }
+body.c22-cambios .c22cat-barra{ display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 8px 0 22px; padding: 14px 16px; background: #fff; border: 1px solid #e3e8e8; border-radius: 14px; box-shadow: 0 2px 10px rgba(0, 0, 0, .05); font-family: "DM Sans", sans-serif; }
+body.c22-cambios .c22cat-barra .chips{ display: flex; flex-wrap: wrap; gap: 8px; }
+body.c22-cambios .c22cat-barra .chips button{ cursor: pointer; padding: 6px 12px; border: 1px solid #c9d2d3; border-radius: 999px; background: #fff; color: #303030; font: 700 12px "DM Sans", sans-serif; letter-spacing: .03em; }
+body.c22-cambios .c22cat-barra .chips button span{ margin-left: 4px; font-weight: 500; color: #657D81; }
+body.c22-cambios .c22cat-barra .chips button[aria-pressed="true"]{ background: #303030; border-color: #303030; color: #fff; }
+body.c22-cambios .c22cat-barra .chips button[aria-pressed="true"] span{ color: #c9d2d3; }
+body.c22-cambios .c22cat-barra input{ flex: 1 1 220px; min-width: 0; padding: 8px 14px; border: 1px solid #c9d2d3; border-radius: 999px; font: 400 14px Montserrat, sans-serif; }
+body.c22-cambios .c22cat-barra .c22cat-cuenta{ margin: 0 !important; flex: 0 0 auto; font: 500 12px/1.3 "DM Sans", sans-serif !important; color: #657D81 !important; }
+body.c22-cambios .c22cat-mas{ display: inline-block; cursor: pointer; margin: 4px 0 30px; padding: 8px 18px; border: 0; border-radius: 999px; background: #e3e8e8; color: #303030; font: 700 12px "DM Sans", sans-serif; letter-spacing: .05em; text-transform: uppercase; }
+body.c22-cambios .c22cat [hidden], body.c22-cambios .c22cat-mas[hidden]{ display: none !important; }
 /* ===== fin catálogo ===== */
 
 /* ===== C22 personas: directorio como el Equipo del CEP (con JS) ===== */
 /* Grupos con su nombre a la izquierda y personas en filas: foto redonda,
    nombre, cargo en el color del grupo y formación. Buscador y filtro
    equipo actual / histórico. Cada fila sigue abriendo el perfil. */
-body.c22-directorio main .ajax-load-more-wrap .alm-btn-wrap,
-body.c22-directorio main .wrap-xl > .text-center { display: none !important; }
-body.c22-directorio main .alm-listing { display: block !important; min-height: 0 !important; height: auto !important; margin: 0 !important; }
-.c22-dir { margin: 6px 0 40px; font-family: "DM Sans", sans-serif; }
-.c22-dir__tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-bottom: 8px; }
-.c22-dir__tools input { flex: 0 1 340px; min-width: 0; padding: 9px 16px; border: 1px solid #c9d2d3; border-radius: 999px; background: #fff; font: 400 14px Montserrat, sans-serif; }
-.c22-dir .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.c22-dir .chips button { cursor: pointer; padding: 7px 14px; border: 1px solid #657D81; border-radius: 6px; background: #fff; color: #303030; font: 700 12.5px "DM Sans", sans-serif; }
-.c22-dir .chips button span { margin-left: 4px; font-weight: 500; color: #657D81; }
-.c22-dir .chips button[aria-pressed="true"] { background: #303030; border-color: #303030; color: #fff; }
-.c22-dir .chips button[aria-pressed="true"] span { color: #c9d2d3; }
-.c22-dir__count { margin: 6px 0 14px; font: 500 13px "DM Sans", sans-serif; color: #657D81; }
-.c22-dir__grupo { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; padding: 20px 0; border-top: 1px solid #d7dcdd; }
-.c22-dir__grupo[hidden] { display: none; }
-.c22-dir__grupo h2 { margin: 8px 0 0; padding-left: 12px; border-left: 4px solid var(--g, #657D81); font: 700 17px/1.25 "DM Sans", sans-serif; color: #1B1C1E; }
+body.c22-cambios.c22-directorio main .ajax-load-more-wrap .alm-btn-wrap,
+body.c22-cambios.c22-directorio main .wrap-xl > .text-center{ display: none !important; }
+body.c22-cambios.c22-directorio main .alm-listing{ display: block !important; min-height: 0 !important; height: auto !important; margin: 0 !important; }
+body.c22-cambios .c22-dir{ margin: 6px 0 40px; font-family: "DM Sans", sans-serif; }
+body.c22-cambios .c22-dir__tools{ display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-bottom: 8px; }
+body.c22-cambios .c22-dir__tools input{ flex: 0 1 340px; min-width: 0; padding: 9px 16px; border: 1px solid #c9d2d3; border-radius: 999px; background: #fff; font: 400 14px Montserrat, sans-serif; }
+body.c22-cambios .c22-dir .chips{ display: flex; flex-wrap: wrap; gap: 8px; }
+body.c22-cambios .c22-dir .chips button{ cursor: pointer; padding: 7px 14px; border: 1px solid #657D81; border-radius: 6px; background: #fff; color: #303030; font: 700 12.5px "DM Sans", sans-serif; }
+body.c22-cambios .c22-dir .chips button span{ margin-left: 4px; font-weight: 500; color: #657D81; }
+body.c22-cambios .c22-dir .chips button[aria-pressed="true"]{ background: #303030; border-color: #303030; color: #fff; }
+body.c22-cambios .c22-dir .chips button[aria-pressed="true"] span{ color: #c9d2d3; }
+body.c22-cambios .c22-dir__count{ margin: 6px 0 14px; font: 500 13px "DM Sans", sans-serif; color: #657D81; }
+body.c22-cambios .c22-dir__grupo{ display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; padding: 20px 0; border-top: 1px solid #d7dcdd; }
+body.c22-cambios .c22-dir__grupo[hidden]{ display: none; }
+body.c22-cambios .c22-dir__grupo h2{ margin: 8px 0 0; padding-left: 12px; border-left: 4px solid var(--g, #657D81); font: 700 17px/1.25 "DM Sans", sans-serif; color: #1B1C1E; }
 /* colores del escalafón del sitio (para texto, un tono más oscuro que se lea sobre gris claro) */
-.c22-dir__grupo.g-dir { --g: #4f6569; } .c22-dir__grupo.g-inv { --g: #1f8f6f; } .c22-dir__grupo.g-ias { --g: #a87400; } .c22-dir__grupo.g-asi { --g: #d0021f; } .c22-dir__grupo.g-his { --g: #8a9a9c; }
-.c22-dir__people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 24px; }
-.c22-dir .person.c22-p { display: grid !important; grid-template-columns: 52px minmax(0, 1fr); gap: 14px; align-items: center; width: auto !important; height: auto !important; min-height: 0 !important; margin: 0 !important; padding: 8px 10px 8px 0 !important; background: none !important; border: 0 !important; border-radius: 10px; box-shadow: none !important; cursor: pointer; }
-.c22-dir .person.c22-p[hidden] { display: none !important; }
-.c22-dir .person.c22-p:hover { background: #eef1f1 !important; }
-.c22-dir .person.c22-p > .texture, .c22-dir .person.c22-p .arrow, .c22-dir .person.c22-p .institution { display: none !important; }
-.c22-dir .person.c22-p > .photo-container { display: block !important; width: 52px !important; height: 52px !important; margin: 0 !important; padding: 0 !important; border-radius: 50% !important; overflow: hidden; background: #e3e8e8 !important; }
-.c22-dir .person.c22-p > .photo-container::before, .c22-dir .person.c22-p > .photo-container::after { display: none !important; }
-.c22-dir .person.c22-p > .photo-container img { display: block !important; width: 100% !important; height: 100% !important; object-fit: cover; object-position: center 20%; }
-.c22-dir .person.c22-p.c22-p-hist > .photo-container img { filter: grayscale(1); }
-.c22-dir .person.c22-p > .photo-container.c22-ini { display: grid !important; place-items: center; font: 700 16px "DM Sans", sans-serif; color: #657D81; letter-spacing: .02em; }
-.c22-dir .person.c22-p > .content { grid-column: 2; }
-.c22-dir .person.c22-p > .content { display: block !important; width: auto !important; padding: 0 !important; margin: 0 !important; }
-.c22-dir .person.c22-p .title { margin: 0 !important; font: 700 15.5px/1.2 "DM Sans", sans-serif !important; color: #1B1C1E !important; }
-.c22-dir .person.c22-p .rol { margin: 2px 0 0 !important; font: 600 12.5px/1.3 "DM Sans", sans-serif !important; color: var(--g, #657D81) !important; text-transform: none !important; }
-.c22-dir .person.c22-p .rol::first-letter { text-transform: uppercase; }
-.c22-dir .person.c22-p .profession { margin: 1px 0 0 !important; font: 500 12px/1.3 Montserrat, sans-serif !important; color: #657D81 !important; }
-@media (max-width: 1100px) { .c22-dir__people { grid-template-columns: repeat(2, minmax(0, 1fr)); } .c22-dir__grupo { grid-template-columns: 170px minmax(0, 1fr); } }
+body.c22-cambios .c22-dir__grupo.g-dir{ --g: #4f6569; } body.c22-cambios .c22-dir__grupo.g-inv{ --g: #1f8f6f; } body.c22-cambios .c22-dir__grupo.g-ias{ --g: #a87400; } body.c22-cambios .c22-dir__grupo.g-asi{ --g: #d0021f; } body.c22-cambios .c22-dir__grupo.g-his{ --g: #8a9a9c; }
+body.c22-cambios .c22-dir__people{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 24px; }
+body.c22-cambios .c22-dir .person.c22-p{ display: grid !important; grid-template-columns: 52px minmax(0, 1fr); gap: 14px; align-items: center; width: auto !important; height: auto !important; min-height: 0 !important; margin: 0 !important; padding: 8px 10px 8px 0 !important; background: none !important; border: 0 !important; border-radius: 10px; box-shadow: none !important; cursor: pointer; }
+body.c22-cambios .c22-dir .person.c22-p[hidden]{ display: none !important; }
+body.c22-cambios .c22-dir .person.c22-p:hover{ background: #eef1f1 !important; }
+body.c22-cambios .c22-dir .person.c22-p > .texture, body.c22-cambios .c22-dir .person.c22-p .arrow, body.c22-cambios .c22-dir .person.c22-p .institution{ display: none !important; }
+body.c22-cambios .c22-dir .person.c22-p > .photo-container{ display: block !important; width: 52px !important; height: 52px !important; margin: 0 !important; padding: 0 !important; border-radius: 50% !important; overflow: hidden; background: #e3e8e8 !important; }
+body.c22-cambios .c22-dir .person.c22-p > .photo-container::before, body.c22-cambios .c22-dir .person.c22-p > .photo-container::after{ display: none !important; }
+body.c22-cambios .c22-dir .person.c22-p > .photo-container img{ display: block !important; width: 100% !important; height: 100% !important; object-fit: cover; object-position: center 20%; }
+body.c22-cambios .c22-dir .person.c22-p.c22-p-hist > .photo-container img{ filter: grayscale(1); }
+body.c22-cambios .c22-dir .person.c22-p > .photo-container.c22-ini{ display: grid !important; place-items: center; font: 700 16px "DM Sans", sans-serif; color: #657D81; letter-spacing: .02em; }
+body.c22-cambios .c22-dir .person.c22-p > .content{ grid-column: 2; }
+body.c22-cambios .c22-dir .person.c22-p > .content{ display: block !important; width: auto !important; padding: 0 !important; margin: 0 !important; }
+body.c22-cambios .c22-dir .person.c22-p .title{ margin: 0 !important; font: 700 15.5px/1.2 "DM Sans", sans-serif !important; color: #1B1C1E !important; }
+body.c22-cambios .c22-dir .person.c22-p .rol{ margin: 2px 0 0 !important; font: 600 12.5px/1.3 "DM Sans", sans-serif !important; color: var(--g, #657D81) !important; text-transform: none !important; }
+body.c22-cambios .c22-dir .person.c22-p .rol::first-letter{ text-transform: uppercase; }
+body.c22-cambios .c22-dir .person.c22-p .profession{ margin: 1px 0 0 !important; font: 500 12px/1.3 Montserrat, sans-serif !important; color: #657D81 !important; }
+@media (max-width: 1100px) { body.c22-cambios .c22-dir__people{ grid-template-columns: repeat(2, minmax(0, 1fr)); } body.c22-cambios .c22-dir__grupo{ grid-template-columns: 170px minmax(0, 1fr); } }
 @media (max-width: 760px) {
-	.c22-dir__grupo { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 16px 0; }
-	.c22-dir__people { grid-template-columns: minmax(0, 1fr); gap: 2px; }
-	.c22-dir__tools input { flex-basis: 100%; }
+	body.c22-cambios .c22-dir__grupo{ grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 16px 0; }
+	body.c22-cambios .c22-dir__people{ grid-template-columns: minmax(0, 1fr); gap: 2px; }
+	body.c22-cambios .c22-dir__tools input{ flex-basis: 100%; }
 }
 /* ===== fin directorio de personas ===== */
 
 /* ===== C22 fichas: cabecera más baja ===== */
 /* La cabecera de cada ficha medía 750–980 px (135 px de relleno arriba y 180
    abajo): había que bajar casi una pantalla para empezar a leer. */
-main section.single-header > .content { padding-top: 64px !important; padding-bottom: 96px !important; }
-@media (max-width: 760px) { main section.single-header > .content { padding-top: 40px !important; padding-bottom: 72px !important; } }
+body.c22-cambios main section.single-header > .content{ padding-top: 64px !important; padding-bottom: 96px !important; }
+@media (max-width: 760px) { body.c22-cambios main section.single-header > .content{ padding-top: 40px !important; padding-bottom: 72px !important; } }
 /* análisis: la barra de compartir salía dos veces (arriba y bajo el tablero) */
-body.single-analisis main article section.iframe .share { display: none !important; }
-.c22-oculto { display: none !important; }
+body.c22-cambios.single-analisis main article section.iframe .share{ display: none !important; }
+body.c22-cambios .c22-oculto{ display: none !important; }
 /* ===== fin fichas ===== */
 
 /* ===== C22 eventos sin foto: fecha en vez del logo (con JS) ===== */
 /* Los eventos sin imagen mostraban el logo de C22 en grande. Como en la agenda
    del CEP, ahora llevan la fecha en un recuadro y la tarjeta es compacta. */
-a.card.c22-ev { display: grid !important; grid-template-columns: 70px minmax(0, 1fr); gap: 16px; align-items: start; padding: 18px !important; }
-a.card.c22-ev > .photo-container { display: none !important; }
-a.card.c22-ev > .content { padding: 0 !important; }
-a.card.c22-ev > .content > .title { min-height: 0; }
-a.card.c22-ev > .content > .date { display: none; }
-.c22-ev-fecha { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 2px; border: 1px solid #d7dcdd; border-radius: 8px; background: #fff; font: 700 11px/1.15 "DM Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #A10856; }
-.c22-ev-fecha b { font: 700 26px/1.05 "DM Sans", sans-serif; color: #1B1C1E; letter-spacing: 0; }
-.c22-ev-fecha i { font-style: normal; font-weight: 500; color: #657D81; }
+body.c22-cambios a.card.c22-ev{ display: grid !important; grid-template-columns: 70px minmax(0, 1fr); gap: 16px; align-items: start; padding: 18px !important; }
+body.c22-cambios a.card.c22-ev > .photo-container{ display: none !important; }
+body.c22-cambios a.card.c22-ev > .content{ padding: 0 !important; }
+body.c22-cambios a.card.c22-ev > .content > .title{ min-height: 0; }
+body.c22-cambios a.card.c22-ev > .content > .date{ display: none; }
+body.c22-cambios .c22-ev-fecha{ display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 2px; border: 1px solid #d7dcdd; border-radius: 8px; background: #fff; font: 700 11px/1.15 "DM Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #A10856; }
+body.c22-cambios .c22-ev-fecha b{ font: 700 26px/1.05 "DM Sans", sans-serif; color: #1B1C1E; letter-spacing: 0; }
+body.c22-cambios .c22-ev-fecha i{ font-style: normal; font-weight: 500; color: #657D81; }
 /* ===== fin eventos sin foto ===== */
 
 /* ===== C22 análisis online y oportunidades ===== */
 /* el subtítulo «Analízame con estas visualizaciones interactivas» era más
    grande que el título de la página */
-body.page-template-plantilla-analisis-online main .filters .main-title,
-body.page-template-plantilla-oportunidades main .filters .main-title { font-size: 26px !important; line-height: 1.2 !important; margin-bottom: 6px !important; }
-.c22-vacio { margin: 8px 0 40px; padding: 22px 26px; background: #fff; border-radius: 14px; font: 400 15.5px/1.6 Montserrat, sans-serif; color: #303030; }
-.c22-vacio a { color: #A10856; font-weight: 600; }
+body.c22-cambios.page-template-plantilla-analisis-online main .filters .main-title,
+body.c22-cambios.page-template-plantilla-oportunidades main .filters .main-title{ font-size: 26px !important; line-height: 1.2 !important; margin-bottom: 6px !important; }
+body.c22-cambios .c22-vacio{ margin: 8px 0 40px; padding: 22px 26px; background: #fff; border-radius: 14px; font: 400 15.5px/1.6 Montserrat, sans-serif; color: #303030; }
+body.c22-cambios .c22-vacio a{ color: #A10856; font-weight: 600; }
 /* ===== fin análisis online y oportunidades ===== */
 
 /* ===== C22 sin desplazamiento horizontal ===== */
 /* La trama decorativa de la esquina (.texture) asomaba 225 px por la derecha
    en Análisis online, Personas y Eventos, y la página se movía de lado.
    «clip» recorta sin romper el menú de colores pegajoso. */
-main { overflow-x: clip; }
+body.c22-cambios main{ overflow-x: clip; }
 /* ===== fin sin desplazamiento horizontal ===== */
 
 /* ===== C22 accesibilidad: foco visible y menos movimiento ===== */
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, [tabindex]:focus-visible {
+body.c22-cambios a:focus-visible, body.c22-cambios button:focus-visible, body.c22-cambios input:focus-visible, body.c22-cambios select:focus-visible, body.c22-cambios [tabindex]:focus-visible{
 	outline: 3px solid #FFB923 !important;
 	outline-offset: 2px;
 }
 @media (prefers-reduced-motion: reduce) {
-	[data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; }
-	.simpleParallax img { transform: none !important; }
-	html { scroll-behavior: auto !important; }
+	body.c22-cambios [data-aos]{ opacity: 1 !important; transform: none !important; transition: none !important; }
+	body.c22-cambios .simpleParallax img{ transform: none !important; }
+	html:has(> body.c22-cambios){ scroll-behavior: auto !important; }
 }
 /* ===== fin accesibilidad ===== */
+
+/* ===== C22 editorial: el lenguaje del CEP nuevo ===== */
+/* Fondo blanco, secciones planas separadas por filetes, encabezados con
+   filete de color a todo el ancho, tarjetas planas con línea divisoria
+   entre columnas y fichas con el título sobre blanco. Se conservan los
+   colores de cada serie, los números (P.777, A.43) y la barra de colores. */
+body.c22-cambios{ background: #fff !important; }
+body.c22-cambios :root{ --c22-tinta: #1B1C1E; --c22-gris: #657D81; --c22-filete: #dfe4e4; }
+
+/* -- secciones de la portada: sin paneles grises ni tramas -- */
+body.c22-cambios main section.cards-slider{ background: none !important; border: 0 !important; border-radius: 0 !important; margin-bottom: 18px !important; }
+body.c22-cambios main section.cards-slider > .texture, body.c22-cambios main section.cards-slider.white > .texture{ display: none !important; }
+body.c22-cambios main section.cards-slider.c22-grid > .content{ padding: 28px 0 0 !important; border-bottom: 3px solid var(--sec, var(--c22-gris)); padding-bottom: 10px !important; column-gap: 24px; }
+body.c22-cambios main section.cards-slider.c22-grid > .carrousel-slider{ padding: 22px 0 30px !important; gap: 0 !important; }
+body.c22-cambios #revisa{ --sec: #657D81; } body.c22-cambios #analiza{ --sec: #4CCAA5; } body.c22-cambios #lee{ --sec: #FFB923; } body.c22-cambios #mira{ --sec: #F20231; } body.c22-cambios #conoce{ --sec: #A10856; } body.c22-cambios #comparte{ --sec: #303030; }
+body.c22-cambios main section.cards-slider .content .main-title{ font-size: 26px !important; line-height: 1.1 !important; margin: 0 !important; padding: 0 !important; }
+body.c22-cambios main section.cards-slider .content .main-title::after, body.c22-cambios main section.cards-slider .content .main-title::before{ display: none !important; }
+body.c22-cambios main section.cards-slider .content .title-underline{ border: 0 !important; text-decoration: none !important; background-image: none !important; }
+body.c22-cambios main section.cards-slider .content .wysiwyg p{ font-size: 14.5px !important; color: #41454A !important; }
+body.c22-cambios main section.cards-slider .content a.btn{ padding: 6px 14px !important; font-size: 11.5px !important; letter-spacing: .05em; background: var(--c22-tinta) !important; color: #fff !important; }
+body.c22-cambios main section.cards-slider .content a.btn i{ display: none; }
+body.c22-cambios #comparte > .content{ border-bottom: 0 !important; }
+/* barra de colores más delgada */
+body.c22-cambios main > ul.sticky-header li a{ padding: 7px 10px !important; font-size: 12px !important; }
+
+/* -- tarjetas planas, como las del CEP -- */
+body.c22-cambios a.card, body.c22-cambios a.card.slide{ background: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; overflow: visible !important; }
+body.c22-cambios a.card > .photo-container{ border-radius: 6px !important; overflow: hidden; }
+body.c22-cambios a.card > .content{ background: none !important; padding: 12px 0 0 !important; }
+body.c22-cambios a.card > .content > .title{ font-size: 16.5px !important; line-height: 1.3 !important; }
+body.c22-cambios a.card .author .avatar-container{ display: none !important; }
+body.c22-cambios a.card .author .names, body.c22-cambios a.card .author .names li{ font-size: 12px !important; color: var(--c22-gris) !important; font-weight: 500 !important; }
+body.c22-cambios a.card .author{ margin-top: 8px !important; }
+body.c22-cambios a.card > .content > .arrow{ display: none !important; }
+body.c22-cambios a.card > .content > .date{ grid-column: 1 / -1 !important; font-size: 12px !important; color: var(--c22-gris) !important; margin-top: 6px !important; }
+body.c22-cambios a.card:hover .title{ text-decoration: underline; text-underline-offset: 3px; }
+body.c22-cambios a.card > .photo-container::after{ font-size: 40px !important; }
+/* línea divisoria entre columnas (portada, publicaciones, listados) */
+body.c22-cambios main section.cards-slider.c22-grid > .carrousel-slider > a.card,
+body.c22-cambios .categories-tabs .slider.c22-grid4 > a.card,
+body.c22-cambios:not(.home) main .alm-listing > a.card{ position: relative; padding: 0 14px !important; }
+body.c22-cambios main section.cards-slider.c22-grid > .carrousel-slider > a.card + a.card::before,
+body.c22-cambios .categories-tabs .slider.c22-grid4 > a.card + a.card::before,
+body.c22-cambios:not(.home) main .alm-listing > a.card + a.card::before{ content: ''; position: absolute; left: 0; top: 0; bottom: 0; border-left: 1px solid var(--c22-filete); }
+body.c22-cambios main section.cards-slider.c22-grid > .carrousel-slider > a.card:first-child,
+body.c22-cambios .categories-tabs .slider.c22-grid4 > a.card:first-child{ padding-left: 0 !important; }
+body.c22-cambios .categories-tabs .slider.c22-grid4{ gap: 0 !important; }
+body.c22-cambios:not(.home) main .alm-listing:has(> a.card){ row-gap: 28px !important; column-gap: 0 !important; }
+/* eventos sin foto: también planos, con filete */
+body.c22-cambios a.card.c22-ev{ padding: 14px 14px 14px 0 !important; border-bottom: 1px solid var(--c22-filete) !important; }
+
+/* -- destacado: plano, como el del CEP -- */
+body.c22-cambios .c22-dest__big, body.c22-cambios .c22-dest--b .c22-dest__small{ background: none !important; box-shadow: none !important; border-radius: 0 !important; }
+body.c22-cambios .c22-dest--b{ grid-template-columns: minmax(0, 1fr) !important; row-gap: 16px !important; }
+body.c22-cambios .c22-dest--b > .c22-dest__big{ border-bottom: 1px solid var(--c22-filete); padding-bottom: 18px; height: auto !important; }
+body.c22-cambios .c22-dest--b .c22-dest__img{ border-radius: 6px; }
+@media (min-width: 1001px) {
+	body.c22-cambios .c22-dest--b > .c22-dest__big{ grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) !important; }
+	body.c22-cambios .c22-dest--b .c22-dest__img{ height: 300px !important; }
+	body.c22-cambios .c22-dest--b .c22-dest__txt{ padding: 6px 6px 6px 32px !important; }
+	body.c22-cambios .c22-dest--b .c22-dest__small{ padding: 0 14px !important; position: relative; }
+	body.c22-cambios .c22-dest--b .c22-dest__small + .c22-dest__small::before{ content: ''; position: absolute; left: 0; top: 0; bottom: 0; border-left: 1px solid var(--c22-filete); }
+	body.c22-cambios .c22-dest--b .c22-dest__small:first-child{ padding-left: 0 !important; }
+	body.c22-cambios .c22-dest--b > .c22-dest__side{ display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-column: 1 / -1; }
+}
+@media (max-width: 1000px) { body.c22-cambios .c22-dest--b .c22-dest__txt{ padding: 14px 0 0 !important; } }
+
+
+/* -- cabeceras de página: planas, con filete -- */
+body.c22-cambios main section.page-header{ background: none !important; border-radius: 0 !important; border-bottom: 3px solid var(--c22-tinta); }
+body.c22-cambios main section.page-header > .content{ padding: 26px 0 18px !important; }
+body.c22-cambios main section.page-header > .texture{ display: none !important; }
+body.c22-cambios main .wrap-xl:has(> section.page-header){ margin-bottom: 8px; }
+
+/* -- fichas: título sobre blanco, foto debajo, como el artículo del CEP -- */
+body.c22-cambios main section.single-header{ display: flex !important; flex-direction: column; height: auto !important; background: #fff !important; overflow: visible !important; }
+body.c22-cambios main section.single-header > .veil, body.c22-cambios main section.single-header > img.logo, body.c22-cambios main section.single-header > img.counterform{ display: none !important; }
+body.c22-cambios main section.single-header > .content{ order: 1; position: relative !important; width: 90%; max-width: 1000px; margin: 0 auto; padding: 34px 0 18px !important; text-align: left !important; color: var(--c22-tinta) !important; }
+body.c22-cambios main section.single-header > .content .date{ color: var(--c22-gris) !important; font-size: 13px !important; letter-spacing: .06em; }
+body.c22-cambios main section.single-header > .content .categories span{ background: var(--c22-tinta) !important; color: #fff !important; }
+body.c22-cambios main section.single-header h1.main-title{ color: var(--c22-tinta) !important; text-align: left !important; font-size: 40px !important; line-height: 1.12 !important; margin: 8px 0 14px !important; padding-bottom: 12px !important; }
+body.c22-cambios main section.single-header .resume{ justify-content: flex-start !important; text-align: left !important; color: var(--c22-tinta) !important; }
+body.c22-cambios main section.single-header .resume *{ color: inherit; }
+body.c22-cambios main section.single-header .authors .name{ color: var(--c22-tinta) !important; }
+body.c22-cambios main section.single-header .authors .rol{ color: var(--c22-gris) !important; }
+body.c22-cambios main section.single-header .c22-cita-prov__pdf{ border: 1px solid var(--c22-tinta) !important; }
+body.c22-cambios main section.single-header > .simpleParallax{ order: 2; position: relative !important; inset: auto !important; width: 90% !important; max-width: 1000px; height: 440px !important; margin: 0 auto; border-radius: 6px; overflow: hidden; }
+body.c22-cambios main section.single-header > .simpleParallax img, body.c22-cambios main section.single-header img.photo{ position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover; transform: none !important; }
+body.c22-cambios main .wrap-s.share-top{ margin-top: 14px !important; }
+body.c22-cambios main .wrap-s.share-top .share, body.c22-cambios main section.authors .share{ box-shadow: none !important; border: 1px solid var(--c22-filete); }
+body.c22-cambios main section.authors{ background: #fff !important; border-top: 1px solid var(--c22-filete); }
+body.c22-cambios main section.authors > .texture-c22{ display: none !important; }
+body.c22-cambios main section.related{ background: #f4f6f6 !important; }
+@media (max-width: 760px) {
+	body.c22-cambios main section.single-header h1.main-title{ font-size: 28px !important; }
+	body.c22-cambios main section.single-header > .simpleParallax{ height: 220px !important; }
+	body.c22-cambios main section.cards-slider .content .main-title{ font-size: 22px !important; }
+}
+/* ajustes: el tema da 30 px de relleno al texto de la tarjeta con un selector más fuerte */
+body.c22-cambios a.card.card > .content, body.c22-cambios main .cards-slider .carrousel-slider .slide.card > .content, body.c22-cambios main .categories-tabs .slider .slide.card > .content{ padding: 12px 0 0 !important; }
+body.c22-cambios a.card.card > .content > .title{ margin: 0 0 4px !important; min-height: 0 !important; }
+body.c22-cambios a.card.card > .content > .author{ align-self: start !important; margin-top: 6px !important; }
+body.c22-cambios a.card.card > .content{ grid-template-rows: auto auto 1fr !important; }
+body.c22-cambios a.card.card > .content > .date{ align-self: end !important; }
+body.c22-cambios main section.cards-slider.c22-grid > .carrousel-slider{ padding-bottom: 16px !important; }
+/* ficha: cabecera, foto, compartir y texto con el mismo borde izquierdo (864 px) */
+body.c22-cambios.single main section.single-header > .content,
+body.c22-cambios.single main section.single-header > .simpleParallax{ max-width: 864px !important; }
+body.c22-cambios.single main section.single-header > .content{ padding-top: 30px !important; }
+body.c22-cambios.single main section.single-header h1.main-title{ border-bottom-width: 3px !important; }
+body.c22-cambios.single main section.single-header .resume{ display: block !important; }
+body.c22-cambios.single main section.single-header .resume .authors{ margin: 14px 0 0 !important; }
+body.c22-cambios.single main section.single-header .resume .authors-list{ display: flex !important; flex-wrap: wrap; gap: 6px 28px; }
+body.c22-cambios.single main section.single-header .resume .authors-list li{ margin: 0 !important; }
+body.c22-cambios.single main section.single-header .c22-cita-prov{ margin: 16px 0 0 !important; }
+body.c22-cambios.single article > .wrap-s{ max-width: 864px !important; }
+body.c22-cambios.single article .wysiwyg > p, body.c22-cambios.single article .wysiwyg > ul, body.c22-cambios.single article .wysiwyg > ol,
+body.c22-cambios.single article .wysiwyg > h2, body.c22-cambios.single article .wysiwyg > h3, body.c22-cambios.single article .wysiwyg > .c22-citar{ max-width: 700px; }
+/* Publicaciones: cada serie con el mismo encabezado que la portada */
+body.c22-cambios .categories-tabs > .intro{ background: none !important; float: none !important; box-sizing: border-box; width: 90% !important; max-width: 1296px; margin: 0 auto !important; padding: 30px 0 10px !important; display: flex; align-items: baseline; gap: 24px; border-bottom: 3px solid var(--sec, #A10856); }
+body.c22-cambios .categories-tabs > .intro > .texture{ display: none !important; }
+body.c22-cambios .categories-tabs > .intro .title-container{ flex: 0 0 auto; width: auto !important; }
+body.c22-cambios .categories-tabs > .intro h2.main-title{ font-size: 26px !important; line-height: 1.1 !important; margin: 0 !important; border: 0 !important; }
+body.c22-cambios .categories-tabs > .intro h2.main-title::after, body.c22-cambios .categories-tabs > .intro h2.main-title::before{ display: none !important; }
+body.c22-cambios .categories-tabs > .intro .description{ padding: 0 !important; width: auto !important; flex: 1 1 auto; }
+body.c22-cambios .categories-tabs > .intro .description p{ font-size: 14.5px !important; color: #41454A !important; margin: 0 !important; }
+body.c22-cambios #puntos-de-referencia{ --sec: #657D81; } body.c22-cambios #notas-de-investigacion{ --sec: #FFB923; } body.c22-cambios #columnas{ --sec: #F20231; } body.c22-cambios #academicas{ --sec: #A10856; }
+body.c22-cambios .categories-tabs .tab-content > .slider.c22-grid4{ margin-top: 22px !important; }
+body.c22-cambios .categories-tabs a.btn{ padding: 6px 14px !important; font-size: 11.5px !important; background: var(--c22-tinta) !important; }
+body.c22-cambios main section.page-header h1.main-title{ border-bottom: 0 !important; padding-bottom: 0 !important; text-decoration: none !important; }
+body.c22-cambios main section.page-header h1.main-title::after, body.c22-cambios main section.page-header h1.main-title::before{ display: none !important; }
+/* títulos de bloque dentro de páginas (Noticias, Eventos, «Analízame…», «Quiénes somos»):
+   el mismo encabezado de sección, con filete de color a todo el ancho */
+body.c22-cambios.page-template-plantilla-eventos-y-noticias main .news > .main-title,
+body.c22-cambios.page-template-plantilla-eventos-y-noticias main .events > .main-title,
+body.c22-cambios.page-template-plantilla-analisis-online main .filters .main-title,
+body.c22-cambios.page-template-plantilla-oportunidades main .filters .main-title{
+	display: block !important; font-size: 24px !important; line-height: 1.15 !important; margin: 0 0 18px !important;
+	padding: 0 0 8px !important; border: 0 !important; border-bottom: 3px solid var(--sec, #303030) !important; text-decoration: none !important; }
+body.c22-cambios.page-template-plantilla-eventos-y-noticias main .news > .main-title::after, body.c22-cambios.page-template-plantilla-eventos-y-noticias main .events > .main-title::after,
+body.c22-cambios.page-template-plantilla-analisis-online main .filters .main-title::after, body.c22-cambios.page-template-plantilla-oportunidades main .filters .main-title::after{ display: none !important; }
+body.c22-cambios.page-template-plantilla-eventos-y-noticias main .news{ --sec: #FFB923; }
+body.c22-cambios.page-template-plantilla-eventos-y-noticias main .events{ --sec: #A10856; }
+body.c22-cambios.page-template-plantilla-analisis-online main .filters{ --sec: #4CCAA5; }
+body.c22-cambios.page-template-plantilla-eventos-y-noticias main .news .alm-listing, body.c22-cambios.page-template-plantilla-eventos-y-noticias main .news{ background: none !important; box-shadow: none !important; padding: 0 !important; }
+body.c22-cambios a.card-news{ border-radius: 6px !important; box-shadow: none !important; }
+/* Sobre C22: «Quiénes somos» como encabezado, sin la C gigante */
+body.c22-cambios.page-template-plantilla-sobre-c22 main section.buttons-container.has-logo{ display: flex !important; align-items: center; justify-content: space-between; gap: 20px; min-height: 0 !important; height: auto !important; padding: 26px 0 10px !important; margin-bottom: 18px; border-bottom: 3px solid #657D81; text-align: left !important; }
+body.c22-cambios.page-template-plantilla-sobre-c22 main section.buttons-container .logo-c22{ display: none !important; }
+body.c22-cambios.page-template-plantilla-sobre-c22 main section.buttons-container .main-title{ font-size: 26px !important; margin: 0 !important; padding: 0 !important; border: 0 !important; text-align: left !important; width: auto !important; flex: 0 1 auto; }
+body.c22-cambios.page-template-plantilla-sobre-c22 main section.buttons-container .main-title::after{ display: none !important; }
+body.c22-cambios.page-template-plantilla-sobre-c22 main section.buttons-container .buttons{ width: auto !important; margin: 0 !important; }
+body.c22-cambios.page-template-plantilla-sobre-c22 main section.buttons-container .btn{ padding: 6px 14px !important; font-size: 11.5px !important; background: #1B1C1E !important; }
+/* listados en grilla: la primera tarjeta de cada fila sin filete ni sangría */
+body.c22-cambios:not(.home) main .alm-listing.grid-column-4 > a.card:nth-child(4n+1),
+body.c22-cambios:not(.home) main .alm-listing.grid-column-3 > a.card:nth-child(3n+1){ padding-left: 0 !important; }
+body.c22-cambios:not(.home) main .alm-listing.grid-column-4 > a.card:nth-child(4n+1)::before,
+body.c22-cambios:not(.home) main .alm-listing.grid-column-3 > a.card:nth-child(3n+1)::before{ display: none !important; }
+@media (max-width: 1100px) {
+	body.c22-cambios:not(.home) main .alm-listing > a.card{ padding: 0 !important; }
+	body.c22-cambios:not(.home) main .alm-listing > a.card::before{ display: none !important; }
+}
+/* ===== fin editorial ===== */
