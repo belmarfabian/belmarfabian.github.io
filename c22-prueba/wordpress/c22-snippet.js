@@ -1,10 +1,9 @@
 /*
  * Capa de cambios de c22cepchile.cl: comportamiento (JS).
- * Se carga al final de cada página en http://localhost:8805.
  *
- * En WordPress no hay un campo nativo para JS: va en el mismo lugar donde hoy
- * está el código de Google Analytics y el bloque del Monitor Legislativo
- * (campo de scripts del tema o header/footer del tema). Ver README.md.
+ * Va en el <head> (WPCode: «Site Wide Header»). Marca el <body> apenas el
+ * navegador lo crea, antes de dibujar nada, y rearma la página cuando termina
+ * de cargar; así no se alcanza a ver la versión anterior.
  * Cada bloque es independiente: si uno falla, los demás siguen.
  */
 (function () {
@@ -13,19 +12,37 @@
   // WordPress iniciada (el <body> trae la clase «logged-in»). Para
   // publicarlos a todos, cambiar a false.
   var SOLO_EDITORES = true;
-  if (!document.body) return;
-  if (SOLO_EDITORES && !document.body.classList.contains('logged-in')) return;
-  // todo el CSS de la versión para WordPress cuelga de esta clase
-  document.body.classList.add('c22-cambios');
   var MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
   var DIA = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
   var $ = window.jQuery;
+  var activo = null, cola = [];
 
+  // 1) apenas existe el <body>: decidir si se aplican los cambios y marcarlo
+  function alBody(fn) {
+    if (document.body) return fn();
+    var mo = new MutationObserver(function () { if (document.body) { mo.disconnect(); fn(); } });
+    mo.observe(document.documentElement, { childList: true });
+  }
+  alBody(function () {
+    activo = !(SOLO_EDITORES && !document.body.classList.contains('logged-in'));
+    // todo el CSS de la versión para WordPress cuelga de .c22-cambios
+    document.body.classList.add(activo ? 'c22-cambios' : 'c22-listo');
+    if (activo) cola.forEach(programar);
+    cola = null;
+  });
+
+  // 2) cada bloque corre cuando la página terminó de cargar, después de los
+  //    $(document).ready del tema, que arman los carruseles
+  function programar(fn) {
+    function go() {
+      $ = window.jQuery;
+      if ($) $(function () { setTimeout(fn, 0); }); else fn();
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+  }
   function ready(fn) {
-    // después de los $(document).ready del tema, que arman los carruseles
-    if ($) $(function () { setTimeout(fn, 0); });
-    else if (document.readyState !== 'loading') fn();
-    else document.addEventListener('DOMContentLoaded', fn);
+    if (cola) cola.push(fn);       // todavía no hay <body>: se programa al decidir
+    else if (activo) programar(fn);
   }
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
@@ -234,26 +251,89 @@
     render();
   });
 
-  /* ===== C22 personas: buscador ===== */
+  /* ===== C22 personas: directorio como el Equipo del CEP ===== */
+  // Grupos con su nombre a la izquierda y personas en filas (foto redonda,
+  // nombre, cargo, formación), buscador y filtro actual/histórico. Se mueven las
+  // fichas originales, así cada una sigue abriendo su perfil.
+  var GRUPOS = [
+    ['Dirección y coordinación', /director|coordina/i, 'g-dir'],
+    ['Investigadores', /investigador|editora/i, 'g-inv', /asistente/i],
+    ['Asistentes de investigación', /asistente/i, 'g-asi'],
+    ['Práctica y pasantías', /pasant|pr[aá]ctic/i, 'g-pas']
+  ];
   ready(function () {
     if (!document.body.classList.contains('page-template-plantilla-personas')) return;
-    var first = document.querySelector('main .alm-listing');
-    if (!first) return;
-    var wrap = first.closest('.ajax-load-more-wrap') || first;
-    var box = document.createElement('div');
-    box.className = 'c22-personas-buscar';
-    box.innerHTML = '<input type="search" placeholder="Buscar por nombre, formación o cargo" aria-label="Buscar personas"><p aria-live="polite"></p>';
-    wrap.parentNode.insertBefore(box, wrap);
-    var input = box.querySelector('input'), out = box.querySelector('p');
-    input.addEventListener('input', function () {
-      var q = norm(input.value.trim()), n = 0;
-      document.querySelectorAll('main .alm-listing > .person').forEach(function (p) {
-        var hit = !q || norm(p.textContent).indexOf(q) >= 0;
-        p.hidden = !hit;
-        if (hit) n++;
-      });
-      out.textContent = q ? n + (n === 1 ? ' persona' : ' personas') : '';
+    var lists = document.querySelectorAll('main .alm-listing');
+    if (!lists.length) return;
+    var actuales = [].slice.call(lists[0].querySelectorAll(':scope > .person'));
+    var historicos = lists[1] ? [].slice.call(lists[1].querySelectorAll(':scope > .person')) : [];
+    if (!actuales.length) return;
+    function fila(p, hist) {
+      p.classList.add('c22-p');
+      if (hist) p.classList.add('c22-p-hist');
+      p._t = norm(p.textContent);
+      if (!p.querySelector('.photo-container')) {  // sin foto: círculo con iniciales
+        var nom = (p.querySelector('.title') || p).textContent.trim().split(/\s+/);
+        var ini = document.createElement('div');
+        ini.className = 'photo-container c22-ini';
+        ini.setAttribute('aria-hidden', 'true');
+        ini.textContent = (nom[0] || '').charAt(0) + (nom.length > 1 ? nom[nom.length - 1].charAt(0) : '');
+        p.insertBefore(ini, p.firstChild);
+      }
+      var rol = p.querySelector('.rol');
+      p._rol = rol ? rol.textContent.trim() : '';
+      return p;
+    }
+    var grupos = GRUPOS.map(function (g) { return { name: g[0], cls: g[2], rx: g[1], no: g[3], people: [] }; });
+    actuales.forEach(function (p) {
+      fila(p, false);
+      var g = grupos.filter(function (g) { return g.rx.test(p._rol) && !(g.no && g.no.test(p._rol)); })[0] || grupos[1];
+      g.people.push(p);
     });
+    grupos = grupos.filter(function (g) { return g.people.length; });
+    if (historicos.length) grupos.push({ name: 'Equipo histórico', cls: 'g-his', people: historicos.map(function (p) { return fila(p, true); }), hist: true });
+
+    var total = actuales.length + historicos.length;
+    var dir = document.createElement('div');
+    dir.className = 'c22-dir';
+    dir.innerHTML = '<div class="c22-dir__tools"><input type="search" placeholder="Buscar por nombre, formación o cargo" aria-label="Buscar personas">' +
+      '<div class="chips" role="group" aria-label="Filtrar"><button type="button" data-f="" aria-pressed="true">Todos</button>' +
+      '<button type="button" data-f="act" aria-pressed="false">Equipo actual <span>' + actuales.length + '</span></button>' +
+      (historicos.length ? '<button type="button" data-f="his" aria-pressed="false">Equipo histórico <span>' + historicos.length + '</span></button>' : '') +
+      '</div></div><p class="c22-dir__count" aria-live="polite"></p>';
+    grupos.forEach(function (g) {
+      var sec = document.createElement('section');
+      sec.className = 'c22-dir__grupo ' + g.cls;
+      sec.innerHTML = '<h2>' + esc(g.name) + '</h2><div class="c22-dir__people"></div>';
+      var box = sec.querySelector('.c22-dir__people');
+      g.people.forEach(function (p) { box.appendChild(p); });
+      g.sec = sec;
+      dir.appendChild(sec);
+    });
+    var wrap = lists[0].closest('.ajax-load-more-wrap') || lists[0];
+    wrap.parentNode.insertBefore(dir, wrap);
+    document.body.classList.add('c22-directorio');
+
+    var input = dir.querySelector('input'), count = dir.querySelector('.c22-dir__count'), filtro = '';
+    function render() {
+      var q = norm(input.value.trim()), n = 0;
+      grupos.forEach(function (g) {
+        var vis = 0, on = !filtro || (filtro === 'his') === !!g.hist;
+        g.people.forEach(function (p) { var hit = on && (!q || p._t.indexOf(q) >= 0); p.hidden = !hit; if (hit) vis++; });
+        g.sec.hidden = !vis;
+        n += vis;
+      });
+      count.textContent = n === total ? total + ' personas' : n + ' de ' + total + ' personas';
+    }
+    input.addEventListener('input', render);
+    dir.querySelectorAll('.chips button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        filtro = b.getAttribute('data-f');
+        dir.querySelectorAll('.chips button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        render();
+      });
+    });
+    render();
   });
 
   /* ===== C22 fechas legibles: 13/07/2026 → 13 jul 2026 ===== */
@@ -273,4 +353,7 @@
     if (window.MutationObserver) new MutationObserver(function () { fechas(); }).observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
   });
 
+  /* ===== C22 carga sin parpadeo: listo ===== */
+  // último en la cola: cuando todo lo anterior ya rearmó la página, se muestra
+  ready(function () { document.body.classList.add('c22-listo'); });
 })();
