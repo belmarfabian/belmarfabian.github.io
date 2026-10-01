@@ -731,4 +731,8 @@ body.c22-cambios.page-template-plantilla-eventos-y-noticias main .news .ajax-loa
 body.c22-cambios main section.page-header > .texture.texture{ opacity: .8 !important; top: 14px !important; right: -60px !important; }
 body.c22-cambios main section.single-header section.authors, body.c22-cambios main .wrap-s.share-top .share{ background: transparent !important; }
 body.c22-cambios #comparte > .content{ border-top: 0 !important; }
+/* Monitor Legislativo: trae su propia portada; la cabecera de WordPress, que el
+   CSS adicional del sitio ya apaga, sigue apagada aunque la capa la reestilice */
+body.c22-cambios.page-id-9531 main section.single-header, body.c22-cambios.page-id-9531 main .share-top,
+body.c22-cambios.page-id-9531 main section.single-header::after{ display: none !important; }
 /* ===== fin identidad ===== */
