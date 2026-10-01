@@ -49,23 +49,68 @@
   }
   function txt(html) { var d = document.createElement('textarea'); d.innerHTML = html || ''; return d.value; }
 
-  /* ===== C22 portada: banner con lo último de cada serie ===== */
+  /* ===== C22 portada: destacados — uno grande y tres chicos ===== */
   // Reemplaza el banner de la foto recortada. Toma la tarjeta más reciente de
   // Revisa, Analiza, Lee y Mira (las mismas que ya trae la portada: foto,
-  // número de serie, autores y fecha), las ordena de la más nueva a la más
-  // antigua y las hace rotar con fundido, como el destacado del CEP.
-  // Se actualiza solo: cada publicación nueva entra al banner sin tocar nada.
+  // número de serie, autores y fecha). La más reciente va en grande y las
+  // otras tres en chico. Se actualiza solo con cada publicación nueva.
+  // DISENO: 'a' grande + columna · 'b' grande + fila · 'c' grande que rota.
+  var DISENO = 'a';
+  try { var qd = /[?&]diseno=([abc])/.exec(location.search); if (qd) DISENO = qd[1]; } catch (e) {}
   var SERIES = {
-    revisa: ['Puntos de Referencia', 'pdr', 'publicaciones'],
-    analiza: ['Análisis online', 'ana', 'analisis'],
-    lee: ['Notas de investigación', 'not', 'publicaciones'],
-    mira: ['Columnas', 'col', 'publicaciones']
+    revisa: ['Puntos de Referencia', 'pdr'],
+    analiza: ['Análisis online', 'ana'],
+    lee: ['Notas de investigación', 'not'],
+    mira: ['Columnas', 'col']
   };
+  // Imágenes que conviene reemplazar mientras se cambian en WordPress
+  // (imagen destacada de la publicación).
+  var IMAGENES = {
+    'monitor-legislativo-las-votaciones-del-congreso-en-visualizaciones':
+      'https://static.cepchile.cl/uploads/c22/2026/08/16-054150_bp5j_c22-congreso-nacional.jpg'
+  };
+  function imagenDe(link) {
+    for (var k in IMAGENES) if (link.indexOf(k) >= 0) return IMAGENES[k];
+    return '';
+  }
+  ready(function () {  // la tarjeta del Monitor en Analiza, con la misma foto
+    Object.keys(IMAGENES).forEach(function (k) {
+      document.querySelectorAll('a.card[href*="' + k + '"] img.photo').forEach(function (i) { i.src = IMAGENES[k]; i.removeAttribute('srcset'); });
+    });
+  });
   function fechaDe(el) {
     var m = el && /(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(el.getAttribute('title') || el.textContent);
     return m ? new Date(+m[3], +m[2] - 1, +m[1]) : null;
   }
+  function fechaTxt(d) { return d ? d.getDate() + ' ' + MES[d.getMonth()] + ' ' + d.getFullYear() : ''; }
   function lista(xs) { return xs.length < 2 ? xs.join('') : xs.slice(0, -1).join(', ') + ' y ' + xs[xs.length - 1]; }
+  function resumenDe(link, cb) {
+    if (!window.fetch || !window.DOMParser) return;
+    fetch(link, { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      var p = [].map.call(doc.querySelectorAll('article .wysiwyg p, section.wysiwyg p'), function (x) { return x.textContent.replace(/\s+/g, ' ').trim(); })
+        .filter(function (t) { return t.length > 80; })[0];
+      if (!p) return;
+      cb(p.length > 280 ? p.slice(0, 280).replace(/\s+\S*$/, '') + '…' : p);
+    }).catch(function () {});
+  }
+  function imgHtml(it, cls, lazy) {
+    return '<a class="' + cls + (it.img ? '' : ' sin-foto') + ' s-' + it.s[1] + '" href="' + esc(it.link) + '" tabindex="-1" aria-hidden="true">' +
+      (it.img ? '<img src="' + esc(it.img) + '" alt=""' + (lazy ? ' loading="lazy"' : '') + '>' : '') +
+      '<span class="c22-num">' + esc(it.num) + '<small>' + esc(it.s[0].toLowerCase()) + '</small></span></a>';
+  }
+  function grande(it, extra) {
+    return '<article class="c22-dest__big s-' + it.s[1] + '"' + (extra || '') + '>' + imgHtml(it, 'c22-dest__img', false) +
+      '<div class="c22-dest__txt"><p class="c22-dest__serie">' + esc(it.s[0]) + (it.date ? ' <span>· ' + fechaTxt(it.date) + '</span>' : '') + '</p>' +
+      '<h2><a href="' + esc(it.link) + '">' + esc(it.title) + '</a></h2><p class="c22-dest__resumen"></p>' +
+      (it.names.length ? '<p class="c22-dest__autores">' + esc(lista(it.names)) + '</p>' : '') +
+      '<a class="c22-dest__btn" href="' + esc(it.link) + '">Leer</a></div></article>';
+  }
+  function chico(it, k) {
+    return '<article class="c22-dest__small s-' + it.s[1] + '" data-k="' + k + '">' + imgHtml(it, 'c22-dest__thumb', true) +
+      '<div><p class="c22-dest__serie">' + esc(it.s[0]) + (it.date ? ' <span>· ' + fechaTxt(it.date) + '</span>' : '') + '</p>' +
+      '<h3><a href="' + esc(it.link) + '">' + esc(it.title) + '</a></h3></div></article>';
+  }
   ready(function () {
     if (!document.body.classList.contains('home')) return;
     var hero = document.querySelector('main > section.slider-1');
@@ -77,9 +122,10 @@
       var pc = card.querySelector('.photo-container'), img = card.querySelector('img.photo');
       var num = pc ? getComputedStyle(pc, '::after').content : '';
       num = /^["']/.test(num || '') ? num.slice(1, -1) : '';
-      var src = img && (img.getAttribute('src') || '').trim();
+      var link = card.getAttribute('href');
       items.push({
-        s: SERIES[id], link: card.getAttribute('href'), num: num, img: src || '',
+        s: SERIES[id], link: link, num: num,
+        img: imagenDe(link) || (img && (img.getAttribute('src') || '').trim()) || '',
         title: (card.querySelector('.title') || card).textContent.trim(),
         date: fechaDe(card.querySelector('.date')),
         names: [].map.call(card.querySelectorAll('.names li'), function (li) { return li.textContent.trim(); })
@@ -88,80 +134,56 @@
     if (items.length < 2) return;
     items.sort(function (a, b) { return (b.date || 0) - (a.date || 0); });
 
-    var lema = (hero.querySelector('.slick-slide:not(.slick-cloned) .title') || {}).textContent || 'Aprender de Chile con métodos digitales';
-    var n = items.length;
-    var slides = items.map(function (it, i) {
-      var f = it.date ? it.date.getDate() + ' ' + MES[it.date.getMonth()] + ' ' + it.date.getFullYear() : '';
-      return '<article class="c22-slide s-' + it.s[1] + (i ? '' : ' is-on') + '" role="group" aria-roledescription="diapositiva" aria-label="' + (i + 1) + ' de ' + n + '"' + (i ? ' aria-hidden="true" inert' : '') + '>' +
-        '<a class="c22-slide__img' + (it.img ? '' : ' sin-foto') + '" href="' + esc(it.link) + '" tabindex="-1" aria-hidden="true">' +
-        (it.img ? '<img src="' + esc(it.img) + '" alt=""' + (i ? ' loading="lazy"' : '') + '>' : '') +
-        '<span class="c22-slide__num">' + esc(it.num) + '<small>' + esc(it.s[0].toLowerCase()) + '</small></span></a>' +
-        '<div class="c22-slide__txt"><p class="c22-slide__serie">' + esc(it.s[0]) + (f ? ' <span>· ' + f + '</span>' : '') + '</p>' +
-        '<h2><a href="' + esc(it.link) + '">' + esc(it.title) + '</a></h2><p class="c22-slide__resumen"></p>' +
-        (it.names.length ? '<p class="c22-slide__autores">' + esc(lista(it.names)) + '</p>' : '') +
-        '<a class="c22-slide__btn" href="' + esc(it.link) + '">Leer</a></div></article>';
-    }).join('');
     var sec = document.createElement('section');
-    sec.className = 'c22-banner';
-    sec.setAttribute('aria-roledescription', 'carrusel');
+    sec.className = 'c22-dest c22-dest--' + DISENO;
     sec.setAttribute('aria-label', 'Lo último de C22');
-    sec.innerHTML = '<h1 class="c22-banner__lema">' + esc(lema.trim()) + '</h1><div class="c22-banner__slides">' + slides +
-      '<div class="c22-banner__ctl"><button type="button" class="prev" aria-label="Anterior">‹</button><span class="dots"></span>' +
-      '<button type="button" class="next" aria-label="Siguiente">›</button><button type="button" class="pause">Pausar</button></div></div>';
+    if (DISENO === 'c') {
+      sec.setAttribute('aria-roledescription', 'carrusel');
+      sec.innerHTML = '<div class="c22-dest__stage">' + items.map(function (it, k) {
+        return grande(it, ' role="group" aria-roledescription="diapositiva" aria-label="' + (k + 1) + ' de ' + items.length + '"');
+      }).join('') + '</div><div class="c22-dest__side"></div>' +
+        '<button type="button" class="c22-dest__pause">Pausar</button>';
+    } else {
+      sec.innerHTML = grande(items[0]) + '<div class="c22-dest__side">' + items.slice(1, 4).map(chico).join('') + '</div>';
+    }
     hero.parentNode.insertBefore(sec, hero);
     try { if ($ && $.fn.slick && $(hero).hasClass('slick-initialized')) $(hero).slick('unslick'); } catch (e) {}
     document.body.classList.add('c22-sin-banner');
 
-    // rotación: 7 s, se detiene con el mouse encima, con el foco dentro o con el botón (WCAG 2.2.2)
-    var arts = [].slice.call(sec.querySelectorAll('.c22-slide')), dots = sec.querySelector('.dots'), btn = sec.querySelector('.pause');
-    var cur = 0, paused = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches, hover = false, timer;
-    arts.forEach(function (a, k) {
-      var d = document.createElement('button');
-      d.type = 'button'; d.className = 'dot s-' + items[k].s[1]; d.setAttribute('aria-label', 'Ver ' + (k + 1) + ' de ' + n);
-      d.addEventListener('click', function () { show(k); });
-      dots.appendChild(d);
-    });
+    var bigs = [].slice.call(sec.querySelectorAll('.c22-dest__big'));
+    var pedidos = {};
+    function resumen(k) {
+      if (pedidos[k]) return; pedidos[k] = 1;
+      resumenDe(items[k].link, function (t) { bigs[DISENO === 'c' ? k : 0].querySelector('.c22-dest__resumen').textContent = t; });
+    }
+    if (DISENO !== 'c') { resumen(0); return; }
+
+    // diseño c: el grande rota (8 s, fundido) y al lado quedan los otros tres;
+    // al hacer clic en uno chico pasa a grande. Pausa con mouse, foco o botón.
+    var side = sec.querySelector('.c22-dest__side'), btn = sec.querySelector('.c22-dest__pause');
+    var cur = 0, hover = false, paused = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     function show(k) {
-      cur = (k + n) % n;
-      arts.forEach(function (a, j) {
+      cur = (k + items.length) % items.length;
+      bigs.forEach(function (a, j) {
         a.classList.toggle('is-on', j === cur);
         if (j === cur) { a.removeAttribute('aria-hidden'); a.removeAttribute('inert'); } else { a.setAttribute('aria-hidden', 'true'); a.setAttribute('inert', ''); }
       });
-      [].forEach.call(dots.children, function (d, j) { d.setAttribute('aria-current', j === cur ? 'true' : 'false'); });
+      side.innerHTML = items.map(function (it, j) { return j === cur ? '' : chico(it, j); }).join('');
+      resumen(cur); resumen((cur + 1) % items.length);
     }
+    side.addEventListener('click', function (e) {
+      var art = e.target.closest('.c22-dest__small');
+      if (!art || e.target.closest('h3 a')) return;
+      e.preventDefault(); show(+art.getAttribute('data-k'));
+    });
     function setPaused(p) { paused = p; btn.textContent = p ? 'Reanudar' : 'Pausar'; btn.setAttribute('aria-pressed', p ? 'true' : 'false'); }
-    sec.querySelector('.prev').addEventListener('click', function () { show(cur - 1); });
-    sec.querySelector('.next').addEventListener('click', function () { show(cur + 1); });
     btn.addEventListener('click', function () { setPaused(!paused); });
     sec.addEventListener('mouseenter', function () { hover = true; });
     sec.addEventListener('mouseleave', function () { hover = false; });
     sec.addEventListener('focusin', function () { hover = true; });
     sec.addEventListener('focusout', function () { hover = false; });
-    setPaused(paused);
-    show(0);
-    timer = setInterval(function () { if (!paused && !hover && !document.hidden) show(cur + 1); }, 7000);
-
-    // resumen: primer párrafo del texto de cada publicación. La API del sitio
-    // no trae el cuerpo (vive en campos ACF), así que se lee de la propia
-    // página, y solo cuando su diapositiva aparece.
-    var pedidos = {};
-    function resumen(k) {
-      if (pedidos[k] || !window.fetch || !window.DOMParser) return;
-      pedidos[k] = 1;
-      fetch(items[k].link, { credentials: 'same-origin' })
-        .then(function (r) { return r.ok ? r.text() : ''; })
-        .then(function (html) {
-          var doc = new DOMParser().parseFromString(html, 'text/html');
-          var p = [].map.call(doc.querySelectorAll('article .wysiwyg p, section.wysiwyg p'), function (x) { return x.textContent.replace(/\s+/g, ' ').trim(); })
-            .filter(function (t) { return t.length > 80; })[0];
-          if (!p) return;
-          if (p.length > 260) p = p.slice(0, 260).replace(/\s+\S*$/, '') + '…';
-          arts[k].querySelector('.c22-slide__resumen').textContent = p;
-        }).catch(function () {});
-    }
-    var show0 = show;
-    show = function (k) { show0(k); resumen(cur); resumen((cur + 1) % n); };
-    resumen(0); resumen(1 % n);
+    setPaused(paused); show(0);
+    setInterval(function () { if (!paused && !hover && !document.hidden) show(cur + 1); }, 8000);
   });
 
   /* ===== C22 portada: cada sección muestra sus cuatro tarjetas ===== */
@@ -259,11 +281,23 @@
   // adicional del sitio («color por escalón»). Si alguien no está en la lista,
   // se ubica por su cargo.
   var GRUPOS = [
-    ['Dirección y coordinación', 'g-dir', ['leonidas-montes', 'macarena-rivas'], /direct|coordinaci[oó]n ejecutiva/i],
+    ['Dirección y coordinación', 'g-dir', ['leonidas-montes', 'juan-luis-ossa', 'macarena-rivas'], /direct|presidente|coordinaci[oó]n ejecutiva/i],
     ['Investigadores', 'g-inv', ['aldo-mascareno', 'rosario-palacios'], null],
     ['Investigadores asistentes', 'g-ias', ['pablo-a-henriquez', 'juan-rozas', 'fabian-belmar'], /investigador(a)? asistente/i],
     ['Asistentes de investigación', 'g-asi', ['katherine-aravena', 'nicole-gardella', 'emilio-rogel', 'sebastian-aliaga'], /asistente de investigaci|pasant|pr[aá]ctic/i]
   ];
+  // Cargos actualizados (cepchile.cl/equipo, oct. 2026). Lo correcto es
+  // editarlos en la ficha de cada persona en WordPress; mientras tanto se
+  // corrigen aquí.
+  var CARGOS = { 'leonidas-montes': 'Presidente CEP', 'juan-luis-ossa': 'Director CEP' };
+  function idDe(p) { return (p.getAttribute('data-id') || '').replace(/^modal-/, ''); }
+  // en WordPress figuran en el histórico, pero son parte del equipo actual
+  var ACTUALES = ['juan-luis-ossa'];
+  function enEscalafon(p) { return ACTUALES.indexOf(idDe(p)) >= 0; }
+  function orden(p) {
+    for (var i = 0; i < GRUPOS.length; i++) { var k = GRUPOS[i][2].indexOf(idDe(p)); if (k >= 0) return k; }
+    return 99;
+  }
   function nivel(p, rol) {
     var id = (p.getAttribute('data-id') || '').replace(/^modal-/, '');
     for (var i = 0; i < GRUPOS.length; i++) if (GRUPOS[i][2].indexOf(id) >= 0) return i;
@@ -316,8 +350,10 @@
     // sigue abriendo su perfil.
     function absorber() {
       [].forEach.call(lists, function (list, k) {
-        var hist = k > 0;
         [].slice.call(list.querySelectorAll(':scope > .person')).forEach(function (p) {
+          var hist = k > 0 && !enEscalafon(p);
+          var cargo = CARGOS[idDe(p)], rolEl = p.querySelector('.rol');
+          if (cargo && rolEl) rolEl.textContent = cargo;
           p.classList.add('c22-p');
           if (hist) p.classList.add('c22-p-hist');
           if (!p.querySelector('.photo-container')) {  // sin foto: círculo con iniciales
@@ -335,6 +371,12 @@
           if (hist) nHis++; else nAct++;
         });
       });
+      // dentro de cada grupo, el orden del escalafón
+      grupos.forEach(function (g) {
+        if (g.hist) return;
+        g.people.sort(function (a, b) { return orden(a) - orden(b); });
+        g.people.forEach(function (p) { g.box.appendChild(p); });
+      });
       render();
     }
     input.addEventListener('input', render);
@@ -347,6 +389,12 @@
     });
     absorber();
     if (window.MutationObserver) [].forEach.call(lists, function (l) { new MutationObserver(absorber).observe(l, { childList: true }); });
+    // el histórico se carga por tandas al bajar (scroll infinito): se piden todas
+    var intentos = 0, pedir = setInterval(function () {
+      var bs = document.querySelectorAll('main .alm-load-more-btn:not(.done)');
+      [].forEach.call(bs, function (b) { if (!b.classList.contains('loading')) b.click(); });
+      if (!bs.length || ++intentos > 20) clearInterval(pedir);
+    }, 700);
   });
 
   /* ===== C22 fechas legibles: 13/07/2026 → 13 jul 2026 ===== */

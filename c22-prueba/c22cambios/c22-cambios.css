@@ -25,64 +25,80 @@ body.page-template-plantilla-personas:not(.c22-listo) main > .wrap-xl:not(:first
 body:not(.c22-listo) .c22cat { visibility: hidden; animation: c22-ver 0s linear 3s forwards; }
 /* ===== fin carga sin parpadeo ===== */
 
-/* ===== C22 portada: banner con lo último de cada serie (con JS) ===== */
-/* El banner de la foto recortada en forma de C no se entendía. En su lugar,
-   lo más reciente de Puntos de Referencia, Análisis online, Notas y Columnas,
-   rotando con fundido; se pausa con el mouse, el foco o el botón.
-   Sin el JS, el banner original sigue en su lugar. */
+/* ===== C22 portada: destacados, uno grande y tres chicos (con JS) ===== */
+/* Reemplaza el banner de la foto recortada. Lo más reciente de C22 en grande y
+   lo último de las otras tres series en chico, como el destacado del CEP.
+   Tres diseños (variable DISENO del JS): a) grande + columna, b) grande + fila,
+   c) grande que rota con los otros tres al lado. Sin el JS queda el banner original. */
 body.c22-sin-banner main > section.slider-1 { display: none !important; }
 body.c22-sin-banner main > ul.sticky-header { margin-top: 0 !important; }
-.c22-banner { width: 90%; max-width: 1296px; margin: 30px auto 34px; font-family: "DM Sans", sans-serif; }
-.c22-banner__lema { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; font: 700 13px/1.2 "DM Sans", sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #657D81; }
-.c22-banner__lema::after { content: ''; width: 150px; height: 5px; background: linear-gradient(90deg, #657D81 0 20%, #4CCAA5 20% 40%, #FFB923 40% 60%, #F20231 60% 80%, #A10856 80%); }
-.c22-banner__slides { position: relative; display: grid; background: #fff; border-radius: 22px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); }
-.c22-slide, .c22-banner__ctl { grid-area: 1 / 1; }
-.c22-slide { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }
-.c22-slide.is-on { opacity: 1; visibility: visible; transition: opacity .8s ease; }
-.c22-slide__img { position: relative; display: block; min-height: 420px; background: #1B1C1E; overflow: hidden; }
-.c22-slide__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.c22-slide__img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, .85)); }
-.c22-slide__img.sin-foto::before { content: ''; position: absolute; inset: 0; opacity: .25; background: repeating-linear-gradient(135deg, currentColor 0 2px, transparent 2px 12px); }
-.c22-slide__num { position: absolute; z-index: 1; left: 28px; bottom: 22px; font: 700 64px/1 Georgia, "Times New Roman", serif; }
-.c22-slide__num small { display: block; margin-top: 6px; font: 700 12px "DM Sans", sans-serif; letter-spacing: .08em; }
-.c22-slide__txt { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 40px 44px 92px; }
-.c22-slide__serie { margin: 0 0 12px; font: 700 12px "DM Sans", sans-serif; letter-spacing: .08em; text-transform: uppercase; }
-.c22-slide__serie span { color: #657D81; font-weight: 500; }
-.c22-slide h2 { margin: 0 0 14px; font: 700 32px/1.15 "DM Sans", sans-serif; color: #1B1C1E; }
-.c22-slide h2 a { color: inherit; text-decoration: none; }
-.c22-slide h2 a:hover { text-decoration: underline; text-underline-offset: 4px; }
-.c22-slide__resumen { margin: 0 0 14px; font: 400 15.5px/1.6 Montserrat, sans-serif; color: #41454A; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
-.c22-slide__resumen:empty { display: none; }
-.c22-slide__autores { margin: 0 0 18px; font: 600 13px "DM Sans", sans-serif; color: #657D81; }
-.c22-slide__btn { display: inline-block; padding: 10px 22px; border-radius: 999px; font: 700 13px "DM Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #fff; text-decoration: none; }
-/* color de cada serie (el mismo de las tarjetas); en texto, tonos más oscuros para que se lean */
-.s-pdr .c22-slide__num, .s-pdr .c22-slide__img { color: #8fa6aa; } .s-pdr .c22-slide__serie { color: #4f6569; } .s-pdr .c22-slide__btn { background: #657D81; }
-.s-ana .c22-slide__num, .s-ana .c22-slide__img { color: #4CCAA5; } .s-ana .c22-slide__serie { color: #1f7a60; } .s-ana .c22-slide__btn { background: #1f8f6f; }
-.s-not .c22-slide__num, .s-not .c22-slide__img { color: #FFB923; } .s-not .c22-slide__serie { color: #8a5d00; } .s-not .c22-slide__btn { background: #FFB923; color: #1B1C1E; }
-.s-col .c22-slide__num, .s-col .c22-slide__img { color: #F20231; } .s-col .c22-slide__serie { color: #c10028; } .s-col .c22-slide__btn { background: #d0021f; }
-.c22-banner__ctl { z-index: 2; align-self: end; justify-self: end; display: flex; align-items: center; gap: 10px; margin: 0 40px 28px 0; }
-.c22-banner__ctl button { cursor: pointer; font-family: "DM Sans", sans-serif; }
-.c22-banner__ctl .prev, .c22-banner__ctl .next { width: 38px; height: 38px; border: 0; border-radius: 50%; background: #e3e8e8; color: #303030; font-size: 22px; line-height: 1; }
-.c22-banner__ctl .dots { display: flex; gap: 6px; }
-.c22-banner__ctl .dot { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 999px; background: #c9d2d3; transition: width .3s; }
-.c22-banner__ctl .dot[aria-current="true"] { width: 26px; }
-.c22-banner__ctl .dot.s-pdr[aria-current="true"] { background: #657D81; }
-.c22-banner__ctl .dot.s-ana[aria-current="true"] { background: #4CCAA5; }
-.c22-banner__ctl .dot.s-not[aria-current="true"] { background: #FFB923; }
-.c22-banner__ctl .dot.s-col[aria-current="true"] { background: #F20231; }
-.c22-banner__ctl .pause { margin-left: 6px; padding: 7px 12px; border: 1px solid #c9d2d3; border-radius: 999px; background: #fff; color: #41454A; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-@media (prefers-reduced-motion: reduce) { .c22-slide, .c22-slide.is-on { transition: none; } }
-@media (max-width: 900px) {
-	.c22-banner { margin: 20px auto 26px; }
-	.c22-slide { grid-template-columns: minmax(0, 1fr); }
-	.c22-slide__img { min-height: 210px; }
-	.c22-slide__num { font-size: 46px; left: 20px; bottom: 16px; }
-	.c22-slide__txt { padding: 22px 20px 78px; }
-	.c22-slide h2 { font-size: 23px; }
-	.c22-slide__resumen { -webkit-line-clamp: 3; font-size: 14.5px; }
-	.c22-banner__ctl { justify-self: start; margin: 0 0 20px 20px; }
+.c22-dest { --pad: 30px; position: relative; width: 90%; max-width: 1296px; margin: 34px auto 34px; display: grid; gap: 28px; font-family: "DM Sans", sans-serif; }
+.c22-dest--a, .c22-dest--c { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+.c22-dest--b { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.c22-dest--b > .c22-dest__big { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+.c22-dest--b > .c22-dest__side { display: contents; }
+.c22-dest__big { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); }
+.c22-dest__img, .c22-dest__thumb { position: relative; display: block; overflow: hidden; background: #1B1C1E; }
+.c22-dest__img { aspect-ratio: 16 / 8; }
+.c22-dest--b .c22-dest__img { aspect-ratio: auto; min-height: 360px; }
+.c22-dest__img img, .c22-dest__thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.c22-dest__img::after, .c22-dest__thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .8)); }
+.c22-dest .sin-foto::before { content: ''; position: absolute; inset: 0; opacity: .25; background: repeating-linear-gradient(135deg, currentColor 0 2px, transparent 2px 12px); }
+.c22-num { position: absolute; z-index: 1; left: 22px; bottom: 16px; font: 700 54px/1 Georgia, "Times New Roman", serif; }
+.c22-num small { display: block; margin-top: 4px; font: 700 11px "DM Sans", sans-serif; letter-spacing: .08em; }
+.c22-dest__thumb .c22-num { left: 12px; bottom: 9px; font-size: 26px; }
+.c22-dest__thumb .c22-num small { display: none; }
+.c22-dest__txt { padding: 24px var(--pad) 28px; }
+.c22-dest--b .c22-dest__txt { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 34px 38px; }
+.c22-dest__serie { margin: 0 0 8px; font: 700 11.5px "DM Sans", sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.c22-dest__serie span { color: #657D81; font-weight: 500; }
+.c22-dest__big h2 { margin: 0 0 12px; font: 700 30px/1.15 "DM Sans", sans-serif; color: #1B1C1E; }
+.c22-dest h2 a, .c22-dest h3 a { color: inherit; text-decoration: none; }
+.c22-dest h2 a:hover, .c22-dest h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.c22-dest__resumen { margin: 0 0 12px; font: 400 15px/1.6 Montserrat, sans-serif; color: #41454A; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.c22-dest__resumen:empty { display: none; }
+.c22-dest__autores { margin: 0 0 16px; font: 600 13px "DM Sans", sans-serif; color: #657D81; }
+.c22-dest__btn { display: inline-block; padding: 9px 22px; border-radius: 999px; font: 700 12.5px "DM Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #fff; text-decoration: none; }
+/* chicos */
+.c22-dest__side { display: flex; flex-direction: column; gap: 16px; }
+.c22-dest__small { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 14px; align-items: start; padding: 0 0 16px; border-bottom: 1px solid #d7dcdd; }
+.c22-dest__small:last-child { border-bottom: 0; padding-bottom: 0; }
+.c22-dest__thumb { aspect-ratio: 4 / 3; border-radius: 10px; }
+.c22-dest__small h3 { margin: 0; font: 700 16px/1.3 "DM Sans", sans-serif; color: #1B1C1E; }
+.c22-dest--b .c22-dest__small { display: block; padding: 0; border: 0; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); }
+.c22-dest--b .c22-dest__small > div { padding: 14px 18px 18px; }
+.c22-dest--b .c22-dest__thumb { aspect-ratio: 16 / 9; border-radius: 0; }
+.c22-dest--b .c22-dest__thumb .c22-num { font-size: 34px; left: 16px; bottom: 12px; }
+.c22-dest--c .c22-dest__small { cursor: pointer; border-radius: 10px; padding: 8px; margin: -8px; border-bottom: 0; transition: background .2s; }
+.c22-dest--c .c22-dest__small:hover { background: #e7ecec; }
+/* c: el grande rota con fundido */
+.c22-dest__stage { display: grid; }
+.c22-dest__stage > .c22-dest__big { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }
+.c22-dest__stage > .c22-dest__big.is-on { opacity: 1; visibility: visible; transition: opacity .8s ease; }
+.c22-dest__pause { position: absolute; right: 0; top: -30px; cursor: pointer; padding: 4px 12px; border: 1px solid #c9d2d3; border-radius: 999px; background: #fff; color: #41454A; font: 700 10.5px "DM Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+/* color de cada serie (el de las tarjetas); en texto, tonos más oscuros que se leen */
+.c22-dest .s-pdr .c22-num, .c22-dest .s-pdr.sin-foto { color: #8fa6aa; } .c22-dest .s-pdr .c22-dest__serie { color: #4f6569; } .c22-dest .s-pdr .c22-dest__btn { background: #657D81; }
+.c22-dest .s-ana .c22-num, .c22-dest .s-ana.sin-foto { color: #4CCAA5; } .c22-dest .s-ana .c22-dest__serie { color: #1f7a60; } .c22-dest .s-ana .c22-dest__btn { background: #1f8f6f; }
+.c22-dest .s-not .c22-num, .c22-dest .s-not.sin-foto { color: #FFB923; } .c22-dest .s-not .c22-dest__serie { color: #8a5d00; } .c22-dest .s-not .c22-dest__btn { background: #FFB923; color: #1B1C1E; }
+.c22-dest .s-col .c22-num, .c22-dest .s-col.sin-foto { color: #F20231; } .c22-dest .s-col .c22-dest__serie { color: #c10028; } .c22-dest .s-col .c22-dest__btn { background: #d0021f; }
+@media (prefers-reduced-motion: reduce) { .c22-dest__stage > .c22-dest__big { transition: none; } }
+@media (max-width: 1000px) {
+	.c22-dest--a, .c22-dest--c, .c22-dest--b { grid-template-columns: minmax(0, 1fr); }
+	.c22-dest--b > .c22-dest__big { grid-template-columns: minmax(0, 1fr); }
+	.c22-dest--b .c22-dest__img { min-height: 0; aspect-ratio: 16 / 9; }
+	.c22-dest--b > .c22-dest__side { display: flex; }
 }
-/* ===== fin banner ===== */
+@media (max-width: 600px) {
+	.c22-dest { --pad: 20px; margin-top: 20px; gap: 20px; }
+	.c22-dest__big h2 { font-size: 23px; }
+	.c22-dest__img { aspect-ratio: 16 / 10; }
+	.c22-dest__small { grid-template-columns: 104px minmax(0, 1fr); }
+	.c22-dest__small h3 { font-size: 15px; }
+	.c22-dest--b .c22-dest__small { display: grid; grid-template-columns: 104px minmax(0, 1fr); background: none; box-shadow: none; border-radius: 0; border-bottom: 1px solid #d7dcdd; padding-bottom: 14px; }
+	.c22-dest--b .c22-dest__small > div { padding: 0; }
+	.c22-dest--b .c22-dest__thumb { aspect-ratio: 4 / 3; border-radius: 10px; }
+}
+/* ===== fin destacados ===== */
 
 /* ===== C22 portada: cada sección muestra sus cuatro tarjetas (con JS) ===== */
 /* Antes: seis carruseles con una tarjeta a la vista y el resto escondido.
