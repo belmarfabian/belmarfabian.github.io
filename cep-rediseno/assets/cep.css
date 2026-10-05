@@ -1081,3 +1081,13 @@ main [hidden] { display: none !important; }
   .lead-side .card + .card { margin-top: 0; padding-top: 18px; align-self: stretch; }
   .lead-side .card:first-child { padding-bottom: 18px; }
 }
+
+/* Áreas (Economía, Política, Sociedad): filas compartidas entre columnas, para que
+   los separadores de la lista queden a la misma altura aunque un título use dos líneas */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 761px) {
+    .areas { grid-template-rows: repeat(5, auto); }
+    .area { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
+    .area > .mini { align-self: stretch; }
+  }
+}
