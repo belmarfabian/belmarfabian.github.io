@@ -1101,3 +1101,10 @@ main [hidden] { display: none !important; }
 .c22x [data-live="c22"] .kicker { flex-wrap: wrap; }
 .c22x [data-live="c22"] .kicker time { display: block; flex-basis: 100%; margin-top: 6px; }
 .c22x [data-live="c22"] .kicker time::before { content: none; }
+
+/* Columnas de opinión: la imagen (cuadrada, 300 px) va al lado del título, no sola bajo él */
+@media (min-width: 761px) {
+  .art-banner-in:has(.pill-opinion):has(.hero-img) { grid-template-columns: minmax(0, 760px) 240px; column-gap: 48px; align-items: end; }
+  .art-banner-in:has(.pill-opinion) .hero-img { margin-top: 0; }
+  .art-banner-in:has(.pill-opinion) .hero-img img { width: 100%; height: auto; display: block; }
+}
