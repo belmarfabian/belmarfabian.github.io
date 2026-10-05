@@ -199,9 +199,10 @@
     });
     slides = slides.concat(take(inv, 4 - slides.length, function (i) { return i.fig || i.imgL; }));
     slides.sort(function (a, b) { return b.date - a.date; });
-    var left = take(inv, 2, function (i) { return (i.fig || i.imgS) && i.series !== 'Voces del CEP'; });
+    // costados con lugares fijos: PdR y Voces a la izquierda; Podcast y Encuesta a la derecha
+    var pdr = take(inv, 1, function (i) { return i.series === 'Puntos de Referencia'; });
     var voces = take(inv, 1, function (i) { return i.series === 'Voces del CEP'; });
-    var right = (voces.length ? voces : []).concat(take(inv, voces.length ? 1 : 2, function (i) { return (i.fig || i.imgS) && i.series !== 'Voces del CEP'; }));
+    var left = pdr.concat(voces);
     var latest = take(inv, 6);
 
     function put(name, html) { var el = document.querySelector('[data-live="' + name + '"]'); if (el && html) el.innerHTML = html; }
@@ -210,8 +211,16 @@
       wrap.innerHTML = slides.map(function (it, n) { return slide(it, n, slides.length); }).join('');
       rot.refresh();
     }
-    put('left', left.map(card).join(''));
-    put('right', right.map(card).join(''));
+    if (left.length === 2) put('left', left.map(card).join(''));
+    // Podcast: tarjeta fija en index.html (el sitio del CEP no publica un feed de podcast vigente)
+    var pod = document.querySelector('[data-live="right"] .card-podcast');
+    if (survey) {
+      survey.numero = 'N° ' + (survey.numero || '');
+      var sv = '<article class="card card-s card-encuesta">' + thumb(survey, 'thumb') +
+        '<p class="kicker"><span class="pill pill-encuesta-cep">Encuesta CEP</span> <time>' + fecha(survey.date) + '</time></p>' +
+        title(survey, 'hl-s') + '</article>';
+      put('right', (pod ? pod.outerHTML : '') + sv);
+    }
     put('latest', latest.map(row).join(''));
 
     var today = new Date(); today.setHours(0, 0, 0, 0);
