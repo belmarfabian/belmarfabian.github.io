@@ -10,6 +10,9 @@
   var MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
   var DIA = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
   var LOCAL = {};
+  // temas con página propia en el prototipo; el resto enlaza a la página del tema en cepchile.cl
+  var TEMAS = ["arte-y-cultura", "c22", "ciencias-sociales", "crecimiento-economico", "cultura", "democracia", "derecho", "desempleo", "economia", "educacion", "empleo", "entrevistas", "finanzas-publicas", "futuros-posibles", "humanidades", "identidad", "modernizacion-del-estado", "pobreza", "pobreza-y-desigualdad", "politica", "politica-fiscal", "politicas-publicas", "presupuesto-publico", "salud", "seguridad", "sociedad", "trabajo", "urbanismo-y-ciudad", "violencia"];
+  function temaHref(t) { var s = slug(t); return TEMAS.indexOf(s) >= 0 ? 'tema/' + s + '/' : 'https://www.cepchile.cl/tema/' + s + '/'; }
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- rotación del destacado ---------- */
@@ -163,7 +166,7 @@
         media: x.featured_media,
         date: new Date(x.date), series: series, numero: (x.acf && x.acf.numero) || '',
         href: loc.p || x.link, dek: loc.d || '', fig: loc.f || '', cap: loc.c || '', figTall: !!loc.ft, topics: loc.t || [], authors: loc.a || [],
-        authorIds: (x.acf && x.acf.autores) || [], topicHref: function (t) { return 'tema/' + slug(t) + '/'; }
+        authorIds: (x.acf && x.acf.autores) || [], topicHref: temaHref
       };
       return it;
     }
@@ -219,7 +222,7 @@
     try {
       var c = JSON.parse(localStorage.getItem(KEY) || 'null');
       if (!c || Date.now() - c.t > 3 * 864e5) return;
-      function h(i) { if (i) { i.date = new Date(i.date); i.topicHref = function (t) { return 'tema/' + slug(t) + '/'; }; } return i; }
+      function h(i) { if (i) { i.date = new Date(i.date); i.topicHref = temaHref; } return i; }
       show(c.d[0].map(h), c.d[1].map(h), h(c.d[2]), c.d[3].map(h), true);
     } catch (e) {}
   })();
