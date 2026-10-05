@@ -1041,3 +1041,8 @@ a.thumb.fig:hover { border-color: var(--navy); }
 .topbar .wrap { justify-content: flex-start; }
 @media (max-width: 760px) { .cifras-grid { row-gap: 28px; } .cifra-dato b { font-size: 34px; } }
 @media (max-width: 760px) { .op-grid > :nth-child(n+5) { display: none; } }
+
+/* Costados del destacado con lugares fijos: Podcast */
+.pill-podcast { background: #1d6b45 !important; color: #fff !important; }
+.ph-podcast { background: #1d6b45; }
+.ph-podcast i { position: absolute; top: 12px; right: 14px; font-size: 44px; color: rgba(255,255,255,.55); }
