@@ -63,6 +63,30 @@
     return { refresh: refresh };
   })();
 
+
+  /* ---------- sin repetidos: cada publicación aparece una sola vez ----------
+     Recorre la portada en orden; si un titular ya salió más arriba, oculta la
+     tarjeta o el ítem de abajo. Compara por enlace y por título. */
+  function dedupe() {
+    var seen = {}, titles = [];
+    function keys(a) {
+      var href = (a.getAttribute('href') || '').replace(/^https?:\/\/(www\.)?cepchile\.cl\//, '').replace(/\/$/, '');
+      var t = a.textContent.trim().toLowerCase().normalize('NFD').replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ');
+      return ['h:' + href.split('/').pop(), 't:' + t];
+    }
+    document.querySelectorAll('main .hl a, main .c22x-notes li a').forEach(function (a) {
+      var item = a.closest('article, li, figure');
+      if (!item || item.closest('.cifras')) return;
+      var k = keys(a), dup = seen[k[0]] || (k[1].length > 24 && seen[k[1]]);
+      // mismo título más corto o más largo (p. ej., libro y nota con subtítulo)
+      if (!dup && k[1].length > 26) dup = titles.some(function (t) { return t.indexOf(k[1].slice(2)) === 0 || k[1].slice(2).indexOf(t) === 0; });
+      if (dup && !item.closest('.lead')) { item.hidden = true; return; }
+      seen[k[0]] = seen[k[1]] = 1;
+      if (k[1].length > 26) titles.push(k[1].slice(2));
+    });
+  }
+  dedupe();
+
   /* ---------- datos en vivo ---------- */
   if (!window.fetch || !document.querySelector('[data-live]')) return;
 
@@ -229,6 +253,7 @@
     if (next.length) put('agenda', next.map(agenda).join(''));
     if (past.length) put('agenda-past', past.map(agenda).join(''));
 
+    dedupe();
     document.documentElement.setAttribute('data-live-ok', '');
   }
 
@@ -245,6 +270,7 @@
           return '<article class="card card-s">' + (src ? thumb(it, 'thumb') : '<a class="thumb ph ph-c22" href="' + esc(x.link) + '" tabindex="-1" aria-hidden="true"><span>C22</span></a>') +
             '<p class="kicker"><span class="pill pill-c22">Análisis online</span> <time>' + fecha(it.date) + '</time></p>' + title(it, 'hl-s') + '</article>';
         }).join('');
+        dedupe();
       }).catch(function () {});
   }
 })();
