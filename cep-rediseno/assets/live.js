@@ -198,9 +198,31 @@
         i.imgS = md.s; i.imgL = md.l;
         if (!i.authors.length) i.authors = i.authorIds.map(function (a) { return team[a]; }).filter(Boolean);
       });
-      render(inv, cols, survey, evs);
+      show(inv, cols, survey, evs);
     });
-  }).catch(function () { /* sin conexión con la API: queda el contenido publicado */ });
+  }).catch(function () { ready(); /* sin conexión con la API: queda el contenido publicado */ });
+
+  /* ---------- sin parpadeo ----------
+     Mientras llega la API, las zonas en vivo quedan ocultas (máx. 3 s, ver <head>).
+     La última respuesta se guarda en el navegador: en la visita siguiente la portada
+     aparece de inmediato con esos datos y solo se redibuja si hay algo nuevo. */
+  var KEY = 'cep-portada-v1', shown = '';
+  function ready() { document.documentElement.classList.remove('live-wait'); }
+  function sig(a) { return JSON.stringify(a.map(function (l) { return (l || []).map(function (i) { return i && (i.link + (i.imgS || '')); }); })); }
+  function show(inv, cols, survey, evs, fromCache) {
+    var s = sig([inv, cols, [survey], evs]);
+    if (s !== shown) { shown = s; render(inv, cols, survey, evs); }
+    ready();
+    if (!fromCache) try { localStorage.setItem(KEY, JSON.stringify({ t: Date.now(), d: [inv, cols, survey, evs] })); } catch (e) {}
+  }
+  (function restore() {
+    try {
+      var c = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (!c || Date.now() - c.t > 3 * 864e5) return;
+      function h(i) { if (i) { i.date = new Date(i.date); i.topicHref = function (t) { return 'tema/' + slug(t) + '/'; }; } return i; }
+      show(c.d[0].map(h), c.d[1].map(h), h(c.d[2]), c.d[3].map(h), true);
+    } catch (e) {}
+  })();
 
   function render(inv, cols, survey, evs) {
     var used = {};

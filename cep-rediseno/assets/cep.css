@@ -1091,3 +1091,13 @@ main [hidden] { display: none !important; }
     .area > .mini { align-self: stretch; }
   }
 }
+
+/* Sin parpadeo: las zonas en vivo esperan los datos de la API (máx. 3 s) y aparecen suave */
+[data-live] { transition: opacity .25s ease; }
+.live-wait [data-live]:not([data-live="c22"]) { opacity: 0; }
+
+/* C22: en las tarjetas chicas la fecha va siempre en su propia línea,
+   para que los títulos partan a la misma altura */
+.c22x [data-live="c22"] .kicker { flex-wrap: wrap; }
+.c22x [data-live="c22"] .kicker time { display: block; flex-basis: 100%; margin-top: 6px; }
+.c22x [data-live="c22"] .kicker time::before { content: none; }
