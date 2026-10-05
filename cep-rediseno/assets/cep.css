@@ -1072,3 +1072,12 @@ a.thumb.fig:hover { border-color: var(--navy); }
 main [hidden] { display: none !important; }
 .cifras-tools { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 10px 22px; }
 .cifras-tools a:not(:last-child) { font: 700 12px var(--sans); letter-spacing: .05em; text-transform: uppercase; color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; background: none; padding: 0; }
+
+/* Costados del destacado: dos filas iguales para que los separadores queden a la misma altura
+   en ambos lados, sin importar el largo de los títulos */
+@media (min-width: 761px) {
+  .lead-side { display: grid; grid-template-rows: 1fr 1fr; align-content: stretch; }
+  .lead-side .card { align-self: start; }
+  .lead-side .card + .card { margin-top: 0; padding-top: 18px; align-self: stretch; }
+  .lead-side .card:first-child { padding-bottom: 18px; }
+}
