@@ -228,6 +228,13 @@
   })();
 
   function render(inv, cols, survey, evs) {
+    // cifras del cierre institucional: último N° de Encuesta CEP y de Punto de Referencia
+    var mE = survey && /(\d{1,4})/.exec(String(survey.numero)), nEnc = mE ? +mE[1] : 0;
+    var nPdr = Math.max.apply(null, inv.filter(function (i) { return i.series === 'Puntos de Referencia'; })
+      .map(function (i) { var m = /N°\s*(\d+)/.exec(String(i.numero)) || /(\d{1,4})/.exec(String(i.numero)); return m ? +m[1] : 0; }).concat([0]));
+    var cE = document.querySelector('[data-count="encuesta"]'), cP = document.querySelector('[data-count="pdr"]');
+    if (cE && nEnc) cE.textContent = nEnc;
+    if (cP && nPdr) cP.textContent = nPdr;
     var used = {};
     // lo que ya muestran las secciones fijas (áreas, Voces, Opinión) no se repite arriba
     var fixed = {};
