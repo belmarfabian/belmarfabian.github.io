@@ -1,9 +1,12 @@
 /*
  * Capa de cambios de c22cepchile.cl: comportamiento (JS).
  *
- * Va en el <head> (WPCode: «Site Wide Header»). Marca el <body> apenas el
- * navegador lo crea, antes de dibujar nada, y rearma la página cuando termina
- * de cargar; así no se alcanza a ver la versión anterior.
+ * Va en el <head> (WPCode: «Site Wide Header»), después de los scripts del
+ * tema. Marca el <body> apenas el navegador lo crea, antes de dibujar nada.
+ * Lo que cambia la estructura de la página (portada, Publicaciones, catálogo,
+ * fichas) se arma apenas el navegador termina de leer el HTML, antes de que
+ * el tema arme sus carruseles; el resto corre después de los
+ * $(document).ready del tema.
  * Cada bloque es independiente: si uno falla, los demás siguen.
  */
 (function () {
@@ -15,7 +18,37 @@
   var MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
   var DIA = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
   var $ = window.jQuery;
-  var activo = null, cola = [];
+  var activo = null, cola = [], tempranos = [];
+
+  // 0) frenos al tema, antes de que corra su código:
+  //    - los carruseles que la capa convierte en grilla (marcados con
+  //      .c22-sin-slick) no se arman: armarlos y desarmarlos era lo más lento
+  //      de la portada;
+  //    - las animaciones de entrada (AOS) no corren: escondían tarjetas y
+  //      títulos hasta que terminaban y recalculaban la página en cada scroll.
+  //      El CSS deja visible todo lo que tenía animación.
+  function frenos() {
+    var jq = window.jQuery;
+    if (jq && jq.fn && jq.fn.slick && !jq.fn.slick.c22) {
+      var slick = jq.fn.slick;
+      jq.fn.slick = function () {
+        var resto = this.filter(function () { return !(this.classList && this.classList.contains('c22-sin-slick')); });
+        if (resto.length === this.length) return slick.apply(this, arguments);
+        if (resto.length) slick.apply(resto, arguments);
+        return this;
+      };
+      jq.fn.slick.c22 = true;
+    }
+    var A = window.AOS;
+    if (A && !A.c22) {
+      ['init', 'refresh', 'refreshHard'].forEach(function (k) {
+        var f = A[k];
+        if (typeof f === 'function') A[k] = function () { if (activo !== true) return f.apply(this, arguments); };
+      });
+      A.c22 = true;
+    }
+  }
+  frenos();
 
   // 1) apenas existe el <body>: decidir si se aplican los cambios y marcarlo
   function alBody(fn) {
@@ -31,8 +64,36 @@
     cola = null;
   });
 
-  // 2) cada bloque corre cuando la página terminó de cargar, después de los
-  //    $(document).ready del tema, que arman los carruseles
+  // 2) apenas el navegador terminó de leer el HTML (antes de que el tema arme
+  //    sus carruseles): los bloques que cambian la estructura. Al terminar se
+  //    marca el <body> con .c22-temprano y la página se muestra.
+  function correr(fn) { try { fn(); } catch (e) { if (window.console) console.error('C22:', e); } }
+  function alLeer(fn) {
+    if (document.readyState !== 'loading') return fn();
+    document.addEventListener('readystatechange', function f() {
+      if (document.readyState === 'loading') return;
+      document.removeEventListener('readystatechange', f);
+      fn();
+    });
+  }
+  alLeer(function () {
+    var fs = tempranos;
+    tempranos = null;
+    if (!activo) return;
+    $ = window.jQuery;
+    frenos();
+    // sin AOS, cada elemento animado queda en su estado final
+    document.querySelectorAll('[data-aos]').forEach(function (e) { e.classList.add('aos-animate'); });
+    fs.forEach(correr);
+    document.body.classList.add('c22-temprano');
+  });
+  function temprano(fn) {
+    if (tempranos) tempranos.push(fn);
+    else if (activo) correr(fn);
+  }
+
+  // 3) el resto corre cuando la página terminó de cargar, después de los
+  //    $(document).ready del tema
   function programar(fn) {
     function go() {
       $ = window.jQuery;
@@ -73,14 +134,27 @@
     for (var k in IMAGENES) if (link.indexOf(k) >= 0) return IMAGENES[k];
     return '';
   }
-  ready(function () {  // la tarjeta del Monitor en Analiza, con la misma foto
+  function imagenes(root) {  // las tarjetas del Monitor, con la misma foto
     Object.keys(IMAGENES).forEach(function (k) {
-      document.querySelectorAll('a.card[href*="' + k + '"] img.photo').forEach(function (i) { i.src = IMAGENES[k]; i.removeAttribute('srcset'); });
+      (root || document).querySelectorAll('a.card[href*="' + k + '"] img.photo').forEach(function (i) {
+        if (i.getAttribute('src') !== IMAGENES[k]) { i.src = IMAGENES[k]; i.removeAttribute('srcset'); }
+      });
     });
-  });
+  }
+  temprano(function () { imagenes(); });
   function fechaDe(el) {
     var m = el && /(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(el.getAttribute('title') || el.textContent);
     return m ? new Date(+m[3], +m[2] - 1, +m[1]) : null;
+  }
+  // foto de autor en tamaño original (las tarjetas traen la miniatura de 150 px)
+  function original(src) { return String(src || '').replace(/-\d+x\d+(\.[a-z]+)(\?.*)?$/i, '$1'); }
+  function fotosDe(card) {
+    return [].map.call(card.querySelectorAll('.author .avatar img'), function (i) { return original(i.getAttribute('src')); })
+      .filter(Boolean).slice(0, 2);
+  }
+  function fotosHtml(fotos) {
+    return '<span class="c22-fa c22-fa--' + fotos.length + '" aria-hidden="true">' +
+      fotos.map(function (s) { return '<img src="' + esc(s) + '" alt="" loading="lazy">'; }).join('') + '</span>';
   }
   function fechaTxt(d) { return d ? d.getDate() + ' ' + MES[d.getMonth()] + ' ' + d.getFullYear() : ''; }
   function lista(xs) { return xs.length < 2 ? xs.join('') : xs.slice(0, -1).join(', ') + ' y ' + xs[xs.length - 1]; }
@@ -96,7 +170,7 @@
   }
   function imgHtml(it, cls, lazy) {
     return '<a class="' + cls + (it.img ? '' : ' sin-foto') + ' s-' + it.s[1] + '" href="' + esc(it.link) + '" tabindex="-1" aria-hidden="true">' +
-      (it.img ? '<img src="' + esc(it.img) + '" alt=""' + (lazy ? ' loading="lazy"' : '') + '>' : '') +
+      (it.img ? '<img src="' + esc(it.img) + '" alt=""' + (lazy ? ' loading="lazy"' : '') + '>' : (it.fotos.length ? fotosHtml(it.fotos) : '')) +
       '<span class="c22-num">' + esc(it.num) + '<small>' + esc(it.s[0].toLowerCase()) + '</small></span></a>';
   }
   function grande(it, extra) {
@@ -111,10 +185,10 @@
       '<div><p class="c22-dest__serie">' + esc(it.s[0]) + (it.date ? ' <span>· ' + fechaTxt(it.date) + '</span>' : '') + '</p>' +
       '<h3><a href="' + esc(it.link) + '">' + esc(it.title) + '</a></h3></div></article>';
   }
-  ready(function () {
+  temprano(function () {
     if (!document.body.classList.contains('home')) return;
     var hero = document.querySelector('main > section.slider-1');
-    if (!hero) return;
+    if (!hero || document.querySelector('.c22-dest')) return;
     var items = [];
     Object.keys(SERIES).forEach(function (id) {
       var card = document.querySelector('#' + id + ' a.card:not(.slick-cloned)');
@@ -128,7 +202,8 @@
         img: imagenDe(link) || (img && (img.getAttribute('src') || '').trim()) || '',
         title: (card.querySelector('.title') || card).textContent.trim(),
         date: fechaDe(card.querySelector('.date')),
-        names: [].map.call(card.querySelectorAll('.names li'), function (li) { return li.textContent.trim(); })
+        names: [].map.call(card.querySelectorAll('.names li'), function (li) { return li.textContent.trim(); }),
+        fotos: fotosDe(card)
       });
     });
     if (items.length < 2) return;
@@ -147,6 +222,8 @@
       sec.innerHTML = grande(items[0]) + '<div class="c22-dest__side">' + items.slice(1, 4).map(chico).join('') + '</div>';
     }
     hero.parentNode.insertBefore(sec, hero);
+    // el banner queda oculto: si el tema todavía no lo arma, ya no lo arma
+    hero.classList.add('c22-sin-slick');
     try { if ($ && $.fn.slick && $(hero).hasClass('slick-initialized')) $(hero).slick('unslick'); } catch (e) {}
     document.body.classList.add('c22-sin-banner');
     // mismo ancho que la barra de colores y las secciones de abajo
@@ -191,15 +268,17 @@
   });
 
   /* ===== C22 portada: cada sección muestra sus cuatro tarjetas ===== */
-  ready(function () {
+  // Se arma antes que el tema: el carrusel queda marcado y el tema ya no lo arma.
+  temprano(function () {
     if (!document.body.classList.contains('home')) return;
     // en el teléfono se deja el carrusel original: en dos columnas no caben los títulos
     if (window.matchMedia && matchMedia('(max-width: 760px)').matches) return;
-    document.querySelectorAll('main section.cards-slider').forEach(function (sec) {
+    document.querySelectorAll('main section.cards-slider:not(.c22-grid)').forEach(function (sec) {
       if (sec.id === 'comparte' || sec.classList.contains('slider-testimonials')) return;
       var car = sec.querySelector('.carrousel-slider');
       if (!car) return;
       try { if ($ && $.fn.slick && $(car).hasClass('slick-initialized')) $(car).slick('unslick'); } catch (e) { return; }
+      car.classList.add('c22-sin-slick');
       car.querySelectorAll('.fake-card').forEach(function (f) { f.remove(); });
       car.style.setProperty('--c22-n', Math.min(5, car.querySelectorAll(':scope > a.card').length) || 4);
       sec.classList.add('c22-grid');
@@ -209,19 +288,19 @@
   function norm(t) { return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
 
   /* ===== C22 publicaciones: cada serie muestra sus cuatro más recientes ===== */
-  ready(function () {
+  temprano(function () {
     if (!document.body.classList.contains('page-template-plantilla-publicaciones')) return;
     if (window.matchMedia && matchMedia('(max-width: 760px)').matches) return;
-    document.querySelectorAll('.categories-tabs .tab-content > .slider').forEach(function (sl) {
+    document.querySelectorAll('.categories-tabs .tab-content > .slider:not(.c22-grid4)').forEach(function (sl) {
       try { if ($ && $.fn.slick && $(sl).hasClass('slick-initialized')) $(sl).slick('unslick'); } catch (e) { return; }
-      sl.classList.add('c22-grid4');
+      sl.classList.add('c22-sin-slick', 'c22-grid4');
     });
   });
 
   /* ===== C22 sobre C22: catálogo con filtros, buscador y «Mostrar más» ===== */
-  ready(function () {
+  temprano(function () {
     var cat = document.querySelector('.c22cat');
-    if (!cat) return;
+    if (!cat || document.querySelector('.c22cat-barra')) return;
     var POR_SERIE = 6, PASO = 12;
     var series = [].map.call(cat.querySelectorAll('h3.c22cat-serie'), function (h) {
       var ol = h.nextElementSibling;
@@ -495,10 +574,149 @@
       el.textContent = +m[1] + ' ' + MES[+m[2] - 1] + ' ' + m[3];
     });
   }
-  ready(function () {
+  temprano(function () {
     fechas();
     // Ajax Load More agrega tarjetas después de cargar la página
     if (window.MutationObserver) new MutationObserver(function () { fechas(); }).observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
+  });
+
+  /* ===== C22 tarjetas sin imagen: la foto de los autores ===== */
+  // Las columnas y académicas sin imagen destacada quedaban como un recuadro
+  // negro con la trama. Ahora llevan la foto del autor (o de los dos
+  // primeros) en un círculo con el anillo del color de la serie. La foto
+  // sale de la misma tarjeta, en tamaño original.
+  function fotosAutor(root) {
+    (root || document).querySelectorAll('a.card:not(.c22-fa-ok)').forEach(function (c) {
+      c.classList.add('c22-fa-ok');
+      var pc = c.querySelector('.photo-container');
+      if (!pc || pc.querySelector('.c22-fa')) return;
+      var img = pc.querySelector('img.photo');
+      if (img && (img.getAttribute('src') || '').trim()) return;
+      var fotos = fotosDe(c);
+      if (!fotos.length) return;
+      pc.insertAdjacentHTML('beforeend', fotosHtml(fotos));
+      // anillo del color del número de la serie (Col. rojo, Ac. morado…)
+      var color = getComputedStyle(pc, '::after').color;
+      if (color) pc.querySelector('.c22-fa').style.setProperty('--fa', color);
+      c.classList.add('c22-con-fa');
+    });
+  }
+  var fotosPend = false;
+  function fotosLuego() {
+    if (fotosPend) return;
+    fotosPend = true;
+    (window.requestAnimationFrame || setTimeout)(function () { fotosPend = false; fotosAutor(); });
+  }
+  temprano(function () {
+    fotosAutor();
+    // tarjetas que llegan después (Ajax Load More, «Revisa más»)
+    if (window.MutationObserver) new MutationObserver(fotosLuego).observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
+  });
+
+  /* ===== C22 fichas: «Revisa más» con lo más reciente de la serie ===== */
+  // El tema mostraba ocho publicaciones de la serie al azar (P.698, P.638…).
+  // Ahora muestra las más recientes de la misma serie, sin la que se está
+  // leyendo. Salen del listado de la serie (las ocho que trae su HTML), que
+  // se pide cuando el lector se acerca al final. Si no llega, quedan las del
+  // tema, ordenadas de la más nueva a la más antigua.
+  var FUENTES = {
+    P: 'categorias_publicaciones/puntos-de-referencia/',
+    N: 'categorias_publicaciones/notas-de-investigacion/',
+    Col: 'categorias_publicaciones/columnas/',
+    Ac: 'categorias_publicaciones/academicas/',
+    A: 'analisis-online/'
+  };
+  // El CSS adicional del sitio pone «Col.», «Ac.», «N.» o «P.» a las tarjetas
+  // sin número propio solo dentro de #columnas, #academicas, etc. «Revisa más»
+  // recibe ese id para que sus tarjetas también lo lleven.
+  var IDS = { P: 'puntos-de-referencia', N: 'notas-de-investigacion', Col: 'columnas', Ac: 'academicas' };
+  function raiz() {
+    var logo = document.querySelector('header a.logo');
+    try { return new URL(logo ? logo.href : '/', location.href).pathname.replace(/\/?$/, '/'); } catch (e) { return '/'; }
+  }
+  function prefijoDe(card) {  // «P.698» → «P»; «Col.» → «Col»
+    var pc = card && card.querySelector('.photo-container');
+    var m = pc && /^["']?([A-Za-z]+)\./.exec(getComputedStyle(pc, '::after').content || '');
+    return m ? m[1] : '';
+  }
+  function cuandoCerca(el, fn) {
+    if (!window.IntersectionObserver) return fn();
+    var io = new IntersectionObserver(function (es) {
+      if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); fn(); }
+    }, { rootMargin: '1200px 0px' });
+    io.observe(el);
+  }
+  temprano(function () {
+    if (!document.body.classList.contains('single')) return;
+    var rel = document.querySelector('main section.related'), sl = rel && rel.querySelector('.slider');
+    if (!sl || sl.classList.contains('c22-rel')) return;
+    try { if ($ && $.fn.slick && $(sl).hasClass('slick-initialized')) $(sl).slick('unslick'); } catch (e) { return; }
+    sl.classList.add('c22-sin-slick', 'c22-rel');
+    var cards = [].slice.call(sl.querySelectorAll(':scope > a.card'));
+    cards.sort(function (a, b) { return (fechaDe(b.querySelector('.date')) || 0) - (fechaDe(a.querySelector('.date')) || 0); });
+    cards.forEach(function (c) { sl.appendChild(c); });
+    var pre = '';
+    cards.some(function (c) { return (pre = prefijoDe(c)); });
+    if (IDS[pre] && !document.getElementById(IDS[pre])) {
+      sl.id = IDS[pre];
+      // los círculos de foto ya puestos toman ahora el color de la serie
+      sl.querySelectorAll('.c22-fa').forEach(function (f) { f.remove(); });
+      sl.querySelectorAll('a.card').forEach(function (c) { c.classList.remove('c22-fa-ok', 'c22-con-fa'); });
+      fotosAutor(sl);
+    }
+    var fuente = FUENTES[pre];
+    if (!fuente || !window.fetch || !window.DOMParser) return;
+    cuandoCerca(rel, function () {
+      var url = location.origin + raiz() + fuente;
+      fetch(url, { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
+        if (!html) return;
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var aqui = location.pathname.replace(/\/?$/, '/');
+        var nuevas = [].filter.call(doc.querySelectorAll('#ajax-load-more a.card, .alm-listing a.card'), function (a) {
+          try { return new URL(a.getAttribute('href'), url).pathname.replace(/\/?$/, '/') !== aqui; } catch (e) { return false; }
+        }).slice(0, 8);
+        if (nuevas.length < 4) return;
+        sl.innerHTML = '';
+        nuevas.forEach(function (a) {
+          var c = document.importNode(a, true);
+          c.setAttribute('href', new URL(a.getAttribute('href'), url).href);
+          c.querySelectorAll('.fake-card').forEach(function (f) { f.remove(); });
+          sl.appendChild(c);
+        });
+        fechas(sl); imagenes(sl); fotosAutor(sl);
+      }).catch(function () {});
+    });
+  });
+
+  /* ===== C22 fichas: sin duplicados ===== */
+  // Arriba ya están la firma y el botón «Descargar el PDF». Abajo se repetían:
+  // los autores y una segunda barra de compartir (eso lo apaga el CSS), el
+  // botón «Descargar PDF» del tema y el párrafo «Leer y descargar el documento
+  // en cepchile.cl». El botón de abajo se oculta y el enlace a cepchile.cl
+  // pasa arriba, junto al PDF.
+  temprano(function () {
+    if (!document.body.classList.contains('single')) return;
+    var pdf = document.querySelector('.single-header a.c22-cita-prov__pdf');
+    if (!pdf) return;
+    document.querySelectorAll('main article a.btn[href*=".pdf"]').forEach(function (b) {
+      var box = b.parentElement;
+      (box && box.children.length === 1 && !box.classList.contains('wysiwyg') ? box : b).classList.add('c22-oculto');
+    });
+    var web = [].filter.call(document.querySelectorAll('main article .wysiwyg > p > a[href*="//www.cepchile.cl/"], main article .wysiwyg > p > a[href*="//cepchile.cl/"]'), function (a) {
+      var p = a.parentElement;
+      return p.children.length === 1 && !/\.pdf(\?|#|$)/i.test(a.getAttribute('href')) &&
+        norm(p.textContent.trim()) === norm(a.textContent.trim()) && /leer|descarg|documento|estudio/i.test(a.textContent);
+    })[0];
+    if (web && !pdf.parentNode.querySelector('.c22-cita-prov__web')) {
+      var w = document.createElement('a');
+      w.className = 'c22-cita-prov__web';
+      w.href = web.href;
+      w.target = '_blank';
+      w.rel = 'noopener';
+      w.textContent = 'Ver en cepchile.cl';
+      pdf.insertAdjacentElement('afterend', w);
+      web.parentElement.classList.add('c22-oculto');
+    }
   });
 
   /* ===== C22 carga sin parpadeo: listo ===== */
