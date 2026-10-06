@@ -17,15 +17,21 @@
 
 
 /* ===== C22 carga sin parpadeo ===== */
-/* Lo que el JS rearma (portada, series de Publicaciones, catálogo de Sobre C22)
-   se oculta hasta que el JS termina y marca el <body> con .c22-listo; así no se
-   alcanza a ver la versión anterior. Si el JS no corre, aparece igual a los 3 s.
+/* Lo que el JS rearma se oculta hasta que está listo; así no se alcanza a ver
+   la versión anterior. La portada, las series de Publicaciones y el catálogo
+   de Sobre C22 se arman apenas el navegador termina de leer la página
+   (.c22-temprano), sin esperar al tema; Personas espera a que lleguen sus
+   fichas (.c22-listo). Si el JS no corre, todo aparece igual a los 3 s.
    Esta sección NO depende de .c22-cambios: tiene que actuar antes del JS. */
 @keyframes c22-ver { to { visibility: visible; } }
-body.home:not(.c22-listo) main,
-body.page-template-plantilla-publicaciones:not(.c22-listo) .categories-tabs .tab-content,
+body.home:not(.c22-listo):not(.c22-temprano) main,
+body.page-template-plantilla-publicaciones:not(.c22-listo):not(.c22-temprano) .categories-tabs .tab-content,
 body.page-template-plantilla-personas:not(.c22-listo) main > .wrap-xl:not(:first-child),
-body:not(.c22-listo) .c22cat { visibility: hidden; animation: c22-ver 0s linear 3s forwards; }
+body:not(.c22-listo):not(.c22-temprano) .c22cat { visibility: hidden; animation: c22-ver 0s linear 3s forwards; }
+/* Sin animaciones de entrada: el JS apaga AOS, que escondía tarjetas y
+   títulos hasta animarlos, y deja cada elemento en su estado final
+   (.aos-animate). Aquí solo se asegura que nada quede transparente. */
+body.c22-cambios [data-aos]{ opacity: 1 !important; transition: none !important; }
 /* ===== fin carga sin parpadeo ===== */
 
 /* ===== C22 portada: destacados, uno grande y tres chicos (con JS) ===== */
@@ -162,6 +168,10 @@ body.c22-cambios main section.cards-slider.c22-grid .fake-card,
 body.c22-cambios main section.cards-slider.c22-grid .slick-dots,
 body.c22-cambios main section.cards-slider.c22-grid .slick-arrow{ display: none !important; }
 body.c22-cambios main section.cards-slider.c22-grid a.card{ width: auto !important; margin: 0 !important; }
+/* el tema iguala la altura de las tarjetas con un valor fijo medido antes de
+   que carguen las fuentes; en la grilla cada fila ya las iguala sola */
+body.c22-cambios main section.cards-slider.c22-grid a.card,
+body.c22-cambios .categories-tabs .slider.c22-grid4 > a.card{ height: auto !important; }
 /* el carrusel ya no está: las tarjetas no esperan la animación de entrada */
 body.c22-cambios main section.cards-slider.c22-grid a.card[data-aos],
 body.c22-cambios main section.cards-slider.c22-grid a.card.aos-init{ opacity: 1 !important; transform: none !important; }
@@ -736,3 +746,74 @@ body.c22-cambios #comparte > .content{ border-top: 0 !important; }
 body.c22-cambios.page-id-9531 main section.single-header, body.c22-cambios.page-id-9531 main .share-top,
 body.c22-cambios.page-id-9531 main section.single-header::after{ display: none !important; }
 /* ===== fin identidad ===== */
+
+/* ===== C22 contraste: texto oscuro sobre verde y amarillo ===== */
+/* El blanco sobre el verde (2,0:1) y sobre el amarillo (1,7:1) de la casa no
+   se leía. Sobre esos dos colores el texto va en carbón (8,4:1 y 9,3:1):
+   franja de series, botones de sección, etiquetas, «Suscribirme» y «Enviar». */
+body.c22-cambios a.btn.btn-green:not(.btn-social), body.c22-cambios a.btn.btn-yellow:not(.btn-social),
+body.c22-cambios main section.cards-slider .content a.btn.btn-green, body.c22-cambios main section.cards-slider .content a.btn.btn-yellow,
+body.c22-cambios main section.cards-slider > .content .btn.btn.btn-green, body.c22-cambios main section.cards-slider > .content .btn.btn.btn-yellow,
+body.c22-cambios main > ul.sticky-header li a.btn-green, body.c22-cambios main > ul.sticky-header li a.btn-yellow,
+body.c22-cambios .permalink.green .categories span, body.c22-cambios .permalink.yellow .categories span,
+body.c22-cambios a.btn-linear-green:hover, body.c22-cambios a.btn-linear-yellow:hover,
+body.c22-cambios input.wpcf7-submit, body.c22-cambios input.wpcf7-submit:hover{ color: #1B1C1E !important; }
+body.c22-cambios a.btn.btn-green:not(.btn-social) i, body.c22-cambios a.btn.btn-yellow:not(.btn-social) i,
+body.c22-cambios a.btn.btn-green:not(.btn-social) i::before, body.c22-cambios a.btn.btn-yellow:not(.btn-social) i::before{ color: inherit !important; }
+/* botón «Leer» del destacado: el color de la serie con contraste suficiente */
+body.c22-cambios .c22-dest .s-ana .c22-dest__btn{ background: #4CCAA5; color: #1B1C1E; }
+body.c22-cambios .c22-dest .s-pdr .c22-dest__btn{ background: #4f6569; }
+/* ===== fin contraste ===== */
+
+/* ===== C22 tarjetas sin imagen: foto de los autores (con JS) ===== */
+/* Sobre la trama oscura, la foto del autor en un círculo con el anillo del
+   color de la serie; con dos autores, dos círculos superpuestos. */
+body.c22-cambios .c22-fa{ position: absolute; z-index: 4; top: 50%; right: 8%; height: 62%; aspect-ratio: 1; transform: translateY(-58%); pointer-events: none; }
+body.c22-cambios .c22-fa--2{ aspect-ratio: 1.62; }
+body.c22-cambios .c22-fa img{ position: absolute !important; top: 0 !important; right: 0; left: auto; display: block; width: auto !important; height: 100% !important; aspect-ratio: 1; border-radius: 50%; object-fit: cover; object-position: center 30%; background: #e3e8e8; box-shadow: 0 0 0 3px #1B1C1E, 0 0 0 6px var(--fa, currentColor); transform: none !important; }
+body.c22-cambios .c22-fa--2 img:first-child{ left: 0; right: auto; z-index: 1; }
+body.c22-cambios .c22-num{ z-index: 5; }
+/* miniaturas del destacado: el círculo arriba, el número abajo */
+body.c22-cambios .c22-dest__thumb .c22-fa{ top: 9%; right: 7%; height: 52%; transform: none; }
+body.c22-cambios .c22-dest__thumb .c22-fa img{ box-shadow: 0 0 0 2px #1B1C1E, 0 0 0 4px var(--fa, currentColor); }
+/* ===== fin tarjetas sin imagen ===== */
+
+/* ===== C22 fichas: «Revisa más» con lo más reciente de la serie (con JS) ===== */
+/* El título salía blanco sobre el gris claro de la capa y no se veía. Las
+   tarjetas, sin carrusel: cuatro en fila (dos en tableta); en el teléfono,
+   una fila que se desliza con el dedo. */
+body.c22-cambios main section.related > .title-underline{ color: var(--c22-tinta) !important; margin: 0 0 26px max(5%, calc(50% - 648px)) !important; }
+body.c22-cambios main section.related .slider.c22-rel{ display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; row-gap: 28px; width: 90%; max-width: 1296px; margin: 0 auto !important; padding: 0 !important; }
+body.c22-cambios main section.related .slider.c22-rel > a.card{ position: relative; float: none !important; width: auto !important; height: auto !important; margin: 0 !important; padding: 0 !important; }
+body.c22-cambios main section.related .slider.c22-rel > a.card > .content{ height: auto !important; }
+body.c22-cambios main section.related .slider.c22-rel > a.card:nth-child(n+5),
+body.c22-cambios main section.related .slider.c22-rel .fake-card{ display: none !important; }
+body.c22-cambios main section.related .slider.c22-rel > a.card + a.card::before{ content: ''; position: absolute; left: -14px; top: 0; bottom: 0; border-left: 1px solid var(--c22-filete); }
+@media (max-width: 1100px) {
+	body.c22-cambios main section.related .slider.c22-rel{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	body.c22-cambios main section.related .slider.c22-rel > a.card:nth-child(2n+1)::before{ display: none; }
+}
+@media (max-width: 760px) {
+	body.c22-cambios main section.related .slider.c22-rel{ display: flex !important; gap: 16px; width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 20px; padding: 0 20px 10px !important; }
+	body.c22-cambios main section.related .slider.c22-rel > a.card{ flex: 0 0 78%; scroll-snap-align: start; }
+	body.c22-cambios main section.related .slider.c22-rel > a.card:nth-child(n+5){ display: flex !important; }
+	body.c22-cambios main section.related .slider.c22-rel > a.card::before{ display: none !important; }
+	body.c22-cambios main section.related > .title-underline{ margin-left: 20px !important; }
+}
+/* ===== fin «Revisa más» ===== */
+
+/* ===== C22 fichas: sin duplicados (con JS) ===== */
+/* Los autores salían bajo el título y otra vez al final, con una segunda
+   barra de compartir: queda la firma de arriba. Si una ficha no tiene firma
+   arriba, el bloque de abajo se mantiene. */
+body.c22-cambios.single main:has(> section.single-header section.authors) > section.authors{ display: none !important; }
+/* «Ver en cepchile.cl», junto a «Descargar el PDF» */
+body.c22-cambios main section.single-header .c22-cita-prov:has(.c22-cita-prov__web){ display: flex !important; flex-wrap: wrap; align-items: center; column-gap: 24px; }
+body.c22-cambios main section.single-header .c22-cita-prov__web{ display: inline-flex; align-items: center; gap: 6px; margin: 20px 0 0; font: 700 12.5px/1 Montserrat, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--c22-tinta) !important; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+body.c22-cambios main section.single-header .c22-cita-prov__web::after{ content: '↗'; font-size: 13px; text-decoration: none; }
+body.c22-cambios main section.single-header .c22-cita-prov__web:hover{ text-decoration-thickness: 2px; }
+@media (max-width: 760px) { body.c22-cambios main section.single-header .c22-cita-prov__web{ margin-top: 14px; } }
+/* al pasar el mouse, el botón del PDF quedaba blanco sobre fondo claro */
+body.c22-cambios main section.single-header a.c22-cita-prov__pdf:hover,
+body.c22-cambios main section.single-header a.c22-cita-prov__pdf:focus{ background: var(--c22-tinta) !important; border-color: var(--c22-tinta) !important; color: #fff !important; }
+/* ===== fin sin duplicados ===== */
