@@ -1108,3 +1108,28 @@ main [hidden] { display: none !important; }
   .art-banner-in:has(.pill-opinion) .hero-img { margin-top: 0; }
   .art-banner-in:has(.pill-opinion) .hero-img img { width: 100%; height: auto; display: block; }
 }
+
+/* En vivo: franja bajo el menú mientras hay un evento, y enlaces a grabaciones */
+.live-bar { background: #0b2238; color: #fff; }
+.live-bar .wrap { display: flex; align-items: center; gap: 16px; padding-top: 11px; padding-bottom: 11px; }
+.live-dot { display: inline-flex; align-items: center; gap: 8px; flex: none; font: 800 12px/1 var(--circe); letter-spacing: .12em; text-transform: uppercase; color: #fff; background: #d7262e; padding: 6px 10px; border-radius: 3px; }
+.live-dot.soon { background: var(--blue); }
+.live-dot i { width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: live-pulse 1.2s infinite; }
+.live-dot.soon i { animation: none; }
+@keyframes live-pulse { 50% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) { .live-dot i { animation: none; } }
+.live-bar .live-t { font: 700 16px/1.25 var(--circe); color: #fff; text-decoration: none; }
+.live-bar .live-t:hover { text-decoration: underline; }
+.live-bar .live-m { font-size: 13px; color: rgba(255,255,255,.75); white-space: nowrap; }
+.live-bar .live-go { margin-left: auto; flex: none; background: #fff; color: #0b2238; border-radius: 999px; padding: 8px 16px; font: 700 12px var(--sans); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; }
+.live-bar .live-go:hover { background: var(--blue); color: #fff; }
+@media (max-width: 760px) {
+  .live-bar .wrap { flex-wrap: wrap; gap: 8px 12px; }
+  .live-bar .live-m { display: none; }
+  .live-bar .live-go { margin-left: 0; }
+}
+.ev-video { font-weight: 700; color: #b81f26 !important; text-decoration: none; white-space: nowrap; }
+.ev-video::before { content: '▶ '; font-size: .85em; }
+.btn-video { background: #d7262e !important; }
+.btn-video:hover { background: #a8161d !important; }
+.ev .ev-live { display: inline-block; margin-left: 8px; font: 800 10.5px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: #fff; background: #d7262e; padding: 3px 7px; border-radius: 3px; vertical-align: middle; }
