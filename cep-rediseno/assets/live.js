@@ -147,15 +147,48 @@
     var d = ev.date;
     return '<li><time datetime="' + d.toISOString().slice(0, 10) + '"><b>' + d.getDate() + '</b>' + MES[d.getMonth()].toUpperCase() + '</time>' +
       '<div><p class="kicker"><span class="pill pill-' + slug(ev.series) + '">' + esc(ev.series) + '</span></p>' +
-      title(ev, 'hl-s') + '<p class="meta">' + DIA[d.getDay()] + ' · ' + ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2) + ' h</p></div></li>';
+      title(ev, 'hl-s') + '<p class="meta">' + DIA[d.getDay()] + ' · ' + ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2) + ' h' +
+      (ev.yt ? ' · <a class="ev-video" href="' + esc(ev.yt) + '">' + (liveState(ev) === 'live' ? 'En vivo' : d < new Date() ? 'Ver grabación' : 'Transmisión') + '</a>' : '') +
+      '</p></div></li>';
   }
+
+  /* ---------- En vivo ----------
+     Un evento está «en vivo» desde 15 minutos antes de su hora hasta 3 horas después
+     (hora local del navegador, pensada para lectores en Chile). La franja aparece
+     bajo el menú y enlaza a la transmisión de YouTube si el evento la tiene. */
+  function ytUrl(o) {
+    var s = typeof o === 'string' ? o : JSON.stringify(o || '');
+    var m = /youtube(?:-nocookie)?\.com\/(?:embed\/|watch\?v=|live\/)([\w-]{11})|youtu\.be\/([\w-]{11})/.exec(s);
+    return m ? 'https://www.youtube.com/watch?v=' + (m[1] || m[2]) : '';
+  }
+  function liveState(ev) {
+    var t = Date.now(), s = +ev.date;
+    if (t >= s && t <= s + 3 * 36e5) return 'live';
+    if (t >= s - 15 * 6e4 && t < s) return 'soon';
+    return '';
+  }
+  var LIVE_EVS = [];
+  function liveBar(evs) {
+    if (evs) LIVE_EVS = evs;
+    var ev = LIVE_EVS.filter(function (e) { return liveState(e); }).sort(function (a, b) { return a.date - b.date; })[0];
+    var bar = document.querySelector('.live-bar'), main = document.querySelector('main');
+    if (!ev) { if (bar) bar.remove(); return; }
+    var st = liveState(ev), d = ev.date, hh = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+    var html = '<div class="wrap"><span class="live-dot' + (st === 'soon' ? ' soon' : '') + '"><i></i>' + (st === 'live' ? 'En vivo' : 'Por comenzar') + '</span>' +
+      '<a class="live-t" href="' + esc(ev.href || ev.link) + '">' + esc(ev.title) + '</a>' +
+      '<span class="live-m">' + esc(ev.series) + ' · ' + hh + ' h</span>' +
+      '<a class="live-go" href="' + esc(ev.yt || ev.href || ev.link) + '">' + (ev.yt ? 'Ver transmisión' : 'Ver evento') + ' <span aria-hidden="true">▶</span></a></div>';
+    if (!bar) { bar = document.createElement('div'); bar.className = 'live-bar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Evento en vivo'); main.insertBefore(bar, main.firstChild); }
+    bar.innerHTML = html;
+  }
+  setInterval(function () { liveBar(); }, 60000);
 
   var F = 'id,date,link,title,featured_media,acf.numero,acf.categoria,acf.autores';
   Promise.all([
     get('investigation?per_page=16&_fields=' + F),
     get('posts?per_page=6&categories=31&_fields=id,date,link,title,featured_media,acf.autores'),
     get('surveys?per_page=1&_fields=id,date,link,title,featured_media,acf.numero'),
-    get('events?per_page=12&_fields=id,link,title,featured_media,acf.fecha_inicio,acf.horario,acf.tipo_de_evento'),
+    get('events?per_page=12&_fields=id,link,title,featured_media,acf.fecha_inicio,acf.horario,acf.tipo_de_evento,acf.ubicacion,acf.contenido_flexible'),
     get('assets/local.json').catch(function () { return {}; })
   ]).then(function (r) {
     var local = r[4]; LOCAL = local;
@@ -176,6 +209,7 @@
     var evs = r[3].filter(function (x) { return x.acf && x.acf.fecha_inicio; }).map(function (x) {
       var f = x.acf.fecha_inicio, it = norm(x, 'event', EVENT[x.acf.tipo_de_evento] || 'Actividad');
       it.date = new Date(+f.slice(0, 4), +f.slice(4, 6) - 1, +f.slice(6, 8), +(x.acf.horario || '0:0').split(':')[0], +(x.acf.horario || '0:0').split(':')[1]);
+      it.yt = ytUrl(x.acf.contenido_flexible);
       return it;
     });
     if (!inv.length) return;
@@ -284,6 +318,7 @@
     var past = evs.filter(function (e) { return e.date < today; }).sort(function (a, b) { return b.date - a.date; }).slice(0, 2);
     if (next.length) put('agenda', next.map(agenda).join(''));
     if (past.length) put('agenda-past', past.map(agenda).join(''));
+    liveBar(evs);
 
     dedupe();
     podcast();
