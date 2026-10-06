@@ -1,7 +1,7 @@
 // Portada en vivo: lee lo último de la API de WordPress del CEP al cargar la
 // página y reemplaza destacados, «Lo más reciente», agenda y «Lo último».
 // Si la API no responde, queda el contenido publicado en el HTML.
-// Además rota el destacado central, con controles y pausa (WCAG 2.2.2).
+// Además rota el destacado central (cada 12 s), con controles y pausa (WCAG 2.2.2).
 (function () {
   var API = 'https://www.cepchile.cl/wp-json/wp/v2/';
   var SERIES = { 6: 'Puntos de Referencia', 7: 'Libros', 1742: 'Voces del CEP', 1831: 'Momento Económico',
@@ -33,7 +33,7 @@
       [].forEach.call(dots.children, function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
     }
     function tick() { if (!userPaused && !hover && !document.hidden) show(i + 1); }
-    function start() { clearInterval(timer); timer = setInterval(tick, 7000); }
+    function start() { clearInterval(timer); timer = setInterval(tick, 12000); }
     function setPaused(p) {
       userPaused = p;
       btnPause.textContent = p ? 'Reanudar' : 'Pausar';
