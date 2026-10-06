@@ -286,8 +286,23 @@
     if (past.length) put('agenda-past', past.map(agenda).join(''));
 
     dedupe();
+    podcast();
     document.documentElement.setAttribute('data-live-ok', '');
   }
+
+  // Podcast: último episodio de «Depósito de libros» (Spotify oEmbed, permite CORS).
+  // Si Spotify no responde, queda la tarjeta verde con el enlace al programa.
+  var POD = null;
+  function podcast() {
+    var c = document.querySelector('.card-podcast');
+    if (!c || !POD || !POD.title) return;
+    var a = c.querySelector('.thumb');
+    if (POD.thumbnail_url) { a.className = 'thumb'; a.innerHTML = '<img src="' + esc(POD.thumbnail_url) + '" alt="" loading="lazy">'; }
+    c.querySelector('.kicker').innerHTML = '<span class="pill pill-podcast">Podcast</span> <time>Depósito de libros</time>';
+    c.querySelector('h3 a').textContent = POD.title;
+  }
+  get('https://open.spotify.com/oembed?url=https://open.spotify.com/show/4o6fMP8Z5rWS3X0DFVlWvO')
+    .then(function (d) { POD = d; podcast(); }).catch(function () {});
 
   // C22: últimos análisis online desde la API de c22cepchile.cl
   var c22 = document.querySelector('[data-live="c22"]');
