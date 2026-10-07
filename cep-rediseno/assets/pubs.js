@@ -26,14 +26,12 @@
         var src = (sz.medium || sz.medium_large || {}).source_url || fm.source_url;
         var dek = txt(x.excerpt && x.excerpt.rendered).replace(/\s+/g, ' ').trim();
         if (dek.length > 220) dek = dek.slice(0, 217).replace(/\s\S*$/, '') + '…';
-        return '<div class="li" data-serie="' + slug(serie) + '"><article class="row">' +
+        return '<div class="li" data-serie="' + slug(serie) + '" data-year="' + d.getFullYear() + '"><article class="row">' +
           (src ? '<a class="thumb" href="' + esc(x.link) + '" tabindex="-1" aria-hidden="true"><img src="' + esc(src) + '" alt="" loading="lazy"></a>' : '') +
           '<div><p class="kicker"><span class="pill pill-' + slug(serie) + '">' + esc(label) + '</span> <time>' + ('0' + d.getDate()).slice(-2) + ' ' + MES[d.getMonth()] + ' ' + d.getFullYear() + '</time></p>' +
           '<h3 class="hl hl-m"><a href="' + esc(x.link) + '">' + esc(txt(x.title.rendered)) + '</a></h3>' + (dek ? '<p class="dek">' + esc(dek) + '</p>' : '') + '</div></article></div>';
       }).join('');
       list.insertAdjacentHTML('afterbegin', html);
-      var c = document.querySelector('.count span'); if (c) c.textContent = list.querySelectorAll('.li').length;
-      var on = document.querySelector('.filters .chip[aria-pressed="true"]');
-      if (on && on.dataset.serie) on.click();
+      if (window.cepApplyFilters) window.cepApplyFilters();
     }).catch(function () {});
 })();
