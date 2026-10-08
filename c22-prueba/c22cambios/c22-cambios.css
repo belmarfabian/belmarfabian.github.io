@@ -818,4 +818,37 @@ body.c22-cambios main section.single-header .c22-cita-prov__web:hover{ text-deco
 body.c22-cambios main section.single-header a.c22-cita-prov__pdf:hover,
 body.c22-cambios main section.single-header a.c22-cita-prov__pdf:focus{ background: var(--c22-tinta) !important; border-color: var(--c22-tinta) !important; color: #fff !important; }
 /* ===== fin sin duplicados ===== */
+
+/* ===== C22 portada: dos destacados grandes (lo más reciente + la tarjeta fija) ===== */
+/* La tarjeta fija (FIJO en el JS) va al lado de la publicación más reciente.
+   Hoy es el juego «¿Con quién votas?», con el azul del CEP. */
+body.c22-cambios .c22-sr{ position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+body.c22-cambios .c22-dest .s-jue .c22-dest__serie{ color: #0b5fb3; }
+body.c22-cambios .c22-dest .s-jue .c22-dest__btn{ background: #0d73d6; color: #fff; }
+body.c22-cambios .c22-dest .s-jue .c22-dest__btn::after{ content: '↗'; margin-left: 6px; }
+body.c22-cambios .c22-dest .s-jue .c22-dest__btn:hover, body.c22-cambios .c22-dest .s-jue .c22-dest__btn:focus{ background: #0a5fb3; }
+body.c22-cambios .c22-dest__img.s-jue{ background: #0d73d6; }
+body.c22-cambios .c22-dest__img.s-jue::after{ display: none; }
+@media (min-width: 1001px) {
+	body.c22-cambios .c22-dest--b.c22-dest--dos{ grid-template-columns: repeat(2, minmax(0, 1fr)) !important; column-gap: 40px; }
+	body.c22-cambios .c22-dest--dos > .c22-dest__big{ grid-column: auto !important; grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: auto 1fr; position: relative; }
+	body.c22-cambios .c22-dest--dos > .c22-dest__big + .c22-dest__big::before{ content: ''; position: absolute; left: -20px; top: 0; bottom: 18px; border-left: 1px solid var(--c22-filete); }
+	body.c22-cambios .c22-dest--dos .c22-dest__img{ height: 270px !important; }
+	body.c22-cambios .c22-dest--dos .c22-dest__txt{ padding: 18px 0 0 !important; justify-content: flex-start !important; }
+	body.c22-cambios .c22-dest--dos .c22-dest__big h2{ font-size: 26px; }
+	body.c22-cambios .c22-dest--dos .c22-dest__resumen{ -webkit-line-clamp: 2; }
+	body.c22-cambios .c22-dest--dos .c22-dest__btn{ margin-top: auto; }
+}
+/* tableta: los dos grandes siguen lado a lado, más compactos */
+@media (min-width: 601px) and (max-width: 1000px) {
+	body.c22-cambios .c22-dest--b.c22-dest--dos{ grid-template-columns: repeat(2, minmax(0, 1fr)) !important; column-gap: 24px; }
+	body.c22-cambios .c22-dest--dos > .c22-dest__big{ grid-column: auto !important; grid-template-rows: auto 1fr; }
+	body.c22-cambios .c22-dest--dos > .c22-dest__side{ grid-column: 1 / -1; }
+	body.c22-cambios .c22-dest--dos .c22-dest__img{ aspect-ratio: 16 / 10 !important; }
+	body.c22-cambios .c22-dest--dos .c22-dest__txt{ justify-content: flex-start !important; }
+	body.c22-cambios .c22-dest--dos .c22-dest__big h2{ font-size: 21px; }
+	body.c22-cambios .c22-dest--dos .c22-dest__resumen{ display: none; }
+	body.c22-cambios .c22-dest--dos .c22-dest__btn{ margin-top: auto; }
+}
+/* ===== fin dos destacados ===== */
 /* ===== C22 CAPA DE CAMBIOS: FIN ===== */
