@@ -1,10 +1,24 @@
-Respaldo del 8 de octubre de 2026, antes de instalar la capa de cambios.
-Ambos archivos coinciden carácter por carácter con lo guardado en WordPress (verificado con SHA-256).
+Respaldo del 8 de octubre de 2026, tomado antes de instalar la capa de cambios.
+Ambos archivos coinciden carácter por carácter con lo que había en WordPress (verificado con SHA-256).
 
 - css-adicional.css: Apariencia > Personalizar > CSS adicional (80.840 caracteres).
 - etiqueta-head.html: Opciones Generales > Analytics > «Etiqueta head» (1.574 caracteres:
   Google Analytics y los estilos del Monitor legislativo).
 
-Para volver atrás basta con borrar, en cada campo, lo que va entre las marcas
-«C22 CAPA DE CAMBIOS: INICIO» y «C22 CAPA DE CAMBIOS: FIN» (ambas incluidas),
-o pegar de nuevo el contenido de estos archivos.
+La capa quedó instalada el mismo día, a las 11:40 aprox., con la cuenta de Aldo Mascareño:
+- «Etiqueta head»: 41.789 caracteres (lo anterior + el script).
+- CSS adicional: 158.743 caracteres (lo anterior + la capa).
+Los visitantes ven el sitio de siempre; solo quien tiene sesión iniciada ve el diseño nuevo
+(SOLO_EDITORES = true). Para abrirlo a todos, se cambia esa línea a false en la «Etiqueta head».
+
+CÓMO VOLVER ATRÁS (en este orden):
+1. Apariencia > Personalizar > CSS adicional: borrar desde la línea
+   «/* ===== C22 CAPA DE CAMBIOS: INICIO ...» hasta «/* ===== C22 CAPA DE CAMBIOS: FIN ===== */»,
+   ambas incluidas. Apretar «Publicar».
+2. Opciones Generales > Analytics > «Etiqueta head»: borrar desde
+   «<!-- C22 CAPA DE CAMBIOS: INICIO ...» hasta «<!-- C22 CAPA DE CAMBIOS: FIN -->»,
+   ambas incluidas. Apretar «Update».
+Primero el CSS y después el script. Si se borra solo el script, algunas páginas quedan
+en blanco tres segundos para todos.
+
+Alternativa: reemplazar el contenido completo de cada campo por el de estos archivos.
