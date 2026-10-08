@@ -20,6 +20,11 @@ más reciente y el juego «¿Con quién votas?» (tarjeta fija FIJO en el script
 A las 18:44 se sacó la cinta de cinco colores bajo los dos títulos grandes del destacado
 (Monitor y juego). El resto de la paleta queda igual. CSS adicional: 161.747 caracteres.
 
+A las 19:35 el juego quedó como «Próximamente»: la tarjeta sigue al lado del Monitor, pero
+en gris y sin enlace. «Etiqueta head»: 43.436 caracteres. CSS adicional: 162.644 caracteres.
+- Para abrir el juego cuando salga: en la «Etiqueta head», borrar la línea
+  «pronto: 'Próximamente'» del bloque FIJO, o pedirlo y se hace desde el repositorio.
+
 PARA ESCONDERLA DE NUEVO A LOS VISITANTES (sin borrar nada):
 En la «Etiqueta head», cambiar «var SOLO_EDITORES = false;» por «var SOLO_EDITORES = true;».
 Apretar «Update». Los visitantes vuelven a ver el sitio antiguo; con sesión se sigue viendo la nueva.
