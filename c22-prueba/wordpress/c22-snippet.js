@@ -1,8 +1,14 @@
 /*
  * Capa de cambios de c22cepchile.cl: comportamiento (JS).
  *
- * Va en el <head> (WPCode: «Site Wide Header»), después de los scripts del
- * tema. Marca el <body> apenas el navegador lo crea, antes de dibujar nada.
+ * Va en el <head>. En c22cepchile.cl no hay plugins de código ni editor de
+ * archivos: se pega, dentro de una etiqueta script, al final de Opciones
+ * Generales → Analytics → «Etiqueta head», después de Google Analytics
+ * (archivo listo: wordpress/c22-etiqueta-head.html). Ese campo sale al
+ * comienzo del <head>, antes que los scripts del tema; el código lo tiene en
+ * cuenta. Ojo: como va dentro del HTML, el código no puede contener la
+ * etiqueta de cierre de script, ni siquiera en un comentario.
+ * Marca el <body> apenas el navegador lo crea, antes de dibujar nada.
  * Lo que cambia la estructura de la página (portada, Publicaciones, catálogo,
  * fichas) se arma apenas el navegador termina de leer el HTML, antes de que
  * el tema arme sus carruseles; el resto corre después de los
@@ -27,6 +33,14 @@
   //    - las animaciones de entrada (AOS) no corren: escondían tarjetas y
   //      títulos hasta que terminaban y recalculaban la página en cada scroll.
   //      El CSS deja visible todo lo que tenía animación.
+  function frenarAOS(A) {
+    if (!A || A.c22) return;
+    ['init', 'refresh', 'refreshHard'].forEach(function (k) {
+      var f = A[k];
+      if (typeof f === 'function') A[k] = function () { if (activo !== true) return f.apply(this, arguments); };
+    });
+    A.c22 = true;
+  }
   function frenos() {
     var jq = window.jQuery;
     if (jq && jq.fn && jq.fn.slick && !jq.fn.slick.c22) {
@@ -39,14 +53,20 @@
       };
       jq.fn.slick.c22 = true;
     }
-    var A = window.AOS;
-    if (A && !A.c22) {
-      ['init', 'refresh', 'refreshHard'].forEach(function (k) {
-        var f = A[k];
-        if (typeof f === 'function') A[k] = function () { if (activo !== true) return f.apply(this, arguments); };
+    frenarAOS(window.AOS);
+  }
+  // Si este script corre antes que los del tema (en este sitio va al
+  // comienzo del <head>), AOS todavía no existe: se lo frena apenas el tema
+  // lo define. Los carruseles se frenan después, antes de que el tema los arme.
+  if (!window.AOS) {
+    try {
+      var aos;
+      Object.defineProperty(window, 'AOS', {
+        configurable: true, enumerable: true,
+        get: function () { return aos; },
+        set: function (v) { aos = v; frenarAOS(v); }
       });
-      A.c22 = true;
-    }
+    } catch (e) {}
   }
   frenos();
 
