@@ -6,7 +6,6 @@
 			
 			
 			
-			
 			.grecaptcha-badge{
 	left: -100% !important;
 }
@@ -795,4 +794,3 @@ a.c22-cita-prov__pdf:hover,a.c22-cita-prov__pdf:focus,.single-header .content .r
 
 /* C22: ocultar filtro de categoría en Notas de investigación */
 body.term-notas-de-investigacion .alm-filter--taxonomy { display: none !important; }
-		
