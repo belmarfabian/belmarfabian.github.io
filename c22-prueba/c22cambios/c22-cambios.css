@@ -856,4 +856,17 @@ body.c22-cambios .c22-dest__img.s-jue::after{ display: none; }
 /* La cinta sigue en las cabeceras de página y en el pie; bajo el Monitor y el juego sobraba. */
 body.c22-cambios .c22-dest__big .c22-dest__txt h2::after{ display: none !important; }
 /* ===== fin destacado sin cinta ===== */
+
+/* ===== C22 destacado: el juego, en gris hasta que salga ===== */
+/* Con «pronto» en la tarjeta fija (FIJO en el JS) no hay enlaces: la foto, el
+   título y el aviso quedan en gris. Al borrar «pronto», vuelve el azul. */
+body.c22-cambios .c22-dest .c22-pronto .c22-dest__img{ background: #DDE2E3; }
+body.c22-cambios .c22-dest .c22-pronto .c22-dest__img img{ filter: grayscale(1); opacity: .5; }
+body.c22-cambios .c22-dest .c22-pronto .c22-dest__serie{ color: #7D8B8E; }
+body.c22-cambios .c22-dest .c22-pronto h2{ color: #6B787B; }
+body.c22-cambios .c22-dest .c22-pronto .c22-dest__resumen{ color: #848F91; }
+body.c22-cambios .c22-dest .c22-pronto .c22-dest__btn,
+body.c22-cambios .c22-dest .c22-pronto .c22-dest__btn:hover{ background: #DDE2E3; color: #5E6C6F; cursor: default; }
+body.c22-cambios .c22-dest .c22-pronto .c22-dest__btn::after{ content: none; }
+/* ===== fin juego en gris ===== */
 /* ===== C22 CAPA DE CAMBIOS: FIN ===== */
