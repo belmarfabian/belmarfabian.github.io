@@ -1,3 +1,4 @@
+/* ===== C22 CAPA DE CAMBIOS: INICIO (todo hasta «C22 CAPA DE CAMBIOS: FIN» se reemplaza junto) ===== */
 /*
  * Capa de cambios de c22cepchile.cl
  * ---------------------------------
@@ -817,3 +818,4 @@ body.c22-cambios main section.single-header .c22-cita-prov__web:hover{ text-deco
 body.c22-cambios main section.single-header a.c22-cita-prov__pdf:hover,
 body.c22-cambios main section.single-header a.c22-cita-prov__pdf:focus{ background: var(--c22-tinta) !important; border-color: var(--c22-tinta) !important; color: #fff !important; }
 /* ===== fin sin duplicados ===== */
+/* ===== C22 CAPA DE CAMBIOS: FIN ===== */
