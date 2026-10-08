@@ -144,6 +144,16 @@
     lee: ['Notas de investigación', 'not'],
     mira: ['Columnas', 'col']
   };
+  // Tarjeta grande fija, al lado de la publicación más reciente (diseño b).
+  // Para sacarla de la portada basta con dejar: var FIJO = null;
+  var FIJO = {
+    s: ['Juego · Educación cívica', 'jue'],
+    link: 'https://belmarfabian.github.io/con-quien-votas/',
+    title: '¿Con quién votas?',
+    resumen: 'Cinco proyectos de ley que votó la Cámara de Diputadas y Diputados. Tú votas cada uno y al final ves con qué partido coincides más.',
+    img: 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/con-quien-votas.jpg',
+    boton: 'Jugar', externo: true, sinNum: true, num: '', names: [], fotos: []
+  };
   // Imágenes que conviene reemplazar mientras se cambian en WordPress
   // (imagen destacada de la publicación).
   var IMAGENES = {
@@ -188,17 +198,20 @@
       cb(p.length > 280 ? p.slice(0, 280).replace(/\s+\S*$/, '') + '…' : p);
     }).catch(function () {});
   }
+  // enlaces de la tarjeta fija: si va a otro sitio, se abre en una pestaña nueva
+  function destino(it) { return it.externo ? ' target="_blank" rel="noopener"' : ''; }
   function imgHtml(it, cls, lazy) {
-    return '<a class="' + cls + (it.img ? '' : ' sin-foto') + ' s-' + it.s[1] + '" href="' + esc(it.link) + '" tabindex="-1" aria-hidden="true">' +
+    return '<a class="' + cls + (it.img ? '' : ' sin-foto') + ' s-' + it.s[1] + '" href="' + esc(it.link) + '"' + destino(it) + ' tabindex="-1" aria-hidden="true">' +
       (it.img ? '<img src="' + esc(it.img) + '" alt=""' + (lazy ? ' loading="lazy"' : '') + '>' : (it.fotos.length ? fotosHtml(it.fotos) : '')) +
-      '<span class="c22-num">' + esc(it.num) + '<small>' + esc(it.s[0].toLowerCase()) + '</small></span></a>';
+      (it.sinNum ? '' : '<span class="c22-num">' + esc(it.num) + '<small>' + esc(it.s[0].toLowerCase()) + '</small></span>') + '</a>';
   }
   function grande(it, extra) {
     return '<article class="c22-dest__big s-' + it.s[1] + '"' + (extra || '') + '>' + imgHtml(it, 'c22-dest__img', false) +
       '<div class="c22-dest__txt"><p class="c22-dest__serie">' + esc(it.s[0]) + (it.date ? ' <span>· ' + fechaTxt(it.date) + '</span>' : '') + '</p>' +
-      '<h2><a href="' + esc(it.link) + '">' + esc(it.title) + '</a></h2><p class="c22-dest__resumen"></p>' +
+      '<h2><a href="' + esc(it.link) + '"' + destino(it) + '>' + esc(it.title) + '</a></h2><p class="c22-dest__resumen">' + esc(it.resumen || '') + '</p>' +
       (it.names.length ? '<p class="c22-dest__autores">' + esc(lista(it.names)) + '</p>' : '') +
-      '<a class="c22-dest__btn" href="' + esc(it.link) + '">Leer</a></div></article>';
+      '<a class="c22-dest__btn" href="' + esc(it.link) + '"' + destino(it) + '>' + esc(it.boton || 'Leer') +
+      (it.externo ? '<span class="c22-sr"> (se abre en una pestaña nueva)</span>' : '') + '</a></div></article>';
   }
   function chico(it, k) {
     return '<article class="c22-dest__small s-' + it.s[1] + '" data-k="' + k + '">' + imgHtml(it, 'c22-dest__thumb', true) +
@@ -239,7 +252,9 @@
       }).join('') + '</div><div class="c22-dest__side"></div>' +
         '<button type="button" class="c22-dest__pause">Pausar</button>';
     } else {
-      sec.innerHTML = grande(items[0]) + '<div class="c22-dest__side">' + items.slice(1, 4).map(chico).join('') + '</div>';
+      var fijo = DISENO === 'b' && FIJO ? grande(FIJO) : '';
+      if (fijo) sec.classList.add('c22-dest--dos');
+      sec.innerHTML = grande(items[0]) + fijo + '<div class="c22-dest__side">' + items.slice(1, 4).map(chico).join('') + '</div>';
     }
     hero.parentNode.insertBefore(sec, hero);
     // el banner queda oculto: si el tema todavía no lo arma, ya no lo arma
