@@ -851,4 +851,49 @@ body.c22-cambios .c22-dest__img.s-jue::after{ display: none; }
 	body.c22-cambios .c22-dest--dos .c22-dest__btn{ margin-top: auto; }
 }
 /* ===== fin dos destacados ===== */
+
+/* ===== C22 paleta sobria: el color dice de qué serie es algo, no decora ===== */
+/* Comentario de Juan Luis (oct 2026): abusar de la paleta del C22 aleja el sitio
+   del CEP. Siguen en color los números de serie sobre las fotos, las etiquetas
+   chicas del destacado y los anillos de autor. Lo demás pasa a tinta y gris. */
+/* subrayado de los títulos: todos en el gris del C22 */
+body.c22-cambios main .title-underline.title-underline.title-underline.title-underline.title-underline[class*="border-"]{ border-bottom-color: #657D81 !important; }
+/* menú: la sección activa se subraya en tinta */
+body.c22-cambios header li > span[class*="background-"]{ background-color: var(--c22-tinta) !important; }
+/* botones de sección: todos iguales, en gris */
+body.c22-cambios main section.cards-slider > .content .btn.btn.btn.btn-green, body.c22-cambios main section.cards-slider > .content .btn.btn.btn.btn-yellow,
+body.c22-cambios main section.cards-slider > .content .btn.btn.btn.btn-red, body.c22-cambios main section.cards-slider > .content .btn.btn.btn.btn-purple,
+body.c22-cambios main .categories-tabs .btn.btn.btn.btn-green, body.c22-cambios main .categories-tabs .btn.btn.btn.btn-yellow,
+body.c22-cambios main .categories-tabs .btn.btn.btn.btn-red, body.c22-cambios main .categories-tabs .btn.btn.btn.btn-purple,
+body.c22-cambios main section.buttons-container .btn.btn.btn.btn-green, body.c22-cambios main section.buttons-container .btn.btn.btn.btn-yellow,
+body.c22-cambios main section.buttons-container .btn.btn.btn.btn-red, body.c22-cambios main section.buttons-container .btn.btn.btn.btn-purple{ background: #657D81 !important; border-color: #657D81 !important; color: #fff !important; }
+/* destacado: sin la cinta de cinco colores; botón en gris oscuro (el del juego sigue en el azul del CEP) */
+body.c22-cambios .c22-dest__big .c22-dest__txt h2::after{ display: none !important; }
+body.c22-cambios .c22-dest .c22-dest__big .c22-dest__btn{ background: #4f6569 !important; color: #fff !important; }
+body.c22-cambios .c22-dest .c22-dest__big.s-jue .c22-dest__btn{ background: #0d73d6 !important; }
+/* cabeceras de página: un filete fino en vez de la franja de colores */
+body.c22-cambios main section.page-header.page-header{ background: transparent !important; border-bottom: 1px solid var(--c22-filete) !important; }
+/* sin tramas diagonales en los bordes ni círculo de trama en las fichas */
+body.c22-cambios main section.cards-slider.c22-grid > .texture.texture, body.c22-cambios main section.page-header > .texture.texture,
+body.c22-cambios main .texture.background.background{ display: none !important; }
+@media (min-width: 1101px) { body.c22-cambios main section.cards-slider.c22-grid > .texture.texture{ display: none !important; } }
+@media (min-width: 1300px) { body.c22-cambios.single main section.single-header::after{ display: none !important; } }
+/* banda de secciones: blanca, con un punto del color de cada serie */
+body.c22-cambios main > ul.sticky-header{ background: #fff !important; border: 1px solid var(--c22-filete) !important; border-radius: 999px !important; overflow: hidden !important; }
+body.c22-cambios main > ul.sticky-header > li > a.btn.btn.btn{ background: #fff !important; border-color: transparent !important; color: var(--c22-tinta) !important; border-radius: 0 !important; }
+body.c22-cambios main > ul.sticky-header > li + li > a.btn.btn.btn{ border-left: 1px solid var(--c22-filete) !important; }
+body.c22-cambios main > ul.sticky-header > li > a.btn.btn.btn:hover, body.c22-cambios main > ul.sticky-header > li > a.btn.btn.btn:focus-visible{ background: #F3F5F5 !important; }
+body.c22-cambios main > ul.sticky-header > li > a.btn::before{ content: ''; display: inline-block; width: 9px; height: 9px; margin-right: 8px; border-radius: 50%; vertical-align: 1px; background: var(--serie, #657D81); }
+body.c22-cambios main > ul.sticky-header a.btn-green{ --serie: #4CCAA5; } body.c22-cambios main > ul.sticky-header a.btn-yellow{ --serie: #FFB923; }
+body.c22-cambios main > ul.sticky-header a.btn-red{ --serie: #F20231; } body.c22-cambios main > ul.sticky-header a.btn-purple{ --serie: #A10856; }
+body.c22-cambios main > ul.sticky-header a.btn-gray{ --serie: #1B1C1E; }
+/* etiquetas de categoría en las tarjetas y títulos de Conoce: en tinta */
+body.c22-cambios .permalink .categories span, body.c22-cambios a.card .categories span{ background: var(--c22-tinta) !important; color: #fff !important; }
+body.c22-cambios #conoce a.card .title{ color: var(--c22-tinta) !important; }
+/* enlaces del texto y de la cita: en tinta */
+body.c22-cambios main section.wysiwyg a, body.c22-cambios main .c22-cita a{ color: var(--c22-tinta) !important; text-decoration-color: rgba(27, 28, 30, .45) !important; border-bottom-color: rgba(27, 28, 30, .45) !important; box-shadow: inset 0 -2px 0 rgba(27, 28, 30, .3) !important; }
+/* pie: botón de suscripción en gris y sin la cinta de colores */
+body.c22-cambios input.wpcf7-submit.wpcf7-submit{ background: #657D81 !important; border-color: #657D81 !important; color: #fff !important; }
+body.c22-cambios img.ribbon{ display: none !important; }
+/* ===== fin paleta sobria ===== */
 /* ===== C22 CAPA DE CAMBIOS: FIN ===== */
