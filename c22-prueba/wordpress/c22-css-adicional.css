@@ -851,4 +851,9 @@ body.c22-cambios .c22-dest__img.s-jue::after{ display: none; }
 	body.c22-cambios .c22-dest--dos .c22-dest__btn{ margin-top: auto; }
 }
 /* ===== fin dos destacados ===== */
+
+/* ===== C22 destacado: sin la cinta de cinco colores bajo los dos títulos grandes ===== */
+/* La cinta sigue en las cabeceras de página y en el pie; bajo el Monitor y el juego sobraba. */
+body.c22-cambios .c22-dest__big .c22-dest__txt h2::after{ display: none !important; }
+/* ===== fin destacado sin cinta ===== */
 /* ===== C22 CAPA DE CAMBIOS: FIN ===== */
