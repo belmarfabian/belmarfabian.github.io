@@ -6,12 +6,16 @@ Ambos archivos coinciden carácter por carácter con lo que había en WordPress 
   Google Analytics y los estilos del Monitor legislativo).
 
 La capa quedó instalada el mismo día, a las 11:40 aprox., con la cuenta de Aldo Mascareño:
-- «Etiqueta head»: 41.789 caracteres (lo anterior + el script).
+- «Etiqueta head»: lo anterior + el script.
 - CSS adicional: 158.743 caracteres (lo anterior + la capa).
-Los visitantes ven el sitio de siempre; solo quien tiene sesión iniciada ve el diseño nuevo
-(SOLO_EDITORES = true). Para abrirlo a todos, se cambia esa línea a false en la «Etiqueta head».
+Primero quedó visible solo con sesión iniciada (SOLO_EDITORES = true). A las 13:35 se abrió
+a todos los visitantes (SOLO_EDITORES = false; la «Etiqueta head» quedó en 41.790 caracteres).
 
-CÓMO VOLVER ATRÁS (en este orden):
+PARA ESCONDERLA DE NUEVO A LOS VISITANTES (sin borrar nada):
+En la «Etiqueta head», cambiar «var SOLO_EDITORES = false;» por «var SOLO_EDITORES = true;».
+Apretar «Update». Los visitantes vuelven a ver el sitio antiguo; con sesión se sigue viendo la nueva.
+
+CÓMO VOLVER ATRÁS DEL TODO (en este orden):
 1. Apariencia > Personalizar > CSS adicional: borrar desde la línea
    «/* ===== C22 CAPA DE CAMBIOS: INICIO ...» hasta «/* ===== C22 CAPA DE CAMBIOS: FIN ===== */»,
    ambas incluidas. Apretar «Publicar».
