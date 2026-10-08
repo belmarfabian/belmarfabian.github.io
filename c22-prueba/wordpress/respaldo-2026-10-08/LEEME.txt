@@ -11,6 +11,12 @@ La capa quedó instalada el mismo día, a las 11:40 aprox., con la cuenta de Ald
 Primero quedó visible solo con sesión iniciada (SOLO_EDITORES = true). A las 13:35 se abrió
 a todos los visitantes (SOLO_EDITORES = false; la «Etiqueta head» quedó en 41.790 caracteres).
 
+A las 15:15 se actualizó la capa: la portada muestra dos destacados grandes, la publicación
+más reciente y el juego «¿Con quién votas?» (tarjeta fija FIJO en el script).
+- «Etiqueta head»: 42.921 caracteres. CSS adicional: 161.429 caracteres.
+- Para sacar solo el juego de la portada: en la «Etiqueta head», cambiar «var FIJO = {» y todo
+  su bloque por «var FIJO = null;», o pedirlo y se hace desde el repositorio.
+
 PARA ESCONDERLA DE NUEVO A LOS VISITANTES (sin borrar nada):
 En la «Etiqueta head», cambiar «var SOLO_EDITORES = false;» por «var SOLO_EDITORES = true;».
 Apretar «Update». Los visitantes vuelven a ver el sitio antiguo; con sesión se sigue viendo la nueva.
