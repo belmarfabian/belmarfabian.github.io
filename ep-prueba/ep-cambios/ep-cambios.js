@@ -234,7 +234,10 @@
       if (!m) return '<span class="ep-metrica ep-metrica--pendiente" title="Por completar"><b>—</b>' + ETIQUETAS[k] + '</span>';
       return '<a class="ep-metrica" href="' + m.fuente + '" rel="noopener"><b>' + m.valor + '</b>' + m.detalle + '</a>';
     }).join('');
-    var sello = soloCep('div', 'ep-indexada',
+    // el sello y los indicadores se ven en los dos estilos (el resto de este bloque, solo en el CEP)
+    var sello = document.createElement('div');
+    sello.className = 'ep-indexada';
+    sello.innerHTML = (
       '<a class="ep-indexada__sello" href="' + INICIO + (INICIO.slice(-1) === '/' ? 'indexaciones/' : '/indexaciones') + '">' +
         '<span class="ep-indexada__marca">Scopus</span>' +
         '<span class="ep-indexada__texto"><b>Indexada en Scopus</b>desde 2026 · cobertura desde 2022</span>' +
@@ -282,21 +285,6 @@
       '<li><a href="https://www.instagram.com/estudiospublicos/" rel="noopener">Instagram</a></li>'));
   })();
 
-  // copia de prueba: interruptor entre el estilo CEP y el diseño actual
-  // (el aviso va después de este script en el HTML: se espera a que exista)
-  function interruptor() {
-    var aviso = $('.ep-aviso-prueba');
-    if (!aviso || $('.ep-interruptor', aviso)) return;
-    var cep = document.documentElement.classList.contains('ep-cep');
-    var a = document.createElement('a');
-    a.className = 'ep-interruptor';
-    a.href = location.pathname + '?estilo=' + (cep ? 'actual' : 'cep') + location.hash;
-    a.textContent = cep ? 'ver diseño actual' : 'ver estilo CEP';
-    a.style.cssText = 'color:#9fc3ea;margin-left:2px';
-    aviso.appendChild(document.createTextNode(' · '));
-    aviso.appendChild(a);
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', interruptor);
-  else interruptor();
+  // (el estilo CEP queda como prueba aparte: ?estilo=cep)
 })();
 /* ===== EP CAPA DE CAMBIOS: FIN ===== */
