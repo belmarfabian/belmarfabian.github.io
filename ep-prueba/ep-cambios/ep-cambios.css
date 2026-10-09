@@ -7,8 +7,8 @@
    Aquí van los cambios de diseño. La copia carga este archivo al final del <head>,
    así que cualquier regla de aquí pisa al tema original (ceptheme).
    Cada bloque lleva un número que coincide con ep-cambios.js.
-   Bloques 1 a 8: mejoras sobre el diseño actual.
-   Bloque 9: estilo CEP (solo con <html class="ep-cep">; ?estilo=actual lo apaga).
+   Bloques 1 a 8 y 10: mejoras sobre el diseño actual (10: portada compacta).
+   Bloque 9: estilo CEP, solo como prueba aparte (?estilo=cep agrega <html class="ep-cep">).
    ===================================== */
 
 /* 0. Aviso de formulario desactivado en la copia (no es una mejora: solo para la prueba) */
@@ -192,6 +192,150 @@ textarea:focus-visible,
 }
 .ep-resumen-numero li a:hover { background: #FFD200; }
 .ep-ancla { scroll-margin-top: 120px; }
+
+/* ===================================================================
+   10. PORTADA COMPACTA (estilo original de la revista)
+   La presentación ocupaba toda la primera pantalla (813 px de alto en una
+   pantalla de 1920, 971 px en una de 1366): solo se veía la imagen y el texto.
+   Ahora: primer párrafo con «Leer más», sello de Scopus e indicadores, imagen
+   recortada al alto del texto y buscador más bajo. Así el «Último número»
+   asoma en la primera pantalla.
+   =================================================================== */
+@media (min-width: 768px) {
+  /* presentación: el texto manda el alto y la imagen se recorta a ese alto */
+  #home .slider-1 .content-general { align-items: stretch !important; }
+  #home .slider-1 .slide .content-img-left {
+    position: relative !important;
+    flex: 0 0 40% !important;
+    max-width: 40% !important;
+    height: auto !important;
+    align-self: stretch;
+    overflow: hidden;
+  }
+  #home .slider-1 .slide .content-img-left .img-left {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: center 62%;
+  }
+  #home .slider-1 .slide .content { flex: 1 1 auto !important; width: auto !important; }
+  #home .slider-1 .slide .content { height: auto !important; padding: 40px 80px 46px 64px !important; }
+  #home .slider-1 .slide .content img.ep { display: none !important; }
+  #home .slider-1 .slide .content .title {
+    margin: 0 0 4px !important;
+    font-size: clamp(34px, 3.2vw, 52px) !important;
+    line-height: 1.08 !important;
+  }
+  /* primer párrafo y «Leer más» también en escritorio */
+  #home .slider-1 .description.ep-intro-corta .ep-intro-mas { display: none; }
+  #home .slider-1 .description .ep-leer-mas {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 14px;
+    padding: 9px 18px;
+    border: 1px solid rgba(255, 255, 255, .7);
+    border-radius: 999px;
+    background: transparent;
+    color: #fff;
+    font: 600 13px/1 Montserrat, sans-serif;
+    letter-spacing: .02em;
+    cursor: pointer;
+  }
+  #home .slider-1 .description .ep-leer-mas:hover { background: #FFD200; border-color: #FFD200; color: #000; }
+  /* íconos de redes: abajo de la presentación, sin pisar el buscador */
+  #home .main-section > .social-networks { top: auto !important; bottom: 84px !important; }
+  /* buscador y barra lateral bajo la presentación, sin montarse sobre ella:
+     el buscador tapaba el botón «Leer más» y dejaba 60 px vacíos debajo */
+  #home .section-sidebar { padding-top: 26px !important; }
+  #home .firts-section .filtro { top: 0 !important; }
+  #home .section-sidebar .sidebar.desktop-sidebar { top: 26px !important; }
+  /* buscador más bajo */
+  #home .firts-section .search-component { padding: 22px 30px 18px !important; }
+  #home .firts-section .search-component label h3 { margin-bottom: 10px !important; }
+  #home .firts-section .search-component .search-full { margin: 10px 0 0 !important; }
+  /* menos aire sobre el último número (las portadas se montan 60 px sobre el título) */
+  #home .section-last-number .head { margin-bottom: 84px !important; }
+  #home .ultimos-estudios { margin-top: 0 !important; }
+}
+
+/* sello de Scopus e indicadores sobre el fondo oscuro de la presentación */
+#home .slider-1 .ep-indexada { display: block; clear: both; float: none; margin: 14px 0 18px; }
+#home .slider-1 .slide .content .ep-indexada a.ep-indexada__sello { float: none !important; }
+#home .slider-1 .slide .content .description { margin-top: 0 !important; padding-top: 0 !important; }
+#home .slider-1 .slide .content a.ep-indexada__sello {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 12px;
+  width: auto !important;
+  height: auto !important;
+  padding: 6px 16px 6px 6px !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  color: #1B1C1E !important;
+  font-size: inherit !important;
+  text-decoration: none !important;
+}
+#home .slider-1 .slide .content a.ep-indexada__sello span {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  background: none !important;
+  white-space: nowrap;
+}
+#home .slider-1 .slide .content a.ep-indexada__sello span.ep-indexada__marca {
+  padding: 7px 10px !important;
+  border-radius: 9px !important;
+  background: #e9711c !important;
+  color: #fff !important;
+  font: 800 14px/1 "DM Sans", sans-serif !important;
+  letter-spacing: .02em;
+}
+#home .slider-1 .slide .content a.ep-indexada__sello span.ep-indexada__texto {
+  font: 500 10.5px/1.35 Montserrat, sans-serif !important;
+  letter-spacing: .05em !important;
+  text-align: left !important;
+  text-transform: uppercase;
+  color: #5f5f63 !important;
+}
+#home .slider-1 .ep-indexada__texto b {
+  display: block;
+  font: 700 15px/1.25 "DM Sans", sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #1B1C1E;
+}
+#home .slider-1 .ep-metricas { display: flex; flex-wrap: wrap; gap: 8px; clear: both; float: none; width: 100%; margin-top: 10px; }
+#home .slider-1 .ep-metrica {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px dashed rgba(255, 255, 255, .45);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, .8) !important;
+  font: 500 10.5px/1.3 Montserrat, sans-serif;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+}
+#home .slider-1 .ep-metrica b { font: 700 16px/1 "DM Sans", sans-serif; letter-spacing: 0; color: #fff; }
+#home .slider-1 .ep-metrica--pendiente b { color: rgba(255, 255, 255, .5); }
+#home .slider-1 a.ep-metrica { border-style: solid; }
+@media (min-width: 768px) and (max-width: 1279px) {
+  /* tableta: los íconos de redes flotan a la derecha; el texto no debe pasar por debajo */
+  #home .slider-1 .slide .content { padding-right: 104px !important; padding-left: 40px !important; }
+}
+@media (max-width: 767px) {
+  /* en celular la barra ya dice «Estudios Públicos»: fuera el logo grande */
+  #home .slider-1 .slide .content img.ep { display: none !important; }
+  #home .slider-1 .slide .content a.ep-indexada__sello { max-width: 100%; box-sizing: border-box; }
+  #home .slider-1 .slide .content a.ep-indexada__sello span.ep-indexada__texto { white-space: normal; }
+}
+/* ===== fin portada compacta ===== */
 
 /* ===================================================================
    9. ESTILO CEP

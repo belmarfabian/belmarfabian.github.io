@@ -21,13 +21,17 @@ Mejoras en la capa (octubre 2026), numeradas igual en el CSS y el JS:
  7. Número: íconos de redes dentro de la cabecera.
  8. Número: año y cantidad de textos por sección, con enlace a cada una.
 
-Estilo CEP (octubre 2026), bloque 9 del CSS y del JS:
+Portada compacta (octubre 2026), bloque 10 del CSS: estilo original de la revista,
+ presentación de ~400-440 px en vez de ~800-970 (primer párrafo con «Leer más»,
+ imagen recortada al alto del texto, sin logo EP repetido), sello de Scopus y
+ espacios para Cuartil SJR, CiteScore y Factor de impacto, buscador y barra
+ lateral bajo la presentación. Es el estilo que se ve por defecto.
+
+Estilo CEP (octubre 2026), bloque 9 del CSS y del JS, solo como prueba aparte:
  - Lenguaje del sitio nuevo del CEP (prototipo cep-rediseno): fondo blanco, Circe,
    Montserrat y Libre Baskerville, azul marino #042033 y azul CEP #0d73d6,
    cabezales con filete, fichas planas y sombra desplazada celeste.
- - Se activa con la clase ep-cep en <html> (script del <head> que agrega espejo.py).
-   ?estilo=actual muestra el diseño de hoy; ?estilo=cep vuelve al estilo CEP.
-   El aviso de prueba (abajo a la izquierda) trae el enlace para cambiar.
+ - Se activa solo con ?estilo=cep en la dirección (agrega la clase ep-cep a <html>).
  - Portada: sello «Indexada en Scopus» (nota editorial del N° 182: aceptada en
    marzo de 2026, cobertura desde 2022) y espacios reservados para Cuartil SJR,
    CiteScore y Factor de impacto. Las cifras se completan en INDICADORES,
