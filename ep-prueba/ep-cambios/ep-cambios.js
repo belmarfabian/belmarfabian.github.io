@@ -440,4 +440,79 @@
     pintar();
   });
 })();
+/* 16. Artículo: botón «Cómo citar» junto al PDF (copia la cita) y, al final,
+   los otros textos del mismo número (leídos de la página del número). */
+(function () {
+  'use strict';
+  var art = document.querySelector('#single-numero.article-details');
+  if (!art) return;
+  var limpio = function (t) { return (t || '').replace(/\s+/g, ' ').trim(); };
+  var esc = function (t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+
+  // Cómo citar
+  var cita = art.querySelector('.item.citation');
+  var entrada = art.querySelector('.csl-entry .csl-right-inline') || art.querySelector('.csl-entry');
+  var opciones = art.querySelector('.headerBanner .options');
+  if (cita && entrada && opciones && !opciones.querySelector('.ep-citar')) {
+    cita.id = cita.id || 'ep-cita';
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'ep-citar';
+    b.textContent = 'Cómo citar';
+    b.addEventListener('click', function () {
+      var texto = limpio(entrada.textContent);
+      var listo = function () {
+        b.textContent = 'Cita copiada';
+        b.classList.add('ep-citar--ok');
+        setTimeout(function () { b.textContent = 'Cómo citar'; b.classList.remove('ep-citar--ok'); }, 2500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(texto).then(listo, function () { cita.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+      } else {
+        cita.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+    opciones.appendChild(b);
+  }
+
+  // Otros textos del número
+  var volver = art.querySelector('.volume-back');
+  var url = volver && volver.getAttribute('data-href');
+  var destino = art.querySelector('.section-sidebar .section-article');
+  if (!url || !destino || destino.querySelector('.ep-otros')) return;
+  var propio = (location.pathname.match(/article\/view\/(\d+)/) || [])[1];
+  fetch(url, { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
+    if (!html) return;
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var titulo = limpio((doc.querySelector('.title-right-box .title1') || {}).textContent);
+    var grupos = [];
+    Array.prototype.forEach.call(doc.querySelectorAll('#single-numero h3.title'), function (h3) {
+      var sec = h3.closest('.section') || h3.parentNode;
+      var items = Array.prototype.filter.call(sec.querySelectorAll('.caja-articulo-listado'), function (c) {
+        return !c.closest('.slick-cloned') && c.querySelector('h4');
+      }).map(function (c) {
+        var a = c.querySelector('a[href*="article/view"]');
+        var href = a ? a.getAttribute('href') : '';
+        return {
+          id: (href.match(/article\/view\/(\d+)/) || [])[1],
+          url: href,
+          titulo: limpio(c.querySelector('h4').textContent),
+          autores: Array.prototype.map.call(c.querySelectorAll('.autor .name'), function (n) { return limpio(n.textContent).replace(/,$/, ''); }).join(', ')
+        };
+      }).filter(function (it) { return it.url && it.id !== propio; });
+      if (items.length) grupos.push({ nombre: limpio(h3.textContent), items: items });
+    });
+    if (!grupos.length) return;
+    var div = document.createElement('div');
+    div.className = 'ep-otros';
+    div.innerHTML = '<h3>Otros textos ' + (titulo ? 'del ' + esc(titulo.replace(/^Número\s*/i, 'N° ')) : 'de este número') + '</h3>' +
+      grupos.map(function (g) {
+        return '<p class="ep-otros__sec">' + esc(g.nombre) + '</p><ul>' + g.items.map(function (it) {
+          return '<li><a href="' + it.url + '"><b>' + esc(it.titulo) + '</b><span>' + esc(it.autores) + '</span></a></li>';
+        }).join('') + '</ul>';
+      }).join('') +
+      '<a class="ep-otros__todo" href="' + url + '">Ver el número completo</a>';
+    destino.appendChild(div);
+  }).catch(function () {});
+})();
 /* ===== EP CAPA DE CAMBIOS: FIN ===== */
