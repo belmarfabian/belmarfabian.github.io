@@ -869,4 +869,54 @@ body.c22-cambios .c22-dest .c22-pronto .c22-dest__btn,
 body.c22-cambios .c22-dest .c22-pronto .c22-dest__btn:hover{ background: #DDE2E3; color: #5E6C6F; cursor: default; }
 body.c22-cambios .c22-dest .c22-pronto .c22-dest__btn::after{ content: none; }
 /* ===== fin juego en gris ===== */
+
+/* ===== C22 portada: lo más reciente a la izquierda; el Monitor y el juego, en una columna a la derecha ===== */
+/* El JS arma .c22-dest__col con el Monitor arriba y la tarjeta fija (el juego) abajo.
+   Cada una: foto a un lado, texto al otro. En el celular todo va en una columna. */
+body.c22-cambios .c22-dest__col{ display: flex; flex-direction: column; min-width: 0; }
+body.c22-cambios .c22-dest--col .c22-dest__col > .c22-dest__big{ display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) !important; column-gap: 22px; align-items: stretch; height: auto !important; padding: 0 !important; border: 0 !important; }
+body.c22-cambios .c22-dest--col .c22-dest__col > .c22-dest__big + .c22-dest__big{ margin-top: 18px; padding-top: 18px !important; border-top: 1px solid var(--c22-filete) !important; }
+body.c22-cambios .c22-dest--col .c22-dest__col .c22-dest__img{ height: auto !important; min-height: 160px; aspect-ratio: auto !important; }
+body.c22-cambios .c22-dest--col .c22-dest__col .c22-dest__txt{ display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start !important; padding: 0 !important; }
+body.c22-cambios .c22-dest--col .c22-dest__col h2{ font-size: 21px !important; line-height: 1.2; margin-bottom: 8px; }
+body.c22-cambios .c22-dest--col .c22-dest__col .c22-dest__resumen{ font-size: 14px; -webkit-line-clamp: 2; margin-bottom: 12px; }
+body.c22-cambios .c22-dest--col .c22-dest__col .c22-dest__btn{ margin-top: auto; }
+body.c22-cambios .c22-dest--col .c22-dest__col .c22-num{ font-size: 32px; left: 14px; bottom: 12px; }
+@media (min-width: 1001px) {
+	body.c22-cambios .c22-dest--b.c22-dest--col{ grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; column-gap: 40px; }
+	body.c22-cambios .c22-dest--col > .c22-dest__big{ grid-column: auto !important; grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: auto 1fr; }
+	body.c22-cambios .c22-dest--col > .c22-dest__big .c22-dest__img{ height: 300px !important; }
+	body.c22-cambios .c22-dest--col > .c22-dest__big .c22-dest__txt{ padding: 18px 0 0 !important; justify-content: flex-start !important; }
+	body.c22-cambios .c22-dest--col > .c22-dest__big h2{ font-size: 26px; }
+	body.c22-cambios .c22-dest--col > .c22-dest__big .c22-dest__btn{ margin-top: auto; }
+	body.c22-cambios .c22-dest--col > .c22-dest__col{ position: relative; padding-bottom: 18px; border-bottom: 1px solid var(--c22-filete); }
+	body.c22-cambios .c22-dest--col > .c22-dest__col::before{ content: ''; position: absolute; left: -20px; top: 0; bottom: 18px; border-left: 1px solid var(--c22-filete); }
+	body.c22-cambios .c22-dest--col .c22-dest__col > .c22-dest__big{ flex: 1 1 auto; }
+}
+@media (min-width: 601px) and (max-width: 1000px) {
+	body.c22-cambios .c22-dest--b.c22-dest--col{ grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) !important; column-gap: 24px; }
+	body.c22-cambios .c22-dest--col > .c22-dest__big{ grid-column: auto !important; grid-template-rows: auto 1fr; }
+	body.c22-cambios .c22-dest--col > .c22-dest__col{ align-self: stretch; }
+	body.c22-cambios .c22-dest--col > .c22-dest__big .c22-dest__img{ aspect-ratio: 16 / 10 !important; }
+	body.c22-cambios .c22-dest--col > .c22-dest__big h2{ font-size: 21px; }
+	body.c22-cambios .c22-dest--col > .c22-dest__side{ grid-column: 1 / -1; }
+	body.c22-cambios .c22-dest--col .c22-dest__resumen{ display: none; }
+	body.c22-cambios .c22-dest--col .c22-dest__col > .c22-dest__big{ grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) !important; column-gap: 14px; flex: 1 1 auto; }
+	body.c22-cambios .c22-dest--col .c22-dest__col .c22-dest__img{ min-height: 120px; }
+	body.c22-cambios .c22-dest--col .c22-dest__col h2{ font-size: 16px !important; }
+	body.c22-cambios .c22-dest--col .c22-dest__col .c22-num{ font-size: 24px; left: 10px; bottom: 8px; }
+	body.c22-cambios .c22-dest--col .c22-dest__col .c22-num small{ display: none; }
+}
+@media (max-width: 600px) {
+	body.c22-cambios .c22-dest--col > .c22-dest__col{ padding-bottom: 14px; border-bottom: 1px solid var(--c22-filete); }
+	body.c22-cambios .c22-dest--col .c22-dest__col > .c22-dest__big{ grid-template-columns: 132px minmax(0, 1fr) !important; column-gap: 14px; }
+	body.c22-cambios .c22-dest--col .c22-dest__col > .c22-dest__big + .c22-dest__big{ margin-top: 14px; padding-top: 14px !important; }
+	body.c22-cambios .c22-dest--col .c22-dest__col .c22-dest__img{ min-height: 0; aspect-ratio: 4 / 3 !important; align-self: start; }
+	body.c22-cambios .c22-dest--col .c22-dest__col h2{ font-size: 16px !important; }
+	body.c22-cambios .c22-dest--col .c22-dest__col .c22-dest__resumen{ display: none; }
+	body.c22-cambios .c22-dest--col .c22-dest__col .c22-dest__btn{ padding: 7px 16px; font-size: 11.5px; }
+	body.c22-cambios .c22-dest--col .c22-dest__col .c22-num{ font-size: 22px; left: 10px; bottom: 8px; }
+	body.c22-cambios .c22-dest--col .c22-dest__col .c22-num small{ display: none; }
+}
+/* ===== fin columna derecha ===== */
 /* ===== C22 CAPA DE CAMBIOS: FIN ===== */
