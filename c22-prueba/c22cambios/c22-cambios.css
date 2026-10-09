@@ -919,4 +919,29 @@ body.c22-cambios .c22-dest--col .c22-dest__col .c22-num{ font-size: 32px; left: 
 	body.c22-cambios .c22-dest--col .c22-dest__col .c22-num small{ display: none; }
 }
 /* ===== fin columna derecha ===== */
+
+/* ===== C22 destacado: la serie como etiqueta de color, como en la web antigua ===== */
+/* Mismo formato que las etiquetas de las tarjetas del tema (11 px, fondo lleno). */
+body.c22-cambios .c22-dest .c22-dest__serie{ display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; letter-spacing: normal; }
+body.c22-cambios .c22-dest .c22-tag{ display: inline-block; padding: 2px 5px; border-radius: 2.5px; font: 700 11px/1.35 "DM Sans", sans-serif; letter-spacing: .02em; text-transform: uppercase; color: #fff; background: #657D81; }
+body.c22-cambios .c22-dest .c22-dest__serie span{ font-size: 12px; letter-spacing: .04em; color: #657D81; }
+body.c22-cambios .c22-dest .s-ana .c22-tag{ background: #4CCAA5; color: #1B1C1E; }
+body.c22-cambios .c22-dest .s-not .c22-tag{ background: #FFB923; color: #1B1C1E; }
+body.c22-cambios .c22-dest .s-col .c22-tag{ background: #F20231; }
+body.c22-cambios .c22-dest .s-jue .c22-tag{ background: #0d73d6; }
+body.c22-cambios .c22-dest .c22-pronto .c22-tag{ background: #C9D1D3; color: #4E5B5E; }
+body.c22-cambios .c22-dest--b .c22-dest__small .c22-dest__serie{ margin-bottom: 6px; }
+body.c22-cambios .c22-dest--b .c22-dest__small .c22-tag{ font-size: 10px; padding: 1px 4px; }
+/* ===== fin etiquetas ===== */
+
+/* ===== C22 carga: sin saltos ===== */
+/* Portada: el resumen de la publicación grande llega un momento después; su
+   lugar queda reservado para que la página no salte. */
+@media (min-width: 1001px) {
+	body.c22-cambios .c22-dest--col > .c22-dest__big .c22-dest__resumen:empty{ display: block; min-height: 72px; }
+}
+/* Personas: la página se muestra cuando llegaron todas las fichas (el JS pone
+   .c22-listo); si algo falla, aparece igual a los 8 s. */
+body.page-template-plantilla-personas:not(.c22-listo) main > .wrap-xl:not(:first-child){ animation-delay: 8s; }
+/* ===== fin carga ===== */
 /* ===== C22 CAPA DE CAMBIOS: FIN ===== */

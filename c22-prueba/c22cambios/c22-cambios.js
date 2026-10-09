@@ -219,9 +219,13 @@
       (it.img ? '<img src="' + esc(it.img) + '" alt=""' + (lazy ? ' loading="lazy"' : '') + '>' : (it.fotos.length ? fotosHtml(it.fotos) : '')) +
       (it.sinNum ? '' : '<span class="c22-num">' + esc(it.num) + '<small>' + esc(it.s[0].toLowerCase()) + '</small></span>') + '</' + tag + '>';
   }
+  // serie como etiqueta de color, igual que las de la web antigua; la fecha al lado, en gris
+  function serieHtml(it) {
+    return '<p class="c22-dest__serie"><b class="c22-tag">' + esc(it.s[0]) + '</b>' + (it.date ? ' <span>' + fechaTxt(it.date) + '</span>' : '') + '</p>';
+  }
   function grande(it, extra) {
     return '<article class="c22-dest__big s-' + it.s[1] + (it.pronto ? ' c22-pronto' : '') + '"' + (extra || '') + '>' + imgHtml(it, 'c22-dest__img', false) +
-      '<div class="c22-dest__txt"><p class="c22-dest__serie">' + esc(it.s[0]) + (it.date ? ' <span>· ' + fechaTxt(it.date) + '</span>' : '') + '</p>' +
+      '<div class="c22-dest__txt">' + serieHtml(it) +
       '<h2>' + (it.pronto ? esc(it.title) : '<a href="' + esc(it.link) + '"' + destino(it) + '>' + esc(it.title) + '</a>') + '</h2>' +
       '<p class="c22-dest__resumen">' + esc(it.resumen || '') + '</p>' +
       (it.names.length ? '<p class="c22-dest__autores">' + esc(lista(it.names)) + '</p>' : '') +
@@ -231,7 +235,7 @@
   }
   function chico(it, k) {
     return '<article class="c22-dest__small s-' + it.s[1] + '" data-k="' + k + '">' + imgHtml(it, 'c22-dest__thumb', true) +
-      '<div><p class="c22-dest__serie">' + esc(it.s[0]) + (it.date ? ' <span>· ' + fechaTxt(it.date) + '</span>' : '') + '</p>' +
+      '<div>' + serieHtml(it) +
       '<h3><a href="' + esc(it.link) + '">' + esc(it.title) + '</a></h3></div></article>';
   }
   function itemDe(card, s) {
@@ -547,15 +551,17 @@
     absorber();
     if (window.MutationObserver) [].forEach.call(lists, function (l) { new MutationObserver(absorber).observe(l, { childList: true }); });
     // el histórico se carga por tandas al bajar (scroll infinito): se piden todas
-    var intentos = 0, pedir = setInterval(function () {
+    var intentos = 0, pedir = setInterval(tanda, 300);
+    tanda();
+    function tanda() {
       var bs = document.querySelectorAll('main .alm-load-more-btn:not(.done)');
       [].forEach.call(bs, function (b) { if (!b.classList.contains('loading')) b.click(); });
       // Ajax Load More pone el foco en la primera ficha que llega: sin
       // interacción, ese recuadro amarillo no corresponde
       var a = document.activeElement;
       if (a && a.closest && a.closest('.c22-dir__people')) a.blur();
-      if (!bs.length || ++intentos > 20) clearInterval(pedir);
-    }, 700);
+      if (!bs.length || ++intentos > 50) clearInterval(pedir);
+    }
   });
 
   /* ===== C22 eventos sin foto: fecha del evento en vez del logo ===== */
@@ -792,5 +798,15 @@
 
   /* ===== C22 carga sin parpadeo: listo ===== */
   // último en la cola: cuando todo lo anterior ya rearmó la página, se muestra
-  ready(function () { document.body.classList.add('c22-listo'); });
+  ready(function () {
+    var b = document.body;
+    if (!b.classList.contains('c22-directorio')) return b.classList.add('c22-listo');
+    // Personas: las fichas llegan por tandas; se muestra cuando llegó la última
+    // (todos los botones de Ajax Load More en «done») o a los 7 s
+    var t0 = Date.now(), iv = setInterval(function () {
+      var bs = document.querySelectorAll('main .alm-load-more-btn');
+      var fin = [].every.call(bs, function (x) { return x.classList.contains('done') && !x.classList.contains('loading'); });
+      if (fin || Date.now() - t0 > 7000) { clearInterval(iv); setTimeout(function () { b.classList.add('c22-listo'); }, 150); }
+    }, 100);
+  });
 })();
