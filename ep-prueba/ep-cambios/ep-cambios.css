@@ -1,0 +1,18 @@
+/* ===== EP CAPA DE CAMBIOS: INICIO =====
+   Copia de prueba de estudiospublicos.cl (belmarfabian.github.io/ep-prueba/).
+   Aquí van los cambios de diseño. La copia carga este archivo al final del <head>,
+   así que cualquier regla de aquí pisa al tema original (ceptheme).
+   ===================================== */
+
+/* Aviso de formulario desactivado en la copia */
+.ep-form-desactivado {
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #FFF4D6;
+  color: #5A4500;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+/* ===== EP CAPA DE CAMBIOS: FIN ===== */

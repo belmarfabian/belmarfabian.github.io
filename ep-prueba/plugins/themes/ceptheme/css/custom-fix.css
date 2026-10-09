@@ -1,0 +1,111 @@
+.box-last-number .last-number-image .number-img {
+  width: 100%;
+  height: 100%;
+}
+
+.box-last-number .responsive-number-img {
+  display: none;
+}
+
+.box-last-number .last-number h6.elemental {
+  margin-bottom: 10px;
+  text-align: left;
+  margin-left: 30px;
+}
+
+.box-last-number .last-number span.elemental {
+  text-align: left;
+  margin-left: 30px;
+  float: left;
+}
+
+.box-last-number .last-number p {
+  width: 80%;
+  float: left !important;
+  margin-left: 30px !important;
+  font-size: 16px !important;
+  text-align: left;
+}
+
+.box-last-number .last-number .info {
+  width: 170px;
+  height: 165px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px 0px #e5e5e5;
+  padding: 30px 20px !important;
+  position: absolute !important;
+  bottom: 10px !important;
+  left: -20px !important;
+  transition-duration: 0.3s;
+  display: none !important;
+}
+.box-last-number .last-number .info .year {
+  font-size: 17px !important;
+  font-weight: bold !important;
+  color: #7e7e9c;
+  margin-top: 0 !important;
+}
+
+.box-last-number .last-number .info .number {
+  margin: 20px 0 !important;
+  font-size: 37px !important;
+  font-weight: bold !important;
+  color: #707070;
+}
+
+.box-last-number .last-number .info .see-more {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+  color: #000;
+  text-decoration: none;
+}
+
+.box-last-number .last-number .info .see-more span {
+  font-size: 15px !important;
+  font-weight: bold !important;
+}
+
+.box-last-number .last-number .info .see-more .arrow {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url(../../img/arrow-right.png);
+}
+
+#home .section-last-number .box-last-number .last-number .botton-group {
+  justify-content: left;
+  padding-left: 15px;
+}
+
+#home .section-last-number .box-last-number .last-number .botton-group a {
+  margin-right: 15px;
+}
+
+
+
+@media (max-width: 768px) {
+  .box-last-number .responsive-number-img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    object-position: top;
+  }
+
+  .box-last-number .last-number {
+    width: 100% !important;
+  }
+
+  .box-last-number .last-number .info {
+    display: block !important;
+  }
+}

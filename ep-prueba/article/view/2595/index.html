@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="es_ES" xml:lang="es_ES">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+            <meta name="description" content=" La desaceleración en el crecimiento económico de Chile ha generado un amplio debate en el ámbito público y académico. Este artículo busca cuantificar la magnitud y describir las características de este decepcionante crecimiento, utilizando metodologías independientes pero complementarias. En particular, se combina la evidencia comparada entre países, el análisis de la productividad total de factores entre sectores económicos, la estimación de regresiones de crecimiento y la aplicación de contrafactuales sintéticos. Estos métodos permiten evidenciar que: (i) la desaceleración del crecimiento en Chile ha ido más allá del efecto de convergencia económica, y no se observa un efecto incremental de reformas estructurales en décadas recientes; (ii) las particularidades sectoriales en Chile contribuyen de forma importante a la desaceleración de la productividad total de factores, particularmente en minería, construcción y energía; y (iii) los ejercicios contrafactuales sugieren que la desaceleración respecto de tendencias previas se explica en partes similares por factores internos y externos. En conjunto, los distintos enfoques metodológicos coinciden en que una tasa de crecimiento per cápita coherente con el nivel actual de desarrollo de Chile, se ubica en torno al 3%. Ello permitiría retomar una senda acorde con la convergencia a niveles de ingreso mayor en el futuro. ">
+    
+    <meta name="author" content="CEP">
+
+    <link rel="canonical" href="/ep-prueba/article/view/2595/" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://estudiospublicos.cl/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://estudiospublicos.cl/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://estudiospublicos.cl/favicon-16x16.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="https://estudiospublicos.cl/android-chrome-192x192.png">
+	<link rel="manifest" href="https://estudiospublicos.cl/site.webmanifest">
+	
+    <!-- Aos -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+
+    <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round" rel="stylesheet">
+	
+    <!-- Jquery-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    
+	 <!-- Global site tag (gtag.js) - Google Analytics -->
+    
+	
+        
+    
+
+    <script>
+        const currentLocale = "es_ES"
+    </script>
+
+    <title>
+        Convergencia interrumpida: Chile y su decepcionante crecimiento
+                            | Estudios Públicos
+            </title>
+
+    
+<meta name="generator" content="Open Journal Systems 3.1.2.4">
+<link rel="schema.DC" href="https://purl.org/dc/elements/1.1/" />
+<meta name="DC.Creator.PersonalName" content="Pablo  García "/>
+<meta name="DC.Creator.PersonalName" content="Igal  Magendzo"/>
+<meta name="DC.Creator.PersonalName" content="Emiliano Toni"/>
+<meta name="DC.Date.created" scheme="ISO8601" content="2026-03-23"/>
+<meta name="DC.Date.dateSubmitted" scheme="ISO8601" content="2026-03-23"/>
+<meta name="DC.Date.issued" scheme="ISO8601" content="2026-05-24"/>
+<meta name="DC.Date.modified" scheme="ISO8601" content="2026-05-22"/>
+<meta name="DC.Description" xml:lang="en" content="The slowdown in Chile’s economic growth has sparked broad debate in both public and academic circles. This article seeks to quantify the magnitude of this disappointing growth and describe its characteristics using independent but complementary methodologies. In particular, it combines cross-country comparative evidence, total factor productivity analysis across economic sectors, growth regression estimation, and the application of synthetic counterfactuals. These methods show that: (i) the slowdown in Chile’s growth has gone beyond the effect of economic convergence, and there is no observable incremental effect of structural reforms in recent decades; (ii) sector-specific features in Chile contribute significantly to the slowdown in total factor productivity, particularly in mining, construction, and energy; and (iii) counterfactual exercises suggest that the slowdown relative to previous trends is explained in roughly equal parts by internal and external factors. Taken together, the different methodological approaches agree that a per capita growth rate consistent with Chile’s current level of development is around 3%. This would allow the country to return to a path consistent with convergence toward higher income levels in the future."/>
+<meta name="DC.Description" xml:lang="es" content="La desaceleración en el crecimiento económico de Chile ha generado un amplio debate en el ámbito público y académico. Este artículo busca cuantificar la magnitud y describir las características de este decepcionante crecimiento, utilizando metodologías independientes pero complementarias. En particular, se combina la evidencia comparada entre países, el análisis de la productividad total de factores entre sectores económicos, la estimación de regresiones de crecimiento y la aplicación de contrafactuales sintéticos. Estos métodos permiten evidenciar que: (i) la desaceleración del crecimiento en Chile ha ido más allá del efecto de convergencia económica, y no se observa un efecto incremental de reformas estructurales en décadas recientes; (ii) las particularidades sectoriales en Chile contribuyen de forma importante a la desaceleración de la productividad total de factores, particularmente en minería, construcción y energía; y (iii) los ejercicios contrafactuales sugieren que la desaceleración respecto de tendencias previas se explica en partes similares por factores internos y externos. En conjunto, los distintos enfoques metodológicos coinciden en que una tasa de crecimiento per cápita coherente con el nivel actual de desarrollo de Chile, se ubica en torno al 3%. Ello permitiría retomar una senda acorde con la convergencia a niveles de ingreso mayor en el futuro."/>
+<meta name="DC.Format" scheme="IMT" content="application/pdf"/>
+<meta name="DC.Identifier" content="2595"/>
+<meta name="DC.Identifier.pageNumber" content="11-57"/>
+<meta name="DC.Identifier.DOI" content="10.38178/071830891745250319"/>
+<meta name="DC.Identifier.URI" content="https://estudiospublicos.cl/index.php/cep/article/view/2595"/>
+<meta name="DC.Language" scheme="ISO639-1" content="es"/>
+<meta name="DC.Rights" content="Derechos de autor 2026 Estudios Públicos"/>
+<meta name="DC.Rights" content=""/>
+<meta name="DC.Source" content="Estudios Públicos"/>
+<meta name="DC.Source.ISSN" content="0718-3089"/>
+<meta name="DC.Source.Issue" content="182"/>
+<meta name="DC.Source.URI" content="https://estudiospublicos.cl/index.php/cep"/>
+<meta name="DC.Subject" xml:lang="es" content="Chile"/>
+<meta name="DC.Subject" xml:lang="es" content="crecimiento económico"/>
+<meta name="DC.Subject" xml:lang="es" content="control sintético"/>
+<meta name="DC.Subject" xml:lang="es" content="convergencia"/>
+<meta name="DC.Subject" xml:lang="es" content="desaceleración económica"/>
+<meta name="DC.Title" content="Convergencia interrumpida: Chile y su decepcionante crecimiento"/>
+<meta name="DC.Title.Alternative" xml:lang="en" content=""/>
+<meta name="DC.Type" content="Text.Serial.Journal"/>
+<meta name="DC.Type.articleType" content="Artículos"/>
+<meta name="gs_meta_revision" content="1.1"/>
+<meta name="citation_journal_title" content="Estudios Públicos"/>
+<meta name="citation_journal_abbrev" content="1"/>
+<meta name="citation_issn" content="0718-3089"/> 
+<meta name="citation_author" content="Pablo  García "/>
+<meta name="citation_author_institution" content="Universidad Adolfo Ibáñez"/>
+<meta name="citation_author" content="Igal  Magendzo"/>
+<meta name="citation_author_institution" content="Pacífico Research Chile"/>
+<meta name="citation_author" content="Emiliano Toni"/>
+<meta name="citation_author_institution" content="University of Gallen"/>
+<meta name="citation_title" content="Convergencia interrumpida: Chile y su decepcionante crecimiento"/>
+<meta name="citation_date" content="2026/03/23"/>
+<meta name="citation_issue" content="182"/>
+<meta name="citation_firstpage" content="11"/>
+<meta name="citation_lastpage" content="57"/>
+<meta name="citation_doi" content="10.38178/071830891745250319"/>
+<meta name="citation_abstract_html_url" content="https://estudiospublicos.cl/index.php/cep/article/view/2595"/>
+<meta name="citation_keywords" xml:lang="es" content="Chile"/>
+<meta name="citation_keywords" xml:lang="es" content="crecimiento económico"/>
+<meta name="citation_keywords" xml:lang="es" content="control sintético"/>
+<meta name="citation_keywords" xml:lang="es" content="convergencia"/>
+<meta name="citation_keywords" xml:lang="es" content="desaceleración económica"/>
+<meta name="citation_pdf_url" content="https://estudiospublicos.cl/index.php/cep/article/download/2595/3548"/>
+    <link rel="stylesheet" href="/ep-prueba/plugins/themes/ceptheme/css/main.css" type="text/css" /><link rel="stylesheet" href="/ep-prueba/plugins/themes/ceptheme/css/slick/slick.css" type="text/css" /><link rel="stylesheet" href="/ep-prueba/plugins/themes/ceptheme/css/slick/slick-theme.css" type="text/css" /><link rel="stylesheet" href="/ep-prueba/plugins/themes/ceptheme/css/fonts.css" type="text/css" /><link rel="stylesheet" href="/ep-prueba/plugins/themes/ceptheme/css/tailwind.min.css" type="text/css" /><link rel="stylesheet" href="/ep-prueba/plugins/themes/ceptheme/css/custom-fix.css" type="text/css" />
+
+    <!-- recaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfvK5wcAAAAAPpBZn0Q8Z3EDMIJJnFX3oRsiScr"></script>
+
+    <!-- Clarity -->
+    
+        
+    
+
+    <!-- Meta Pixel Code -->
+    
+        
+    
+    
+    <!-- End Meta Pixel Code -->
+    <meta name="facebook-domain-verification" content="p39o0bywf91b0quk8900dhgmayi5we" />
+
+    <!-- Google tag (gtag.js) -->
+    
+        
+        
+    
+
+    <!-- Google tag (gtag.js) -->
+    
+    
+        
+    
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/ep-prueba/ep-cambios/ep-cambios.css">
+</head>
+<div id="single-numero" class="container article-details">
+    
+<!-- Boton Sidebar (Desde 1200px) -->
+<button class="btn-sidebar"></button>
+<!-- Sidebar (Desde 1200px) -->
+<div class="sidebar sidebar-responsive">
+
+    <h4>Estudios Públicos</h4>
+    <!-- Formulario -->
+            <div class="box-login">
+        <form action="https://estudiospublicos.cl/index.php/cep/login/signIn" method="post">
+            
+            <div id="form-login">
+                <h5> Iniciar Sesión</h5>
+
+                <input class="name" type="text" placeholder="Nombre de Usuario" value="" name="username" id="username">
+
+                <input type="password" placeholder="Contraseña" value="" name="password" id="password">
+
+                <div class="box-remember">
+                    <input id="rememberme" name="rememberme" value="remember" type="checkbox">
+                    <label for="rememberme">Mantener sesión iniciada</label>
+                </div>
+
+
+                <div class="group-button">
+                    <a id="btn-register" class="uppercase" href='https://estudiospublicos.cl/index.php/cep/user/register'>Registrarse</a>
+
+                    <button id="btn-login" type="submit" class="uppercase"> Iniciar Sesión</button>
+                </div>
+
+
+
+                <a href="https://estudiospublicos.cl/index.php/cep/login/lostPassword" class="lostPassword">¿Olvidó su contraseña?</a>
+
+            </div>
+        </form>
+    </div>
+     <!-- Formulario -->
+        <hr>
+        <!-- Information -->
+        <div class="information">
+            <table>
+                <tr>
+                    <td>ISSN Digital</td>
+                    <td>0718-3089</td>
+                </tr>
+                <tr>
+                    <td>ISSN Impreso</td>
+                    <td>0716-1115</td>
+                </tr>
+                <tr>
+                    <td>Inicio</td>
+                    <td>1980</td>
+                </tr>
+                <tr>
+                    <td>Periodicidad</td>
+                    <td>Trimestral</td>
+                </tr>
+                <tr>
+                    <td>País</td>
+                    <td>Chile</td>
+                </tr>
+                <tr>
+                    <td>Idioma</td>
+                    <td>Español, Inglés</td>
+                </tr>
+
+            </table>
+
+        </div>
+        <!-- Information -->
+        <hr>
+        <!-- Newsletter -->
+        <div class="newsletter">
+
+            <h5>Suscripción Newsletter</h5>
+            
+            <p>Suscríbete a nuestro boletín de noticias. Te iremos informando sobre novedades que esperamos sean de tu interés.</p>
+            <!-- Formulario Newsletter -->
+            <form id="form-newsletter">
+                <input type="text" name="fullname" class="uppercase" placeholder="Nombre">
+                <input type="email" name="email" placeholder="EMAIL">
+                <div class="group-button">
+                    <button id="btn-suscribirse" class="uppercase">Registrame</button>
+                </div>
+
+            </form>
+            <!-- Formulario Newsletter -->
+
+
+        </div>
+        <!-- Newsletter -->
+        <hr>
+        <!-- Número actual -->
+        <div class="actual">
+            <h5>Número Actual</h5>
+            <div class="info">
+                <a href="https://estudiospublicos.cl/index.php/cep/gateway/plugin/WebFeedGatewayPlugin/atom">
+                    <div class="img-info info1" data-aos="fade-up"></div>
+                </a>
+                <a href="https://estudiospublicos.cl/index.php/cep/gateway/plugin/WebFeedGatewayPlugin/rss2">
+                    <div class="img-info info2" data-aos="fade-up"></div>
+                </a>
+                <a href="https://estudiospublicos.cl/index.php/cep/gateway/plugin/WebFeedGatewayPlugin/rss">
+                    <div class="img-info info3" data-aos="fade-up"></div>
+                </a>
+            </div>
+        </div>
+        <!-- Número actual -->
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function () {
+     const submitBottom = $('.sendForm');
+     const $emailInput = $("#subscription_email");
+      function validarEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+     $("#subscription_lastName").on("input", function () {
+        $(this).val($(this).val().replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ ]/g, ""));
+    });
+     $("#subscription_firstName").on("input", function () {
+        $(this).val($(this).val().replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ ]/g, ""));
+    });
+
+    $emailInput.on("input", function () {
+        if (validarEmail($emailInput.val())) {
+           $emailInput.removeAttr('style')
+        } else {
+           $emailInput.css('border','1px solid red')
+        }
+    });
+    let formSubmitted = false; // Variable de control en memoria
+    
+    $('.sendForm').off('click').on('click', function (event){
+        event.preventDefault(); 
+        console.log(validarEmail($emailInput.val()))
+        console.log($("#subscription_firstName").val().length)
+        console.log($("#subscription_lastName").val().length)
+        if($("#subscription_firstName").val().length>0 && $("#subscription_lastName").val().length > 0 && validarEmail($emailInput.val())){
+             $('#mensaje').addClass('d-none')
+            if (formSubmitted) return; 
+            formSubmitted = true; 
+            let name_newsletter = $('[name="subscription[firstName]"]').val();
+            let lastname_newsletter = $('[name="subscription[lastName]"]').val();
+            let email_newsletter = $('[name="subscription[email]"]').val();
+            let utm = $('[name="utm_source"]').val();
+            
+            // Enviar datos a Zapier
+            $.get('/ep-prueba/ep-datos/desactivado.json', {
+                nombre: name_newsletter,
+                apellido: lastname_newsletter,
+                email: email_newsletter,
+                utm_source: utm
+            })
+            .done(function (data) {
+                console.log("Respuesta Zapier:", data);
+                  let formData = $('#fide-embed-form').serialize(); // Serializa los datos del formulario
+                // Enviar formulario por AJAX (POST)
+                $.ajax({
+                    url: $('#fide-embed-form').attr('action'), // Usa la URL del form
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        console.log("Respuesta del servidor:", response);
+        
+                        // Verifica si el servidor devuelve éxito
+                        if (response) {
+                            response=JSON.parse(response);
+                            let cleanMessage = response[1].replace(/<\/?[^>]+(>|$)/g, "").replace(/&nbsp;/g, " ");
+                            alert(decodeURIComponent(cleanMessage));
+                            document.getElementById("fide-embed-form").reset();
+                        } else {
+                            alert("Error en el envío: " + response.message);
+                            formSubmitted = false; // Permitir reintento
+                        }
+                    },
+                    error: function (error) {
+                        console.error("Error en la petición POST:", error);
+                        alert("Hubo un error, intenta nuevamente.");
+                        formSubmitted = false; // Permitir reintento en caso de fallo
+                    }
+                });
+            })
+            .fail(function (error) {
+                console.error("Error en la petición GET:", error);
+                formSubmitted = false; // Permitir reintento si hay error
+            });
+        }
+        else{
+            $('#mensaje').removeClass('d-none')
+        }
+    });
+    
+});
+
+
+</script>
+
+
+    <!-- Header -->
+<header class="header">
+	<a class="menu-home palatino uppercase" href='/ep-prueba/'><img src="/ep-prueba/plugins/themes/ceptheme/img/logo.png" alt="Estudios Públicos" width="500" height="108" /></a>
+	<!-- Menu -->
+	<nav>
+		<ul class="menu-top">
+			<li><a href="https://www.cepchile.cl/" class="cep-chile" target="_blank">Cep Chile</a></li>
+			<li><a href='/ep-prueba/audioVisuals/' class="">Audiovisual</a></li>
+			<li><a href='/ep-prueba/contacto/' class="">Contacto</a></li>
+									<li><a class="uppercase" href="/ep-prueba/#suscripcion" id="menu-suscribete" class="">Suscríbete</a></li>
+			<li class="lenguaje">
+				<a href="https://estudiospublicos.cl/index.php/cep/user/setLocale/es_ES?source=%2Findex.php%2F">ES</a> /
+				<a href="https://estudiospublicos.cl/index.php/cep/user/setLocale/en_US?source=%2Findex.php%2F">EN</a>
+			</li>  
+		</ul>
+		
+		<ul class="menu-bottom">
+			<li><a href='/ep-prueba/' class="home uppercase ">Inicio</a></li>
+			<li><span class="submenutitle " tabindex="0">Sobre la revista</span>
+				<ul>
+					<li><a href='/ep-prueba/concepto/' class=" uppercase">Concepto</a></li>
+					<li><a href='/ep-prueba/secciones/' class=" uppercase">Secciones</a></li>
+					<li><a href='/ep-prueba/indexaciones/' class=" uppercase">Indexaciones</a></li>
+					<li><a href='/ep-prueba/equipo-edicion/' class=" uppercase">Equipo Edición</a></li>
+					<li><a href='/ep-prueba/comite-editorial/' class=" uppercase">Comité Editorial</a></li>
+				</ul>
+			</li>
+			<li><span class="submenutitle " tabindex="0"><a href='/ep-prueba/issue/archive/' class=" uppercase">Números</a></span>
+				<ul>
+					<li><a href='/ep-prueba/numeros-especiales/' class=" uppercase">Números Especiales</a></li>
+					<li><a href='/ep-prueba/online-first/' class=" uppercase">Online First</a></li>
+				</ul>
+			</li>
+			<li><span class="submenutitle " tabindex="0">Envío de artículos</span>
+				<ul>
+					<li><a href='/ep-prueba/ventanilla-abierta/' class=" uppercase">Ventanilla abierta</a></li>
+					<li><a href='/ep-prueba/guia-para-autores/' class=" uppercase">Guía para autores</a></li>
+					<li><a href='/ep-prueba/enviar-articulo/' class=" uppercase">Enviar artículo</a></li>
+				</ul>
+			</li>
+			<li><span class="submenutitle " tabindex="0">Proceso de revisión</span>
+				<ul>
+					<li><a href='/ep-prueba/guia-para-revisores/' class=" uppercase">Guía para revisores</a></li>
+					<li><a href='/ep-prueba/revisores/' class=" uppercase">Revisores Estudios Públicos</a></li>
+				</ul>
+			</li>
+			<li><a href='/ep-prueba/politicas-y-etica/' class=" uppercase">Políticas y ética</a></li>
+			<li><a href='/ep-prueba/comite-editorial/' class=" uppercase">Comité Editorial</a></li>
+		</ul>
+	</nav>
+</header>
+<!-- Header -->
+
+<!-- Menu responsive (768px) -->
+<header class="header-responsive">
+
+	<div class="menu_bar">
+		<a class="lenguaje"><span href="https://estudiospublicos.cl/index.php/cep/user/setLocale/es_ES?source=%2Findex.php%2F">ES</span> / <span href="https://estudiospublicos.cl/index.php/cep/user/setLocale/en_US?source=%2Findex.php%2F">EN</span></a>
+		<a class="link-index" href='/ep-prueba/'>Estudios Públicos</a>
+		<a href="#" class="bt-menu">
+			<div></div>
+			<div></div>
+			<div></div>
+		</a>
+	</div>
+
+	<nav>
+		<ul>
+			<li><a href='/ep-prueba/'><span class="icon icon-home"></span>Inicio</a></li>
+			<li><span class="submenutitle" tabindex="0"><span class="icon icon-about"></span>Sobre la revista</span>
+				<ul>
+					<li><a href='/ep-prueba/concepto/'>Concepto</a></li>
+					<li><a href='/ep-prueba/secciones/'>Secciones</a></li>
+					<li><a href='/ep-prueba/indexaciones/'>Indexaciones</a></li>
+					<li><a href='/ep-prueba/equipo-edicion/'>Equipo Edición</a></li>
+					<li><a href='/ep-prueba/comite-editorial/'>Comité Editorial</a></li>
+				</ul>
+			</li>
+			<li><span class="submenutitle" tabindex="0"><span class="icon icon-numeros"></span><a href='/ep-prueba/issue/archive/'>Números</a></span>
+				<ul>
+					<li><a href='/ep-prueba/numeros-especiales/'>Números Especiales</a></li>
+					<li><a href='/ep-prueba/online-first/'>Online First</a></li>
+				</ul>
+			</li>
+			<li><span class="submenutitle" tabindex="0"><span class="icon icon-submit"></span>Envío de artículos</span>
+				<ul>
+					<li><a href='/ep-prueba/ventanilla-abierta/'>Ventanilla abierta</a></li>
+					<li><a href='/ep-prueba/guia-para-autores/'>Guía para autores</a></li>
+					<li><a href='/ep-prueba/enviar-articulo/'>Enviar artículo</a></li>
+				</ul>
+			</li>
+			<li><span class="submenutitle" tabindex="0"><span class="icon icon-revision"></span>Proceso de revisión</span>
+				<ul>
+					<li><a href='/ep-prueba/guia-para-revisores/'>Guía para revisores</a></li>
+					<li><a href='/ep-prueba/revisores/'>Revisores Estudios Públicos</a></li>
+				</ul>
+			</li>
+			<li><a href='/ep-prueba/politicas-y-etica/'><span class="icon icon-politicas"></span>Políticas y ética</a></li>
+			<li><a href='/ep-prueba/comite-editorial/'><span class="icon icon-equipo"></span>Comité Editorial</a></li>
+			<li><a href="https://www.cepchile.cl/" target="_blank"><span class="icon icon-cep"></span><span>CEP Chile</span></a></li>
+			<li><a href='/ep-prueba/audioVisuals/'><span class="icon icon-audiovisual"></span>Audiovisual</a></li>
+			<li><a href='/ep-prueba/contacto/'><span class="icon icon-contacto"></span>Contacto</a></li>
+			<li><a href="/ep-prueba/#suscripcion"><span class="icon icon-subscribete"></span>Suscríbete</a></li>
+		</ul>
+
+		<!-- Social Networks -->
+		<div class="social-networks">
+			<a href="https://www.facebook.com/profile.php?id=100072377182191" target="_blank"><span class="icon-social icon-facebook"></span></a>
+			<a href="https://x.com/EstPublicos" target="_blank"><span class="icon-social icon-twitter"></span></a>
+			<a href="https://www.instagram.com/estudiospublicos/" target="_blank"><span class="icon-social icon-instagram"></span></a>
+		</div>
+	</nav>
+	<script>
+	if (window.location.search.includes('utm_source')) {
+		const getUtm = window.location.search; 
+		const enlaces = document.querySelectorAll('.header nav a');
+		enlaces.forEach(link => {
+			const linkPrev = link.getAttribute('href');
+			if (linkPrev && !linkPrev.includes('#suscripcion')) { 
+				link.setAttribute('href', linkPrev + getUtm); 
+			}
+		});
+	}
+	</script>
+</header>
+<!-- Menu responsive (768px) -->
+    <!-- Main section -->
+    <div class="main-section headerBanner">
+        <div class="main-img">
+        </div>
+        <img src="https://estudiospublicos.cl/public/journals/1/article_2595_cover_es_ES.jpg" class="right"> 
+        
+    <div class="social-networks">
+        <a href="https://web.facebook.com/Estudios-P%C3%BAblicos-104314085318573" target="_blank">
+            <div class="icon-social icon-facebook"></div>
+        </a>
+        <a href="https://twitter.com/EstPublicos" target="_blank">
+            <div class="icon-social icon-twitter"></div>
+        </a>
+        <a href="https://www.instagram.com/estudiospublicos/" target="_blank">
+            <div class="icon-social icon-instagram"></div>
+        </a>
+    </div>
+
+        <!-- Content-section -->
+        <div class="content-section">
+            <h2 class="title1">
+                Convergencia interrumpida: Chile y su decepcionante crecimiento
+            </h2>
+            <div class="options">
+                                                                            
+
+
+ 
+
+
+<a class="uppercase galley-link" href="https://estudiospublicos.cl/index.php/cep/article/view/2595/3548" onclick="gtag('event', 'download', { 'event_category': '', 'event_label': 'header_article', 'value': '0'});" data-cf-modified-7f67bd3a2cb251f823b669d0-="">
+    Ver
+    PDF
+    <span class="icon icon-resumen"></span>
+</a>                                                </div>
+            
+        </div>
+        <!-- Content-section -->
+        <div class="shareSocialNetworkHeader">
+            <p>Compartir en <img src="/ep-prueba/plugins/themes/ceptheme/img/link.png"></p>
+            <a href="mailto:?Subject=Mira%20estÃ¡%20publicaciÃ³n%20%20estudiospublicos.cl/index.php/cep/article/view/2595" class="shareLink" target="_blank">
+                <img src="/ep-prueba/plugins/themes/ceptheme/img/correo.png">
+            </a>
+            <a href="https://www.facebook.com/sharer.php?u=estudiospublicos.cl/index.php/cep/article/view/2595" class="shareLink" target="_blank">
+                <img src="/ep-prueba/plugins/themes/ceptheme/img/fb.png">
+            </a>
+            <a href="https://www.linkedin.com/shareArticle/?mini=true&url=estudiospublicos.cl/index.php/cep/article/view/2595" class="shareLink" target="_blank">
+                <img src="/ep-prueba/plugins/themes/ceptheme/img/linkedin.png"> 
+            </a>
+            <a href="https://twitter.com/intent/tweet?url=estudiospublicos.cl/index.php/cep/article/view/2595" class="shareLink" target="_blank">
+                <img src="/ep-prueba/plugins/themes/ceptheme/img/twitter.png">
+            </a>
+        </div>
+    </div>
+    <!-- Main section -->
+    <!-- Section Sidebar -->
+    <div class="section-sidebar">
+        <div class="section section-article">
+            <h3 class="title">Resumen</h3>
+            <div class="details tw-mt-3">
+                <div class="content">
+                    La desaceleración en el crecimiento económico de Chile ha generado un amplio debate en el ámbito público y académico. Este artículo busca cuantificar la magnitud y describir las características de este decepcionante crecimiento, utilizando metodologías independientes pero complementarias. En particular, se combina la evidencia comparada entre países, el análisis de la productividad total de factores entre sectores económicos, la estimación de regresiones de crecimiento y la aplicación de contrafactuales sintéticos. Estos métodos permiten evidenciar que: (i) la desaceleración del crecimiento en Chile ha ido más allá del efecto de convergencia económica, y no se observa un efecto incremental de reformas estructurales en décadas recientes; (ii) las particularidades sectoriales en Chile contribuyen de forma importante a la desaceleración de la productividad total de factores, particularmente en minería, construcción y energía; y (iii) los ejercicios contrafactuales sugieren que la desaceleración respecto de tendencias previas se explica en partes similares por factores internos y externos. En conjunto, los distintos enfoques metodológicos coinciden en que una tasa de crecimiento per cápita coherente con el nivel actual de desarrollo de Chile, se ubica en torno al 3%. Ello permitiría retomar una senda acorde con la convergencia a niveles de ingreso mayor en el futuro.
+
+                    <h6 class="author">            <span class="name">
+            Pablo García,        </span>
+            <span class="name">
+            Igal  Magendzo,        </span>
+            <span class="name">
+            Emiliano Toni        </span>
+    </h6>
+                    <div class="article-metadata">
+                                                    <span class="code">
+                                <b>DOI</b>: <a href="https://doi.org/10.38178/071830891745250319">https://doi.org/10.38178/071830891745250319</a>
+                            </span>
+                                                <span class="code">
+                            <b>Páginas</b>: 11-57
+                        </span>
+                        <span class="code">
+                            <b>Fecha de Publicación</b>:
+                            23-03-2026
+                        </span>
+                        
+												<span class="keywords">
+                            <b>Palabras Clave</b>:
+                            Chile, crecimiento económico, control sintético, convergencia, desaceleración económica
+                                                                                                                </span>
+												
+                                                     <div class="item citation">
+                                <div class="sub_item citation_display">
+                                    <span class="code">
+                                        <b>¿Cómo citar este artículo?</b>
+                                        <div class="csl-bib-body">
+  <div class="csl-entry"><div class="csl-left-margin">[1]</div><div class="csl-right-inline">García , P., Magendzo, I. y Toni, E. 2026. Convergencia interrumpida: Chile y su decepcionante crecimiento. <i>Estudios Públicos</i>. 182 (mar. 2026), 11-57. DOI: <a href="https://doi.org/10.38178/071830891745250319">https://doi.org/10.38178/071830891745250319</a>.</div></div>
+</div>
+                                    </span>
+                                    <div class="value">
+                                        <div id="citationOutput" role="region" aria-live="polite">
+                                            
+                                        </div>
+                                        <div class="citation_formats">
+                                            <div class="cmp_button citation_formats_button"
+                                                aria-controls="cslCitationFormats" aria-expanded="false"
+                                                data-csl-dropdown="true">
+                                                <span>+ </span>Formatos de citación
+                                            </div>
+                                            <div id="cslCitationFormats" class="citation_formats_list" aria-hidden="true">
+                                                <ul class="citation_formats_styles">
+                                                                                                            <li>
+                                                            <a aria-controls="citationOutput"
+                                                                href="https://estudiospublicos.cl/index.php/cep/citationstylelanguage/get/acm-sig-proceedings?submissionId=2595"
+                                                                data-load-citation
+                                                                data-json-href="https://estudiospublicos.cl/index.php/cep/citationstylelanguage/get/acm-sig-proceedings?submissionId=2595&amp;return=json">
+                                                                ACM
+                                                            </a>
+                                                        </li>
+                                                                                                            <li>
+                                                            <a aria-controls="citationOutput"
+                                                                href="https://estudiospublicos.cl/index.php/cep/citationstylelanguage/get/apa?submissionId=2595"
+                                                                data-load-citation
+                                                                data-json-href="https://estudiospublicos.cl/index.php/cep/citationstylelanguage/get/apa?submissionId=2595&amp;return=json">
+                                                                APA
+                                                            </a>
+                                                        </li>
+                                                                                                            <li>
+                                                            <a aria-controls="citationOutput"
+                                                                href="https://estudiospublicos.cl/index.php/cep/citationstylelanguage/get/chicago-author-date?submissionId=2595"
+                                                                data-load-citation
+                                                                data-json-href="https://estudiospublicos.cl/index.php/cep/citationstylelanguage/get/chicago-author-date?submissionId=2595&amp;return=json">
+                                                                Chicago
+                                                            </a>
+                                                        </li>
+                                                                                                            <li>
+                                                            <a aria-controls="citationOutput"
+                                                                href="https://estudiospublicos.cl/index.php/cep/citationstylelanguage/get/harvard-cite-them-right?submissionId=2595"
+                                                                data-load-citation
+                                                                data-json-href="https://estudiospublicos.cl/index.php/cep/citationstylelanguage/get/harvard-cite-them-right?submissionId=2595&amp;return=json">
+                                                                Harvard
+                                                            </a>
+                                                        </li>
+                                                                                                            <li>
+                                                            <a aria-controls="citationOutput"
+                                                                href="https://estudiospublicos.cl/index.php/cep/citationstylelanguage/get/modern-language-association?submissionId=2595"
+                                                                data-load-citation
+                                                                data-json-href="https://estudiospublicos.cl/index.php/cep/citationstylelanguage/get/modern-language-association?submissionId=2595&amp;return=json">
+                                                                MLA
+                                                            </a>
+                                                        </li>
+                                                                                                    </ul>
+                                                                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                <div class="content-bottom"> 
+                                                                                                            
+
+
+ 
+
+
+<a class="uppercase galley-link" href="https://estudiospublicos.cl/index.php/cep/article/view/2595/3548" onclick="gtag('event', 'download', { 'event_category': '', 'event_label': 'footer_article', 'value': '0'});" data-cf-modified-7f67bd3a2cb251f823b669d0-="">
+    Ver
+    PDF
+    <span class="icon icon-resumen"></span>
+</a>                            
+                        
+
+                        <button class="uppercase volume-back"
+                            data-href="/ep-prueba/issue/view/182/">Volver al volumen </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+                    </div>
+
+
+        
+            <!-- Sidebar desktop -->
+    <div class="sidebar desktop-sidebar">
+
+    <h4 class="title-sideBar">Estudios Públicos</h4>
+
+    <!-- Formulario -->
+            <div class="box-login">
+        <form action="https://estudiospublicos.cl/index.php/cep/login/signIn" method="post">
+            
+            <div id="form-login">
+                <h5> Iniciar Sesión</h5>
+
+                <input class="name" type="text" placeholder="Nombre de Usuario" value="" name="username" id="username">
+
+                <input type="password" placeholder="Contraseña" value="" name="password" id="password">
+
+                <div class="box-remember">
+                    <input id="rememberme" name="rememberme" value="remember" type="checkbox">
+                    <label for="rememberme">Mantener sesión iniciada</label>
+                </div>
+
+
+                <div class="group-button">
+                    <a id="btn-register" class="uppercase" href='https://estudiospublicos.cl/index.php/cep/user/register'>Registrarse</a>
+
+                    <button id="btn-login" type="submit" class="uppercase"> Iniciar Sesión</button>
+                </div>
+
+
+
+                <a href="https://estudiospublicos.cl/index.php/cep/login/lostPassword" class="lostPassword">¿Olvidó su contraseña?</a>
+
+            </div>
+        </form>
+    </div>
+        <!-- Formulario -->
+    <hr>
+    <!-- Information -->
+    <div class="information">
+        <table>
+            <tr>
+                <td>ISSN Digital</td>
+                <td>0718-3089</td>
+            </tr>
+            <tr>
+                <td>ISSN Impreso</td>
+                <td>0716-1115</td>
+            </tr>
+            <tr>
+                <td>Inicio</td>
+                <td>1980</td>
+            </tr>
+            <tr>
+                <td>Periodicidad</td>
+                <td>Trimestral</td>
+            </tr>
+            <tr>
+                <td>País</td>
+                <td>Chile</td>
+            </tr>
+            <tr>
+                <td>Idioma</td>
+                <td>Español, Inglés</td>
+            </tr>
+
+        </table>
+
+    </div>
+    <!-- Information -->
+    <hr>
+    <!-- Newsletter -->
+    <div class="newsletter">
+
+        <h5>Suscripción Newsletter</h5>
+
+        <p>Suscríbete a nuestro boletín de noticias. Te iremos informando sobre novedades que esperamos sean de tu interés.</p>
+        <!-- Formulario Newsletter -->
+        <form id="fide-embed-form" action="https://publiccl1.fidelizador.com/cepchile/form/4D985F23A03E1BA469FC7A8E1A4BCB9C577F1144B1/subscription/save" method="POST"
+             data-fetch-geographic-zones-url="https://publiccl1.fidelizador.com/cepchile/api/geo/zone/_country_id_"
+      data-fetch-countries-url="https://publiccl1.fidelizador.com/cepchile/api/geo/countries" target="_blank">
+            
+            <input type="text" id="subscription_firstName" name="subscription[firstName]" required="required" title="Nombre" placeholder="Nombre" />
+            <input type="text" id="subscription_lastName" name="subscription[lastName]" required="required" title="Apellido"  placeholder="Apellido" />
+            <input type="text" id="subscription_email" name="subscription[email]" required="required" title="E-mail" placeholder="Email"  />
+            <input type="hidden" name="embed" value="1" />
+            <input type="hidden" name="utm_source" value="">
+             <p id="mensaje" class="d-none text-center mt-2" style="color:red;margin-top:10px">Existen errores en algunos campos</p>
+            <div class="group-button">
+           
+            <input type="submit" id="btn-suscribirse" value="REGÍSTRAME" class="btn-send-form-fide sendForm uppercase" />
+            </div>
+
+            <!--<input type="text" name="FNAME" class="" >
+            <input type="hidden" name="utm_source" value="">
+            <input type="text" name="LNAME" class="" placeholder="Apellido">
+            <input type="email" name="EMAIL" placeholder="Email">
+            <div class="group-button">
+                <button class="uppercase">Registrame</button>
+            </div>-->
+        </form>
+        <!-- Formulario Newsletter -->
+
+
+    </div>
+    <!-- Newsletter -->
+
+
+    <hr>
+    <!-- Número actual -->
+    <div class="actual">
+
+        <h5>Número Actual</h5>
+
+        <div class="info">
+            <a href="https://estudiospublicos.cl/index.php/cep/gateway/plugin/WebFeedGatewayPlugin/atom">
+                <div class="img-info info1" ></div>
+            </a>
+            <a href="https://estudiospublicos.cl/index.php/cep/gateway/plugin/WebFeedGatewayPlugin/rss2">
+                <div class="img-info info2" ></div>
+            </a>
+            <a href="https://estudiospublicos.cl/index.php/cep/gateway/plugin/WebFeedGatewayPlugin/rss">
+                <div class="img-info info3" ></div>
+            </a>
+
+        </div>
+
+    </div>
+    <!-- Número actual -->
+
+
+</div>
+<!-- Sidebar desktop -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function () {
+     const submitBottom = $('.sendForm');
+     const $emailInput = $("#subscription_email");
+      function validarEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+     $("#subscription_lastName").on("input", function () {
+        $(this).val($(this).val().replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ ]/g, ""));
+    });
+     $("#subscription_firstName").on("input", function () {
+        $(this).val($(this).val().replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ ]/g, ""));
+    });
+
+    $emailInput.on("input", function () {
+        if (validarEmail($emailInput.val())) {
+           $emailInput.removeAttr('style')
+        } else {
+           $emailInput.css('border','1px solid red')
+        }
+    });
+    let formSubmitted = false; // Variable de control en memoria
+    
+    $('.sendForm').off('click').on('click', function (event){
+        event.preventDefault(); 
+        console.log(validarEmail($emailInput.val()))
+        console.log($("#subscription_firstName").val().length)
+        console.log($("#subscription_lastName").val().length)
+        if($("#subscription_firstName").val().length>0 && $("#subscription_lastName").val().length > 0 && validarEmail($emailInput.val())){
+             $('#mensaje').addClass('d-none')
+            if (formSubmitted) return; 
+            formSubmitted = true; 
+            let name_newsletter = $('[name="subscription[firstName]"]').val();
+            let lastname_newsletter = $('[name="subscription[lastName]"]').val();
+            let email_newsletter = $('[name="subscription[email]"]').val();
+            let utm = $('[name="utm_source"]').val();
+            
+            // Enviar datos a Zapier
+            $.get('/ep-prueba/ep-datos/desactivado.json', {
+                nombre: name_newsletter,
+                apellido: lastname_newsletter,
+                email: email_newsletter,
+                utm_source: utm
+            })
+            .done(function (data) {
+                console.log("Respuesta Zapier:", data);
+                  let formData = $('#fide-embed-form').serialize(); // Serializa los datos del formulario
+                // Enviar formulario por AJAX (POST)
+                $.ajax({
+                    url: $('#fide-embed-form').attr('action'), // Usa la URL del form
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        console.log("Respuesta del servidor:", response);
+        
+                        // Verifica si el servidor devuelve éxito
+                        if (response) {
+                            response=JSON.parse(response);
+                            let cleanMessage = response[1].replace(/<\/?[^>]+(>|$)/g, "").replace(/&nbsp;/g, " ");
+                            alert(decodeURIComponent(cleanMessage));
+                            document.getElementById("fide-embed-form").reset();
+                        } else {
+                            alert("Error en el envío: " + response.message);
+                            formSubmitted = false; // Permitir reintento
+                        }
+                    },
+                    error: function (error) {
+                        console.error("Error en la petición POST:", error);
+                        alert("Hubo un error, intenta nuevamente.");
+                        formSubmitted = false; // Permitir reintento en caso de fallo
+                    }
+                });
+            })
+            .fail(function (error) {
+                console.error("Error en la petición GET:", error);
+                formSubmitted = false; // Permitir reintento si hay error
+            });
+        }
+        else{
+            $('#mensaje').removeClass('d-none')
+        }
+    });
+    
+});
+
+
+</script>
+
+
+
+    </div>
+</div>
+
+
+
+<div class="content-spinner">
+    <img src="/ep-prueba/plugins/themes/ceptheme/img/logo.png" />
+    <div class='spinner'></div>
+</div>
+<!-- Main modal -->
+<div id="staticModal">
+    <div class="contentModal">
+        <div class="remove_field tw-absolute tw-right-0 tw-mt-2">
+            <span class="material-icons">
+                close
+            </span>
+        </div>
+        <h3>Formato de cita <span></span></h3>
+    </div>
+</div>
+
+<footer>
+
+    <div class="footer-top">
+        <a href="/ep-prueba/">
+            <div class="contentLogoFooter">
+                                <img src="/ep-prueba/plugins/themes/ceptheme/img/logo.png">
+            </div>
+        </a>
+
+        <div data-href="/ep-prueba/">
+            <img src="/ep-prueba/plugins/themes/ceptheme/img/Logo-CEP.svg">
+        </div>
+    </div>
+
+
+    <!-- Menu footer -->
+    <nav class="menu-footer">
+        <div class="widget">
+            <ul>
+                <li class="uppercase">
+					<a href='/ep-prueba/'><span>INICIO</span></a>
+				</li>
+                <li class="uppercase">
+					<a href='/ep-prueba/concepto/'><span>Sobre la revista</span></a>
+				</li>
+                <li>
+					<a href='/ep-prueba/issue/archive/'　class=' uppercase'><span>Números</span></a>
+                </li>
+            </ul>
+			
+            <ul>
+                <li class="uppercase">
+					<a href='/ep-prueba/guia-para-autores/'><span>Información para autores</span></a>
+				</li>
+                <li>
+					<a href='/ep-prueba/comite-editorial/' class="uppercase"><span>Comité Editorial</span></a>
+				</li>
+                <li>
+					<a href='/ep-prueba/equipo-edicion/' class="uppercase"><span>Equipo</span></a>
+				</li>
+            </ul>
+        </div>
+        <div class="widget">
+            <ul>
+                <li class="uppercase">
+					<a href="https://www.cepchile.cl" class="cep-chile" target="_blank"><span>CEP CHILE</span> <img src="/ep-prueba/plugins/themes/ceptheme/img/link.png" class="link-menu" style="vertical-align: top; width: 10px; margin: 2px 0 0 0;"></a>
+				</li>
+                <li class="uppercase">
+					<a href='/ep-prueba/indexaciones/'><span>Nuestras Indexaciones</span></a>
+				</li>
+                <li class="uppercase">
+					<a href='/ep-prueba/enviar-articulo/'><span>Envío de artículos</span></a>
+				</li>
+            </ul>
+            <ul>
+                <li class="uppercase">
+					<a href='/ep-prueba/audioVisuals/'><span>Audiovisuales</span></a>
+                </li>
+                <li class="uppercase">
+					<a href='/ep-prueba/contacto/'><span>Contacto</span></a>
+				</li>
+                <li class="uppercase">
+					<a><span> ISSN: 0718-3089 | 0716-1115</span></a>
+				</li>
+            </ul>
+        </div>
+        <div class="widget widget-contact">
+            <ul>
+                <li><span> Monseñor Sótero Sanz 162, Providencia Santiago de Chile.</span></li>
+                <li><span>Código Postal 7500011 </span></li>
+                <li><a href="tel:223282400"><span> Teléfono: 223282400</span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Menu footer -->
+    <div class="footer-bottom footer-cep-gj">
+                <p>© 2026 CEP - CENTRO DE ESTUDIOS PÚBLICOS <br>  ISSN: 0718-3089 | 0716-1115 </p>
+    </div>
+
+</footer>
+<!-- Vue -->
+<script src="/ep-prueba/plugins/themes/ceptheme/js/vue@2.7.8.min.js"></script>
+<!-- DatePicker -->
+<link rel="stylesheet" href="/ep-prueba/plugins/themes/ceptheme/css/vue2-datepicker@3.11.0.css">
+<script src="/ep-prueba/plugins/themes/ceptheme/js/vue2-datepicker@3.11.0.min.js"></script>
+<!-- Axios -->
+<script src="/ep-prueba/plugins/themes/ceptheme/js/axios.min.js"></script>
+<script>
+const CEPClient = axios.create({
+	baseURL: "https://estudiospublicos.cl/index.php/cep",
+	headers: {
+		"Content-Type": "application/json; charset=utf-8",
+	},
+});
+</script>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<!-- Aos -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Menu responsive -->
+<script src="/ep-prueba/plugins/themes/ceptheme/js/menu.js"></script>
+<!-- Sidebar -->
+<script src="/ep-prueba/plugins/themes/ceptheme/js/sidebar.js"></script>
+<!-- Slick Slider -->
+<script src="/ep-prueba/plugins/themes/ceptheme/js/slick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
+<!-- Parallax -->
+<script src="/ep-prueba/plugins/themes/ceptheme/js/singleParallax.js"></script>
+<!-- Script -->
+<script src="/ep-prueba/plugins/themes/ceptheme/js/script.js"></script>
+
+<script src="/ep-prueba/plugins/themes/ceptheme/js/subscriptionApp.js"></script>
+<script src="/ep-prueba/plugins/themes/ceptheme/js/fullTextSearch.js"></script>
+
+
+<script>
+
+    var boxOtherNumbers = $(".box-other-numbers").find("a").find(".other-number");
+    if (window.innerWidth < 768) {
+        boxOtherNumbers.each(function(item) {
+            const color = $(this).attr("attr-color")
+            $(this).css("background-color", color);
+            })
+        }
+        $('.section-editor-most-read .slider-most-read .selection').click(function(e) {
+            window.location.href = $(e.currentTarget).attr('href')
+        })
+        $('.section-editor-selection .slider-selection .selection').click(function(e) {
+            window.location.href = $(e.currentTarget).attr('href')
+        })
+        function getParameterByName(name) {
+            let urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+    
+        // Obtener el valor de utm_source
+        let utmSource = getParameterByName("utm_source");
+    
+        // Validar si existe y no está vacío
+        if (utmSource && utmSource.trim() !== "") {
+            localStorage.setItem("utm_source", utmSource);
+        }
+    </script>
+
+
+<script src="/ep-prueba/ep-cambios/ep-cambios.js"></script>
+<div class="ep-aviso-prueba" style="position:fixed;left:12px;bottom:12px;z-index:9999;background:#1B1C1E;color:#fff;font:600 12px/1.3 sans-serif;padding:8px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.25)">Prueba de cambios · no es el sitio oficial · <a href="https://estudiospublicos.cl/index.php/cep" style="color:#F9B233">ir a estudiospublicos.cl</a></div>
+</body>
+
+</html>

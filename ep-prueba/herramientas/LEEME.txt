@@ -1,0 +1,11 @@
+Copia de prueba de la revista Estudios Públicos (estudiospublicos.cl)
+Se ve en: https://belmarfabian.github.io/ep-prueba/
+
+- espejo.py vuelve a bajar el sitio y rearma la copia (python3 -I espejo.py).
+  paginas.json lista las páginas copiadas: portada, menú, archivo de números,
+  números recientes y especiales, y sus artículos.
+- Los cambios de diseño van SOLO en ep-cambios/ep-cambios.css y ep-cambios.js.
+  Volver a correr espejo.py no los toca.
+- Lo no copiado (números antiguos, PDF, login, búsqueda) abre el sitio real.
+- Formularios desactivados: la copia no envía datos a OJS ni a Zapier.
+- Sin analítica (Google, Meta, Clarity) y con noindex.
