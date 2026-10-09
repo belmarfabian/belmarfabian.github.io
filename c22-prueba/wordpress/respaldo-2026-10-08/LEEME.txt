@@ -30,6 +30,11 @@ publicación más reciente sin contar el Monitor; a la derecha, en una columna, 
 (fijo, MONITOR en el script) y debajo el juego (FIJO). Abajo sigue la fila de tres.
 «Etiqueta head»: 44.897 caracteres. CSS adicional: 167.611 caracteres.
 
+A la 1:30 del 9 de octubre: la serie de cada tarjeta del destacado va como etiqueta de color
+lleno, como en la web antigua; Personas se muestra cuando llegaron todas las fichas (antes
+aparecía incompleta y se iba llenando); la portada reserva el lugar del resumen para no saltar.
+«Etiqueta head»: 45.622 caracteres. CSS adicional: 169.458 caracteres.
+
 PARA ESCONDERLA DE NUEVO A LOS VISITANTES (sin borrar nada):
 En la «Etiqueta head», cambiar «var SOLO_EDITORES = false;» por «var SOLO_EDITORES = true;».
 Apretar «Update». Los visitantes vuelven a ver el sitio antiguo; con sesión se sigue viendo la nueva.
