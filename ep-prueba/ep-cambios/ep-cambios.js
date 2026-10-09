@@ -334,4 +334,15 @@
   }).catch(function () {});
 })();
 
+
+/* 13. Barra lateral: las fuentes del número actual como enlaces de texto */
+(function () {
+  'use strict';
+  Array.prototype.forEach.call(document.querySelectorAll('.sidebar.desktop-sidebar .actual .info a'), function (a) {
+    var h = a.getAttribute('href') || '';
+    var n = /atom/i.test(h) ? 'Atom' : /rss2/i.test(h) ? 'RSS 2.0' : /rss/i.test(h) ? 'RSS 1.0' : '';
+    if (!n) return;
+    a.classList.add('ep-rss'); a.setAttribute('data-nombre', n); a.setAttribute('aria-label', 'Fuente ' + n + ' del número actual');
+  });
+})();
 /* ===== EP CAPA DE CAMBIOS: FIN ===== */

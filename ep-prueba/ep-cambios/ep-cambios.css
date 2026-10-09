@@ -463,6 +463,46 @@ textarea:focus-visible,
 /* ===== fin carrusel especial ===== */
 
 /* ===================================================================
+   13. BARRA LATERAL MÁS CORTA
+   Tenía 1.400 px de alto fijo y un formulario de boletín de tres campos
+   grandes. Ahora mide lo que ocupa su contenido: nombre y apellido en una
+   fila, campos más bajos, datos de la revista más juntos y las fuentes
+   RSS como enlaces de texto.
+   =================================================================== */
+.sidebar.desktop-sidebar { height: auto !important; padding-bottom: 34px !important; }
+.sidebar.desktop-sidebar > h4.title-sideBar { margin-bottom: 14px !important; }
+.sidebar.desktop-sidebar hr { margin: 18px 0 !important; }
+.sidebar.desktop-sidebar .box-login.ep-plegado { margin-bottom: 0 !important; }
+.sidebar.desktop-sidebar .information table td { padding-top: 2px !important; padding-bottom: 2px !important; }
+.sidebar.desktop-sidebar .newsletter h5 { margin-bottom: 4px !important; }
+.sidebar.desktop-sidebar .newsletter > p { margin-bottom: 12px !important; }
+.sidebar.desktop-sidebar #fide-embed-form {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  height: auto !important;
+}
+.sidebar.desktop-sidebar #fide-embed-form > *:not(input[type=text]):not(input[type=email]):not(.group-button) { grid-column: 1 / -1; }
+.sidebar.desktop-sidebar #fide-embed-form input[type=text],
+.sidebar.desktop-sidebar #fide-embed-form input[type=email] {
+  width: 100% !important;
+  height: 38px !important;
+  margin: 0 !important;
+  padding: 0 14px !important;
+  box-sizing: border-box;
+  font-size: 13px !important;
+}
+.sidebar.desktop-sidebar #fide-embed-form #subscription_email,
+.sidebar.desktop-sidebar #fide-embed-form .group-button { grid-column: 1 / -1; }
+.sidebar.desktop-sidebar #fide-embed-form .group-button { margin: 4px 0 0 !important; height: auto !important; }
+.sidebar.desktop-sidebar .actual h5 { margin-bottom: 6px !important; }
+.sidebar.desktop-sidebar .actual .info { display: flex !important; gap: 14px; height: auto !important; }
+.sidebar.desktop-sidebar .actual .info a { width: auto !important; font: 600 11px/1.3 Montserrat, sans-serif; letter-spacing: .05em; color: #1B1C1E; text-decoration: underline; text-underline-offset: 3px; }
+.sidebar.desktop-sidebar .actual .info .img-info { display: none !important; }
+.sidebar.desktop-sidebar .actual .info a.ep-rss::before { content: attr(data-nombre); }
+/* ===== fin barra lateral ===== */
+
+/* ===================================================================
    9. ESTILO CEP
    El lenguaje del sitio nuevo del CEP (prototipo cep-rediseno) sobre la revista:
    fondo blanco, Circe en titulares, Montserrat en texto, Libre Baskerville en
