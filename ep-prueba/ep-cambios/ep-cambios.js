@@ -516,7 +516,7 @@
   }).catch(function () {});
 })();
 /* 17. Bajada de cada texto (idea de Journal of Democracy): la primera frase del
-   resumen, bajo el título, en el índice del número y en el de la portada.
+   resumen, bajo el título, en el índice de cada número (en la portada no: recargaba).
    En la copia se lee el resumen de cada artículo; en el sitio real saldría
    directo de la plantilla, sin cargas extra. */
 (function () {
@@ -560,16 +560,42 @@
     var autor = c.querySelector('.autor');
     poner(c, a.getAttribute('href'), autor ? autor.nextElementSibling : null);
   });
-  // índice del último número en la portada (lo arma el bloque 11 después de cargar)
-  var caja = document.querySelector('#home .section-last-number .contentUltimoNumero');
-  if (caja) {
-    var obs = new MutationObserver(function () {
-      var links = caja.querySelectorAll('.ep-indice li:not(.ep-indice__sec) a');
-      if (!links.length) return;
-      obs.disconnect();
-      Array.prototype.forEach.call(links, function (a) { poner(a, a.getAttribute('href')); });
-    });
-    obs.observe(caja, { childList: true, subtree: true });
+})();
+
+/* 18. Portada: la tapa del último número ocupa el alto de su tarjeta.
+   Con el índice al lado, la tarjeta quedaba más alta que la tapa y sobraba
+   blanco abajo. Se ajusta el alto de la tapa (y su ancho, en proporción). */
+(function () {
+  'use strict';
+  var tarjeta = document.querySelector('#home .section-last-number .last-number');
+  var img = tarjeta && tarjeta.querySelector('.number-img');
+  if (!img) return;
+  function ajustar() {
+    if (!tarjeta.classList.contains('ep-con-indice') || window.innerWidth < 1024 || !img.naturalWidth) return;
+    var caja = tarjeta.querySelector('.last-number-image');
+    var texto = tarjeta.querySelector('.contentUltimoNumero');
+    var r = img.naturalWidth / img.naturalHeight;
+    var maxAncho = Math.round(tarjeta.getBoundingClientRect().width * 0.46);
+    // el botón «Ver más» pasa bajo la tapa: así el índice queda más bajo
+    var boton = tarjeta.querySelector('.contentUltimoNumero .botton-group');
+    if (boton && boton.parentNode !== caja) { caja.appendChild(boton); boton.classList.add('ep-boton-bajo-tapa'); }
+    var extra = boton ? boton.offsetHeight + 18 + 24 : 0; // 24: aire bajo el botón
+    // la tapa asoma 60 px sobre la tarjeta (diseño original): su alto es el del
+    // texto más esos 60 px, así su borde inferior calza con el de la tarjeta.
+    // Dos pasadas: al cambiar el ancho de la tapa, el texto puede cambiar de alto.
+    for (var i = 0; i < 3; i++) {
+      var altoTexto = texto.offsetHeight + parseFloat(getComputedStyle(texto).marginTop || 0);
+      var ancho = Math.min(maxAncho, Math.max(260, Math.round((altoTexto + 60 - extra) * r)));
+      // variables CSS: el script del tema reescribe el alto en línea de la tapa
+      tarjeta.style.setProperty('--ep-tapa-w', ancho + 'px');
+      tarjeta.style.setProperty('--ep-tapa-h', Math.round(ancho / r) + 'px');
+      tarjeta.classList.add('ep-tapa-ajustada');
+    }
   }
+  var t;
+  function pronto() { clearTimeout(t); t = setTimeout(ajustar, 60); }
+  new MutationObserver(pronto).observe(tarjeta, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+  window.addEventListener('resize', pronto);
+  if (img.complete) pronto(); else img.addEventListener('load', pronto);
 })();
 /* ===== EP CAPA DE CAMBIOS: FIN ===== */

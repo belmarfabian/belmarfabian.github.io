@@ -701,18 +701,33 @@ html.ep-archivo-listo .container.archives .cmp_pagination { display: none !impor
   font: 400 14px/1.5 Montserrat, sans-serif !important;
   color: #3f4044 !important;
 }
-#home .section-last-number .contentUltimoNumero .ep-indice li a .ep-bajada {
-  display: -webkit-box !important;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden !important;
-  margin: 4px 0 0 !important;
-  font: 400 13px/1.45 Montserrat, sans-serif !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  color: #4a4b4f !important;
-}
+
 /* ===== fin bajada ===== */
+
+/* 18. Portada: la tapa del último número llena el alto de su tarjeta (ancho calculado en ep-cambios.js) */
+@media (min-width: 1024px) {
+  #home .section-last-number .last-number.ep-con-indice { padding-bottom: 0 !important; align-items: start !important; }
+  #home .section-last-number .last-number.ep-con-indice .contentUltimoNumero { padding-bottom: 26px !important; }
+  #home .section-last-number .last-number.ep-con-indice.ep-tapa-ajustada { grid-template-columns: var(--ep-tapa-w) minmax(0, 1fr) !important; }
+  #home .section-last-number .last-number.ep-con-indice.ep-tapa-ajustada .last-number-image { width: var(--ep-tapa-w) !important; }
+  #home .section-last-number .last-number.ep-con-indice .last-number-image .botton-group.ep-boton-bajo-tapa {
+    display: flex !important;
+    justify-content: center;
+    margin: 18px 0 0 !important;
+    width: 100% !important;
+  }
+  #home .section-last-number .last-number.ep-con-indice.ep-tapa-ajustada .number-img {
+    width: var(--ep-tapa-w) !important;
+    height: var(--ep-tapa-h) !important;
+    max-width: none !important;
+    position: static !important;
+    top: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+  /* la columna de la tapa sube 60 px (la tapa asoma sobre la tarjeta, como en el original) */
+  #home .section-last-number .last-number.ep-con-indice.ep-tapa-ajustada .last-number-image { margin-top: -60px !important; padding-bottom: 24px !important; position: relative !important; top: auto !important; }
+}
 
 /* ===================================================================
    9. ESTILO CEP
