@@ -515,4 +515,61 @@
     destino.appendChild(div);
   }).catch(function () {});
 })();
+/* 17. Bajada de cada texto (idea de Journal of Democracy): la primera frase del
+   resumen, bajo el título, en el índice del número y en el de la portada.
+   En la copia se lee el resumen de cada artículo; en el sitio real saldría
+   directo de la plantilla, sin cargas extra. */
+(function () {
+  'use strict';
+  var limpio = function (t) { return (t || '').replace(/\s+/g, ' ').trim(); };
+  var cache = {};
+  function primeraFrase(t) {
+    t = limpio(t);
+    var m = t.match(/^(.{60,260}?[.!?])\s+[A-ZÁÉÍÓÚÑ¿¡«"“]/);
+    var f = m ? m[1] : t;
+    return f.length > 240 ? f.slice(0, 236).replace(/\s+\S*$/, '') + '…' : f;
+  }
+  function bajada(url) {
+    if (!cache[url]) {
+      cache[url] = fetch(url, { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (h) {
+        if (!h) return '';
+        var doc = new DOMParser().parseFromString(h, 'text/html');
+        var c = doc.querySelector('#single-numero.article-details .section-article .details > .content');
+        if (!c) return '';
+        c = c.cloneNode(true);
+        Array.prototype.forEach.call(c.querySelectorAll('h6, .article-metadata, .item, div, script'), function (x) { x.remove(); });
+        return primeraFrase(c.textContent);
+      }).catch(function () { return ''; });
+    }
+    return cache[url];
+  }
+  function poner(destino, url, antesDe) {
+    bajada(url).then(function (txt) {
+      if (!txt || destino.querySelector('.ep-bajada')) return;
+      var p = document.createElement('p');
+      p.className = 'ep-bajada';
+      p.textContent = txt;
+      if (antesDe && antesDe.parentNode === destino) destino.insertBefore(p, antesDe); else destino.appendChild(p);
+    });
+  }
+  // índice del número
+  Array.prototype.forEach.call(document.querySelectorAll('#single-numero:not(.article-details) .caja-articulo-listado'), function (c) {
+    if (c.closest('.slick-cloned')) return;
+    var a = c.querySelector('a[href*="article/view"]');
+    if (!a) return;
+    var autor = c.querySelector('.autor');
+    poner(c, a.getAttribute('href'), autor ? autor.nextElementSibling : null);
+  });
+  // índice del último número en la portada (lo arma el bloque 11 después de cargar)
+  var caja = document.querySelector('#home .section-last-number .contentUltimoNumero');
+  if (caja) {
+    var obs = new MutationObserver(function () {
+      var links = caja.querySelectorAll('.ep-indice li:not(.ep-indice__sec) a');
+      if (!links.length) return;
+      obs.disconnect();
+      Array.prototype.forEach.call(links, function (a) { poner(a, a.getAttribute('href')); });
+    });
+    obs.observe(caja, { childList: true, subtree: true });
+  }
+})();
 /* ===== EP CAPA DE CAMBIOS: FIN ===== */
