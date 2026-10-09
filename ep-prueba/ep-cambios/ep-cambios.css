@@ -433,6 +433,41 @@ textarea:focus-visible,
 /* ===== fin índice del último número ===== */
 
 /* ===================================================================
+   12. PORTADA ORDENADA POR NOVEDAD
+   Online First pasa a estar justo bajo la presentación (lo mueve
+   ep-cambios.js) y con menos aire. El carrusel del número especial queda
+   como una franja más baja: de unos 900 px a unos 480 px.
+   =================================================================== */
+#home .section-online-first.ep-arriba { padding: 40px 5% 56px !important; }
+#home .section-online-first.ep-arriba > h3.title { margin-bottom: 26px !important; }
+#home .section-online-first.ep-arriba .text-center.mt-4 { margin-top: 8px !important; }
+@media (min-width: 1024px) {
+  #slider_ne .special__image__left,
+  #slider_ne .special__content__right,
+  #slider_ne .special__content__right .content { height: 400px !important; min-height: 0 !important; }
+  #slider_ne .special__image__left { display: flex !important; align-items: flex-end; justify-content: center; overflow: visible; }
+  #slider_ne .special__image__left img.img_number_special {
+    width: auto !important;
+    height: 450px !important;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  #slider_ne .special__content__right .content { padding: 40px 64px !important; box-sizing: border-box; display: flex !important; flex-direction: column; justify-content: center; }
+  #slider_ne .special__content__right .content h2.title { margin: 8px 0 14px !important; }
+  #slider_ne .special__content__right .content .description { margin: 0 0 20px !important; }
+  #slider_ne .special__content__right .content .description p {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  #slider_ne .slick-list { padding-top: 70px !important; }
+  #slider_ne { padding-bottom: 46px !important; }
+  #slider_ne .slick-dots { bottom: -34px !important; }
+}
+/* ===== fin portada ordenada ===== */
+
+/* ===================================================================
    9. ESTILO CEP
    El lenguaje del sitio nuevo del CEP (prototipo cep-rediseno) sobre la revista:
    fondo blanco, Circe en titulares, Montserrat en texto, Libre Baskerville en
