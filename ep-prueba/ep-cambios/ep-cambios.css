@@ -503,6 +503,104 @@ textarea:focus-visible,
 /* ===== fin barra lateral ===== */
 
 /* ===================================================================
+   14. NÚMERO: ÍNDICE COMPACTO
+   Cada texto era una tarjeta de 360 px con una foto de 400 px de ancho:
+   el N° 183 medía unos 5.800 px. Ahora cada texto es una fila con miniatura,
+   título, autores, DOI y botones. Las palabras clave quedan en el artículo.
+   =================================================================== */
+#single-numero:not(.article-details) .section-sidebar > .section,
+#single-numero:not(.article-details) .section-other-toc > .section { padding-top: 34px !important; padding-bottom: 30px !important; }
+#single-numero:not(.article-details) .section > h3.title { margin-bottom: 20px !important; }
+#single-numero:not(.article-details) .other-articles,
+#single-numero:not(.article-details) .other-articles > .content,
+#single-numero:not(.article-details) .slider-review,
+#single-numero:not(.article-details) .slider-notes,
+#single-numero:not(.article-details) .slider-notes .slick-list,
+#single-numero:not(.article-details) .slider-notes .slick-track { height: auto !important; min-height: 0 !important; }
+#single-numero:not(.article-details) .other-articles > .content { padding: 0 !important; margin: 0 !important; }
+#single-numero:not(.article-details) .section .details,
+#single-numero:not(.article-details) .slider-notes .contentSlider,
+#single-numero:not(.article-details) .slider-review .review {
+  display: grid !important;
+  grid-template-columns: 150px minmax(0, 1fr);
+  align-items: stretch;
+  height: auto !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin: 0 auto 12px !important;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+#single-numero:not(.article-details) .section .details > img,
+#single-numero:not(.article-details) .section .details > .featured-image,
+#single-numero:not(.article-details) .slider-notes .contentSlider > .featured-image,
+#single-numero:not(.article-details) .slider-review .review > .featured-image {
+  width: 150px !important;
+  max-width: none !important;
+  height: 100% !important;
+  min-height: 120px;
+  margin: 0 !important;
+  overflow: hidden;
+}
+#single-numero:not(.article-details) .section .details > img,
+#single-numero:not(.article-details) .section .featured-image img {
+  max-width: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+/* la foto no fija el alto de la fila: se recorta al alto del texto */
+#single-numero:not(.article-details) .section .details > .featured-image,
+#single-numero:not(.article-details) .slider-notes .contentSlider > .featured-image,
+#single-numero:not(.article-details) .slider-review .review > .featured-image { position: relative !important; }
+#single-numero:not(.article-details) .section .featured-image img { position: absolute !important; inset: 0; }
+#single-numero:not(.article-details) .slider-notes .slick-track { width: 100% !important; transform: none !important; }
+#single-numero:not(.article-details) .slider-notes .contentSlider:not(.slick-cloned) { float: none !important; }
+#single-numero:not(.article-details) .slider-notes .slick-cloned { display: none !important; }
+#single-numero:not(.article-details) .caja-articulo-listado {
+  width: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 14px 22px 14px !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+#single-numero:not(.article-details) .caja-articulo-listado .top-info { display: none !important; }
+#single-numero:not(.article-details) .caja-articulo-listado h4 { margin: 0 0 4px !important; font-size: 19px !important; line-height: 1.25 !important; -webkit-line-clamp: unset !important; height: auto !important; }
+#single-numero:not(.article-details) .caja-articulo-listado .autor { margin: 0 0 6px !important; height: auto !important; }
+#single-numero:not(.article-details) .caja-articulo-listado h5,
+#single-numero:not(.article-details) .caja-articulo-listado h5 + p,
+#single-numero:not(.article-details) .caja-articulo-listado .mt-auto > h5,
+#single-numero:not(.article-details) .caja-articulo-listado .mt-auto > p { display: none !important; }
+#single-numero:not(.article-details) .caja-articulo-listado .mt-auto { margin: 0 !important; height: auto !important; }
+#single-numero:not(.article-details) .caja-articulo-listado .doi { margin: 0 0 8px !important; font-size: 12px !important; }
+#single-numero:not(.article-details) .caja-articulo-listado .content-galley {
+  position: static !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  width: 100% !important;
+  margin: 0 !important;
+}
+@media (max-width: 767px) {
+  /* celular: sin miniatura (el tema ya la oculta), una sola columna */
+  #single-numero:not(.article-details) .section .details,
+  #single-numero:not(.article-details) .slider-notes .contentSlider,
+  #single-numero:not(.article-details) .slider-review .review { display: block !important; }
+  #single-numero:not(.article-details) .section .details > img,
+  #single-numero:not(.article-details) .section .details > .featured-image,
+  #single-numero:not(.article-details) .slider-notes .contentSlider > .featured-image,
+  #single-numero:not(.article-details) .slider-review .review > .featured-image { display: none !important; }
+  #single-numero:not(.article-details) .caja-articulo-listado { width: auto !important; padding: 14px 16px !important; }
+  #single-numero:not(.article-details) .caja-articulo-listado h4 { font-size: 16px !important; }
+  #single-numero:not(.article-details) .caja-articulo-listado .doi { overflow-wrap: anywhere; }
+  #single-numero:not(.article-details) .caja-articulo-listado .content-galley { width: 100% !important; }
+}
+/* ===== fin índice compacto ===== */
+
+/* ===================================================================
    9. ESTILO CEP
    El lenguaje del sitio nuevo del CEP (prototipo cep-rediseno) sobre la revista:
    fondo blanco, Circe en titulares, Montserrat en texto, Libre Baskerville en
