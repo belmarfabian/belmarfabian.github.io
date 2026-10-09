@@ -433,14 +433,9 @@ textarea:focus-visible,
 /* ===== fin índice del último número ===== */
 
 /* ===================================================================
-   12. PORTADA ORDENADA POR NOVEDAD
-   Online First pasa a estar justo bajo la presentación (lo mueve
-   ep-cambios.js) y con menos aire. El carrusel del número especial queda
-   como una franja más baja: de unos 900 px a unos 480 px.
+   12. CARRUSEL DEL NÚMERO ESPECIAL MÁS BAJO
+   De unos 900 px a unos 480 px. Online First queda en su lugar original.
    =================================================================== */
-#home .section-online-first.ep-arriba { padding: 40px 5% 56px !important; }
-#home .section-online-first.ep-arriba > h3.title { margin-bottom: 26px !important; }
-#home .section-online-first.ep-arriba .text-center.mt-4 { margin-top: 8px !important; }
 @media (min-width: 1024px) {
   #slider_ne .special__image__left,
   #slider_ne .special__content__right,
@@ -465,7 +460,7 @@ textarea:focus-visible,
   #slider_ne { padding-bottom: 46px !important; }
   #slider_ne .slick-dots { bottom: -34px !important; }
 }
-/* ===== fin portada ordenada ===== */
+/* ===== fin carrusel especial ===== */
 
 /* ===================================================================
    9. ESTILO CEP
