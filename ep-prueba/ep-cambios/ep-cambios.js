@@ -334,16 +334,4 @@
   }).catch(function () {});
 })();
 
-/* 12. Portada ordenada por novedad: Online First (lo más reciente) va justo
-   después de la presentación, antes del buscador y del último número.
-   Se mueve antes de que el carrusel se arme, así toma el ancho nuevo. */
-(function () {
-  'use strict';
-  var of = document.querySelector('#home > .section-online-first');
-  var destino = document.querySelector('#home > .section-sidebar');
-  if (of && destino && of.nextElementSibling !== destino) {
-    destino.parentNode.insertBefore(of, destino);
-    of.classList.add('ep-arriba');
-  }
-})();
 /* ===== EP CAPA DE CAMBIOS: FIN ===== */
