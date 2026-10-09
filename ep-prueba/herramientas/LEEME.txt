@@ -9,3 +9,14 @@ Se ve en: https://belmarfabian.github.io/ep-prueba/
 - Lo no copiado (números antiguos, PDF, login, búsqueda) abre el sitio real.
 - Formularios desactivados: la copia no envía datos a OJS ni a Zapier.
 - Sin analítica (Google, Meta, Clarity) y con noindex.
+
+Mejoras en la capa (octubre 2026), numeradas igual en el CSS y el JS:
+ 1. Accesibilidad: foco visible, lang="es", título principal marcado, imágenes decorativas.
+ 2. Tarjetas con título y autores completos (antes se cortaban con «…»).
+ 3. Portada en celular: presentación corta con botón «Leer más sobre la revista».
+ 4. Portada en celular: números anteriores en dos columnas.
+ 5. Barra lateral: inicio de sesión plegado tras «Acceso suscriptores».
+ 6. Artículo: autores bajo el título, resumen más legible, metadatos a 14px,
+    enlaces para compartir con https:// y asunto bien codificado.
+ 7. Número: íconos de redes dentro de la cabecera.
+ 8. Número: año y cantidad de textos por sección, con enlace a cada una.

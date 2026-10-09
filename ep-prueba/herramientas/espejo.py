@@ -195,6 +195,7 @@ def reescribir_html(s, copiadas):
     s = re.sub(r'url\((["\']?)(/(?!/|ep-prueba/)[^)"\']+)\1\)', lambda m: 'url(%s%s%s)' % (m.group(1), BASE + m.group(2), m.group(1)), s)
     # marca de copia de prueba y capa de cambios
     cabeza = ('<meta name="robots" content="noindex, nofollow">\n'
+              '<script>window.dataLayer=[];function gtag(){}function fbq(){}</script>\n'
               '<link rel="stylesheet" href="%s/ep-cambios/ep-cambios.css">\n' % PREFIX)
     s = re.sub(r'</head>', cabeza + '</head>', s, count=1, flags=re.I)
     pie = ('<script src="%s/ep-cambios/ep-cambios.js"></script>\n'
