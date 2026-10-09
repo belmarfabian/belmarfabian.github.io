@@ -25,6 +25,11 @@ en gris y sin enlace. «Etiqueta head»: 43.436 caracteres. CSS adicional: 162.6
 - Para abrir el juego cuando salga: en la «Etiqueta head», borrar la línea
   «pronto: 'Próximamente'» del bloque FIJO, o pedirlo y se hace desde el repositorio.
 
+Pasada la medianoche (9 de octubre) cambió el destacado de la portada: a la izquierda va la
+publicación más reciente sin contar el Monitor; a la derecha, en una columna, el Monitor
+(fijo, MONITOR en el script) y debajo el juego (FIJO). Abajo sigue la fila de tres.
+«Etiqueta head»: 44.897 caracteres. CSS adicional: 167.611 caracteres.
+
 PARA ESCONDERLA DE NUEVO A LOS VISITANTES (sin borrar nada):
 En la «Etiqueta head», cambiar «var SOLO_EDITORES = false;» por «var SOLO_EDITORES = true;».
 Apretar «Update». Los visitantes vuelven a ver el sitio antiguo; con sesión se sigue viendo la nueva.
