@@ -283,7 +283,8 @@
   })();
 
   // copia de prueba: interruptor entre el estilo CEP y el diseño actual
-  (function () {
+  // (el aviso va después de este script en el HTML: se espera a que exista)
+  function interruptor() {
     var aviso = $('.ep-aviso-prueba');
     if (!aviso || $('.ep-interruptor', aviso)) return;
     var cep = document.documentElement.classList.contains('ep-cep');
@@ -294,6 +295,8 @@
     a.style.cssText = 'color:#9fc3ea;margin-left:2px';
     aviso.appendChild(document.createTextNode(' · '));
     aviso.appendChild(a);
-  })();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', interruptor);
+  else interruptor();
 })();
 /* ===== EP CAPA DE CAMBIOS: FIN ===== */
