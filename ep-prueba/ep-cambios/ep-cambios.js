@@ -287,4 +287,50 @@
 
   // (el estilo CEP queda como prueba aparte: ?estilo=cep)
 })();
+
+/* 11. Portada: índice del último número junto a su tapa.
+   Lee la página del número (misma dirección del botón «Ver más») y muestra
+   artículos y notas con autores; las reseñas, como un conteo. */
+(function () {
+  'use strict';
+  var caja = document.querySelector('#home .section-last-number .contentUltimoNumero');
+  var boton = caja && caja.querySelector('a.suscribete');
+  if (!boton || caja.querySelector('.ep-indice')) return;
+  var url = boton.getAttribute('href');
+  var limpio = function (t) { return (t || '').replace(/\s+/g, ' ').trim(); };
+  var esc = function (t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+  fetch(url, { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
+    if (!html) return;
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var secciones = [];
+    Array.prototype.forEach.call(doc.querySelectorAll('#single-numero h3.title'), function (h3) {
+      var sec = h3.closest('.section') || h3.parentNode;
+      var items = Array.prototype.filter.call(sec.querySelectorAll('.caja-articulo-listado'), function (c) {
+        return !c.closest('.slick-cloned') && c.querySelector('h4');
+      }).map(function (c) {
+        var a = c.querySelector('a[href*="article/view"]');
+        return {
+          titulo: limpio(c.querySelector('h4').textContent),
+          url: a ? a.getAttribute('href') : url,
+          autores: Array.prototype.map.call(c.querySelectorAll('.autor .name'), function (n) { return limpio(n.textContent).replace(/,$/, ''); }).join(', ')
+        };
+      });
+      if (items.length) secciones.push({ nombre: limpio(h3.textContent), items: items });
+    });
+    if (!secciones.length) return;
+    var partes = [], resto = [];
+    secciones.forEach(function (s) {
+      if (/rese/i.test(s.nombre)) { resto.push(s.items.length + ' ' + (s.items.length === 1 ? 'reseña' : 'reseñas')); return; }
+      partes.push('<li class="ep-indice__sec">' + esc(s.nombre) + '</li>' + s.items.map(function (it) {
+        return '<li><a href="' + it.url + '"><b>' + esc(it.titulo) + '</b><span>' + esc(it.autores) + '</span></a></li>';
+      }).join(''));
+    });
+    var div = document.createElement('div');
+    div.className = 'ep-indice';
+    div.innerHTML = '<p class="ep-indice__titulo">En este número</p><ul>' + partes.join('') + '</ul>' +
+      (resto.length ? '<p class="ep-indice__mas">Además, ' + resto.join(' y ') + '.</p>' : '');
+    caja.insertBefore(div, boton.closest('.botton-group') || boton);
+    caja.closest('.last-number').classList.add('ep-con-indice');
+  }).catch(function () {});
+})();
 /* ===== EP CAPA DE CAMBIOS: FIN ===== */
