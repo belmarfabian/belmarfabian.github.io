@@ -601,6 +601,48 @@ textarea:focus-visible,
 /* ===== fin índice compacto ===== */
 
 /* ===================================================================
+   15. ARCHIVO DE NÚMEROS EN UNA PÁGINA
+   Antes: 8 páginas de 24 tapas grandes. Ahora: los 185 números con filtro
+   por década y vista de tapas (seis por fila) o lista por año.
+   =================================================================== */
+html.ep-archivo-listo .container.archives .box-other-numbers,
+html.ep-archivo-listo .container.archives .cmp_pagination { display: none !important; }
+.ep-archivo { max-width: 1240px; margin: 0 auto 60px; padding: 0 24px; box-sizing: border-box; }
+.ep-archivo__barra { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin: 0 0 28px; }
+.ep-archivo__decadas, .ep-archivo__vistas { display: flex; flex-wrap: wrap; gap: 6px; }
+.ep-archivo button {
+  padding: 8px 16px;
+  border: 1px solid #1B1C1E;
+  border-radius: 999px;
+  background: #fff;
+  color: #1B1C1E;
+  font: 600 13px/1 Montserrat, sans-serif;
+  cursor: pointer;
+}
+.ep-archivo button[aria-pressed="true"] { background: #FFD200; border-color: #FFD200; }
+.ep-archivo__vistas { margin-left: auto; }
+.ep-archivo__cuenta { flex-basis: 100%; margin: 0; font: 500 13px Montserrat, sans-serif; color: #707073; }
+.ep-archivo__tapas { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 28px 22px; }
+.ep-archivo__tapas a { display: block; color: #1B1C1E; text-decoration: none; }
+.ep-archivo__tapas img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 10px; box-shadow: 0 6px 16px rgba(0, 0, 0, .14); background: #e9e9e9; }
+.ep-archivo__tapas b { display: block; margin-top: 10px; font: 700 16px/1.2 "DM Sans", sans-serif; }
+.ep-archivo__tapas span { font: 500 12.5px Montserrat, sans-serif; color: #707073; }
+.ep-archivo__tapas a:hover b { text-decoration: underline; text-underline-offset: 3px; }
+.ep-archivo__lista { border-top: 1px solid #ddd; }
+.ep-archivo__anio { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid #ddd; }
+.ep-archivo__anio > b { font: 700 18px/1.4 "DM Sans", sans-serif; }
+.ep-archivo__anio > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.ep-archivo__anio a { padding: 6px 12px; border-radius: 999px; background: #fff; border: 1px solid #ddd; color: #1B1C1E; font: 600 13px Montserrat, sans-serif; text-decoration: none; }
+.ep-archivo__anio a:hover { border-color: #1B1C1E; }
+@media (max-width: 1023px) { .ep-archivo__tapas { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  .ep-archivo__tapas { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 12px; }
+  .ep-archivo__vistas { margin-left: 0; }
+  .ep-archivo__anio { grid-template-columns: 56px minmax(0, 1fr); }
+}
+/* ===== fin archivo ===== */
+
+/* ===================================================================
    9. ESTILO CEP
    El lenguaje del sitio nuevo del CEP (prototipo cep-rediseno) sobre la revista:
    fondo blanco, Circe en titulares, Montserrat en texto, Libre Baskerville en

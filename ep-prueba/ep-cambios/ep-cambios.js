@@ -345,4 +345,99 @@
     a.classList.add('ep-rss'); a.setAttribute('data-nombre', n); a.setAttribute('aria-label', 'Fuente ' + n + ' del número actual');
   });
 })();
+
+/* 15. Archivo de números: los 185 números en una sola página, con filtro por
+   década y dos vistas (tapas o lista por año). Lee las páginas del archivo
+   (1 a 8) y arma la grilla; si algo falla, queda el archivo paginado de siempre. */
+(function () {
+  'use strict';
+  var m = location.pathname.match(/^(.*\/issue\/archive)(?:\/(\d+))?\/?$/);
+  var caja = document.querySelector('.container.archives .box-other-numbers');
+  if (!m || !caja) return;
+  var base = m[1];
+  var nPag = document.querySelectorAll('.cmp_pagination .content__pages ul li').length || 1;
+  var limpio = function (t) { return (t || '').replace(/\s+/g, ' ').trim(); };
+  var esc = function (t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+  function leer(doc) {
+    return Array.prototype.map.call(doc.querySelectorAll('.container.archives .box-other-numbers a.link'), function (a) {
+      var img = a.querySelector('img');
+      return {
+        url: a.getAttribute('href'),
+        num: (function (t) {
+          // 001, 002… son números especiales; 01 es el volumen Online First
+          var d = (t.match(/(\d+)\s*$/) || [])[1] || '';
+          if (/^00\d$/.test(d)) return 'Especial ' + parseInt(d, 10);
+          if (/^0\d$/.test(d)) return 'Online First';
+          return t;
+        })(limpio((a.querySelector('.number') || {}).textContent)),
+        anio: parseInt(limpio((a.querySelector('.year') || {}).textContent), 10) || 0,
+        tapa: img ? img.getAttribute('src').trim() : ''
+      };
+    });
+  }
+  var paginas = [];
+  for (var i = 1; i <= nPag; i++) paginas.push(i);
+  Promise.all(paginas.map(function (k) {
+    var copia = location.pathname.indexOf('/ep-prueba/') === 0;
+    var dir = k === 1 ? base + (copia ? '/' : '') : base + '/' + k + (copia ? '/' : '');
+    return fetch(dir, { credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.text() : ''; })
+      .then(function (h) { return h ? leer(new DOMParser().parseFromString(h, 'text/html')) : []; })
+      .catch(function () { return []; });
+  })).then(function (listas) {
+    var vistos = {}, todos = [];
+    listas.forEach(function (l) { l.forEach(function (n) { if (!vistos[n.url]) { vistos[n.url] = 1; todos.push(n); } }); });
+    if (todos.length < 30) return;
+    // los números especiales (001, 002…) quedan en su año, no al final
+    todos = todos.map(function (n, i) { n.i = i; return n; }).sort(function (a, b) { return (b.anio - a.anio) || (a.i - b.i); });
+    var decadas = [];
+    todos.forEach(function (n) { var d = Math.floor(n.anio / 10) * 10; if (n.anio && decadas.indexOf(d) < 0) decadas.push(d); });
+    decadas.sort(function (a, b) { return b - a; });
+    var estado = { decada: decadas[0], vista: 'tapas' };
+    var raiz = document.createElement('div');
+    raiz.className = 'ep-archivo';
+    raiz.innerHTML =
+      '<div class="ep-archivo__barra">' +
+        '<div class="ep-archivo__decadas" role="group" aria-label="Década">' +
+          decadas.map(function (d) { return '<button type="button" data-decada="' + d + '">' + d + 's</button>'; }).join('') +
+          '<button type="button" data-decada="todas">Todos</button>' +
+        '</div>' +
+        '<div class="ep-archivo__vistas" role="group" aria-label="Vista">' +
+          '<button type="button" data-vista="tapas">Tapas</button><button type="button" data-vista="lista">Lista</button>' +
+        '</div>' +
+        '<p class="ep-archivo__cuenta" aria-live="polite"></p>' +
+      '</div><div class="ep-archivo__cuerpo"></div>';
+    var cuerpo = raiz.querySelector('.ep-archivo__cuerpo');
+    function pintar() {
+      var sel = todos.filter(function (n) { return estado.decada === 'todas' || Math.floor(n.anio / 10) * 10 === estado.decada; });
+      Array.prototype.forEach.call(raiz.querySelectorAll('[data-decada]'), function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-decada') === String(estado.decada))); });
+      Array.prototype.forEach.call(raiz.querySelectorAll('[data-vista]'), function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-vista') === estado.vista)); });
+      raiz.querySelector('.ep-archivo__cuenta').textContent = sel.length + (sel.length === 1 ? ' número' : ' números');
+      if (estado.vista === 'tapas') {
+        cuerpo.className = 'ep-archivo__cuerpo ep-archivo__tapas';
+        cuerpo.innerHTML = sel.map(function (n, i) {
+          return '<a href="' + n.url + '"><img ' + (i > 17 ? 'loading="lazy" ' : '') + 'alt="" src="' + n.tapa + '"><b>' + esc(n.num) + '</b><span>' + n.anio + '</span></a>';
+        }).join('');
+      } else {
+        var porAnio = {};
+        sel.forEach(function (n) { (porAnio[n.anio] = porAnio[n.anio] || []).push(n); });
+        cuerpo.className = 'ep-archivo__cuerpo ep-archivo__lista';
+        cuerpo.innerHTML = Object.keys(porAnio).sort(function (a, b) { return b - a; }).map(function (a) {
+          return '<div class="ep-archivo__anio"><b>' + a + '</b><div>' + porAnio[a].map(function (n) {
+            return '<a href="' + n.url + '">' + esc(n.num) + '</a>';
+          }).join('') + '</div></div>';
+        }).join('');
+      }
+    }
+    raiz.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      if (b.hasAttribute('data-decada')) { var d = b.getAttribute('data-decada'); estado.decada = d === 'todas' ? 'todas' : parseInt(d, 10); }
+      if (b.hasAttribute('data-vista')) estado.vista = b.getAttribute('data-vista');
+      pintar();
+    });
+    caja.parentNode.insertBefore(raiz, caja);
+    document.documentElement.classList.add('ep-archivo-listo');
+    pintar();
+  });
+})();
 /* ===== EP CAPA DE CAMBIOS: FIN ===== */
