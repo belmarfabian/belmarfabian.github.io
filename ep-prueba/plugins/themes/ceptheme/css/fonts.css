@@ -1,0 +1,192 @@
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro-BoldItalic.woff2') format('woff2'),
+        url('fonts/ElementalSansPro-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro.woff2') format('woff2'),
+        url('fonts/ElementalSansPro.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro-Bold.woff2') format('woff2'),
+        url('fonts/ElementalSansPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra-LightItal';
+    src: url('fonts/ElementalSansProExtra-LightItal.woff2') format('woff2'),
+        url('fonts/ElementalSansProExtra-LightItal.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra';
+    src: url('fonts/ElementalSansProExtra-Light.woff2') format('woff2'),
+        url('fonts/ElementalSansProExtra-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra-BoldItali';
+    src: url('fonts/ElementalSansProExtra-BoldItali.woff2') format('woff2'),
+        url('fonts/ElementalSansProExtra-BoldItali.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra';
+    src: url('fonts/ElementalSansProExtra-Bold.woff2') format('woff2'),
+        url('fonts/ElementalSansProExtra-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro-Italic.woff2') format('woff2'),
+        url('fonts/ElementalSansPro-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra';
+    src: url('fonts/ElementalSansProExtra-Bold.woff2') format('woff2'),
+        url('fonts/ElementalSansProExtra-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro-Italic.woff2') format('woff2'),
+        url('fonts/ElementalSansPro-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro-Bold.woff2') format('woff2'),
+        url('fonts/ElementalSansPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro.woff2') format('woff2'),
+        url('fonts/ElementalSansPro.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra';
+    src: url('fonts/ElementalSansProExtra-Light.woff2') format('woff2'),
+        url('fonts/ElementalSansProExtra-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra-BoldItali';
+    src: url('fonts/ElementalSansProExtra-BoldItali.woff2') format('woff2'),
+        url('fonts/ElementalSansProExtra-BoldItali.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra-LightItal';
+    src: url('fonts/ElementalSansProExtra-LightItal.woff2') format('woff2'),
+        url('fonts/ElementalSansProExtra-LightItal.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro-BoldItalic.woff2') format('woff2'),
+        url('fonts/ElementalSansPro-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro-Italic.woff2') format('woff2'),
+        url('fonts/ElementalSansPro-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra';
+    src: url('fonts/ElementalSansProExtra-Light.woff2') format('woff2'),
+        url('fonts/ElementalSansProExtra-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra-LightItal';
+    src: url('fonts/ElementalSansProExtra-LightItal.woff2') format('woff2'),
+        url('fonts/ElementalSansProExtra-LightItal.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro-Bold.woff2') format('woff2'),
+        url('fonts/ElementalSansPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra';
+    src: url('ElementalSansProExtra-Bold.woff2') format('woff2'),
+        url('ElementalSansProExtra-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansProExtra-BoldItali';
+    src: url('fonts/ElementalSansProExtra-BoldItali.woff2') format('woff2'),
+        url('fonts/ElementalSansProExtra-BoldItali.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro.woff2') format('woff2'),
+        url('fonts/ElementalSansPro.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ElementalSansPro';
+    src: url('fonts/ElementalSansPro-BoldItalic.woff2') format('woff2'),
+        url('fonts/ElementalSansPro-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
