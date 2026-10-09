@@ -2,9 +2,10 @@
    Copia de prueba de estudiospublicos.cl (belmarfabian.github.io/ep-prueba/).
    Aquí van los cambios de diseño. La copia carga este archivo al final del <head>,
    así que cualquier regla de aquí pisa al tema original (ceptheme).
+   Cada bloque lleva un número que coincide con ep-cambios.js.
    ===================================== */
 
-/* Aviso de formulario desactivado en la copia */
+/* 0. Aviso de formulario desactivado en la copia (no es una mejora: solo para la prueba) */
 .ep-form-desactivado {
   margin: 8px 0 0;
   padding: 8px 12px;
@@ -14,5 +15,176 @@
   font-size: 13px;
   line-height: 1.35;
 }
+
+/* 1. Accesibilidad: foco visible para quien navega con teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #1A5FD0 !important;
+  outline-offset: 2px;
+}
+
+/* 2. Tarjetas (Online First, Selección del Editor, página Online First): título y autores completos.
+      El tema cortaba los títulos a tres líneas y los autores a una, con «…». */
+.featured-article .details p,
+.of-card .of-title {
+  -webkit-line-clamp: unset !important;
+  display: block !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+.featured-article .autor,
+.of-card .of-author {
+  -webkit-line-clamp: unset !important;
+  display: block !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  margin-bottom: 6px;
+}
+
+/* 3. Portada en celular: la presentación de la revista ocupaba dos pantallas.
+      Se ve el primer párrafo y un botón para leer el resto (ver ep-cambios.js). */
+.ep-intro-mas { display: inline; }
+.ep-leer-mas { display: none; }
+@media (max-width: 767px) {
+  .slider-1 .description.ep-intro-corta .ep-intro-mas { display: none; }
+  .slider-1 .description .ep-leer-mas {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 9px 18px;
+    border: 1px solid rgba(255, 255, 255, .7);
+    border-radius: 999px;
+    background: transparent;
+    color: #fff;
+    font: 600 13px/1 Montserrat, sans-serif;
+    letter-spacing: .02em;
+    cursor: pointer;
+  }
+}
+
+/* 4. Portada en celular: los números anteriores en dos columnas.
+      Antes eran cuatro tarjetas a pantalla completa, una debajo de otra. */
+@media (max-width: 767px) {
+  /* el último número conserva su portada grande, con alto propio
+     (en el tema dependía del alto del bloque de números anteriores) */
+  #home .section-last-number .box-last-number,
+  #home .section-last-number .box-last-number .last-number { height: auto !important; }
+  #home .section-last-number .box-last-number .last-number .last-number-image .number-img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .section-last-number #secound-other-numbers {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: none !important;
+    grid-auto-rows: auto !important;
+    gap: 64px 14px !important;
+    margin-top: 110px !important;
+  }
+  #home .section-last-number #secound-other-numbers .link { min-width: 0; min-height: 0 !important; }
+  .section-last-number #secound-other-numbers .other-number {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .section-last-number #secound-other-numbers .other-number .info { width: 100% !important; }
+  .section-last-number #secound-other-numbers .img-number {
+    width: 80% !important;
+    height: auto !important;
+    margin: -44px auto 0 !important;
+  }
+  .section-last-number #secound-other-numbers .info-number { padding: 12px 14px 16px !important; }
+  .section-last-number #secound-other-numbers .info-number .number { font-size: 18px !important; }
+}
+
+/* 5. Barra lateral: el formulario de inicio de sesión queda plegado.
+      Lo usan suscriptores y editores; para quien lee, la revista va primero. */
+.box-login.ep-plegado #form-login { display: none; }
+.ep-acceso {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 4px 0 6px;
+  padding: 11px 16px;
+  border: 1px solid #1B1C1E;
+  border-radius: 999px;
+  background: #fff;
+  color: #1B1C1E;
+  font: 600 13px/1.2 Montserrat, sans-serif;
+  letter-spacing: .02em;
+  cursor: pointer;
+}
+.ep-acceso:hover { background: #FFD200; border-color: #FFD200; }
+.ep-acceso::after { content: "▾"; font-size: 12px; transition: transform .2s; }
+.box-login:not(.ep-plegado) .ep-acceso::after { transform: rotate(180deg); }
+
+/* 6. Artículo: autores bajo el título, y un resumen que se lee mejor */
+.ep-autores {
+  margin: 12px 0 0;
+  font: 500 19px/1.35 "DM Sans", sans-serif;
+  color: inherit;
+}
+#single-numero.article-details .content-section .title1 { margin-bottom: 0 !important; }
+@media (min-width: 768px) {
+  .ep-autores { margin-bottom: 34px; }
+}
+#single-numero.article-details .section-sidebar .section-article > .title {
+  text-align: left !important;
+  font-size: 36px !important;
+  line-height: 1.1 !important;
+}
+#single-numero.article-details .section-sidebar .section-article .details > .content {
+  max-width: 68ch;
+  font-size: 17px !important;
+  line-height: 1.7 !important;
+  color: #2B2B2B;
+}
+#single-numero.article-details .section-article .article-metadata {
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+#single-numero.article-details .section-article .article-metadata .keywords {
+  display: block;
+  margin-top: 10px;
+}
+
+/* 7. Número: los íconos de redes se salían de la cabecera (Instagram quedaba sobre el contenido) */
+#single-numero .main-section .social-networks {
+  top: auto !important;
+  bottom: 24px !important;
+}
+
+/* 8. Número: resumen bajo el título, con enlaces a cada sección */
+.ep-resumen-numero {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+.ep-resumen-numero li a,
+.ep-resumen-numero li span {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .92);
+  color: #1B1C1E;
+  font: 600 12.5px/1.2 Montserrat, sans-serif;
+  text-decoration: none;
+}
+.ep-resumen-numero li a:hover { background: #FFD200; }
+.ep-ancla { scroll-margin-top: 120px; }
 
 /* ===== EP CAPA DE CAMBIOS: FIN ===== */
