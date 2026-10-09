@@ -199,5 +199,101 @@
     window.addEventListener('resize', alinear);
     window.addEventListener('load', alinear);
   })();
+
+  /* 9. Estilo CEP: piezas que solo se ven con <html class="ep-cep"> */
+  function soloCep(tag, clase, html) {
+    var el = document.createElement(tag);
+    el.className = clase + ' ep-solo-cep';
+    if (html) el.innerHTML = html;
+    return el;
+  }
+  var INICIO = location.pathname.indexOf('/ep-prueba/') === 0 ? '/ep-prueba/' : '/index.php/cep';
+
+  // Indicadores de la revista para la primera pantalla.
+  // Fuente de Scopus: nota editorial «Estudios Públicos en Scopus», N° 182 (2026):
+  // aceptada en marzo de 2026, con cobertura retroactiva desde 2022.
+  // Cuartil SJR, CiteScore y factor de impacto: aún no hay cifras publicadas
+  // (SCImago no lista la revista; la revista no declara Web of Science).
+  // Cuando existan, se completan aquí y aparecen solas: { valor, detalle, fuente }.
+  var INDICADORES = {
+    cuartil: null,    // ej. { valor: 'Q2', detalle: 'SJR 2026 · Ciencias Sociales', fuente: 'https://www.scimagojr.com/...' }
+    citescore: null,  // ej. { valor: '1,2', detalle: 'CiteScore 2026', fuente: 'https://www.scopus.com/sourceid/...' }
+    impacto: null     // ej. { valor: '0,8', detalle: 'JIF 2026 (JCR)', fuente: 'https://jcr.clarivate.com/...' }
+  };
+
+  // portada: antetítulo, sello de Scopus y datos de la revista, como en el sitio del CEP
+  (function () {
+    var cont = $('#home .slider-1 .content');
+    var titulo = cont && $('.title', cont);
+    if (!titulo || $('.ep-ceja', cont)) return;
+    titulo.parentNode.insertBefore(soloCep('p', 'ep-ceja', 'La revista del CEP · desde 1980'), titulo);
+    // sin cifra publicada, cada indicador queda como espacio reservado («—»)
+    var ETIQUETAS = { cuartil: 'Cuartil SJR', citescore: 'CiteScore', impacto: 'Factor de impacto' };
+    var metricas = ['cuartil', 'citescore', 'impacto'].map(function (k) {
+      var m = INDICADORES[k];
+      if (!m) return '<span class="ep-metrica ep-metrica--pendiente" title="Por completar"><b>—</b>' + ETIQUETAS[k] + '</span>';
+      return '<a class="ep-metrica" href="' + m.fuente + '" rel="noopener"><b>' + m.valor + '</b>' + m.detalle + '</a>';
+    }).join('');
+    var sello = soloCep('div', 'ep-indexada',
+      '<a class="ep-indexada__sello" href="' + INICIO + (INICIO.slice(-1) === '/' ? 'indexaciones/' : '/indexaciones') + '">' +
+        '<span class="ep-indexada__marca">Scopus</span>' +
+        '<span class="ep-indexada__texto"><b>Indexada en Scopus</b>desde 2026 · cobertura desde 2022</span>' +
+      '</a><div class="ep-metricas">' + metricas + '</div>');
+    titulo.parentNode.insertBefore(sello, titulo.nextSibling);
+    var datos = soloCep('ul', 'ep-datos',
+      '<li><b>Trimestral</b>periodicidad</li>' +
+      '<li><b>Arbitrada</b>revisión por pares</li>' +
+      '<li><b>Acceso abierto</b>ISSN 0718-3089</li>' +
+      '<li><b>Español e inglés</b>idiomas</li>');
+    cont.appendChild(datos);
+  })();
+
+  // número y artículo: migas de pan
+  (function () {
+    var cont = $('#single-numero');
+    if (!cont || $('.ep-migas', cont)) return;
+    var partes = ['<a href="' + INICIO + '">Inicio</a>', '<a href="' + INICIO + (INICIO.slice(-1) === '/' ? '' : '/') + 'issue/archive' + (INICIO.slice(-1) === '/' ? '/' : '') + '">Números</a>'];
+    var destino;
+    if (cont.classList.contains('article-details')) {
+      var volver = $$('a, button', cont).filter(function (a) { return /volver al volumen/i.test(texto(a)); })[0];
+      var hrefNum = volver && (volver.getAttribute('href') || volver.getAttribute('data-href'));
+      var cita = texto($('.csl-entry', cont));
+      var num = (cita.match(/Estudios Públicos\.?\s*(\d{1,3})\s*\(/) || [])[1];
+      if (hrefNum && num) partes.push('<a href="' + hrefNum + '">N° ' + num + '</a>');
+      destino = $('.content-section', cont);
+      if (destino) destino.insertBefore(soloCep('p', 'ep-migas', partes.join('<span>›</span>')), destino.firstChild);
+    } else {
+      var caja = $('.title-right-box', cont);
+      if (caja) {
+        caja.insertBefore(soloCep('p', 'ep-migas', partes.join('<span>›</span>')), caja.firstChild);
+        var h2 = $('.title1', caja);
+        if (h2) h2.parentNode.insertBefore(soloCep('p', 'ep-ceja', 'Estudios Públicos'), h2);
+      }
+    }
+  })();
+
+  // pie: las redes de la revista (en estilo CEP salen de la cabecera)
+  (function () {
+    var col = $('footer .widget-contact');
+    if (!col || $('.ep-redes-pie', col)) return;
+    col.appendChild(soloCep('ul', 'ep-redes-pie',
+      '<li><a href="https://www.facebook.com/profile.php?id=100072377182191" rel="noopener">Facebook</a></li>' +
+      '<li><a href="https://x.com/EstPublicos" rel="noopener">X · @EstPublicos</a></li>' +
+      '<li><a href="https://www.instagram.com/estudiospublicos/" rel="noopener">Instagram</a></li>'));
+  })();
+
+  // copia de prueba: interruptor entre el estilo CEP y el diseño actual
+  (function () {
+    var aviso = $('.ep-aviso-prueba');
+    if (!aviso || $('.ep-interruptor', aviso)) return;
+    var cep = document.documentElement.classList.contains('ep-cep');
+    var a = document.createElement('a');
+    a.className = 'ep-interruptor';
+    a.href = location.pathname + '?estilo=' + (cep ? 'actual' : 'cep') + location.hash;
+    a.textContent = cep ? 'ver diseño actual' : 'ver estilo CEP';
+    a.style.cssText = 'color:#9fc3ea;margin-left:2px';
+    aviso.appendChild(document.createTextNode(' · '));
+    aviso.appendChild(a);
+  })();
 })();
 /* ===== EP CAPA DE CAMBIOS: FIN ===== */

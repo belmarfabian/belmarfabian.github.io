@@ -196,6 +196,10 @@ def reescribir_html(s, copiadas):
     # marca de copia de prueba y capa de cambios
     cabeza = ('<meta name="robots" content="noindex, nofollow">\n'
               '<script>window.dataLayer=[];function gtag(){}function fbq(){}</script>\n'
+              # estilo CEP por defecto; ?estilo=actual muestra el diseño de hoy (se recuerda en el navegador)
+              '<script>(function(){var e="cep";try{var m=location.search.match(/[?&]estilo=(cep|actual)/);'
+              'if(m){e=m[1];localStorage.setItem("ep-estilo",e)}else{e=localStorage.getItem("ep-estilo")||"cep"}}catch(x){}'
+              'if(e==="cep")document.documentElement.classList.add("ep-cep")})();</script>\n'
               '<link rel="stylesheet" href="%s/ep-cambios/ep-cambios.css">\n' % PREFIX)
     s = re.sub(r'</head>', cabeza + '</head>', s, count=1, flags=re.I)
     pie = ('<script src="%s/ep-cambios/ep-cambios.js"></script>\n'
