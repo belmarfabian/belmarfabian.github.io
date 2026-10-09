@@ -146,7 +146,7 @@
     lee: ['Notas de investigación', 'not'],
     mira: ['Columnas', 'col']
   };
-  // Tarjeta grande fija, al lado de la publicación más reciente (diseño b).
+  // Tarjeta fija de la columna derecha, bajo el Monitor (diseño b).
   // Para sacarla de la portada basta con dejar: var FIJO = null;
   // Con «pronto», la tarjeta queda en gris, sin enlace y con ese aviso en vez
   // del botón. Para abrir el juego cuando salga, borrar la línea «pronto».
@@ -169,6 +169,14 @@
     for (var k in IMAGENES) if (link.indexOf(k) >= 0) return IMAGENES[k];
     return '';
   }
+  // Diseño b: el Monitor Legislativo va fijo en la columna derecha, sobre la
+  // tarjeta FIJO. A la izquierda queda la publicación más reciente sin contarlo.
+  var MONITOR = 'monitor-legislativo-las-votaciones-del-congreso-en-visualizaciones';
+  var MONITOR_FIJO = {  // por si su tarjeta ya no está en la portada
+    s: SERIES.analiza, link: 'https://c22cepchile.cl/analisis/' + MONITOR + '/', num: 'A.',
+    title: 'Monitor Legislativo: las votaciones del Congreso en visualizaciones',
+    img: IMAGENES[MONITOR], date: new Date(2026, 7, 19), names: [], fotos: []
+  };
   function imagenes(root) {  // las tarjetas del Monitor, con la misma foto
     Object.keys(IMAGENES).forEach(function (k) {
       (root || document).querySelectorAll('a.card[href*="' + k + '"] img.photo').forEach(function (i) {
@@ -228,29 +236,39 @@
       '<div><p class="c22-dest__serie">' + esc(it.s[0]) + (it.date ? ' <span>· ' + fechaTxt(it.date) + '</span>' : '') + '</p>' +
       '<h3><a href="' + esc(it.link) + '">' + esc(it.title) + '</a></h3></div></article>';
   }
+  function itemDe(card, s) {
+    var pc = card.querySelector('.photo-container'), img = card.querySelector('img.photo');
+    var num = pc ? getComputedStyle(pc, '::after').content : '';
+    num = /^["']/.test(num || '') ? num.slice(1, -1) : '';
+    var link = card.getAttribute('href');
+    return {
+      s: s, link: link, num: num,
+      img: imagenDe(link) || (img && (img.getAttribute('src') || '').trim()) || '',
+      title: (card.querySelector('.title') || card).textContent.trim(),
+      date: fechaDe(card.querySelector('.date')),
+      names: [].map.call(card.querySelectorAll('.names li'), function (li) { return li.textContent.trim(); }),
+      fotos: fotosDe(card)
+    };
+  }
   temprano(function () {
     if (!document.body.classList.contains('home')) return;
     var hero = document.querySelector('main > section.slider-1');
     if (!hero || document.querySelector('.c22-dest')) return;
+    var conCol = DISENO === 'b';  // columna derecha: el Monitor y la tarjeta fija
     var items = [];
     Object.keys(SERIES).forEach(function (id) {
-      var card = document.querySelector('#' + id + ' a.card:not(.slick-cloned)');
-      if (!card) return;
-      var pc = card.querySelector('.photo-container'), img = card.querySelector('img.photo');
-      var num = pc ? getComputedStyle(pc, '::after').content : '';
-      num = /^["']/.test(num || '') ? num.slice(1, -1) : '';
-      var link = card.getAttribute('href');
-      items.push({
-        s: SERIES[id], link: link, num: num,
-        img: imagenDe(link) || (img && (img.getAttribute('src') || '').trim()) || '',
-        title: (card.querySelector('.title') || card).textContent.trim(),
-        date: fechaDe(card.querySelector('.date')),
-        names: [].map.call(card.querySelectorAll('.names li'), function (li) { return li.textContent.trim(); }),
-        fotos: fotosDe(card)
-      });
+      var card = [].filter.call(document.querySelectorAll('#' + id + ' a.card:not(.slick-cloned)'), function (c) {
+        return !conCol || (c.getAttribute('href') || '').indexOf(MONITOR) < 0;
+      })[0];
+      if (card) items.push(itemDe(card, SERIES[id]));
     });
     if (items.length < 2) return;
     items.sort(function (a, b) { return (b.date || 0) - (a.date || 0); });
+    var mon = null;
+    if (conCol) {
+      var mc = document.querySelector('a.card[href*="' + MONITOR + '"]:not(.slick-cloned)');
+      mon = mc ? itemDe(mc, SERIES.analiza) : MONITOR_FIJO;
+    }
 
     var sec = document.createElement('section');
     sec.className = 'c22-dest c22-dest--' + DISENO;
@@ -262,9 +280,14 @@
       }).join('') + '</div><div class="c22-dest__side"></div>' +
         '<button type="button" class="c22-dest__pause">Pausar</button>';
     } else {
-      var fijo = DISENO === 'b' && FIJO ? grande(FIJO) : '';
-      if (fijo) sec.classList.add('c22-dest--dos');
-      sec.innerHTML = grande(items[0]) + fijo + '<div class="c22-dest__side">' + items.slice(1, 4).map(chico).join('') + '</div>';
+      // a la izquierda lo más reciente; a la derecha, en una columna, el Monitor y la tarjeta fija
+      var col = conCol ? [mon, FIJO].filter(Boolean) : [];
+      if (col.length) sec.classList.add('c22-dest--col');
+      sec.innerHTML = grande(items[0]) +
+        (col.length ? '<div class="c22-dest__col">' + col.map(function (it) {
+          return grande(it, it === mon ? ' data-fijo="monitor"' : '');
+        }).join('') + '</div>' : '') +
+        '<div class="c22-dest__side">' + items.slice(1, 4).map(chico).join('') + '</div>';
     }
     hero.parentNode.insertBefore(sec, hero);
     // el banner queda oculto: si el tema todavía no lo arma, ya no lo arma
@@ -282,7 +305,12 @@
       if (pedidos[k]) return; pedidos[k] = 1;
       resumenDe(items[k].link, function (t) { bigs[DISENO === 'c' ? k : 0].querySelector('.c22-dest__resumen').textContent = t; });
     }
-    if (DISENO !== 'c') { resumen(0); return; }
+    if (DISENO !== 'c') {
+      resumen(0);
+      var rm = mon && sec.querySelector('[data-fijo="monitor"] .c22-dest__resumen');
+      if (rm) resumenDe(mon.link, function (t) { rm.textContent = t; });
+      return;
+    }
 
     // diseño c: el grande rota (8 s, fundido) y al lado quedan los otros tres;
     // al hacer clic en uno chico pasa a grande. Pausa con mouse, foco o botón.
