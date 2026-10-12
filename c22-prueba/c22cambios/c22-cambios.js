@@ -105,8 +105,16 @@
     // sin AOS, cada elemento animado queda en su estado final
     document.querySelectorAll('[data-aos]').forEach(function (e) { e.classList.add('aos-animate'); });
     fs.forEach(correr);
-    document.body.classList.add('c22-temprano');
+    // la portada se muestra cuando los resúmenes de las tarjetas grandes ya están
+    // (con caché local es inmediato); si la red tarda, no se espera más de 900 ms
+    mostrar.listo = true;
+    if (!mostrar.n) mostrar(); else setTimeout(mostrar, 900);
   });
+  function mostrar() {
+    if (mostrar.hecho) return;
+    mostrar.hecho = true;
+    document.body.classList.add('c22-temprano');
+  }
   function temprano(fn) {
     if (tempranos) tempranos.push(fn);
     else if (activo) correr(fn);
@@ -222,15 +230,28 @@
   }
   function fechaTxt(d) { return d ? d.getDate() + ' ' + MES[d.getMonth()] + ' ' + d.getFullYear() : ''; }
   function lista(xs) { return xs.length < 2 ? xs.join('') : xs.slice(0, -1).join(', ') + ' y ' + xs[xs.length - 1]; }
-  function resumenDe(link, cb) {
+  function resumenDe(link, cb, critico) {
+    var clave = 'c22r:' + link, guardado = '';
+    try { guardado = localStorage.getItem(clave) || ''; } catch (e) {}
+    if (guardado) cb(guardado);                       // de la visita anterior: sin esperar
     if (!window.fetch || !window.DOMParser) return;
+    var espera = critico && !guardado && !mostrar.hecho;
+    if (espera) mostrar.n = (mostrar.n || 0) + 1;
+    function fin() {
+      if (!espera) return;
+      espera = false; mostrar.n--;
+      if (mostrar.listo && !mostrar.n) mostrar();
+    }
     fetch(link, { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
       var doc = new DOMParser().parseFromString(html, 'text/html');
       var p = [].map.call(doc.querySelectorAll('article .wysiwyg p, section.wysiwyg p'), function (x) { return x.textContent.replace(/\s+/g, ' ').trim(); })
         .filter(function (t) { return t.length > 80; })[0];
-      if (!p) return;
-      cb(p.length > 280 ? p.slice(0, 280).replace(/\s+\S*$/, '') + '…' : p);
-    }).catch(function () {});
+      if (!p) return fin();
+      p = p.length > 280 ? p.slice(0, 280).replace(/\s+\S*$/, '') + '…' : p;
+      try { localStorage.setItem(clave, p); } catch (e) {}
+      if (p !== guardado) cb(p);
+      fin();
+    }).catch(fin);
   }
   // enlaces de la tarjeta fija: si va a otro sitio, se abre en una pestaña nueva
   function destino(it) { return it.externo ? ' target="_blank" rel="noopener"' : ''; }
@@ -333,11 +354,11 @@
     var pedidos = {};
     function resumen(k) {
       if (pedidos[k]) return; pedidos[k] = 1;
-      resumenDe(items[k].link, function (t) { bigs[k].querySelector('.c22-dest__resumen').textContent = t; });
+      resumenDe(items[k].link, function (t) { bigs[k].querySelector('.c22-dest__resumen').textContent = t; }, true);
     }
     if (DISENO !== 'c') {
       var rm = mon && sec.querySelector('[data-fijo="monitor"] .c22-dest__resumen');
-      if (rm) resumenDe(mon.link, function (t) { rm.textContent = t; });
+      if (rm) resumenDe(mon.link, function (t) { rm.textContent = t; }, true);
     }
 
     // el grande rota: el grande rota (8 s, fundido) y al lado quedan los otros tres;
@@ -376,6 +397,8 @@
     var st = document.createElement('style');
     st.id = 'c22-rota-css';
     st.textContent = 'body.c22-cambios .c22-dest--rota{ position: relative; }' +
+      '@keyframes c22-aparece{ from{ opacity: 0 } to{ opacity: 1 } }' +
+      'body.c22-cambios .c22-dest__resumen{ animation: c22-aparece .5s ease both; }' +
       'body.c22-cambios .c22-dest--rota > .c22-rota{ grid-row: 1 !important; grid-column: 1 !important; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }' +
       'body.c22-cambios .c22-dest--rota > .c22-rota.is-on{ opacity: 1; visibility: visible; transition: opacity .8s ease; }' +
       'body.c22-cambios .c22-dest--rota > .c22-dest__pause{ top: 12px; left: 12px; right: auto; z-index: 3; background: rgba(255,255,255,.92); }' +
