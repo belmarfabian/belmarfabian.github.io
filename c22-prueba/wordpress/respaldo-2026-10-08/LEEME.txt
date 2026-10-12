@@ -40,7 +40,8 @@ El 12 de octubre en la noche: el destacado grande de la portada rota cada 8 segu
 ilustración conceptual (columnas) o una ilustración abstracta (las 8 académicas); la tarjeta del
 Monitor usa la foto de su portada; las secciones llevan nombres con sustantivo (NOMBRES en el script).
 Las reglas de la rotación las agrega el propio script (<style id="c22-rota-css">). así que el CSS adicional
-no cambió. «Etiqueta head»: 49.246 caracteres. SHA-256: 9c53a08b4a156a44ad75b58091add4709ce54b289409f532748eab81b141c493.
+no cambió. Después: el destacado siempre parte con lo más reciente (sin contar el Monitor) y el círculo de trama de las cabeceras
+(Sobre C22, Personas…) se ve entero (oculto en móvil). «Etiqueta head»: 49.437 caracteres. SHA-256: 86745a388817d6f22c7feec3446910adab6d64aea2addcaef52946d6c6a12842.
 
 PARA ESCONDERLA DE NUEVO A LOS VISITANTES (sin borrar nada):
 En la «Etiqueta head», cambiar «var SOLO_EDITORES = false;» por «var SOLO_EDITORES = true;».

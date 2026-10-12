@@ -944,6 +944,9 @@ body.c22-cambios .c22-dest--b .c22-dest__small .c22-tag{ font-size: 10px; paddin
    .c22-listo); si algo falla, aparece igual a los 8 s. */
 body.page-template-plantilla-personas:not(.c22-listo) main > .wrap-xl:not(:first-child){ animation-delay: 8s; }
 /* ===== fin carga ===== */
+/* cabeceras de página: el círculo de trama se ve entero (antes lo recortaba la cabecera) */
+body.c22-cambios main section.page-header > .texture.texture{ width: 104px !important; height: 104px !important; top: 14px !important; right: 34px !important; opacity: .85 !important; }
+@media (max-width: 760px) { body.c22-cambios main section.page-header > .texture.texture{ display: none !important; } }
 /* ===== C22 CAPA DE CAMBIOS: FIN ===== */
 
 /* ===== C22 portada: el destacado grande rota (8 s, fundido) ===== */

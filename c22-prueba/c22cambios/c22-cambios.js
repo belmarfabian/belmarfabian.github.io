@@ -178,9 +178,8 @@
     'publicaciones/crisis/': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-crisis.jpg',
     'corruption-an-uneven-field-of-research': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-corrupcion.jpg'
   };
-  // El destacado grande rota: parte con PRINCIPAL y sigue con lo último de cada
+  // El destacado grande rota: parte con lo más reciente y sigue con lo último de cada
   // serie. Las de SECUNDARIAS no entran a la rotación (siguen en su fila).
-  var PRINCIPAL = 'ninez-en-campamentos-las-complejidades-de-un-desalojo';
   var SECUNDARIAS = ['estado-y-ninez-la-necesidad-de-un-aparato-publico-sensible-a-la-infancia'];
   function secundaria(href) { return SECUNDARIAS.some(function (k) { return (href || '').indexOf(k) >= 0; }); }
   function imagenDe(link) {
@@ -291,8 +290,7 @@
     });
     if (items.length < 2) return;
     items.sort(function (a, b) { return (b.date || 0) - (a.date || 0); });
-    // la principal va primero
-    items.sort(function (a, b) { return (b.link.indexOf(PRINCIPAL) >= 0) - (a.link.indexOf(PRINCIPAL) >= 0); });
+    // siempre parte con lo más reciente (sin contar el Monitor, que va fijo)
     var mon = null;
     if (conCol) {
       var mc = document.querySelector('a.card[href*="' + MONITOR + '"]:not(.slick-cloned)');
@@ -382,7 +380,9 @@
       'body.c22-cambios .c22-dest--rota > .c22-rota.is-on{ opacity: 1; visibility: visible; transition: opacity .8s ease; }' +
       'body.c22-cambios .c22-dest--rota > .c22-dest__pause{ top: 12px; left: 12px; right: auto; z-index: 3; background: rgba(255,255,255,.92); }' +
       'body.c22-cambios .c22-dest--rota .c22-dest__small{ cursor: pointer; }' +
-      '@media (prefers-reduced-motion: reduce) { body.c22-cambios .c22-dest--rota > .c22-rota{ transition: none; } }';
+      '@media (prefers-reduced-motion: reduce) { body.c22-cambios .c22-dest--rota > .c22-rota{ transition: none; } }' +
+      'body.c22-cambios main section.page-header > .texture.texture{ width: 104px !important; height: 104px !important; top: 14px !important; right: 34px !important; opacity: .85 !important; }' +
+      '@media (max-width: 760px) { body.c22-cambios main section.page-header > .texture.texture{ display: none !important; } }';
     (document.head || document.documentElement).appendChild(st);
   })();
 
