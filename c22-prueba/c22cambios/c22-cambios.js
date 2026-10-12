@@ -159,10 +159,21 @@
   };
   // Imágenes que conviene reemplazar mientras se cambian en WordPress
   // (imagen destacada de la publicación).
+  // Las columnas no llevan la cara del autor sino una foto conceptual del tema
+  // (Unsplash, licencia libre). El Monitor usa la foto de su portada.
   var IMAGENES = {
     'monitor-legislativo-las-votaciones-del-congreso-en-visualizaciones':
-      'https://static.cepchile.cl/uploads/c22/2026/08/16-054150_bp5j_c22-congreso-nacional.jpg'
+      'https://belmarfabian.github.io/visualizadores-camara-c22/assets/hero-gente.jpg',
+    'ninez-en-campamentos-las-complejidades-de-un-desalojo': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/col-campamentos.jpg',
+    'estado-y-ninez-la-necesidad-de-un-aparato-publico-sensible-a-la-infancia': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/col-estado-ninez.jpg',
+    'la-continuidad-de-nuestros-parques': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/col-parques.jpg',
+    'patrimonios-dinamicos-para-un-futuro-valioso': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/col-patrimonios.jpg'
   };
+  // El destacado grande rota: parte con PRINCIPAL y sigue con lo último de cada
+  // serie. Las de SECUNDARIAS no entran a la rotación (siguen en su fila).
+  var PRINCIPAL = 'ninez-en-campamentos-las-complejidades-de-un-desalojo';
+  var SECUNDARIAS = ['estado-y-ninez-la-necesidad-de-un-aparato-publico-sensible-a-la-infancia'];
+  function secundaria(href) { return SECUNDARIAS.some(function (k) { return (href || '').indexOf(k) >= 0; }); }
   function imagenDe(link) {
     for (var k in IMAGENES) if (link.indexOf(k) >= 0) return IMAGENES[k];
     return '';
@@ -177,8 +188,12 @@
   };
   function imagenes(root) {  // las tarjetas del Monitor, con la misma foto
     Object.keys(IMAGENES).forEach(function (k) {
-      (root || document).querySelectorAll('a.card[href*="' + k + '"] img.photo').forEach(function (i) {
-        if (i.getAttribute('src') !== IMAGENES[k]) { i.src = IMAGENES[k]; i.removeAttribute('srcset'); }
+      (root || document).querySelectorAll('a.card[href*="' + k + '"]').forEach(function (c) {
+        var pc = c.querySelector('.photo-container'), i = c.querySelector('img.photo');
+        if (!i && pc) { i = document.createElement('img'); i.className = 'photo'; i.alt = ''; pc.insertBefore(i, pc.firstChild); }
+        if (i && i.getAttribute('src') !== IMAGENES[k]) { i.src = IMAGENES[k]; i.removeAttribute('srcset'); }
+        var fa = c.querySelector('.c22-fa');  // si ya tenía la cara del autor
+        if (fa) { fa.remove(); c.classList.remove('c22-con-fa'); }
       });
     });
   }
@@ -260,12 +275,15 @@
     var items = [];
     Object.keys(SERIES).forEach(function (id) {
       var card = [].filter.call(document.querySelectorAll('#' + id + ' a.card:not(.slick-cloned)'), function (c) {
-        return !conCol || (c.getAttribute('href') || '').indexOf(MONITOR) < 0;
+        var h = c.getAttribute('href') || '';
+        return (!conCol || h.indexOf(MONITOR) < 0) && !secundaria(h);
       })[0];
       if (card) items.push(itemDe(card, SERIES[id]));
     });
     if (items.length < 2) return;
     items.sort(function (a, b) { return (b.date || 0) - (a.date || 0); });
+    // la principal va primero
+    items.sort(function (a, b) { return (b.link.indexOf(PRINCIPAL) >= 0) - (a.link.indexOf(PRINCIPAL) >= 0); });
     var mon = null;
     if (conCol) {
       var mc = document.querySelector('a.card[href*="' + MONITOR + '"]:not(.slick-cloned)');
@@ -285,11 +303,13 @@
       // a la izquierda lo más reciente; a la derecha, en una columna, el Monitor y la tarjeta fija
       var col = conCol ? [mon, FIJO].filter(Boolean) : [];
       if (col.length) sec.classList.add('c22-dest--col');
-      sec.innerHTML = grande(items[0]) +
+      sec.classList.add('c22-dest--rota');
+      sec.innerHTML = items.map(function (it, k) { return grande(it, ' data-rota="' + k + '"'); }).join('') +
         (col.length ? '<div class="c22-dest__col">' + col.map(function (it) {
           return grande(it, it === mon ? ' data-fijo="monitor"' : '');
         }).join('') + '</div>' : '') +
-        '<div class="c22-dest__side">' + items.slice(1, 4).map(chico).join('') + '</div>';
+        '<div class="c22-dest__side"></div>' +
+        '<button type="button" class="c22-dest__pause">Pausar</button>';
     }
     hero.parentNode.insertBefore(sec, hero);
     // el banner queda oculto: si el tema todavía no lo arma, ya no lo arma
@@ -301,20 +321,19 @@
     function alinear() { if (barra && barra.offsetWidth) sec.style.maxWidth = barra.offsetWidth + 'px'; }
     alinear(); window.addEventListener('resize', alinear);
 
-    var bigs = [].slice.call(sec.querySelectorAll('.c22-dest__big'));
+    var bigs = [].slice.call(sec.querySelectorAll(DISENO === 'c' ? '.c22-dest__big' : '[data-rota]'));
+    bigs.forEach(function (a) { a.classList.add('c22-rota'); });
     var pedidos = {};
     function resumen(k) {
       if (pedidos[k]) return; pedidos[k] = 1;
-      resumenDe(items[k].link, function (t) { bigs[DISENO === 'c' ? k : 0].querySelector('.c22-dest__resumen').textContent = t; });
+      resumenDe(items[k].link, function (t) { bigs[k].querySelector('.c22-dest__resumen').textContent = t; });
     }
     if (DISENO !== 'c') {
-      resumen(0);
       var rm = mon && sec.querySelector('[data-fijo="monitor"] .c22-dest__resumen');
       if (rm) resumenDe(mon.link, function (t) { rm.textContent = t; });
-      return;
     }
 
-    // diseño c: el grande rota (8 s, fundido) y al lado quedan los otros tres;
+    // el grande rota: el grande rota (8 s, fundido) y al lado quedan los otros tres;
     // al hacer clic en uno chico pasa a grande. Pausa con mouse, foco o botón.
     var side = sec.querySelector('.c22-dest__side'), btn = sec.querySelector('.c22-dest__pause');
     var cur = 0, hover = false, paused = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
