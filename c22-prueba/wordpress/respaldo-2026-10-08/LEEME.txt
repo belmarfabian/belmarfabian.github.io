@@ -43,6 +43,9 @@ Las reglas de la rotación las agrega el propio script (<style id="c22-rota-css"
 no cambió. Después: el destacado siempre parte con lo más reciente (sin contar el Monitor) y el círculo de trama de las cabeceras
 (Sobre C22, Personas…) se ve entero (oculto en móvil). «Etiqueta head»: 49.437 caracteres. SHA-256: 86745a388817d6f22c7feec3446910adab6d64aea2addcaef52946d6c6a12842.
 
+Más tarde (12 de octubre): la portada tiene una sección «Académicas» después de Columnas (las cuatro más recientes
+del listado de la serie) y su botón en la barra de colores. «Etiqueta head»: 52.394 caracteres. SHA-256: 42467886b5d2ec146040a52151d4d0b511517010209ed1a75e1dd7fd8b847446.
+
 PARA ESCONDERLA DE NUEVO A LOS VISITANTES (sin borrar nada):
 En la «Etiqueta head», cambiar «var SOLO_EDITORES = false;» por «var SOLO_EDITORES = true;».
 Apretar «Update». Los visitantes vuelven a ver el sitio antiguo; con sesión se sigue viendo la nueva.
