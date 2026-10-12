@@ -35,6 +35,13 @@ lleno, como en la web antigua; Personas se muestra cuando llegaron todas las fic
 aparecía incompleta y se iba llenando); la portada reserva el lugar del resumen para no saltar.
 «Etiqueta head»: 45.622 caracteres. CSS adicional: 169.458 caracteres.
 
+El 12 de octubre en la noche: el destacado grande de la portada rota cada 8 segundos (parte con
+«Niñez en campamentos»); las tarjetas sin imagen ya no llevan la cara del autor sino una foto o
+ilustración conceptual (columnas) o una ilustración abstracta (las 8 académicas); la tarjeta del
+Monitor usa la foto de su portada; las secciones llevan nombres con sustantivo (NOMBRES en el script).
+Las reglas de la rotación las agrega el propio script (<style id="c22-rota-css">). así que el CSS adicional
+no cambió. «Etiqueta head»: 49.246 caracteres. SHA-256: 9c53a08b4a156a44ad75b58091add4709ce54b289409f532748eab81b141c493.
+
 PARA ESCONDERLA DE NUEVO A LOS VISITANTES (sin borrar nada):
 En la «Etiqueta head», cambiar «var SOLO_EDITORES = false;» por «var SOLO_EDITORES = true;».
 Apretar «Update». Los visitantes vuelven a ver el sitio antiguo; con sesión se sigue viendo la nueva.

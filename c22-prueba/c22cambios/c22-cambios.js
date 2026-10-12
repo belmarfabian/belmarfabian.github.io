@@ -167,7 +167,16 @@
     'ninez-en-campamentos-las-complejidades-de-un-desalojo': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/col-campamentos.jpg',
     'estado-y-ninez-la-necesidad-de-un-aparato-publico-sensible-a-la-infancia': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/col-estado-ninez.jpg',
     'la-continuidad-de-nuestros-parques': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/col-parques.jpg',
-    'patrimonios-dinamicos-para-un-futuro-valioso': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/col-patrimonios.jpg'
+    'patrimonios-dinamicos-para-un-futuro-valioso': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/col-patrimonios.jpg',
+    // Académicas: ilustración abstracta por publicación (originales, paleta C22)
+    'la-condicion-posdemocratica-en-chile': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-posdemocracia.jpg',
+    'resena-more-than-a-glitch-de-meredith-broussard': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-glitch.jpg',
+    'la-discrecionalidad-en-la-administracion-publica-de-chile': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-discrecionalidad.jpg',
+    'el-retorno-de-la-imaginacion-sociologica': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-imaginacion.jpg',
+    'la-formula-de-contingencia-universidad': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-universidad.jpg',
+    'latin-america-and-social-theory': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-latam-teoria.jpg',
+    'publicaciones/crisis/': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-crisis.jpg',
+    'corruption-an-uneven-field-of-research': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-corrupcion.jpg'
   };
   // El destacado grande rota: parte con PRINCIPAL y sigue con lo último de cada
   // serie. Las de SECUNDARIAS no entran a la rotación (siguen en su fila).
@@ -360,6 +369,22 @@
     setPaused(paused); show(0);
     setInterval(function () { if (!paused && !hover && !document.hidden) show(cur + 1); }, 8000);
   });
+
+  /* ===== C22 portada: estilos del destacado que rota ===== */
+  // Van desde el script porque el CSS adicional (Personalizar) no siempre se
+  // puede editar con la cuenta disponible. Si el bloque ya está en el CSS
+  // adicional, repetirlo aquí no cambia nada.
+  (function () {
+    var st = document.createElement('style');
+    st.id = 'c22-rota-css';
+    st.textContent = 'body.c22-cambios .c22-dest--rota{ position: relative; }' +
+      'body.c22-cambios .c22-dest--rota > .c22-rota{ grid-row: 1 !important; grid-column: 1 !important; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }' +
+      'body.c22-cambios .c22-dest--rota > .c22-rota.is-on{ opacity: 1; visibility: visible; transition: opacity .8s ease; }' +
+      'body.c22-cambios .c22-dest--rota > .c22-dest__pause{ top: 12px; left: 12px; right: auto; z-index: 3; background: rgba(255,255,255,.92); }' +
+      'body.c22-cambios .c22-dest--rota .c22-dest__small{ cursor: pointer; }' +
+      '@media (prefers-reduced-motion: reduce) { body.c22-cambios .c22-dest--rota > .c22-rota{ transition: none; } }';
+    (document.head || document.documentElement).appendChild(st);
+  })();
 
   /* ===== C22 portada: secciones con sustantivos en vez de verbos ===== */
   // «Revisa», «Analiza», «Lee»… no decían qué hay en cada sección. Ahora el
@@ -706,6 +731,8 @@
       if (!pc || pc.querySelector('.c22-fa')) return;
       var img = pc.querySelector('img.photo');
       if (img && (img.getAttribute('src') || '').trim()) return;
+      // las académicas no llevan la cara del autor (ya sale abajo): ilustración o trama
+      if (c.closest('#academicas') || prefijoDe(c) === 'Ac') return;
       var fotos = fotosDe(c);
       if (!fotos.length) return;
       pc.insertAdjacentHTML('beforeend', fotosHtml(fotos));
