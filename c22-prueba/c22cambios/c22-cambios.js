@@ -361,6 +361,24 @@
     setInterval(function () { if (!paused && !hover && !document.hidden) show(cur + 1); }, 8000);
   });
 
+  /* ===== C22 portada: secciones con sustantivos en vez de verbos ===== */
+  // «Revisa», «Analiza», «Lee»… no decían qué hay en cada sección. Ahora el
+  // título y la barra de colores usan el nombre de la serie o del contenido.
+  var NOMBRES = {
+    revisa: 'Puntos de Referencia', analiza: 'Análisis online', lee: 'Notas de investigación',
+    mira: 'Columnas', conoce: 'Qué es C22', comparte: 'Redes'
+  };
+  temprano(function () {
+    if (!document.body.classList.contains('home')) return;
+    Object.keys(NOMBRES).forEach(function (id) {
+      var t = document.querySelector('#' + id + ' .main-title');
+      if (t && t.textContent.trim().toLowerCase() === id) t.textContent = NOMBRES[id];
+      document.querySelectorAll('main > ul.sticky-header a[href="#' + id + '"]').forEach(function (a) {
+        if (a.textContent.trim().toLowerCase() === id) a.textContent = NOMBRES[id];
+      });
+    });
+  });
+
   /* ===== C22 portada: cada sección muestra sus cuatro tarjetas ===== */
   // Se arma antes que el tema: el carrusel queda marcado y el tema ya no lo arma.
   temprano(function () {
