@@ -407,7 +407,7 @@
       'body.c22-cambios #conoce a.card .photo-container::before, body.c22-cambios #conoce a.card .photo-container::after{ color: #d2d2d2 !important; }' +
       'body.c22-cambios #conoce a.card .title, body.c22-cambios #conoce a.card .title *{ color: #303030 !important; }' +
       'body.c22-cambios #conoce .main-title{ border-bottom-color: #303030 !important; }' +
-      '@media (min-width:1400px){ body.c22-cambios header .search-container{ width:130px !important; } body.c22-cambios header{ padding-left:calc((100% - 1248px) / 2) !important; padding-right:calc((100% - 1248px) / 2) !important; } }' +
+      '@media (min-width:1400px){ body.c22-cambios header .search-container{ width:130px !important; } body.c22-cambios.home header{ padding-left:calc((100% - 1248px) / 2) !important; padding-right:calc((100% - 1248px) / 2) !important; } }' +
       'header ul.main-menu:not(.secondary){ justify-content:flex-start !important; }' +
       'header ul.main-menu:not(.secondary) > li{ margin:0 30px 0 0 !important; }' +
       'header ul.main-menu:not(.secondary) > li > a{ font-size:14px; }' +
