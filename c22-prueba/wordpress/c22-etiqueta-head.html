@@ -199,7 +199,7 @@
   // tarjeta FIJO. A la izquierda queda la publicación más reciente sin contarlo.
   var MONITOR = 'monitor-legislativo-las-votaciones-del-congreso-en-visualizaciones';
   var MONITOR_FIJO = {  // por si su tarjeta ya no está en la portada
-    s: SERIES.analiza, link: 'https://c22cepchile.cl/analisis/' + MONITOR + '/', num: 'A.',
+    s: SERIES.analiza, link: 'https://c22cepchile.cl/analisis/' + MONITOR + '/', num: '', sinNum: true,
     title: 'Monitor Legislativo: las votaciones del Congreso en visualizaciones',
     img: IMAGENES[MONITOR], date: new Date(2026, 7, 19), names: [], fotos: []
   };
@@ -289,7 +289,7 @@
     num = /^["']/.test(num || '') ? num.slice(1, -1) : '';
     var link = card.getAttribute('href');
     return {
-      s: s, link: link, num: num,
+      s: s, link: link, num: num, sinNum: !/\d/.test(num),
       img: imagenDe(link) || (img && (img.getAttribute('src') || '').trim()) || '',
       title: (card.querySelector('.title') || card).textContent.trim(),
       date: fechaDe(card.querySelector('.date')),
@@ -398,6 +398,7 @@
     var st = document.createElement('style');
     st.id = 'c22-rota-css';
     st.textContent = 'body.c22-cambios .c22-dest--rota{ position: relative; }' +
+      'body.c22-cambios a.card.c22-sin-num > .photo-container::after{ content: none !important; }' +
       '@keyframes c22-aparece{ from{ opacity: 0 } to{ opacity: 1 } }' +
       'body.c22-cambios .c22-dest__resumen{ animation: c22-aparece .5s ease both; }' +
       'body.c22-cambios .c22-dest--rota > .c22-rota{ grid-row: 1 !important; grid-column: 1 !important; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }' +
@@ -783,10 +784,20 @@
       el.textContent = +m[1] + ' ' + MES[+m[2] - 1] + ' ' + m[3];
     });
   }
+  // tarjetas cuyo número quedó en «A.» (sin cifra, como el Monitor): sin etiqueta numérica
+  function sinNumero() {
+    document.querySelectorAll('a.card:not([data-c22n])').forEach(function (c) {
+      var pc = c.querySelector('.photo-container');
+      if (!pc) return;
+      c.setAttribute('data-c22n', '1');
+      var n = getComputedStyle(pc, '::after').content || '';
+      if (/^["'][^"']*["']$/.test(n) && !/\d/.test(n)) c.classList.add('c22-sin-num');
+    });
+  }
   temprano(function () {
-    fechas();
+    fechas(); sinNumero();
     // Ajax Load More agrega tarjetas después de cargar la página
-    if (window.MutationObserver) new MutationObserver(function () { fechas(); }).observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
+    if (window.MutationObserver) new MutationObserver(function () { fechas(); sinNumero(); }).observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
   });
 
   /* ===== C22 tarjetas sin imagen: la foto de los autores ===== */
