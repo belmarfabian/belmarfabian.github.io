@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><title>Página no encontrada</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:34rem;margin:15vh auto;padding:0 1rem;color:#1b1c1e}a{color:#0d73d6}</style></head>
+<body><main><h1>Página no encontrada</h1><p>La dirección que buscas no existe o cambió de lugar.</p><p><a href="/">Ir al inicio</a></p></main>
+<script>
+/* Dentro del rediseño del CEP se muestra su propia página de error (sigue siendo un 404). */
+(function () {
+  if (location.pathname.indexOf('/cep-rediseno/') !== 0) return;
+  fetch('/cep-rediseno/404.html').then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+    .then(function (h) { document.open(); document.write(h); document.close(); }).catch(function () {});
+})();
+</script></body></html>
