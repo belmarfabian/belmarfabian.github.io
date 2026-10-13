@@ -289,7 +289,7 @@
     num = /^["']/.test(num || '') ? num.slice(1, -1) : '';
     var link = card.getAttribute('href');
     return {
-      s: s, link: link, num: num, sinNum: !/\d/.test(num),
+      s: s, link: link, num: num, sinNum: (link || '').indexOf(MONITOR) > -1,
       img: imagenDe(link) || (img && (img.getAttribute('src') || '').trim()) || '',
       title: (card.querySelector('.title') || card).textContent.trim(),
       date: fechaDe(card.querySelector('.date')),
@@ -789,15 +789,14 @@
       el.textContent = +m[1] + ' ' + MES[+m[2] - 1] + ' ' + m[3];
     });
   }
-  // tarjetas cuyo número quedó en «A.» (sin cifra, como el Monitor): sin etiqueta numérica
+  // el Monitor no lleva número de serie (es una herramienta)
   function sinNumero() {
     document.querySelectorAll('a.card:not([data-c22n])').forEach(function (c) {
       var pc = c.querySelector('.photo-container');
       if (!pc) return;
       c.setAttribute('data-c22n', '1');
-      var n = getComputedStyle(pc, '::after').content || '';
-      if (/^["'][^"']*["']$/.test(n) && !/\d/.test(n)) c.classList.add('c22-sin-num');
-      if ((c.getAttribute('href') || '').indexOf(MONITOR) > -1) c.classList.add('c22-herr');
+      // solo el Monitor: «Col.», «P.», «N.»… son números de serie legítimos
+      if ((c.getAttribute('href') || '').indexOf(MONITOR) > -1) c.classList.add('c22-sin-num', 'c22-herr');
     });
   }
   temprano(function () {
