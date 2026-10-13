@@ -149,6 +149,7 @@
   var SERIES = {
     revisa: ['Puntos de Referencia', 'pdr'],
     analiza: ['Análisis online', 'ana'],
+    herr: ['Herramienta', 'her'],     // el Monitor no es un análisis: es una herramienta
     lee: ['Notas de investigación', 'not'],
     mira: ['Columnas', 'col']
   };
@@ -198,7 +199,7 @@
   // tarjeta FIJO. A la izquierda queda la publicación más reciente sin contarlo.
   var MONITOR = 'monitor-legislativo-las-votaciones-del-congreso-en-visualizaciones';
   var MONITOR_FIJO = {  // por si su tarjeta ya no está en la portada
-    s: SERIES.analiza, link: 'https://c22cepchile.cl/analisis/' + MONITOR + '/', num: '', sinNum: true,
+    boton: 'Abrir', s: SERIES.herr, link: 'https://c22cepchile.cl/analisis/' + MONITOR + '/', num: '', sinNum: true,
     title: 'Monitor Legislativo: las votaciones del Congreso en visualizaciones',
     img: IMAGENES[MONITOR], date: new Date(2026, 7, 19), names: [], fotos: []
   };
@@ -315,7 +316,8 @@
     var mon = null;
     if (conCol) {
       var mc = document.querySelector('a.card[href*="' + MONITOR + '"]:not(.slick-cloned)');
-      mon = mc ? itemDe(mc, SERIES.analiza) : MONITOR_FIJO;
+      mon = mc ? itemDe(mc, SERIES.herr) : MONITOR_FIJO;
+      mon.boton = 'Abrir';
     }
 
     var sec = document.createElement('section');
@@ -398,6 +400,10 @@
     st.id = 'c22-rota-css';
     st.textContent = 'body.c22-cambios .c22-dest--rota{ position: relative; }' +
       'body.c22-cambios a.card.c22-sin-num > .photo-container::after{ content: none !important; }' +
+      'body.c22-cambios a.card.c22-herr > .photo-container::before{ content: "herramienta" !important; }' +
+      'body.c22-cambios .c22-dest .s-her .c22-tag{ background: #0d73d6; color: #fff; }' +
+      'body.c22-cambios .c22-dest .s-her .c22-dest__btn{ background: #0d73d6; color: #fff; }' +
+      'body.c22-cambios .c22-dest .s-her .c22-dest__btn:hover, body.c22-cambios .c22-dest .s-her .c22-dest__btn:focus{ background: #0a5fb3; }' +
       '@keyframes c22-aparece{ from{ opacity: 0 } to{ opacity: 1 } }' +
       'body.c22-cambios .c22-dest__resumen{ animation: c22-aparece .5s ease both; }' +
       'body.c22-cambios .c22-dest--rota > .c22-rota{ grid-row: 1 !important; grid-column: 1 !important; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }' +
@@ -791,6 +797,7 @@
       c.setAttribute('data-c22n', '1');
       var n = getComputedStyle(pc, '::after').content || '';
       if (/^["'][^"']*["']$/.test(n) && !/\d/.test(n)) c.classList.add('c22-sin-num');
+      if ((c.getAttribute('href') || '').indexOf(MONITOR) > -1) c.classList.add('c22-herr');
     });
   }
   temprano(function () {
