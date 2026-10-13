@@ -1042,6 +1042,64 @@
 
   /* ===== C22 carga sin parpadeo: listo ===== */
   // último en la cola: cuando todo lo anterior ya rearmó la página, se muestra
+  /* ===== C22 cómo citar en las series propias ===== */
+  // Solo las series del propio C22 (Puntos de Referencia, Notas de investigación y
+  // Análisis online) que aún no traen su bloque «Cómo citar» en el contenido. La
+  // referencia se arma con los datos de la propia ficha (autores, año, título,
+  // número de la serie y enlace); no se redacta texto nuevo. Estilo APA 7 en español.
+  // Las columnas y las publicaciones académicas no llevan bloque: tienen otra fuente.
+  temprano(function () {
+    var b = document.body;
+    if (!b.classList.contains('single') || document.querySelector('.c22-citar')) return;
+    var slug = location.pathname.replace(/\/$/, '').split('/').pop();
+    var num = '';
+    [].forEach.call(document.styleSheets, function (ss) {
+      if (ss.href || num) return;
+      var rs; try { rs = ss.cssRules; } catch (e) { return; }
+      for (var i = 0; i < rs.length && !num; i++) {
+        var r = rs[i];
+        if (r.selectorText && r.selectorText.indexOf('/' + slug + '/') > -1 && /::after/.test(r.selectorText) && r.style && r.style.content) {
+          var m = r.style.content.replace(/["']/g, '').match(/^(P|N|A)\.(\d+)$/);
+          if (m) num = m[1] + m[2];
+        }
+      }
+    });
+    if (!num) return;
+    var SERIE = { P: 'Puntos de Referencia', N: 'Notas de investigación', A: 'Análisis online' }[num.charAt(0)];
+    var nro = num.slice(1);
+    var nombres = [], vistos = {};
+    [].forEach.call(document.querySelectorAll('.single-header .name'), function (n) {
+      var t = n.textContent.replace(/\s+/g, ' ').trim();
+      if (t && !vistos[t]) { vistos[t] = 1; nombres.push(t); }
+    });
+    var h1 = document.querySelector('main h1, .single-header h1');
+    var fecha = document.querySelector('.single-header .date');
+    var anio = fecha && (fecha.textContent.match(/\d{4}/) || [])[0];
+    var cont = [].slice.call(document.querySelectorAll('article .wysiwyg')).pop() || [].slice.call(document.querySelectorAll('article .wrap-s')).pop();
+    if (!nombres.length || !h1 || !anio) return;
+    if (!cont) {  // fichas sin texto (solo resumen y PDF): el bloque va antes de «Revisa más»
+      var rel = document.querySelector('main > section.related'), mainEl = document.querySelector('main');
+      if (!mainEl) return;
+      cont = document.createElement('div'); cont.className = 'wrap-s';
+      if (rel) mainEl.insertBefore(cont, rel); else mainEl.appendChild(cont);
+    }
+    var COMPUESTOS = { 'Lucas Fernández Cabezas': ['Fernández Cabezas', 'L.'] };
+    function apa(n) {
+      if (COMPUESTOS[n]) return COMPUESTOS[n][0] + ', ' + COMPUESTOS[n][1];
+      var t = n.split(' '), ap = t.pop();
+      return ap + ', ' + t.map(function (x) { return x.charAt(0).toUpperCase() + '.'; }).join(' ');
+    }
+    var aut = nombres.map(apa);
+    var txt = aut.length === 1 ? aut[0] : aut.slice(0, -1).join(', ') + ' y ' + aut[aut.length - 1];
+    var url = (document.querySelector('link[rel=canonical]') || {}).href || location.href;
+    function esc(x) { return x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+    var caja = document.createElement('div');
+    caja.className = 'c22-citar';
+    caja.innerHTML = '<p class="c22-citar-rotulo">Cómo citar</p><p class="c22-cita">' + esc(txt) + ' (' + anio + '). <em>' +
+      esc(h1.textContent.trim()) + '</em> (' + SERIE + ' N.º ' + nro + '). Centro de Estudios Públicos. <a href="' + esc(url) + '">' + esc(url) + '</a></p>';
+    cont.appendChild(caja);
+  });
+
   ready(function () {
     var b = document.body;
     if (!b.classList.contains('c22-directorio')) return b.classList.add('c22-listo');
