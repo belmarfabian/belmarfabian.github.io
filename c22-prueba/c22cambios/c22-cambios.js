@@ -407,6 +407,8 @@
       'body.c22-cambios #conoce a.card .photo-container::before, body.c22-cambios #conoce a.card .photo-container::after{ color: #d2d2d2 !important; }' +
       'body.c22-cambios #conoce a.card .title, body.c22-cambios #conoce a.card .title *{ color: #303030 !important; }' +
       'body.c22-cambios #conoce .main-title{ border-bottom-color: #303030 !important; }' +
+      'header ul.main-menu:not(.secondary){ justify-content:flex-start !important; }' +
+      'header ul.main-menu:not(.secondary) > li{ margin:0 18px 0 0 !important; }' +
       'header ul.main-menu li.menu-item-has-children ul.sub-menu{ width:auto !important; min-width:210px; left:0 !important; right:auto !important; padding:8px 0; }' +
       'header ul.main-menu li.menu-item-has-children ul.sub-menu:before{ left:24px; right:auto !important; }' +
       'header ul.main-menu li.menu-item-has-children ul.sub-menu li{ margin:0 !important; width:100%; }' +
@@ -1128,6 +1130,10 @@
       var sub = document.createElement('ul'); sub.className = 'sub-menu';
       g[1].forEach(function (f) { var h = li(f); if (h) { var sp = h.querySelector('span'); if (sp) sp.remove(); sub.appendChild(h); } });
       if (!sub.children.length) return;
+      // primer ítem del desplegable: la propia página del padre
+      var pa = padre.querySelector('a'), propio = document.createElement('li'), ea = document.createElement('a');
+      ea.href = pa.href; ea.textContent = g[0] === '/publicaciones/' ? 'Todas las publicaciones' : 'Sobre C22';
+      propio.appendChild(ea); sub.insertBefore(propio, sub.firstChild);
       padre.classList.add('menu-item-has-children'); padre.appendChild(sub);
     });
   });
