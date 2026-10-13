@@ -404,6 +404,11 @@
     st.textContent = 'body.c22-cambios .c22-dest--rota{ position: relative; }' +
       'body.c22-cambios a.card.c22-sin-num > .photo-container::after{ content: none !important; }' +
       'body.c22-cambios a.card.c22-herr > .photo-container::before{ content: "herramienta" !important; }' +
+      'body.c22-cambios #academicas a.card .photo-container::before, body.c22-cambios #academicas a.card .photo-container::after, body.c22-cambios.term-academicas a.card .photo-container::before, body.c22-cambios.term-academicas a.card .photo-container::after{ color: #d41a78 !important; }' +
+      'body.c22-cambios #conoce a.card .photo-container::before, body.c22-cambios #conoce a.card .photo-container::after{ color: #d2d2d2 !important; }' +
+      'body.c22-cambios #conoce a.card .title, body.c22-cambios #conoce a.card .title *{ color: #303030 !important; }' +
+      'body.c22-cambios #conoce .main-title{ border-bottom-color: #303030 !important; }' +
+      '.c22-p .photo-container img.c22-rostro{ object-fit: cover; object-position: 50% 34%; transform: scale(1.5); transform-origin: 50% 36%; }' +
       '.c22-grid a.card{ height: 100%; }' +
       '.c22-grid a.card > .content{ flex: 1 1 auto; display: flex !important; flex-direction: column; }' +
       '.c22-grid a.card > .content > .title{ flex: 1 1 auto; }' +
@@ -446,6 +451,12 @@
     // «Redes» sale de la barra de colores y «Qué es C22» toma su gris oscuro
     document.querySelectorAll('main > ul.sticky-header a[href="#comparte"]').forEach(function (a) {
       var li = a.closest('li'); if (li && li.parentNode) li.parentNode.removeChild(li);
+    });
+    document.querySelectorAll('#conoce .btn-purple').forEach(function (a) {
+      a.classList.remove('btn-purple'); a.classList.add('btn-gray');
+    });
+    document.querySelectorAll('#conoce .background-purple').forEach(function (a) {
+      a.classList.remove('background-purple'); a.classList.add('background-gray');
     });
     document.querySelectorAll('main > ul.sticky-header a[href="#conoce"]').forEach(function (a) {
       a.classList.remove('btn-purple'); a.classList.add('btn-gray');
@@ -720,7 +731,15 @@
     // Ajax Load More entrega las fichas por partes (y a veces tarde): cada vez que
     // llegan, se mueven a su grupo. Se mueven las fichas originales, así cada una
     // sigue abriendo su perfil.
+    // fotos apaisadas (con trama y barra de color incluidas): se acercan al rostro
+    function rostros() {
+      [].forEach.call(document.querySelectorAll('.c22-p .photo-container img:not(.c22-rostro)'), function (f) {
+        if (f.naturalHeight && f.naturalWidth / f.naturalHeight > 1.2) f.classList.add('c22-rostro');
+        else if (!f.getAttribute('data-c22f')) { f.setAttribute('data-c22f', '1'); f.addEventListener('load', rostros); }
+      });
+    }
     function absorber() {
+      setTimeout(rostros, 0); setTimeout(rostros, 1200); setTimeout(rostros, 3500);
       [].forEach.call(lists, function (list, k) {
         [].slice.call(list.querySelectorAll(':scope > .person')).forEach(function (p) {
           var hist = k > 0 && !enEscalafon(p);
