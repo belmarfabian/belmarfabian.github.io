@@ -444,11 +444,19 @@
     var mira = document.getElementById('mira');
     if (!mira || !mira.parentNode) return;
     var url = location.origin + raiz() + 'categorias_publicaciones/academicas/';
-    fetch(url, { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
-      if (!html || document.getElementById('academicas')) return;
-      var doc = new DOMParser().parseFromString(html, 'text/html');
-      var cards = [].slice.call(doc.querySelectorAll('#ajax-load-more a.card, .alm-listing a.card')).slice(0, 4);
-      if (cards.length < 2) return;
+    var CK = 'c22acad:v1';
+    // el botón de la barra de colores va desde el primer momento (si no hay tarjetas, se quita)
+    var bar = document.querySelector('main > ul.sticky-header'), ml = bar && bar.querySelector('a[href="#mira"]');
+    var boton = null;
+    if (ml && ml.parentNode && !bar.querySelector('a[href="#academicas"]')) {
+      boton = document.createElement('li');
+      boton.innerHTML = '<a href="#academicas" class="scroll-move btn btn-purple">Académicas</a>';
+      ml.parentNode.parentNode.insertBefore(boton, ml.parentNode.nextSibling);
+    }
+    function sinSeccion() { if (boton && boton.parentNode) boton.parentNode.removeChild(boton); }
+    function armar(tarjetas) {
+      if (document.getElementById('academicas')) return true;
+      if (!tarjetas || tarjetas.length < 2) return false;
       var sec = document.createElement('section');
       sec.id = 'academicas';
       sec.className = 'cards-slider gray text-column-right';
@@ -456,28 +464,44 @@
         '<div class="content"><div class="col-100 left clearfix"><p class="main-title title-underline border-purple">Académicas</p></div>' +
         '<div class="wysiwyg"><p>artículos y capítulos con revisión de pares</p></div>' +
         '<div class="col-100 left clearfix"><a href="' + esc(location.origin + raiz() + 'publicaciones#academicas') + '" class="btn btn-purple btn-next">Ver más académicas</a></div></div>' +
-        '<div class="carrousel-slider"></div>';
+        '<div class="carrousel-slider">' + tarjetas.join('') + '</div>';
       var car = sec.querySelector('.carrousel-slider');
-      cards.forEach(function (a) {
-        var c = document.importNode(a, true);
-        c.setAttribute('href', new URL(a.getAttribute('href'), url).href);
-        c.querySelectorAll('.fake-card').forEach(function (f) { f.remove(); });
-        car.appendChild(c);
-      });
       car.classList.add('c22-sin-slick');
-      car.style.setProperty('--c22-n', Math.min(5, cards.length));
+      car.style.setProperty('--c22-n', Math.min(5, tarjetas.length));
       // en el teléfono las otras secciones siguen siendo carrusel; aquí se apilan las tarjetas
       var movil = window.matchMedia && matchMedia('(max-width: 760px)').matches;
       if (!movil) sec.classList.add('c22-grid');
       mira.parentNode.insertBefore(sec, mira.nextSibling);
       fechas(sec); imagenes(sec); fotosAutor(sec);
-      var bar = document.querySelector('main > ul.sticky-header'), ml = bar && bar.querySelector('a[href="#mira"]');
-      if (ml && ml.parentNode && !bar.querySelector('a[href="#academicas"]')) {
-        var li = document.createElement('li');
-        li.innerHTML = '<a href="#academicas" class="scroll-move btn btn-purple">Académicas</a>';
-        ml.parentNode.parentNode.insertBefore(li, ml.parentNode.nextSibling);
-      }
-    }).catch(function () {});
+      return true;
+    }
+    // visita anterior: la sección se arma de inmediato, antes de mostrar la portada
+    var guardado = null;
+    try { guardado = JSON.parse(localStorage.getItem(CK) || 'null'); } catch (e) {}
+    var armada = !!(guardado && guardado.length && armar(guardado));
+    var espera = !armada && !mostrar.hecho;
+    if (espera) mostrar.n = (mostrar.n || 0) + 1;
+    function fin() {
+      if (!espera) return;
+      espera = false; mostrar.n--;
+      if (mostrar.listo && !mostrar.n) mostrar();
+    }
+    fetch(url, { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
+      if (!html) { if (!armada) sinSeccion(); return fin(); }
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      var cards = [].slice.call(doc.querySelectorAll('#ajax-load-more a.card, .alm-listing a.card')).slice(0, 4);
+      var tarjetas = cards.map(function (a) {
+        var c = document.importNode(a, true);
+        c.setAttribute('href', new URL(a.getAttribute('href'), url).href);
+        c.querySelectorAll('.fake-card').forEach(function (f) { f.remove(); });
+        return c.outerHTML;
+      });
+      if (tarjetas.length >= 2) {
+        try { localStorage.setItem(CK, JSON.stringify(tarjetas)); } catch (e) {}
+        if (!armada) armar(tarjetas);
+      } else if (!armada) sinSeccion();
+      fin();
+    }).catch(function () { if (!armada) sinSeccion(); fin(); });
   });
 
   /* ===== C22 portada: cada sección muestra sus cuatro tarjetas ===== */
