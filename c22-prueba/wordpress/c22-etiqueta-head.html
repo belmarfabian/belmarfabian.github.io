@@ -404,6 +404,10 @@
     st.textContent = 'body.c22-cambios .c22-dest--rota{ position: relative; }' +
       'body.c22-cambios a.card.c22-sin-num > .photo-container::after{ content: none !important; }' +
       'body.c22-cambios a.card.c22-herr > .photo-container::before{ content: "herramienta" !important; }' +
+      '#conoce .carrousel-slider{ grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }' +
+      '#conoce .carrousel-slider > a.card:nth-child(n+5){ display: none !important; }' +
+      '#conoce .carrousel-slider > a.card:nth-child(3) > .photo-container::after{ content: "C.3" !important; }' +
+      '#conoce .carrousel-slider > a.card:nth-child(4) > .photo-container::after{ content: "C.4" !important; }' +
       'body.c22-cambios .c22-dest .s-her .c22-tag{ background: #0d73d6; color: #fff; }' +
       'body.c22-cambios .c22-dest .s-her .c22-dest__btn{ background: #0d73d6; color: #fff; }' +
       'body.c22-cambios .c22-dest .s-her .c22-dest__btn:hover, body.c22-cambios .c22-dest .s-her .c22-dest__btn:focus{ background: #0a5fb3; }' +
@@ -434,6 +438,13 @@
       document.querySelectorAll('main > ul.sticky-header a[href="#' + id + '"]').forEach(function (a) {
         if (a.textContent.trim().toLowerCase() === id) a.textContent = NOMBRES[id];
       });
+    });
+    // «Redes» sale de la barra de colores y «Qué es C22» toma su gris oscuro
+    document.querySelectorAll('main > ul.sticky-header a[href="#comparte"]').forEach(function (a) {
+      var li = a.closest('li'); if (li && li.parentNode) li.parentNode.removeChild(li);
+    });
+    document.querySelectorAll('main > ul.sticky-header a[href="#conoce"]').forEach(function (a) {
+      a.classList.remove('btn-purple'); a.classList.add('btn-gray');
     });
   });
 
