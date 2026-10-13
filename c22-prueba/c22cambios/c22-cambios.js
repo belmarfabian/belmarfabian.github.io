@@ -407,6 +407,13 @@
       'body.c22-cambios #conoce a.card .photo-container::before, body.c22-cambios #conoce a.card .photo-container::after{ color: #d2d2d2 !important; }' +
       'body.c22-cambios #conoce a.card .title, body.c22-cambios #conoce a.card .title *{ color: #303030 !important; }' +
       'body.c22-cambios #conoce .main-title{ border-bottom-color: #303030 !important; }' +
+      'header ul.main-menu li.menu-item-has-children ul.sub-menu{ width:auto !important; min-width:210px; left:0 !important; right:auto !important; padding:8px 0; }' +
+      'header ul.main-menu li.menu-item-has-children ul.sub-menu:before{ left:24px; right:auto !important; }' +
+      'header ul.main-menu li.menu-item-has-children ul.sub-menu li{ margin:0 !important; width:100%; }' +
+      'header ul.main-menu li.menu-item-has-children ul.sub-menu li a{ display:block; padding:8px 18px !important; white-space:nowrap; color:rgba(255,255,255,.75) !important; }' +
+      'header ul.main-menu li.menu-item-has-children ul.sub-menu li a:hover{ color:#fff !important; }' +
+      'header ul.main-menu li.menu-item-has-children > a:after{ content:"▾"; font-size:10px; margin-left:5px; opacity:.55; }' +
+      '.menu-responsive .menu-container ul li.c22-hijo a{ font-size:.82em; font-weight:500; padding:9px 0 9px 22px !important; }' +
       '.c22-p{ overflow: visible !important; }' +
       '.c22-grid a.card{ height: 100%; }' +
       '.c22-grid a.card > .content{ flex: 1 1 auto; display: flex !important; flex-direction: column; }' +
@@ -1096,6 +1103,33 @@
     caja.innerHTML = '<p class="c22-citar-rotulo">Cómo citar</p><p class="c22-cita">' + esc(txt) + ' (' + anio + '). <em>' +
       esc(h1.textContent.trim()) + '</em> (' + SERIE + ' N.º ' + nro + '). Centro de Estudios Públicos. <a href="' + esc(url) + '">' + esc(url) + '</a></p>';
     cont.appendChild(caja);
+  });
+
+  temprano(function () {
+    [].forEach.call(document.querySelectorAll('.menu-responsive .menu-container li a'), function (a) {
+      if (/\/personas\/|puntos-de-referencia|\/analisis-online|notas-de-investigacion|columnas|academicas/.test(a.getAttribute('href') || '')) a.parentNode.classList.add('c22-hijo');
+    });
+  });
+
+  // Menú principal anidado: Sobre C22 ▸ Personas; Publicaciones ▸ las cinco series.
+  // El tema imprime la lista plana, así que se agrupa aquí con los estilos de sub-menu del tema.
+  temprano(function () {
+    var ul = document.querySelector('header ul.main-menu:not(.secondary)');
+    if (!ul || ul.querySelector('ul.sub-menu')) return;
+    var li = function (frag) {
+      return [].filter.call(ul.children, function (x) { var a = x.querySelector('a'); return a && a.getAttribute('href').indexOf(frag) > -1; })[0];
+    };
+    var grupos = [
+      ['/sobre-c22', ['/personas/']],
+      ['/publicaciones/', ['puntos-de-referencia', '/analisis-online', 'notas-de-investigacion', 'columnas', 'academicas']]
+    ];
+    grupos.forEach(function (g) {
+      var padre = li(g[0]); if (!padre) return;
+      var sub = document.createElement('ul'); sub.className = 'sub-menu';
+      g[1].forEach(function (f) { var h = li(f); if (h) { var sp = h.querySelector('span'); if (sp) sp.remove(); sub.appendChild(h); } });
+      if (!sub.children.length) return;
+      padre.classList.add('menu-item-has-children'); padre.appendChild(sub);
+    });
   });
 
   ready(function () {
