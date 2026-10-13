@@ -408,6 +408,8 @@
       'body.c22-cambios #conoce a.card .title, body.c22-cambios #conoce a.card .title *{ color: #303030 !important; }' +
       'body.c22-cambios #conoce .main-title{ border-bottom-color: #303030 !important; }' +
       '.c22-p{ overflow: visible !important; }' +
+      'body.home main > ul.sticky-header{ padding: 8px 0 6px !important; }' +
+      'body.home main > ul.sticky-header li a{ padding-top: 3px !important; padding-bottom: 3px !important; font-size: 11px !important; line-height: 20px !important; }' +
       '.c22-grid a.card{ height: 100%; }' +
       '.c22-grid a.card > .content{ flex: 1 1 auto; display: flex !important; flex-direction: column; }' +
       '.c22-grid a.card > .content > .title{ flex: 1 1 auto; }' +
