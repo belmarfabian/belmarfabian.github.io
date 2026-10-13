@@ -186,7 +186,9 @@
     'la-formula-de-contingencia-universidad': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-universidad.jpg',
     'latin-america-and-social-theory': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-latam-teoria.jpg',
     'publicaciones/crisis/': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-crisis.jpg',
-    'corruption-an-uneven-field-of-research': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-corrupcion.jpg'
+    'corruption-an-uneven-field-of-research': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-corrupcion.jpg',
+    'economia-tanatica-de-la-violencia': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-tanatica.jpg',
+    'estereotipos-y-roles-de-genero': 'https://belmarfabian.github.io/c22-prueba/c22cambios/img/ac-estereotipos.jpg'
   };
   // El destacado grande rota: parte con lo más reciente y sigue con lo último de cada
   // serie. Las de SECUNDARIAS no entran a la rotación (siguen en su fila).
@@ -433,6 +435,40 @@
         if (a.textContent.trim().toLowerCase() === id) a.textContent = NOMBRES[id];
       });
     });
+  });
+
+  /* ===== C22 cabecera de cada página: título, h1, indexación ===== */
+  // El título de la pestaña salía con «C22» pegado («C22Sobre C22 | …»): se corrige aquí
+  // mientras no se cambie la plantilla de Yoast. Las páginas sin h1 reciben uno oculto
+  // y los h1 sobrantes pasan a nivel 2 sin cambiar su aspecto.
+  temprano(function () {
+    document.title = document.title.replace(/^C22(?=[A-ZÁÉÍÓÚÑ¿¡«"])/, '');
+    var main = document.querySelector('main');
+    if (main) {
+      var hs = main.querySelectorAll('h1');
+      if (!hs.length) {
+        var h = document.createElement('h1');
+        h.className = 'c22-sr';
+        h.textContent = document.body.classList.contains('home') ? 'C22: laboratorio de métodos digitales del Centro de Estudios Públicos' : (document.title.split('|')[0] || 'C22').trim();
+        main.insertBefore(h, main.firstChild);
+      } else {
+        [].slice.call(hs, 1).forEach(function (x) { x.setAttribute('role', 'heading'); x.setAttribute('aria-level', '2'); });
+      }
+    }
+    // páginas de plantilla que no deben aparecer en buscadores
+    if (/\/(pagina-tipo|noticia-numero-[a-z]+|evento\/evento-numero-[a-z]+)\/?$/.test(location.pathname) && !document.querySelector('meta[name="robots"][content*="noindex"]')) {
+      var m = document.createElement('meta');
+      m.name = 'robots'; m.content = 'noindex, follow';
+      document.head.appendChild(m);
+    }
+  });
+  // En el listado de una serie, el filtro «Elige una categoría» debe mostrar esa serie
+  ready(function () {
+    if (!document.body.classList.contains('tax-categorias_publicaciones') && !/categorias_publicaciones/.test(location.pathname)) return;
+    var h = document.querySelector('main h1'), sel = document.querySelector('select[id^="taxonomy-select"]');
+    if (!h || !sel) return;
+    var t = norm(h.textContent.trim());
+    [].some.call(sel.options, function (o, i) { if (norm(o.text.trim()) === t) { sel.selectedIndex = i; return true; } });
   });
 
   /* ===== C22 portada: sección «Académicas» ===== */
@@ -761,12 +797,18 @@
       c.insertBefore(tile, c.firstChild);
       c.classList.add('c22-ev');
       function usar(f) { if (f) tile.innerHTML = tileHtml(f[0], f[1], f[2]); tile.style.visibility = f ? '' : 'hidden'; }
+      // la fecha real de cada evento se guarda en el navegador: desde la segunda visita no hay espera
+      var clave = 'c22ev:' + c.getAttribute('href'), cache = null;
+      try { cache = JSON.parse(localStorage.getItem(clave) || 'null'); } catch (e) {}
+      if (cache && cache.length === 3) return usar(cache);
       if (!window.fetch || !window.DOMParser) return usar(fechaTarjeta(c));
       fetch(mismoSitio(c.getAttribute('href')), { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
         var doc = new DOMParser().parseFromString(html, 'text/html');
         var p = doc.querySelector('.single-header p.date'), m = p && /(\d{1,2}) (?:de )?([a-záéíóú]+),? (?:de )?(\d{4})/i.exec(p.textContent.replace(/\s+/g, ' '));
         var k = m ? MESES.indexOf(m[2].toLowerCase()) : -1;
-        usar(k >= 0 ? [+m[1], k, m[3]] : fechaTarjeta(c));
+        var f = k >= 0 ? [+m[1], k, m[3]] : null;
+        if (f) { try { localStorage.setItem(clave, JSON.stringify(f)); } catch (e) {} }
+        usar(f || fechaTarjeta(c));
       }).catch(function () { usar(fechaTarjeta(c)); });
     });
   }
@@ -827,7 +869,7 @@
   temprano(function () {
     fechas(); sinNumero();
     // Ajax Load More agrega tarjetas después de cargar la página
-    if (window.MutationObserver) new MutationObserver(function () { fechas(); sinNumero(); }).observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
+    if (window.MutationObserver) new MutationObserver(function () { fechas(); sinNumero(); imagenes(); }).observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
   });
 
   /* ===== C22 tarjetas sin imagen: la foto de los autores ===== */
