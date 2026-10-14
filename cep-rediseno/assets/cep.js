@@ -85,3 +85,13 @@
     });
   });
 })();
+
+// Abre un <details> cuando un enlace o la dirección apuntan a él (p. ej. #ficha).
+(function () {
+  function open(id) { var d = id && document.getElementById(id); if (d && d.tagName === 'DETAILS') d.open = true; }
+  try { open(decodeURIComponent(location.hash.slice(1))); } catch (e) {}
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) try { open(decodeURIComponent(a.getAttribute('href').slice(1))); } catch (x) {}
+  });
+})();
