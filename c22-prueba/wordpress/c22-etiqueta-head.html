@@ -409,7 +409,21 @@
       'body.c22-cambios #conoce a.card .photo-container::before, body.c22-cambios #conoce a.card .photo-container::after{ color: #d2d2d2 !important; }' +
       'body.c22-cambios #conoce a.card .title, body.c22-cambios #conoce a.card .title *{ color: #303030 !important; }' +
       'body.c22-cambios #conoce .main-title{ border-bottom-color: #303030 !important; }' +
-      '@media (min-width:1400px){ body.c22-cambios header .search-container{ width:130px !important; } body.c22-cambios.home header{ padding-left:calc((100% - 1248px) / 2) !important; padding-right:calc((100% - 1248px) / 2) !important; } }' +
+      '@media (min-width:1400px){ body.c22-cambios header .search-container{ width:130px !important; } body.c22-cambios header{ padding-left:calc((100% - 1248px) / 2) !important; padding-right:calc((100% - 1248px) / 2) !important; } }' +
+      // Todo el sitio al ancho de la portada: 1248 px centrados
+      'body.c22-cambios .wrap-xl, body.c22-cambios .wrap-l, body.c22-cambios .wrap-m, body.c22-cambios .wrap-s, body.c22-cambios .sticky-header{ max-width: 1248px !important; }' +
+      'body.c22-cambios .categories-tabs .intro, body.c22-cambios .categories-tabs .slider{ max-width: 1248px !important; }' +
+      'body.c22-cambios footer.dark{ padding-left: max(5%, calc((100% - 1248px) / 2)) !important; padding-right: max(5%, calc((100% - 1248px) / 2)) !important; }' +
+      'body.c22-cambios .categories-tabs .col-100{ max-width: 1248px !important; float: none !important; margin-left: auto !important; margin-right: auto !important; }' +
+      // Círculos rayados de la portada, también en las demás páginas
+      '.c22-texturas{ position: absolute; top: 0; width: calc((100% - 1248px) / 2); overflow: hidden; pointer-events: none; z-index: 2; }' +
+      '.c22-texturas.izq{ left: 0; } .c22-texturas.der{ right: 0; }' +
+      '.c22-texturas > .texture{ position: absolute; width: 460px; height: 460px; opacity: .5; }' +
+      '.c22-texturas.izq > .texture{ left: -94px; } .c22-texturas.der > .texture{ right: -94px; }' +
+      'body.c22-cambios:not(.home) main section.page-header > .texture, body.c22-cambios:not(.home) main > .texture.background, body.c22-cambios:not(.home) article > .texture.background, body.c22-cambios .categories-tabs .intro .texture{ display: none !important; }' +
+      '@media (max-width: 1500px){ .c22-texturas{ display: none; } }' +
+      'body.c22-cambios section.banner{ max-width: 1248px !important; margin-left: auto !important; margin-right: auto !important; }' +
+      'body.c22-cambios .contact-form{ padding-left: max(5%, calc((100% - 1248px) / 2)) !important; padding-right: max(5%, calc((100% - 1248px) / 2)) !important; }' +
       'header ul.main-menu:not(.secondary){ justify-content:flex-start !important; }' +
       'header ul.main-menu:not(.secondary) > li{ margin:0 30px 0 0 !important; }' +
       'header ul.main-menu:not(.secondary) > li > a{ font-size:14px; }' +
@@ -1122,6 +1136,41 @@
         a.parentNode.parentNode.insertBefore(t, a.parentNode);
       }
     });
+  });
+
+  // Círculos rayados en los márgenes, como en la portada (que ya los trae del tema)
+  ready(function () {
+    var b = document.body;
+    if (b.classList.contains('home') || document.querySelector('.c22-texturas')) return;
+    var SERIE = [['puntos-de-referencia', 'light-gray'], ['analisis-online', 'green'], ['notas-de-investigacion', 'yellow'],
+                 ['columnas', 'red'], ['academicas', 'purple']];
+    var fijo = null, cls = b.className + ' ' + location.pathname;
+    SERIE.forEach(function (x) { if (cls.indexOf(x[0]) > -1) fijo = x[1]; });
+    if (!fijo && b.classList.contains('single')) {
+      var cat = document.querySelector('.single-header a[href*="categorias_publicaciones"], .single-header .categories a');
+      if (cat) SERIE.forEach(function (x) { if ((cat.getAttribute('href') || '').indexOf(x[0]) > -1) fijo = x[1]; });
+    }
+    var ciclo = ['light-gray', 'green', 'yellow', 'red', 'purple', 'gray'];
+    var poner = function () {
+      [].forEach.call(document.querySelectorAll('.c22-texturas'), function (v) { v.remove(); });
+      var foot = document.querySelector('footer'), main = document.querySelector('main');
+      if (!main) return;
+      var top0 = main.getBoundingClientRect().top + scrollY;
+      var fin = (foot ? foot.getBoundingClientRect().top + scrollY : document.documentElement.scrollHeight) - 230;
+      var lados = { izq: document.createElement('div'), der: document.createElement('div') };
+      var i = 0;
+      for (var y = top0 + 220; y < fin; y += 510, i++) {
+        var lado = i % 2 ? 'der' : 'izq', d = document.createElement('div');
+        d.className = 'texture background-' + (fijo || ciclo[i % ciclo.length]);
+        d.style.top = y + 'px'; lados[lado].appendChild(d);
+      }
+      ['izq', 'der'].forEach(function (k) {
+        var c = lados[k]; if (!c.children.length) return;
+        c.className = 'c22-texturas ' + k; c.setAttribute('aria-hidden', 'true');
+        c.style.height = (fin + 230) + 'px'; b.insertBefore(c, b.firstChild);
+      });
+    };
+    poner(); setTimeout(poner, 2500); setTimeout(poner, 7000);
   });
 
   // Menú principal anidado: Sobre C22 ▸ Personas; Publicaciones ▸ las cinco series.
