@@ -424,6 +424,8 @@
       'body.c22-cambios:not(.home) main section.page-header > .texture, body.c22-cambios:not(.home) main > .texture.background, body.c22-cambios:not(.home) article > .texture.background, body.c22-cambios .categories-tabs .intro .texture{ display: none !important; }' +
       '@media (max-width: 1500px){ .c22-texturas{ display: none; } }' +
       'body.c22-cambios section.banner{ max-width: 1248px !important; margin-left: auto !important; margin-right: auto !important; }' +
+      // Portada sin la sección «Redes»: las redes ya están en el pie y en Contacto
+      'body.c22-cambios.home main > div:has(> section#comparte), body.c22-cambios.home section#comparte{ display: none !important; }' +
       'body.c22-cambios .contact-form{ padding-left: max(5%, calc((100% - 1248px) / 2)) !important; padding-right: max(5%, calc((100% - 1248px) / 2)) !important; }' +
       'header ul.main-menu:not(.secondary){ justify-content:flex-start !important; }' +
       'header ul.main-menu:not(.secondary) > li{ margin:0 30px 0 0 !important; }' +
