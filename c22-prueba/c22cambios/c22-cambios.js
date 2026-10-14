@@ -429,6 +429,7 @@
       // Subtítulos con color puesto a mano en el texto: el color de la serie
       'body.c22-cambios .wysiwyg :is(h1,h2,h3,h4,h5) [style*="color"]{ color: inherit !important; }' +
       'body.c22-cambios .wysiwyg.green :is(h1,h2,h3,h4,h5):has([style*="color"]){ color: #1f9c78 !important; }' +
+      '@media (min-width: 900px){ body.c22-cambios main > section.related{ display: grid !important; grid-template-columns: minmax(0, min(1248px, 90%)); justify-content: center; } body.c22-cambios main > section.related > *{ margin-left: 0 !important; margin-right: 0 !important; max-width: none !important; width: auto !important; justify-self: stretch; } html body.c22-cambios main > section.related > h6.title-underline{ justify-self: start; margin: 0 0 26px 0 !important; } }' +
       'body.c22-cambios .contact-form{ padding-left: max(5%, calc((100% - 1248px) / 2)) !important; padding-right: max(5%, calc((100% - 1248px) / 2)) !important; }' +
       'header ul.main-menu:not(.secondary){ justify-content:flex-start !important; }' +
       'header ul.main-menu:not(.secondary) > li{ margin:0 30px 0 0 !important; }' +
@@ -1142,6 +1143,46 @@
         a.parentNode.parentNode.insertBefore(t, a.parentNode);
       }
     });
+  });
+
+  // Etiquetas temáticas de publicaciones y tarjetas con el color de su serie (como en la portada)
+  ready(function () {
+    var COL = { P: ['#657d81', '#fff'], A: ['#4ccaa5', '#1b1c1e'], N: ['#ffb923', '#1b1c1e'],
+                Col: ['#f20231', '#fff'], Ac: ['#a10856', '#fff'], C: ['#303030', '#fff'] };
+    var pref = function (txt) { var m = /^["']?(P|N|A|Col|Ac|C)\./.exec(txt || ''); return m ? m[1] : ''; };
+    var pintar = function (cont, k) {
+      if (!COL[k]) return;
+      [].forEach.call(cont.querySelectorAll('.categories span'), function (sp) {
+        sp.style.setProperty('background-color', COL[k][0], 'important');
+        sp.style.setProperty('color', COL[k][1], 'important');
+      });
+    };
+    // tarjetas: la serie sale de su número
+    [].forEach.call(document.querySelectorAll('a.card'), function (a) {
+      var pc = a.querySelector('.photo-container');
+      if (pc && a.querySelector('.categories span')) pintar(a, pref(getComputedStyle(pc, '::after').content));
+    });
+    // ficha de la publicación: la serie sale del número que el sitio le asigna
+    var hd = document.querySelector('.single-header');
+    if (hd && hd.querySelector('.categories span')) {
+      var slug = location.pathname.replace(/\/$/, '').split('/').pop(), k = '';
+      [].forEach.call(document.styleSheets, function (ss) {
+        if (ss.href || k) return;
+        var rs; try { rs = ss.cssRules; } catch (e) { return; }
+        for (var i = 0; i < rs.length && !k; i++) {
+          var r = rs[i];
+          if (r.selectorText && r.selectorText.indexOf('/' + slug + '/') > -1 && /::after/.test(r.selectorText) && r.style && r.style.content) k = pref(r.style.content);
+        }
+      });
+      if (!k) {
+        var cuenta = {};
+        [].forEach.call(document.querySelectorAll('section.related a.card .photo-container'), function (pc) {
+          var x = pref(getComputedStyle(pc, '::after').content); if (x) cuenta[x] = (cuenta[x] || 0) + 1;
+        });
+        Object.keys(cuenta).forEach(function (x) { if (!k || cuenta[x] > cuenta[k]) k = x; });
+      }
+      pintar(hd, k);
+    }
   });
 
   // Círculos rayados en los márgenes, como en la portada (que ya los trae del tema)
