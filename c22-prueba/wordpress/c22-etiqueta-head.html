@@ -419,6 +419,8 @@
       'header ul.main-menu li.menu-item-has-children ul.sub-menu li a{ display:block; padding:8px 18px !important; white-space:nowrap; color:rgba(255,255,255,.75) !important; }' +
       'header ul.main-menu li.menu-item-has-children ul.sub-menu li a:hover{ color:#fff !important; }' +
       'header ul.main-menu li.menu-item-has-children > a:after{ content:"▾"; font-size:10px; margin-left:5px; opacity:.55; }' +
+      'header ul.main-menu li.c22-pronto a{ cursor:default; opacity:.45; }' +
+      'header ul.main-menu li.c22-pronto a em{ font-style:normal; font-size:10px; margin-left:4px; }' +
       '.menu-responsive .menu-container ul li.c22-hijo a{ font-size:.82em; font-weight:500; padding:9px 0 9px 22px !important; }' +
       '.c22-p{ overflow: visible !important; }' +
       '.c22-grid a.card{ height: 100%; }' +
@@ -1114,6 +1116,11 @@
   temprano(function () {
     [].forEach.call(document.querySelectorAll('.menu-responsive .menu-container li a'), function (a) {
       if (/\/personas\/|puntos-de-referencia|\/analisis-online|notas-de-investigacion|columnas|academicas/.test(a.getAttribute('href') || '')) a.parentNode.classList.add('c22-hijo');
+      if (/\/monitor-legislativo/.test(a.getAttribute('href') || '') && !document.querySelector('.menu-responsive .c22-her')) {
+        a.parentNode.classList.add('c22-hijo');
+        var t = document.createElement('li'); t.className = 'c22-her'; t.innerHTML = '<a href="' + a.href + '">Herramientas</a>';
+        a.parentNode.parentNode.insertBefore(t, a.parentNode);
+      }
     });
   });
 
@@ -1140,6 +1147,16 @@
       propio.appendChild(ea); sub.insertBefore(propio, sub.firstChild);
       padre.classList.add('menu-item-has-children'); padre.appendChild(sub);
     });
+    // Herramientas ▸ Monitor legislativo (y el juego, aún sin publicar)
+    var mon = li('/monitor-legislativo'); if (!mon) return;
+    var her = document.createElement('li'), ha = document.createElement('a'), hs = document.createElement('ul');
+    ha.href = mon.querySelector('a').href; ha.textContent = 'Herramientas'; hs.className = 'sub-menu';
+    her.className = 'menu-item-has-children' + (mon.classList.contains('active') ? ' active' : '');
+    var msp = mon.querySelector('span'); if (msp) { her.appendChild(ha); her.appendChild(msp); } else her.appendChild(ha);
+    mon.classList.remove('active');
+    ul.insertBefore(her, mon); hs.appendChild(mon);
+    var jg = document.createElement('li'); jg.className = 'c22-pronto'; jg.innerHTML = '<a>¿Con quién votas? <em>próximamente</em></a>';
+    hs.appendChild(jg); her.appendChild(hs);
   });
 
   ready(function () {
