@@ -410,6 +410,7 @@
       '@media (min-width:1400px){ body.c22-cambios header .search-container{ width:130px !important; } body.c22-cambios header{ padding-left:calc((100% - 1248px) / 2) !important; padding-right:calc((100% - 1248px) / 2) !important; } }' +
       // Todo el sitio al ancho de la portada: 1248 px centrados
       'body.c22-cambios .wrap-xl, body.c22-cambios .wrap-l, body.c22-cambios .wrap-m, body.c22-cambios .wrap-s, body.c22-cambios .sticky-header{ max-width: 1248px !important; }' +
+      'html body.c22-cambios main > ul.sticky-header.sticky-header{ margin-left: auto !important; margin-right: auto !important; float: none !important; }' +
       'body.c22-cambios .categories-tabs .intro, body.c22-cambios .categories-tabs .slider{ max-width: 1248px !important; }' +
       'body.c22-cambios footer.dark{ padding-left: max(5%, calc((100% - 1248px) / 2)) !important; padding-right: max(5%, calc((100% - 1248px) / 2)) !important; }' +
       'body.c22-cambios .categories-tabs .col-100{ max-width: 1248px !important; float: none !important; margin-left: auto !important; margin-right: auto !important; }' +
@@ -1145,8 +1146,28 @@
     var fijo = null, cls = b.className + ' ' + location.pathname;
     SERIE.forEach(function (x) { if (cls.indexOf(x[0]) > -1) fijo = x[1]; });
     if (!fijo && b.classList.contains('single')) {
-      var cat = document.querySelector('.single-header a[href*="categorias_publicaciones"], .single-header .categories a');
-      if (cat) SERIE.forEach(function (x) { if ((cat.getAttribute('href') || '').indexOf(x[0]) > -1) fijo = x[1]; });
+      // la serie sale del número que el sitio le da a la ficha (P., A., N., Col., Ac.)
+      var slug = location.pathname.replace(/\/$/, '').split('/').pop(), pref = '';
+      [].forEach.call(document.styleSheets, function (ss) {
+        if (ss.href || pref) return;
+        var rs; try { rs = ss.cssRules; } catch (e) { return; }
+        for (var i = 0; i < rs.length && !pref; i++) {
+          var r = rs[i];
+          if (r.selectorText && r.selectorText.indexOf('/' + slug + '/') > -1 && /::after/.test(r.selectorText) && r.style && r.style.content) {
+            var m = r.style.content.replace(/["']/g, '').match(/^(P|N|A|Col|Ac)\./);
+            if (m) pref = m[1];
+          }
+        }
+      });
+      if (!pref) {  // columnas y académicas: la serie de sus tarjetas relacionadas
+        var pcs = document.querySelectorAll('section.related a.card .photo-container'), cuenta = {};
+        [].forEach.call(pcs, function (pc) {
+          var m2 = /^["']?(P|N|A|Col|Ac)\./.exec(getComputedStyle(pc, '::after').content || '');
+          if (m2) cuenta[m2[1]] = (cuenta[m2[1]] || 0) + 1;
+        });
+        Object.keys(cuenta).forEach(function (k) { if (!pref || cuenta[k] > cuenta[pref]) pref = k; });
+      }
+      fijo = { P: 'light-gray', A: 'green', N: 'yellow', Col: 'red', Ac: 'purple' }[pref] || null;
     }
     var ciclo = ['light-gray', 'green', 'yellow', 'red', 'purple', 'gray'];
     var poner = function () {
