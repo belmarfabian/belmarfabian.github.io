@@ -1353,3 +1353,11 @@ main [hidden] { display: none !important; }
   .sec-head.has-mark .mark { flex-basis: 100%; height: auto !important; }
   .rail .sec-head.has-mark .mark { flex-basis: auto; }
 }
+/* Carrusel móvil: el alto sigue a la diapositiva visible (live.js), con transición suave */
+@media (max-width: 760px) { .slides { transition: height .5s ease; } }
+/* Auditoría 14-10: rótulos de miniaturas que caben y redes en una fila (móvil) */
+@media (max-width: 760px) {
+  .li .ph, .latest .ph, .ph-publicaciones-indexadas { padding: 8px; }
+  .ph span { font-size: 9.5px; letter-spacing: 0; }
+  .social ul { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+}

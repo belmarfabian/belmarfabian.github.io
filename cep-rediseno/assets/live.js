@@ -31,8 +31,18 @@
         if ('inert' in s) s.inert = !on;
       });
       [].forEach.call(dots.children, function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+      fit();
     }
-    function tick() { if (!userPaused && !hover && !document.hidden) show(i + 1); }
+    // En móvil el carrusel toma el alto de la diapositiva visible (sin hueco) y solo rota mientras se ve,
+    // para que el cambio de alto no mueva lo que se está leyendo más abajo.
+    var box = root.querySelector('.slides'), mq = window.matchMedia && matchMedia('(max-width: 760px)'), seen = true;
+    function fit() {
+      if (!box) return;
+      box.style.height = (mq && mq.matches && slides[i]) ? slides[i].offsetHeight + 'px' : '';
+    }
+    window.addEventListener('resize', fit);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }).observe(root);
+    function tick() { if (!userPaused && !hover && !document.hidden && seen) show(i + 1); }
     function start() { clearInterval(timer); timer = setInterval(tick, 12000); }
     function setPaused(p) {
       userPaused = p;
@@ -59,6 +69,7 @@
         dots.appendChild(b);
       });
       if (slides.length) show(0);
+      root.querySelectorAll('.slide img').forEach(function (im) { im.addEventListener('load', fit); });
     }
     setPaused(userPaused);
     refresh();
