@@ -1281,3 +1281,31 @@ main [hidden] { display: none !important; }
 }
 .search-big input { min-width: 0; }
 @media (max-width: 760px) { .search-big .btn { padding: 0 16px; } }
+
+/* Ficha técnica de la Encuesta CEP (como «About this research» de Pew) */
+.ficha-key { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; max-width: 470px; margin: 18px 0 22px; padding: 16px 0 0; border-top: 1px solid var(--rule); }
+.ficha-key div { min-width: 0; }
+.ficha-key dt { margin: 0 0 3px; font: 600 10.5px var(--sans); letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+.ficha-key dd { margin: 0; font: 700 18px/1.25 var(--circe); color: var(--navy); }
+.feature-btns { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+.ficha { margin: -6px 0 8px; background: #f4f7fa; border: 1px solid var(--rule); }
+.ficha > summary { display: flex; align-items: center; gap: 10px; padding: 14px 18px; font: 700 15px var(--circe); color: var(--navy); cursor: pointer; list-style: none; }
+.ficha > summary::-webkit-details-marker { display: none; }
+.ficha > summary::after { content: '+'; display: inline-grid; place-items: center; width: 20px; height: 20px; border: 1.5px solid currentColor; border-radius: 50%; font: 600 14px/1 var(--sans); }
+.ficha[open] > summary::after { content: '−'; }
+.ficha > summary:hover { color: var(--blue-ink); }
+.ficha-dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; margin: 0; padding: 0 18px 6px; }
+.ficha-dl div { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 14px; padding: 12px 0; border-top: 1px solid var(--rule); }
+.ficha-dl dt { font: 700 13.5px/1.4 var(--circe); color: var(--navy); }
+.ficha-dl dd { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text); }
+.ficha-dl code, .ficha-mini code { font-size: .92em; }
+.ficha-src { margin: 0; padding: 12px 18px 16px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--muted); }
+.ficha-src a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+.ficha-mini { display: block; margin-top: 4px; font-size: 13px; color: var(--muted); }
+.ficha-mini a { text-decoration: underline; text-underline-offset: 3px; }
+.dl-box .ficha-mini { margin-top: 10px; color: rgba(255,255,255,.85); }
+@media (max-width: 760px) {
+  .ficha-key dd { font-size: 16px; }
+  .ficha-dl { grid-template-columns: minmax(0, 1fr); }
+  .ficha-dl div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
