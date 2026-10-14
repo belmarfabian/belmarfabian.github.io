@@ -68,10 +68,10 @@
   var area = '';
   function norm(t) { return t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
   function apply() {
-    var q = norm(box.value.trim()), n = 0;
+    var q = norm(box.value.trim()), seen = {}, n = 0;
     people.forEach(function (p) {
       var ok = (!q || norm(p.dataset.name).indexOf(q) >= 0) && (!area || (' ' + p.dataset.area + ' ').indexOf(' ' + area + ' ') >= 0);
-      p.hidden = !ok; if (ok) n++;
+      p.hidden = !ok; if (ok && !seen[p.dataset.name]) { seen[p.dataset.name] = 1; n++; } // quien aparece en dos grupos cuenta una vez
     });
     groups.forEach(function (g) { g.hidden = !g.querySelector('.person:not([hidden])'); });
     count.textContent = n;
