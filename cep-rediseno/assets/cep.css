@@ -908,7 +908,7 @@ a.thumb.fig:hover { border-color: var(--navy); }
 .sec-head.has-mark h2 { flex: 1; }
 .mark img, .mark-temas img, .mark-agenda img, .mark-opinion-publica img { height: 34px; width: auto; }
 /* pantallas anchas: el monograma sale de la columna, al margen */
-@media (min-width: 1400px) {
+@media (min-width: 1480px) {
   .sec-head.has-mark .mark { position: absolute; right: calc(100% + 22px); bottom: 6px; }
   .sec-head.has-mark .mark img { height: 46px; }
   /* salvo donde no hay margen libre: columnas interiores y rieles */
@@ -1308,4 +1308,48 @@ main [hidden] { display: none !important; }
   .ficha-key dd { font-size: 16px; }
   .ficha-dl { grid-template-columns: minmax(0, 1fr); }
   .ficha-dl div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+
+/* Monogramas siempre junto al título y más grandes (antes colgaban en el margen y se cortaban o se veían chicos) */
+.sec-head.has-mark { align-items: center; gap: 14px; }
+.sec-head.has-mark .mark { position: static !important; }
+.sec-head.has-mark .mark img { height: 50px !important; }
+.rail .sec-head.has-mark .mark img, .box .sec-head.has-mark .mark img,
+.areas .sec-head.has-mark .mark img, .cols4 .sec-head.has-mark .mark img { height: 40px !important; }
+@media (max-width: 760px) { .sec-head.has-mark .mark img { height: 38px !important; } }
+.rail .sec-head.has-mark .mark img { height: 34px !important; }
+.rail .sec-head.has-mark h2 { white-space: nowrap; }
+/* misma altura de cabecera aunque el monograma sea más chico: las rayas quedan alineadas */
+.sec-head.has-mark .mark { height: 50px; display: flex; align-items: center; }
+@media (max-width: 760px) { .sec-head.has-mark .mark { height: 38px; } }
+/* Agenda de portada: solo el monograma, a tamaño completo (el título queda para lectores de pantalla) */
+.rail .sec-head.has-mark .mark img { height: 50px !important; }
+.rail .sec-head.has-mark h2 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.rail .sec-head.has-mark .more { margin-left: auto; }
+@media (max-width: 760px) { .rail .sec-head.has-mark .mark img { height: 38px !important; } }
+/* Monogramas: letra + nombre del área en una sola fila, mismo tamaño en todas las secciones */
+.sec-head.has-mark .mark { display: flex !important; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 4px; width: 128px; height: 56px !important; flex: none; }
+.sec-head.has-mark .mark img { height: 30px !important; width: auto; }
+.sec-head.has-mark .mark-opinion-publica img { height: 34px !important; }
+.sec-head.has-mark .mark-temas img, .sec-head.has-mark .mark-investigacion img { height: 33px !important; }
+.sec-head.has-mark .mark-agenda img { height: 27px !important; }
+.mark-t { font: 400 14px/1 var(--circe); white-space: nowrap; letter-spacing: .01em; }
+.mark-investigacion .mark-t { color: #e0b000; } .mark-agenda .mark-t { color: var(--c-agenda); }
+.mark-opinion-publica .mark-t { color: var(--c-op); } .mark-temas .mark-t { color: var(--c-temas); } .mark-arte-cultura .mark-t { color: var(--c-ac); }
+.band-coral .mark-t { color: var(--navy); }
+.rail .sec-head.has-mark .mark, .areas .area + .area .sec-head.has-mark .mark { width: auto; }
+@media (max-width: 760px) {
+  .sec-head.has-mark .mark { width: auto; height: 46px !important; gap: 3px; }
+  .sec-head.has-mark .mark img { height: 24px !important; }
+  .sec-head.has-mark .mark-opinion-publica img { height: 27px !important; }
+  .mark-t { font-size: 12px; }
+}
+.rail .sec-head.has-mark .mark img { height: 27px !important; }
+.rail .sec-head.has-mark .mark { width: auto; }
+.areas > .area + .area .sec-head.has-mark .mark { display: none !important; }
+@media (max-width: 760px) { .rail .sec-head.has-mark .mark img { height: 24px !important; } }
+@media (max-width: 760px) {
+  .sec-head.has-mark { flex-wrap: wrap; row-gap: 6px; }
+  .sec-head.has-mark .mark { flex-basis: 100%; height: auto !important; }
+  .rail .sec-head.has-mark .mark { flex-basis: auto; }
 }
