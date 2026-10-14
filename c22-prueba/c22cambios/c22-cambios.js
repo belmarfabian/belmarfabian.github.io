@@ -424,6 +424,11 @@
       'body.c22-cambios section.banner{ max-width: 1248px !important; margin-left: auto !important; margin-right: auto !important; }' +
       // Portada sin la sección «Redes»: las redes ya están en el pie y en Contacto
       'body.c22-cambios.home main > div:has(> section#comparte), body.c22-cambios.home section#comparte{ display: none !important; }' +
+      // Tableros de Power BI: el marco a la proporción del tablero (16:9 más su barra), sin hueco en blanco
+      'body.c22-cambios section.iframe iframe[src*="app.powerbi.com"]{ height: auto !important; aspect-ratio: 864 / 542; }' +
+      // Subtítulos con color puesto a mano en el texto: el color de la serie
+      'body.c22-cambios .wysiwyg :is(h1,h2,h3,h4,h5) [style*="color"]{ color: inherit !important; }' +
+      'body.c22-cambios .wysiwyg.green :is(h1,h2,h3,h4,h5):has([style*="color"]){ color: #1f9c78 !important; }' +
       'body.c22-cambios .contact-form{ padding-left: max(5%, calc((100% - 1248px) / 2)) !important; padding-right: max(5%, calc((100% - 1248px) / 2)) !important; }' +
       'header ul.main-menu:not(.secondary){ justify-content:flex-start !important; }' +
       'header ul.main-menu:not(.secondary) > li{ margin:0 30px 0 0 !important; }' +
