@@ -1195,6 +1195,11 @@
     }
   });
 
+  // Un solo pie en todo el sitio: Contacto y 404 traían el pie claro
+  temprano(function () {
+    var f = document.querySelector('footer.light'); if (f) { f.classList.remove('light'); f.classList.add('dark'); }
+  });
+
   // Círculos rayados en los márgenes, como en la portada (que ya los trae del tema)
   ready(function () {
     var b = document.body;
