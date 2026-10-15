@@ -430,6 +430,14 @@
       'body.c22-cambios .wysiwyg :is(h1,h2,h3,h4,h5) [style*="color"]{ color: inherit !important; }' +
       'body.c22-cambios .wysiwyg.green :is(h1,h2,h3,h4,h5):has([style*="color"]){ color: #1f9c78 !important; }' +
       '@media (min-width: 900px){ body.c22-cambios main > section.related{ display: grid !important; grid-template-columns: minmax(0, min(1248px, 90%)); justify-content: center; } body.c22-cambios main > section.related > *{ margin-left: 0 !important; margin-right: 0 !important; max-width: none !important; width: auto !important; justify-self: stretch; } html body.c22-cambios main > section.related > h6.title-underline{ justify-self: start; margin: 0 0 26px 0 !important; } }' +
+      // Auditoría (14 oct): pie claro (Contacto, 404) al mismo ancho que el oscuro
+      'body.c22-cambios footer.light{ padding-left: max(5%, calc((100% - 1248px) / 2)) !important; padding-right: max(5%, calc((100% - 1248px) / 2)) !important; }' +
+      // la carga automática de tarjetas deja el foco en la primera nueva: sin marco amarillo salvo con teclado
+      'body.c22-cambios a.card:focus:not(:focus-visible), body.c22-cambios .alm-listing a:focus:not(:focus-visible){ outline: none !important; }' +
+      // Publicaciones en móvil: título y descripción de cada serie uno bajo el otro
+      '@media (max-width: 760px){ body.c22-cambios .categories-tabs > .intro{ display: block !important; } body.c22-cambios .categories-tabs > .intro .description{ margin-top: 10px !important; } }' +
+      // 404: el texto alineado con el margen del sitio
+      '@media (min-width: 1400px){ body.c22-cambios.error404 section.error-404 .content{ padding-left: calc((100% - 1248px) / 2) !important; width: auto !important; } }' +
       'body.c22-cambios .contact-form{ padding-left: max(5%, calc((100% - 1248px) / 2)) !important; padding-right: max(5%, calc((100% - 1248px) / 2)) !important; }' +
       'header ul.main-menu:not(.secondary){ justify-content:flex-start !important; }' +
       'header ul.main-menu:not(.secondary) > li{ margin:0 30px 0 0 !important; }' +
