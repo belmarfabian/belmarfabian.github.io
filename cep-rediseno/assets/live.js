@@ -142,7 +142,7 @@
   function title(it, cls, tag) {
     return '<' + (tag || 'h3') + ' class="hl ' + cls + '"><a href="' + esc(it.href) + '">' + esc(it.title) + '</a></' + (tag || 'h3') + '>';
   }
-  function card(it) { return '<article class="card card-s">' + thumb(it, 'thumb') + kicker(it) + title(it, 'hl-s') + '</article>'; }
+  function card(it) { return '<article class="card card-s">' + thumb(it, 'thumb') + kicker(it) + title(it, 'hl-s') + (it.dek ? '<p class="dek dek-s">' + esc(it.dek) + '</p>' : '') + '</article>'; }
   function row(it) {
     return '<article class="row">' + thumb(it, 'thumb') + '<div>' + kicker(it) + title(it, 'hl-m') +
       (it.dek ? '<p class="dek">' + esc(it.dek) + '</p>' : '') + by(it) + '</div></article>';
@@ -194,7 +194,7 @@
   }
   setInterval(function () { liveBar(); }, 60000);
 
-  var F = 'id,date,link,title,featured_media,acf.numero,acf.categoria,acf.autores';
+  var F = 'id,date,link,title,featured_media,acf.numero,acf.categoria,acf.autores,acf.contenido_flexible';
   Promise.all([
     get('investigation?per_page=16&_fields=' + F),
     get('posts?per_page=6&categories=31&_fields=id,date,link,title,featured_media,acf.autores'),
@@ -203,13 +203,30 @@
     get('assets/local.json').catch(function () { return {}; })
   ]).then(function (r) {
     var local = r[4]; LOCAL = local;
+    // Bajada desde la API cuando no está en local.json: primer párrafo largo del contenido, sin encabezados
+    function apiDek(x) {
+      var mods = (x.acf && x.acf.contenido_flexible) || [], t = txt(x.title.rendered).trim();
+      for (var k = 0; k < mods.length; k++) {
+        var h = mods[k].texto_enriquecido; if (!h) continue;
+        var ps = h.replace(/<\/(p|h\d|li|div)>|<br\s*\/?>/gi, '\n').split(/\n+/);
+        for (var j = 0; j < ps.length; j++) {
+          var p = txt(ps[j].replace(/<[^>]+>/g, '')).replace(/\[\d+\]/g, '').replace(/\s+/g, ' ').trim();
+          if (p.length < 80 || p === t || /^(por|autores?|título original|boletín|resumen)\b/i.test(p)) continue;
+          // «En el Punto de Referencia "Título", los autores plantean que…» → «Los autores plantean que…»
+          p = p.replace(/^(en el|el) (punto de referencia|estudio|documento|libro)\s*[“"«][^”"»]+[”"»],?\s*/i, '');
+          p = p.charAt(0).toUpperCase() + p.slice(1);
+          return p.length > 230 ? p.slice(0, 230).replace(/\s+\S*$/, '') + '…' : p;
+        }
+      }
+      return '';
+    }
     function norm(x, kind, series) {
       var loc = local[x.link] || {};
       var it = {
         kind: kind, id: x.id, link: x.link, title: txt(x.title.rendered), area: loc.ar || null,
         media: x.featured_media,
         date: new Date(x.date), series: series, numero: (x.acf && x.acf.numero) || '',
-        href: loc.p || x.link, dek: loc.d || '', fig: loc.f || '', cap: loc.c || '', figTall: !!loc.ft, topics: loc.t || [], authors: loc.a || [],
+        href: loc.p || x.link, dek: loc.d || apiDek(x), fig: loc.f || '', cap: loc.c || '', figTall: !!loc.ft, topics: loc.t || [], authors: loc.a || [],
         authorIds: (x.acf && x.acf.autores) || [], topicHref: temaHref
       };
       return it;
@@ -254,7 +271,7 @@
      Mientras llega la API, las zonas en vivo quedan ocultas (máx. 3 s, ver <head>).
      La última respuesta se guarda en el navegador: en la visita siguiente la portada
      aparece de inmediato con esos datos y solo se redibuja si hay algo nuevo. */
-  var KEY = 'cep-portada-v1', shown = '';
+  var KEY = 'cep-portada-v2', shown = '';
   function ready() { document.documentElement.classList.remove('live-wait'); }
   function sig(a) { return JSON.stringify(a.map(function (l) { return (l || []).map(function (i) { return i && (i.link + (i.imgS || '')); }); })); }
   function show(inv, cols, survey, evs, fromCache) {

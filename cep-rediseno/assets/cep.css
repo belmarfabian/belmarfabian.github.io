@@ -1361,3 +1361,5 @@ main [hidden] { display: none !important; }
   .ph span { font-size: 9.5px; letter-spacing: 0; }
   .social ul { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
 }
+/* Tarjetas laterales de portada con bajada corta (2 líneas) */
+.lead-side .dek-s { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 6px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--muted); }
