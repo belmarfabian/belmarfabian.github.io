@@ -717,10 +717,11 @@
   // corrigen aquí.
   var CARGOS = { 'leonidas-montes': 'Presidente CEP', 'juan-luis-ossa': 'Director CEP' };
   function idDe(p) { return (p.getAttribute('data-id') || '').replace(/^modal-/, ''); }
-  // Fotos que faltan en la ficha de WordPress: la foto oficial del Equipo de
-  // cepchile.cl. Lo correcto es subirla a la ficha de la persona; mientras
-  // tanto se pone aquí, en la tarjeta y en su perfil.
-  var FOTOS = { 'juan-luis-ossa': 'https://static.cepchile.cl/uploads/cepchile/2022/09/24-141743_p283_Juan-Luis-Ossa-1000x1000-2026.jpg' };
+  // Fotos de respaldo, por si la ficha de WordPress no trae imagen destacada.
+  // La de Juan Luis Ossa ya está en su ficha (16-oct-2026, al estilo del sitio:
+  // recorte, fondo, rayado gris de Dirección, cinta y el filtro frío de las
+  // demás fotos); esta es la misma.
+  var FOTOS = { 'juan-luis-ossa': 'https://static.cepchile.cl/uploads/c22/2026/10/16-194340_xswa_juan-luis-ossa.jpg' };
   function ponerFoto(p) {
     var id = idDe(p), src = FOTOS[id];
     if (!src) return;
@@ -740,7 +741,11 @@
       lado.className = 'sidebar';
       cont.insertBefore(lado, cont.firstChild);
     }
-    if (lado && !lado.querySelector('.photo-container')) {
+    // el CSS de la lista del histórico (.alm-1 .photo-container) esconde la
+    // foto del perfil aunque venga de la ficha
+    var yaHay = lado && lado.querySelector('.photo-container');
+    if (yaHay) yaHay.style.display = 'block';
+    if (lado && !yaHay) {
       var m = document.createElement('div');
       m.className = 'photo-container';
       // el perfil queda dentro de la lista del histórico, cuyo CSS esconde las fotos
