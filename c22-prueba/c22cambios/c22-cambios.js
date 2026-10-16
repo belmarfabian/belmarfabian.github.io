@@ -743,6 +743,8 @@
     if (lado && !lado.querySelector('.photo-container')) {
       var m = document.createElement('div');
       m.className = 'photo-container';
+      // el perfil queda dentro de la lista del histórico, cuyo CSS esconde las fotos
+      m.style.display = 'block';
       m.innerHTML = img.replace('<img ', '<img class="avatar" ');
       lado.insertBefore(m, lado.firstChild);
     }
@@ -810,6 +812,10 @@
           var hist = k > 0 && !enEscalafon(p);
           var cargo = CARGOS[idDe(p)], rolEl = p.querySelector('.rol');
           if (cargo && rolEl) rolEl.textContent = cargo;
+          if (cargo) {  // el mismo cargo en el perfil
+            var rolPerfil = document.querySelector('.modal[data-id="modal-' + idDe(p) + '"] .rol');
+            if (rolPerfil) rolPerfil.textContent = cargo;
+          }
           // el escalafón no tiene prácticas ni pasantías: en el equipo actual
           // figuran como asistentes de investigación
           if (!hist && rolEl && /pasant|pr[aá]ctic/i.test(rolEl.textContent)) rolEl.textContent = 'Asistente de investigación';
@@ -848,6 +854,29 @@
       });
     });
     absorber();
+    // Perfiles de las fichas que llegan por Ajax Load More (el histórico, donde
+    // WordPress tiene a Juan Luis Ossa): el tema enlaza el clic solo a las fichas
+    // que están al cargar la página (modal.js), así que estas no abrían su perfil
+    // ni su botón de cerrar funcionaba. Se delega en el documento y se salta lo
+    // que el tema ya enlazó.
+    var jq = window.jQuery;
+    if (jq && !window.c22Perfiles) {
+      window.c22Perfiles = true;
+      var enlazado = function (el) { var ev = jq._data && jq._data(el, 'events'); return !!(ev && ev.click); };
+      jq(document).on('click', '.c22-dir .person.modal-trigger', function () {
+        if (enlazado(this)) return;
+        var id = jq(this).attr('data-id');
+        jq(".modal[data-id='" + id + "'], .modal-background").fadeIn(100);
+        jq('body').addClass('overflow-hidden');
+      });
+      jq(document).on('click', '.modal .close', function () {
+        if (enlazado(this)) return;
+        jq('.modal-background').fadeOut(100);
+        jq('.modal').fadeOut(100);
+        jq('.modal-background').removeClass().addClass('modal-background');
+        jq('body').removeClass('overflow-hidden');
+      });
+    }
     if (window.MutationObserver) [].forEach.call(lists, function (l) { new MutationObserver(absorber).observe(l, { childList: true }); });
     // el histórico se carga por tandas al bajar (scroll infinito): se piden todas
     var intentos = 0, pedir = setInterval(tanda, 300);
