@@ -719,6 +719,36 @@
   // corrigen aquí.
   var CARGOS = { 'leonidas-montes': 'Presidente CEP', 'juan-luis-ossa': 'Director CEP' };
   function idDe(p) { return (p.getAttribute('data-id') || '').replace(/^modal-/, ''); }
+  // Fotos que faltan en la ficha de WordPress: la foto oficial del Equipo de
+  // cepchile.cl. Lo correcto es subirla a la ficha de la persona; mientras
+  // tanto se pone aquí, en la tarjeta y en su perfil.
+  var FOTOS = { 'juan-luis-ossa': 'https://static.cepchile.cl/uploads/cepchile/2022/09/24-141743_p283_Juan-Luis-Ossa-1000x1000-2026.jpg' };
+  function ponerFoto(p) {
+    var id = idDe(p), src = FOTOS[id];
+    if (!src) return;
+    var nombre = ((p.querySelector('.title') || {}).textContent || '').trim();
+    var img = '<img src="' + src + '" alt="' + esc(nombre) + '" loading="lazy">';
+    if (!p.querySelector('.photo-container')) {
+      var c = document.createElement('div');
+      c.className = 'photo-container';
+      c.innerHTML = img;
+      p.insertBefore(c, p.firstChild);
+    }
+    // el perfil sin foto ni enlaces no trae la columna lateral: se crea
+    var cont = document.querySelector('.modal[data-id="modal-' + id + '"] .content-modal');
+    var lado = cont && cont.querySelector('.sidebar');
+    if (cont && !lado) {
+      lado = document.createElement('div');
+      lado.className = 'sidebar';
+      cont.insertBefore(lado, cont.firstChild);
+    }
+    if (lado && !lado.querySelector('.photo-container')) {
+      var m = document.createElement('div');
+      m.className = 'photo-container';
+      m.innerHTML = img.replace('<img ', '<img class="avatar" ');
+      lado.insertBefore(m, lado.firstChild);
+    }
+  }
   // en WordPress figuran en el histórico, pero son parte del equipo actual
   var ACTUALES = ['juan-luis-ossa'];
   function enEscalafon(p) { return ACTUALES.indexOf(idDe(p)) >= 0; }
@@ -787,6 +817,7 @@
           if (!hist && rolEl && /pasant|pr[aá]ctic/i.test(rolEl.textContent)) rolEl.textContent = 'Asistente de investigación';
           p.classList.add('c22-p');
           if (hist) p.classList.add('c22-p-hist');
+          ponerFoto(p);
           if (!p.querySelector('.photo-container')) {  // sin foto: círculo con iniciales
             var nom = (p.querySelector('.title') || p).textContent.trim().split(/\s+/);
             var ini = document.createElement('div');
