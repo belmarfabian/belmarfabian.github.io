@@ -1,0 +1,19 @@
+services:
+  bd:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${BD_CLAVE_ROOT}
+      MARIADB_DATABASE: ojs
+      MARIADB_USER: ojs
+      MARIADB_PASSWORD: ${BD_CLAVE}
+    volumes: ["./bd:/var/lib/mysql"]
+    command: --character-set-server=utf8 --collation-server=utf8_general_ci
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on: [bd]
+    ports: ["80:80"]
+    volumes:
+      - ./ojs:/var/www/html
+      - ./files:/var/www/files

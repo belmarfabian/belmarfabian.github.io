@@ -1,0 +1,3 @@
+Espejo de prueba de la revista Estudios Públicos en OJS 3.5.0-5.
+Armado solo con contenido público de estudiospublicos.cl; no contiene usuarios ni datos privados de la revista.
+Instalación en un servidor Ubuntu 24.04: sudo bash instalar-oracle.sh (baja los PDF desde el sitio público y verifica cada uno)
