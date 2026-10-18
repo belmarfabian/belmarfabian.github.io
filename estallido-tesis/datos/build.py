@@ -610,6 +610,54 @@ ROWS = [
   "referencia": "Hodge Dupré, E. (2024). Falsas dicotomías de la guerra durante el estallido social chileno. Revista Científica General José María Córdova, 22(48), 1127–1150. https://doi.org/10.21830/19006586.1360",
   "fuente_url": "https://doi.org/10.21830/19006586.1360",
   "nota": "Artículo en revista arbitrada. Sostiene que el estallido no fue espontáneo y lo lee como guerra híbrida; trata la injerencia extranjera como no descartable."
+ },
+ {
+  "id": "tromben2024",
+  "etiqueta": "Tromben (2024)",
+  "autores": "Carlos Tromben",
+  "anio": 2024,
+  "tesis": "Transformacional",
+  "subcorriente": "Crítica al neoliberalismo",
+  "mecanismos": "M01;M14;M12",
+  "mecanismo_principal": "M01",
+  "confianza_codificacion": "media",
+  "registro": "ensayo",
+  "rol": "principal",
+  "referencia": "Tromben, C. (2024). Las tramas ocultas del 18-O. Planeta.",
+  "fuente_url": "https://www.planetadelibros.com/libro-las-tramas-ocultas-del-18-o/401546",
+  "nota": "Periodismo de investigación en tres tramas (financiera, política y anarquista). Pese al título, no sostiene una tesis de complot y califica de fantasiosa la injerencia extranjera (reseña de El Mostrador, 21/07/2024)."
+ },
+ {
+  "id": "lyd2024",
+  "etiqueta": "LyD (2024)",
+  "autores": "Libertad y Desarrollo",
+  "anio": 2024,
+  "tesis": "Estructural",
+  "subcorriente": "Expectativas frustradas",
+  "mecanismos": "M02;M13;M03;M05;M10;M12",
+  "mecanismo_principal": "M02",
+  "confianza_codificacion": "alta",
+  "registro": "opinion",
+  "rol": "principal",
+  "referencia": "Libertad y Desarrollo. (2024). A cinco años del 18 de octubre: reflexiones para un «Nunca más». Temas Públicos, 1662-1.",
+  "fuente_url": "https://lyd.org/wp-content/uploads/2024/10/TP-1662-CINCO-ANOS-ESTALLIDO.pdf",
+  "nota": "Explica las causas por expectativas defraudadas tras la desaceleración. Usa la fórmula «golpe de Estado no tradicional» para la dinámica posterior, no para el origen."
+ },
+ {
+  "id": "ortuzar2025",
+  "etiqueta": "Ortúzar (2025)",
+  "autores": "Pablo Ortúzar",
+  "anio": 2025,
+  "tesis": "Otras lecturas",
+  "subcorriente": "Violencia moralizada",
+  "mecanismos": "M12;M10;M03;M08",
+  "mecanismo_principal": "M12",
+  "confianza_codificacion": "media",
+  "registro": "ensayo",
+  "rol": "principal",
+  "referencia": "Ortúzar, P. (2025). Dignos. Crónica del estallido social. Instituto de Estudios de la Sociedad.",
+  "fuente_url": "https://www.ex-ante.cl/?p=328672",
+  "nota": "Libro-crónica. Según la entrevista en Ex-Ante, el núcleo fue una violencia moralista y autojustificada de grupos preexistentes, con espontaneidad inicial y aprovechamiento posterior de la izquierda."
  }
 ]
 p = pathlib.Path(__file__).parent
