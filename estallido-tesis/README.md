@@ -40,7 +40,7 @@ La base no se limita a la tipología de Bellolio. Las obras que no calzan en las
 Un segundo codificador clasificó las 41 obras a ciegas con las mismas definiciones y el mismo libro de códigos. Fue un modelo de lenguaje, no una persona, por lo que la prueba es un contraste preliminar. Acuerdo en la tesis: 40 de 41 (kappa de Cohen = 0,97). Registro: kappa = 0,96. Mecanismo principal: kappa = 0,83. Conjunto de mecanismos: alfa de Krippendorff = 0,64, bajo el umbral de 0,667 para conclusiones tentativas (Krippendorff, 2004, pp. 241–243). Las dos codificaciones están en `datos/confiabilidad.csv`.
 ## Cómo citar
 
-Belmar, F. (2026). *Tesis sobre el estallido social: mapa longitudinal y base de referencias* (versión 1.3.0) [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23455927
+Belmar, F. (2026). *Tesis sobre el estallido social: mapa longitudinal y base de referencias* (versión 1.4.0) [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23455927
 
 Si usas la tipología, cita también a Bellolio (2026).
 
