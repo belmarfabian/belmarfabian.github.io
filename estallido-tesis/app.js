@@ -300,6 +300,7 @@
     var det = document.getElementById("detail"); det.classList.remove("on");
     var hideT = null;
     function place(n) {
+      if (touch) return;
       var k = svg.node().getBoundingClientRect().height / H;
       var max = H * k - det.offsetHeight - 30, top;
       if (n.cx > sx0 - 70 && n.cx < sx1 + 70) {
@@ -312,7 +313,17 @@
       det.style.top = top + "px";
     }
     var top0 = top;
+    var touch = window.matchMedia && window.matchMedia("(hover: none)").matches;
+    if (touch && det.parentNode !== document.body) document.body.appendChild(det);
+    links.on("click", function (evt, n) {
+      // En pantallas táctiles, el primer toque muestra la referencia y el segundo abre la fuente
+      if (touch && state.sel !== n.d.id) { evt.preventDefault(); select(n.d, n); det.classList.add("on"); }
+    });
+    if (touch && !window._detClose) (window._detClose = true) && document.addEventListener("click", function (e) {
+      if (!e.target.closest("#detail") && !e.target.closest("a.nodelink")) { det.classList.remove("on"); state.sel = null; }
+    });
     links.on("mouseenter", function (evt, n) {
+      if (touch) return;
       clearTimeout(hideT); select(n.d, n); det.classList.add("on"); place(n);
     }).on("mouseleave", function () { hideT = setTimeout(function () { det.classList.remove("on"); }, 900); })
       .on("focus", function (evt, n) { select(n.d, n); det.classList.add("on"); place(n); });
