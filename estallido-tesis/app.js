@@ -85,7 +85,7 @@
   }
 
   function renderAll() {
-    buildChipsColors(); renderStats(); renderCaption(); renderMap(); renderBars(); renderCum(); renderTable(); renderLegend();
+    buildChipsColors(); renderStats(); renderCaption(); renderMap(); renderBars(); renderTable(); renderLegend();
   }
   function buildChipsColors() {
     document.querySelectorAll("#chips .chip i").forEach(function (el, i) { el.style.background = color(THESES[i].key); });
@@ -338,82 +338,47 @@
 
   function renderBars() {
     var host = document.getElementById("bars").parentNode;
-    var W = Math.max(300, host.clientWidth - 20), H = 220, m = { l: 28, r: 8, t: 10, b: 24 };
+    var W = Math.max(320, host.clientWidth - 20), H = 260, m = { l: 28, r: 8, t: 10, b: 24 };
     var svg = smallChart("#bars", W, H);
     var v = DATA.filter(visible);
     var years = d3.range(d3.min(v, function (d) { return d.anio; }) || 2019, Y1 + 1);
     var keys = THESES.map(function (t) { return t.key; }).filter(function (k) { return state.on[k]; });
-    var rows = years.map(function (yr) {
-      var o = { year: yr };
-      keys.forEach(function (k) { o[k] = v.filter(function (d) { return d.anio === yr && d.tesis === k; }).length; });
-      return o;
-    });
-    var stack = d3.stack().keys(keys)(rows);
+    var REG = ["investigacion", "ensayo", "opinion"], REGN = { investigacion: "investigación", ensayo: "ensayo", opinion: "opinión" };
     var x = d3.scaleBand().domain(years).range([m.l, W - m.r]).padding(0.28);
-    var ymax = d3.max(rows, function (r) { return d3.sum(keys, function (k) { return r[k]; }); }) || 1;
+    var ymax = d3.max(years, function (yr) { return v.filter(function (d) { return d.anio === yr; }).length; }) || 1;
     var y = d3.scaleLinear().domain([0, ymax]).nice().range([H - m.b, m.t]);
     y.ticks(4).forEach(function (t) {
       svg.append("line").attr("class", "gridline").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(t)).attr("y2", y(t));
       svg.append("text").attr("x", m.l - 6).attr("y", y(t) + 4).attr("text-anchor", "end").attr("font-size", 11).attr("fill", css("--muted")).text(t);
     });
     years.forEach(function (yr) {
-      if (years.length < 10 || yr % 2 === 0) svg.append("text").attr("x", x(yr) + x.bandwidth() / 2).attr("y", H - 6).attr("text-anchor", "middle").attr("font-size", 11).attr("fill", css("--muted")).text(yr);
+      if (W > 640 || years.length < 10 || yr % 2 === 0) svg.append("text").attr("x", x(yr) + x.bandwidth() / 2).attr("y", H - 6).attr("text-anchor", "middle").attr("font-size", 11).attr("fill", css("--muted")).text(yr);
     });
-    var bg = css("--bg"), tip2 = document.getElementById("tip2"), hostFig = host;
-    stack.forEach(function (layer) {
-      layer.forEach(function (seg) {
-        var h = y(seg[0]) - y(seg[1]); if (h <= 0) return;
-        svg.append("rect").attr("x", x(seg.data.year)).attr("width", x.bandwidth())
-          .attr("y", y(seg[1])).attr("height", Math.max(0, h - 2)).attr("rx", 2)
-          .attr("fill", color(layer.key)).attr("stroke", bg).attr("stroke-width", 0)
-          .on("mousemove", function (evt) {
-            var names = v.filter(function (d) { return d.anio === seg.data.year && d.tesis === layer.key; }).map(function (d) { return esc(d.etiqueta); }).join("<br>");
-            showTip(tip2, '<div class="t1">' + seg.data.year + " · " + esc(layer.key) + " (" + (seg[1] - seg[0]) + ')</div><div class="t2">' + names + "</div>", evt, hostFig);
-          }).on("mouseleave", function () { hideTip(tip2); });
-      });
-    });
-  }
-
-  function renderCum() {
-    var host = document.getElementById("cum").parentNode;
-    var W = Math.max(300, host.clientWidth - 20), H = 220, m = { l: 28, r: 22, t: 16, b: 24 };
-    var svg = smallChart("#cum", W, H);
-    var v = DATA.filter(visible);
-    var start = d3.min(v, function (d) { return d.anio; }) || 2019;
-    var years = d3.range(start, Y1 + 1);
-    var seen = new Set(), seenTh = new Set();
-    var pts = years.map(function (yr) {
-      var newOnes = [];
-      v.filter(function (d) { return d.anio === yr; }).forEach(function (d) {
-        var k = d.tesis + "|" + d.subcorriente; if (!seen.has(k)) { seen.add(k); newOnes.push(d.subcorriente + " (" + d.tesis + ")"); }
-        seenTh.add(d.tesis);
-      });
-      return { year: yr, n: seen.size, th: seenTh.size, nuevos: newOnes };
-    });
-    var x = d3.scaleLinear().domain([start, Y1]).range([m.l + 6, W - m.r]);
-    var y = d3.scaleLinear().domain([0, d3.max(pts, function (p) { return p.n; }) || 1]).nice().range([H - m.b, m.t]);
-    y.ticks(4).forEach(function (t) {
-      svg.append("line").attr("class", "gridline").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(t)).attr("y2", y(t));
-      svg.append("text").attr("x", m.l - 6).attr("y", y(t) + 4).attr("text-anchor", "end").attr("font-size", 11).attr("fill", css("--muted")).text(t);
-    });
+    var bg = css("--bg"), tip2 = document.getElementById("tip2");
     years.forEach(function (yr) {
-      if (years.length < 10 || yr % 2 === 0) svg.append("text").attr("x", x(yr)).attr("y", H - 6).attr("text-anchor", "middle").attr("font-size", 11).attr("fill", css("--muted")).text(yr);
+      var acc = 0;
+      keys.forEach(function (k) {
+        REG.forEach(function (r) {
+          var its = v.filter(function (d) { return d.anio === yr && d.tesis === k && d.registro === r; });
+          if (!its.length) return;
+          var y1 = y(acc + its.length), h = y(acc) - y1; acc += its.length;
+          var c = color(k);
+          svg.append("rect").attr("x", x(yr) + 0.75).attr("width", x.bandwidth() - 1.5)
+            .attr("y", y1 + 0.75).attr("height", Math.max(0, h - 2.5)).attr("rx", 2)
+            .attr("fill", r === "opinion" ? bg : c).attr("fill-opacity", r === "ensayo" ? 0.4 : 1)
+            .attr("stroke", c).attr("stroke-width", 1.5).attr("stroke-dasharray", r === "opinion" ? "4 2.5" : null)
+            .on("mousemove", function (evt) {
+              showTip(tip2, '<div class="t1">' + yr + " · " + esc(k) + " · " + REGN[r] + " (" + its.length + ')</div><div class="t2">' +
+                its.map(function (d) { return esc(d.etiqueta); }).join("<br>") + "</div>", evt, host);
+            }).on("mouseleave", function () { hideTip(tip2); });
+        });
+      });
     });
-    var line = d3.line().curve(d3.curveStepAfter).x(function (p) { return x(p.year); }).y(function (p) { return y(p.n); });
-    svg.append("path").datum(pts).attr("fill", "none").attr("stroke", css("--accent")).attr("stroke-width", 2).attr("d", line);
-    var tip3 = document.getElementById("tip3"), bg = css("--bg");
-    pts.forEach(function (p) {
-      if (!p.nuevos.length) return;
-      svg.append("circle").attr("cx", x(p.year)).attr("cy", y(p.n)).attr("r", 4.5).attr("fill", css("--accent")).attr("stroke", bg).attr("stroke-width", 2);
-    });
-    pts.forEach(function (p) {
-      svg.append("rect").attr("x", x(p.year) - 10).attr("y", m.t).attr("width", 20).attr("height", H - m.t - m.b).attr("fill", "transparent")
-        .on("mousemove", function (evt) {
-          showTip(tip3, '<div class="t1">' + p.year + ": " + p.n + " subcorrientes</div>" + (p.nuevos.length ? '<div class="t2">Nuevas: ' + p.nuevos.map(esc).join("; ") + "</div>" : '<div class="t2">Sin ramas nuevas</div>'), evt, host);
-        }).on("mouseleave", function () { hideTip(tip3); });
-    });
-    var last = pts[pts.length - 1];
-    svg.append("text").attr("x", x(last.year) - 4).attr("y", y(last.n) + 16).attr("text-anchor", "end").attr("font-size", 11).attr("fill", css("--text-2")).text(last.n + " subcorrientes");
+    var ink = css("--text-2");
+    document.getElementById("legend2").innerHTML =
+      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="2" fill="' + ink + '" stroke="' + ink + '" stroke-width="1.5"/></svg>Investigación</span>' +
+      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="2" fill="' + ink + '" fill-opacity=".4" stroke="' + ink + '" stroke-width="1.5"/></svg>Ensayo</span>' +
+      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="2" fill="' + bg + '" stroke="' + ink + '" stroke-dasharray="4 2.5" stroke-width="1.5"/></svg>Opinión, crónica o documento político</span>';
   }
 
   function renderTable() {

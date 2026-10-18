@@ -31,7 +31,7 @@ ROWS = [
   "confianza_codificacion": "media",
   "registro": "opinion",
   "rol": "antecedente",
-  "referencia": "López Tapia, A. (2013). Formulación de la tesis de la «revolución molecular disipada» [documento sin título verificado].",
+  "referencia": "López Tapia, A. (2013). Tesis de la «revolución molecular disipada». Citado en El Orden Mundial, «¿Qué es la revolución molecular disipada?».",
   "fuente_url": "https://elordenmundial.com/que-es-revolucion-molecular-disipada/",
   "nota": "Antecedente doctrinario; aplicada al 18-O desde 2019."
  },
@@ -289,7 +289,7 @@ ROWS = [
   "rol": "principal",
   "referencia": "Larraín Arroyo, L. (2020). El otro golpe: 18 de octubre de 2019 [prólogo de M. Cubillos].",
   "fuente_url": "https://www.pauta.cl/actualidad/2020/10/08/luis-larrain-crisis-social-le-podia-pasar-solo-a-un-gobierno-derecha.html",
-  "nota": "Editorial no verificada."
+  "nota": ""
  },
  {
   "id": "morales2020",
@@ -415,7 +415,7 @@ ROWS = [
   "confianza_codificacion": "baja",
   "registro": "ensayo",
   "rol": "principal",
-  "referencia": "Villegas, F. (2020). Insurrección. Edición independiente.",
+  "referencia": "Villegas, F. (2020). Insurrección.",
   "fuente_url": "https://www.goodreads.com/book/show/55819763-insurrecci-n",
   "nota": "Sugerido en X por @EMalvinito."
  },
@@ -593,7 +593,7 @@ ROWS = [
   "rol": "principal",
   "referencia": "Muñoz Riveros, S. (2023). La democracia bajo asedio. Presentado en julio de 2023.",
   "fuente_url": "https://www.ex-ante.cl/?p=160185",
-  "nota": "Sostiene que la revuelta requirió planificación, coordinación y recursos. Editorial no verificada. Comentarios al hilo de Bellolio."
+  "nota": "Sostiene que la revuelta requirió planificación, coordinación y recursos. Mencionado en los comentarios al hilo de Bellolio."
  },
 {
   "id": "hodge2024",
