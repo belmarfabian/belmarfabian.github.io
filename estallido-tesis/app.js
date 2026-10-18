@@ -9,7 +9,8 @@
     { key: "Otras lecturas", var: "--t-otr" }
   ];
   var Y0 = 2012, Y1 = 2026;
-  var state = { on: {}, reg: "todos", ant: true, sel: null, q: "" };
+  var state = { on: {}, reg: "todos", ant: true, sel: null, q: "", scheme: "bellolio" };
+  var EMER = ["Agravios del modelo económico", "Modernización y expectativas", "Experiencia cotidiana y malestar", "Representación, élites y legitimidad", "Dinámica de la movilización", "Operación política o conspiración", "Violencia y desintegración cultural"];
   THESES.forEach(function (t) { state.on[t.key] = true; });
 
   function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
@@ -65,6 +66,13 @@
   }
 
   function bind() {
+    document.querySelectorAll(".segb").forEach(function (b) {
+      b.addEventListener("click", function () {
+        state.scheme = b.getAttribute("data-scheme");
+        document.querySelectorAll(".segb").forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+        renderAll();
+      });
+    });
     document.getElementById("reg").addEventListener("change", function (e) { state.reg = e.target.value; renderAll(); });
     document.getElementById("ant").addEventListener("change", function (e) { state.ant = e.target.checked; renderAll(); });
     document.getElementById("q").addEventListener("input", function (e) { state.q = e.target.value.toLowerCase(); renderTable(); });
@@ -73,7 +81,7 @@
   }
 
   function renderAll() {
-    buildChipsColors(); renderStats(); renderMap(); renderBars(); renderCum(); renderTable(); renderLegend();
+    buildChipsColors(); renderStats(); renderCaption(); renderMap(); renderBars(); renderCum(); renderTable(); renderLegend();
   }
   function buildChipsColors() {
     document.querySelectorAll("#chips .chip i").forEach(function (el, i) { el.style.background = color(THESES[i].key); });
@@ -84,11 +92,17 @@
     var subs = new Set(v.map(function (d) { return d.tesis + "|" + d.subcorriente; }));
     var acad = v.filter(function (d) { return d.registro === "academico"; }).length;
     var authors = new Set(v.map(function (d) { return d.autores; }));
-    var html = [
-      [v.length, "obras"], [authors.size, "autores o fuentes"], [subs.size, "subcorrientes"],
-      [acad, "académicas o ensayo"], [v.length - acad, "opinión, crónica o documento"]
-    ].map(function (s) { return '<div class="stat"><b>' + s[0] + "</b><span>" + s[1] + "</span></div>"; }).join("");
-    document.getElementById("stats").innerHTML = html;
+    document.getElementById("stats").textContent = v.length + " obras de " + authors.size + " autores o fuentes, " +
+      subs.size + " subcorrientes. " + acad + " son literatura académica o ensayo y " + (v.length - acad) + " son opinión, crónica o documento político.";
+  }
+
+  function renderCaption() {
+    var c = document.getElementById("caption");
+    if (state.scheme === "emergente") {
+      c.textContent = "Figura 1. Las mismas obras ordenadas en una categorización emergente, según el mecanismo causal que invoca cada texto. Cada franja es una categoría y cada fila, una tesis de la tipología de Bellolio (2026); el color indica esa tesis. La categorización es de elaboración propia y preliminar. La línea punteada marca el 18 de octubre de 2019.";
+    } else {
+      c.textContent = "Figura 1. Mapa de las interpretaciones del estallido social, 2012–2026. Cada franja es una tesis de la tipología de Bellolio (2026) y cada fila, una subcorriente. La asignación de obras y las subcorrientes son de elaboración propia. Las obras que no calzan en las cuatro tesis van a «Otras lecturas». La línea punteada marca el 18 de octubre de 2019. Antes de 2019 la escala está comprimida.";
+    }
   }
 
   function renderLegend() {
@@ -101,20 +115,24 @@
   }
 
   function lanes() {
-    var out = [];
-    THESES.forEach(function (t) {
-      var items = DATA.filter(function (d) { return d.tesis === t.key && visible(d); });
+    var out = [], emer = state.scheme === "emergente";
+    var groups = emer ? EMER : THESES.map(function (t) { return t.key; });
+    groups.forEach(function (gk) {
+      var items = DATA.filter(function (d) { return (emer ? d.categoria_emergente : d.tesis) === gk && visible(d); });
       if (!items.length) return;
+      var rowKey = emer ? function (d) { return d.tesis; } : function (d) { return d.subcorriente; };
       var subs = [];
-      items.forEach(function (d) { if (subs.indexOf(d.subcorriente) < 0) subs.push(d.subcorriente); });
-      subs.sort(function (a, b) {
-        var fa = d3.min(items.filter(function (d) { return d.subcorriente === a; }), function (d) { return d.anio; });
-        var fb = d3.min(items.filter(function (d) { return d.subcorriente === b; }), function (d) { return d.anio; });
-        return fa - fb || a.localeCompare(b);
+      items.forEach(function (d) { if (subs.indexOf(rowKey(d)) < 0) subs.push(rowKey(d)); });
+      subs.sort(function (p, q) {
+        if (emer) return THESES.findIndex(function (t) { return t.key === p; }) - THESES.findIndex(function (t) { return t.key === q; });
+        var fa = d3.min(items.filter(function (d) { return rowKey(d) === p; }), function (d) { return d.anio; });
+        var fb = d3.min(items.filter(function (d) { return rowKey(d) === q; }), function (d) { return d.anio; });
+        return fa - fb || p.localeCompare(q);
       });
-      out.push({ thesis: t.key, subs: subs.map(function (s) {
-        var its = items.filter(function (d) { return d.subcorriente === s; });
-        return { name: s, items: its, first: d3.min(its, function (d) { return d.anio; }),
+      out.push({ name: gk, color: emer ? css("--faint") : color(gk), subs: subs.map(function (sn) {
+        var its = items.filter(function (d) { return rowKey(d) === sn; });
+        return { name: emer ? (sn === "Otras lecturas" ? sn : "Tesis " + sn.toLowerCase()) : sn, line: color(emer ? sn : gk), items: its,
+          first: d3.min(its, function (d) { return d.anio; }),
           opinionOnly: its.every(function (d) { return d.registro === "opinion"; }) };
       }) });
     });
@@ -169,11 +187,9 @@
     var g = svg.append("g");
 
     L.forEach(function (grp) {
-      var c = color(grp.thesis);
       g.append("rect").attr("x", 0).attr("y", grp.y0).attr("width", W).attr("height", grp.y1 - grp.y0)
-        .attr("rx", 10).attr("fill", c).attr("fill-opacity", 0.07);
-      g.append("rect").attr("x", 0).attr("y", grp.y0).attr("width", 4).attr("height", grp.y1 - grp.y0).attr("fill", c);
-      g.append("text").attr("class", "thesis-label").attr("x", 14).attr("y", grp.y0 + bandPad + 11).text(grp.thesis);
+        .attr("rx", 6).attr("fill", grp.color).attr("fill-opacity", state.scheme === "emergente" ? 0.06 : 0.07);
+      g.append("text").attr("class", "thesis-label").attr("x", 14).attr("y", grp.y0 + bandPad + 11).text(grp.name);
       grp.subs.forEach(function (s) {
         g.append("text").attr("class", "lane-label").attr("x", 14).attr("y", s.y0 + pillH / 2 + 4)
           .attr("font-style", "italic").text(s.name);
@@ -193,8 +209,9 @@
       .attr("fill", muted).attr("font-style", "italic").text("antecedentes (escala comprimida)");
     g.append("a").attr("href", "https://x.com/cbellolio/status/2111498263115272614").attr("target", "_blank").attr("rel", "noopener")
       .append("text").attr("x", 14).attr("y", top - 66).attr("font-size", 12).attr("font-weight", 600).attr("fill", css("--text"))
-      .attr("text-decoration", "underline").text("Tipología: Cristóbal Bellolio (2026) ↗");
-    g.append("text").attr("x", 14).attr("y", top - 50).attr("font-size", 11).attr("fill", muted).text("Asignación de obras: elaboración propia");
+      .attr("text-decoration", "underline").text(state.scheme === "emergente" ? "Colores: tesis de Cristóbal Bellolio (2026) ↗" : "Tipología: Cristóbal Bellolio (2026) ↗");
+    g.append("text").attr("x", 14).attr("y", top - 50).attr("font-size", 11).attr("fill", muted)
+      .text(state.scheme === "emergente" ? "Categorización emergente y asignación de obras: elaboración propia" : "Asignación de obras: elaboración propia");
     var ox = X(2019);
     g.append("line").attr("x1", ox).attr("x2", ox).attr("y1", top - 8).attr("y2", H - 22)
       .attr("stroke", css("--accent")).attr("stroke-width", 1.5).attr("stroke-dasharray", "2 3");
@@ -219,7 +236,7 @@
           var a = byYear[i], b = byYear[i + 1];
           var x1 = X(a.yr) + a.halfW, x2 = X(b.yr) - b.halfW, mx = (x1 + x2) / 2;
           var dashed = a.items.concat(b.items).every(function (d) { return d.registro === "opinion"; });
-          links.append("path").attr("fill", "none").attr("stroke", color(grp.thesis)).attr("stroke-width", 1.5).attr("opacity", 0.75)
+          links.append("path").attr("fill", "none").attr("stroke", s.line).attr("stroke-width", 1.5).attr("opacity", 0.75)
             .attr("stroke-dasharray", dashed ? "4 3" : null)
             .attr("d", "M" + x1 + "," + a.cy + " C" + mx + "," + a.cy + " " + mx + "," + b.cy + " " + x2 + "," + b.cy);
         }
@@ -263,7 +280,7 @@
     var rol = d.rol === "antecedente" ? " · Antecedente previo al 18-O" : "";
     document.getElementById("detail").innerHTML =
       '<div class="ref">' + esc(d.referencia) + "</div>" +
-      '<div class="meta"><span style="color:' + color(d.tesis) + '">●</span> ' + esc(d.tesis) + " · " + esc(d.subcorriente) + " · " + reg + rol +
+      '<div class="meta"><span style="color:' + color(d.tesis) + '">●</span> ' + esc(d.tesis) + " · " + esc(d.subcorriente) + " · Categoría emergente: " + esc(d.categoria_emergente) + " · " + reg + rol +
       (d.nota ? "<br>" + esc(d.nota) : "") +
       ' · <a href="' + esc(d.fuente_url) + '" target="_blank" rel="noopener">Ver fuente ↗</a></div>';
   }
@@ -358,13 +375,14 @@
     var tb = document.querySelector("#tbl tbody");
     var rows = DATA.filter(visible).filter(function (d) {
       if (!state.q) return true;
-      return (d.referencia + " " + d.tesis + " " + d.subcorriente + " " + d.autores).toLowerCase().indexOf(state.q) >= 0;
+      return (d.referencia + " " + d.tesis + " " + d.subcorriente + " " + d.categoria_emergente + " " + d.autores).toLowerCase().indexOf(state.q) >= 0;
     }).sort(function (a, b) { return a.anio - b.anio || a.tesis.localeCompare(b.tesis) || a.etiqueta.localeCompare(b.etiqueta); });
     tb.innerHTML = rows.map(function (d) {
       return "<tr><td>" + d.anio + '</td><td><span class="dot" style="background:' + color(d.tesis) + '"></span>' + esc(d.tesis) +
         "</td><td>" + esc(d.subcorriente) + (d.registro === "opinion" ? ' <span style="color:var(--faint)">(opinión)</span>' : "") +
+        "</td><td>" + esc(d.categoria_emergente) +
         '</td><td class="ref">' + esc(d.referencia) + (d.nota ? '<div style="font-family:Inter,sans-serif;font-size:12px;color:var(--muted)">' + esc(d.nota) + "</div>" : "") +
         '</td><td><a href="' + esc(d.fuente_url) + '" target="_blank" rel="noopener">↗</a></td></tr>';
-    }).join("") || '<tr><td colspan="5" style="color:var(--muted)">Sin resultados.</td></tr>';
+    }).join("") || '<tr><td colspan="6" style="color:var(--muted)">Sin resultados.</td></tr>';
   }
 })();

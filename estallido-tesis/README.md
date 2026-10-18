@@ -7,7 +7,9 @@ Mapa longitudinal y base de referencias sobre las interpretaciones del estallido
 ## Autoría
 
 - **Tipología de las cuatro tesis** (transformacional, populista, estructural e insurreccional): Cristóbal Bellolio. Bellolio, C. [@cbellolio]. (2026, 17 de octubre). *A propósito del aniversario del 18O, hice un barrido por la literatura académica…* [Hilo]. X. https://x.com/cbellolio/status/2111498263115272614
-- **Asignación de obras, subcorrientes, variables y visualización**: elaboración propia (Fabián Belmar). Bellolio no participó en la ubicación de los autores.
+- **Asignación de obras, subcorrientes, categorización emergente, variables y visualización**: elaboración propia (Fabián Belmar). Bellolio no participó en la ubicación de los autores.
+
+La base no se limita a la tipología de Bellolio. Las obras que no calzan en las cuatro tesis van a «Otras lecturas», y la variable `categoria_emergente` ofrece una segunda clasificación, independiente de esa tipología.
 
 - Página: https://belmarfabian.github.io/estallido-tesis/
 - Datos: `datos/tesis_estallido.csv` y `datos/tesis_estallido.json` (se generan con `datos/build.py`)
@@ -22,7 +24,8 @@ Mapa longitudinal y base de referencias sobre las interpretaciones del estallido
 | autores | Autores o fuente |
 | anio | Año de publicación o declaración |
 | tesis | Tesis de Bellolio, u «Otras lecturas» |
-| subcorriente | Variante dentro de la tesis |
+| subcorriente | Variante dentro de la tesis (elaboración propia) |
+| categoria_emergente | Categoría de la clasificación emergente, según el mecanismo causal que invoca la obra (elaboración propia, preliminar) |
 | registro | `academico` (literatura académica y ensayo) u `opinion` (discurso político, entrevista, columna) |
 | enfoque | `normativo` (la explicación va unida a una toma de posición) o `empirico` (explica sin juzgar el estallido). Clasificación preliminar |
 | rol | `principal` o `antecedente` (anterior al 18-O) |
@@ -32,7 +35,7 @@ Mapa longitudinal y base de referencias sobre las interpretaciones del estallido
 
 ## Cómo citar
 
-Belmar, F. (2026). *Tesis sobre el estallido social: mapa longitudinal y base de referencias* (versión 1.0.1) [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23455927
+Belmar, F. (2026). *Tesis sobre el estallido social: mapa longitudinal y base de referencias* (versión 1.1.0) [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23455927
 
 Si usas la tipología, cita también a Bellolio (2026).
 

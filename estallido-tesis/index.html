@@ -43,13 +43,15 @@ body{font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.6;-webk
 .top a{color:var(--muted);text-decoration:none}.top a:hover{color:var(--accent)}
 .theme{background:none;border:1px solid var(--border);color:var(--text-2);border-radius:6px;width:30px;height:30px;cursor:pointer;font-size:15px}
 header{margin:28px 0 20px}
-.kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:600}
 h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:clamp(26px,4vw,36px);line-height:1.15;margin:6px 0 10px;letter-spacing:-.01em}
 .lede{max-width:72ch;color:var(--text-2);margin:0}
 .lede a,.prose a,td a,.detail a{color:var(--accent)}
-.stats{display:flex;flex-wrap:wrap;gap:28px;margin:22px 0 6px;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.stat b{display:block;font-family:"Source Serif 4",Georgia,serif;font-size:26px;font-weight:600;line-height:1.1}
-.stat span{font-size:12px;color:var(--muted)}
+.credit{max-width:72ch;color:var(--muted);font-size:13.5px;margin:12px 0 0}
+.stats{max-width:72ch;color:var(--muted);font-size:13.5px;margin:6px 0 0}
+.seg{display:inline-flex;border:1px solid var(--border-strong);border-radius:6px;overflow:hidden}
+.segb{font:inherit;font-size:13px;background:var(--bg);color:var(--text-2);border:0;padding:6px 12px;cursor:pointer}
+.segb+.segb{border-left:1px solid var(--border-strong)}
+.segb[aria-pressed="true"]{background:var(--text);color:var(--bg)}
 .controls{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:22px 0 10px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border-strong);background:var(--bg);color:var(--text-2);border-radius:999px;padding:4px 11px 4px 9px;font:inherit;font-size:13px;cursor:pointer}
@@ -74,12 +76,11 @@ a.nodelink:focus-visible .mk{stroke:var(--text);stroke-width:2.5}
 .node:focus .mk,.node.sel .mk{stroke:var(--text);stroke-width:2.5}
 .dim{opacity:.12}
 figcaption{font-family:"Source Serif 4",Georgia,serif;font-size:14px;color:var(--text-2);margin:10px 4px 0;max-width:80ch}
-figcaption b{font-family:Inter,sans-serif;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-right:6px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--muted);margin:8px 4px 2px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .tip{position:absolute;pointer-events:none;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;padding:8px 10px;font-size:12.5px;max-width:300px;box-shadow:0 4px 18px rgba(0,0,0,.08);opacity:0;transition:opacity .12s;z-index:5}
 .tip .t1{font-weight:600}.tip .t2{color:var(--muted)}
-.detail{margin:12px 0 0;padding:14px 16px;border-left:3px solid var(--accent);background:var(--surface);border-radius:0;font-size:14px;min-height:56px}
+.detail{margin:12px 0 0;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);font-size:14px;min-height:56px}
 .detail .ref{font-family:"Source Serif 4",Georgia,serif;font-size:15px}
 .detail .meta{color:var(--muted);font-size:12.5px;margin-top:6px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
@@ -103,13 +104,6 @@ td .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right
 pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;overflow:auto}
 footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted)}
 .tw{overflow-x:auto}
-.authorship{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 0}
-@media (max-width:700px){.authorship{grid-template-columns:1fr}}
-.authorship>div{border:1px solid var(--border);border-radius:8px;padding:10px 14px;background:var(--surface)}
-.authorship .al{display:block;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.authorship b{display:block;font-family:"Source Serif 4",Georgia,serif;font-size:18px;font-weight:600;margin:2px 0}
-.authorship .as{display:block;font-size:12.5px;color:var(--text-2);line-height:1.5}
-.authorship a{color:var(--accent);word-break:break-all}
 </style>
 </head>
 <body>
@@ -117,16 +111,18 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
   <div class="top"><a href="../">← Fabián Belmar</a><button class="theme" id="themeBtn" aria-label="Cambiar tema">◐</button></div>
 
   <header>
-    <div class="kicker">Datos abiertos · Estallido social 2019</div>
     <h1>¿Qué fue el 18-O? Mapa longitudinal de las tesis</h1>
-    <p class="lede">Cristóbal Bellolio propuso una tipología de cuatro tesis sobre el estallido social: transformacional, populista, estructural e insurreccional (<a href="https://x.com/cbellolio/status/2111498263115272614">hilo en X</a>, 17 de octubre de 2026). Este mapa toma esa tipología y ubica en ella a los autores que la sostienen, según su año de publicación. Cada referencia está verificada y enlaza a su fuente.</p>
-    <div class="authorship">
-      <div><span class="al">Tipología de las cuatro tesis</span><b>Cristóbal Bellolio</b><span class="as">Bellolio, C. [@cbellolio]. (2026, 17 de octubre). <i>A propósito del aniversario del 18O, hice un barrido por la literatura académica…</i> [Hilo]. X. <a href="https://x.com/cbellolio/status/2111498263115272614">https://x.com/cbellolio/status/2111498263115272614</a></span></div>
-      <div><span class="al">Asignación de obras, datos y visualización</span><b>Elaboración propia</b><span class="as">Fabián Belmar. Bellolio no participó en la ubicación de los autores; los errores de asignación son nuestros.</span></div>
-    </div>
-    <div class="stats" id="stats"></div>
+    <p class="lede">Cristóbal Bellolio propuso una tipología de cuatro tesis sobre el estallido social: transformacional, populista, estructural e insurreccional (<a href="https://x.com/cbellolio/status/2111498263115272614">hilo en X</a>, 17 de octubre de 2026). Este mapa ubica en esa tipología a los autores que sostienen cada tesis, según su año de publicación. También permite ver las mismas obras ordenadas en una categorización emergente, construida desde el argumento de cada texto. Cada referencia está verificada y enlaza a su fuente.</p>
+    <p class="credit">La tipología de las cuatro tesis es de Cristóbal Bellolio. La asignación de obras, las subcorrientes, la categorización emergente y la visualización son de elaboración propia (Fabián Belmar). Bellolio no participó en la ubicación de los autores; los errores de asignación son nuestros.</p>
+    <p class="stats" id="stats"></p>
   </header>
 
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Ordenar las obras según">
+      <button type="button" class="segb" data-scheme="bellolio" aria-pressed="true">Tipología de Bellolio</button>
+      <button type="button" class="segb" data-scheme="emergente" aria-pressed="false">Categorización emergente</button>
+    </div>
+  </div>
   <div class="controls">
     <div class="chips" id="chips" role="group" aria-label="Filtrar por tesis"></div>
     <select id="reg" aria-label="Filtrar por registro">
@@ -143,7 +139,7 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
       <div class="legend" id="legend"></div>
       <div class="tip" id="tip"></div>
     </div>
-    <figcaption><b>Figura 1</b>Mapa de las interpretaciones del estallido social, 2012–2026. Cada franja es una de las tesis de la tipología de Bellolio (2026) y cada fila, una subcorriente. La asignación de obras y las subcorrientes son de elaboración propia. Las obras se ubican en su año de publicación y las líneas unen obras de una misma subcorriente. La línea punteada marca el 18 de octubre de 2019. Antes de 2019 la escala está comprimida.</figcaption>
+    <figcaption id="caption">Figura 1. Mapa de las interpretaciones del estallido social, 2012–2026.</figcaption>
   </figure>
   <div class="detail" id="detail" aria-live="polite"><span style="color:var(--muted)">Pasa el cursor sobre un nombre para ver su referencia completa. Haz clic para abrir la fuente.</span></div>
 
@@ -169,27 +165,30 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
       <a class="btn" href="https://doi.org/10.5281/zenodo.23455927">Zenodo (DOI)</a>
       <a class="btn" href="figura_mapa_estallido.png" download>Figura PNG</a>
       <a class="btn" href="figura_mapa_estallido_oscuro.png" download>Figura PNG (oscuro)</a>
+      <a class="btn" href="figura_mapa_emergente.png" download>Figura emergente PNG</a>
     </div>
   </div>
-  <div class="tw"><table id="tbl"><thead><tr><th>Año</th><th>Tesis</th><th>Subcorriente</th><th>Referencia</th><th>Fuente</th></tr></thead><tbody></tbody></table></div>
+  <div class="tw"><table id="tbl"><thead><tr><th>Año</th><th>Tesis</th><th>Subcorriente</th><th>Categoría emergente</th><th>Referencia</th><th>Fuente</th></tr></thead><tbody></tbody></table></div>
 
   <h2>Criterios</h2>
   <div class="prose">
-    <p>La tipología de cuatro tesis es de Cristóbal Bellolio. La asignación de cada obra a una tesis, las subcorrientes, la rama «Otras lecturas» y las variables de registro y enfoque son de elaboración propia. Bellolio no revisó esta asignación. Cada obra se ubica según la tesis central que defiende sobre las causas del estallido. Cuando una obra combina tesis, va en la que domina su argumento. Solo se incluyen referencias cuyo año, autor y argumento se verificaron en una fuente publicada.</p>
-    <p>El borde discontinuo marca columnas, crónicas, entrevistas, declaraciones y documentos de gobierno. Todas las obras de la tesis insurreccional están en ese registro; no se encontró literatura académica que la defienda. La rama «Otras lecturas» reúne interpretaciones que no caben en las cuatro tesis. Algunas obras son casos límite entre dos tesis (por ejemplo, Edwards y Tironi); la nota de cada referencia lo indica.</p>
+    <p>La tipología de cuatro tesis es de Cristóbal Bellolio. La asignación de cada obra a una tesis, las subcorrientes y las variables de registro y enfoque son de elaboración propia. Bellolio no revisó esta asignación. Cada obra se ubica según la tesis central que defiende sobre las causas del estallido. Cuando una obra combina tesis, va en la que domina su argumento. Solo se incluyen referencias cuyo año, autor y argumento se verificaron en una fuente publicada.</p>
+    <p>La base no se limita a la tipología de Bellolio. Las obras que no calzan en ninguna de las cuatro tesis no se excluyen: van a la rama «Otras lecturas». Si una obra conocida no aparece en las cuatro tesis, lo más probable es que esté en esa rama o que aún no se haya verificado. En ese caso, se puede proponer.</p>
+    <p>La categorización emergente es una segunda lectura de las mismas obras. No parte de una tipología previa. Agrupa cada texto según el mecanismo causal que invoca: agravios del modelo económico, modernización y expectativas, experiencia cotidiana y malestar, representación y legitimidad, dinámica de la movilización, operación política, o violencia y desintegración cultural. En esa vista el color de cada obra sigue indicando su tesis en la tipología de Bellolio, para mostrar dónde ambas clasificaciones coinciden y dónde se cruzan. Es una propuesta preliminar.</p>
+    <p>El borde discontinuo marca columnas, crónicas, entrevistas, declaraciones y documentos de gobierno. Todas las obras de la tesis insurreccional están en ese registro; no se encontró literatura académica que la defienda. Algunas obras son casos límite entre dos tesis (por ejemplo, Edwards y Tironi); la nota de cada referencia lo indica.</p>
     <p>Para una revisión sistemática de la literatura, ver Joignant y Garrido-Vergara (2025), «Revisiting the Chilean Social Uprising», <i>Latin American Research Review</i>, 60(4).</p>
   </div>
 
   <h2>Cómo citar</h2>
   <p style="margin:0 0 10px"><a href="https://doi.org/10.5281/zenodo.23455927"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23455927.svg" alt="DOI 10.5281/zenodo.23455927" height="20"></a></p>
-  <div class="cite" id="cite">Belmar, F. (2026). <i>Tesis sobre el estallido social: mapa longitudinal y base de referencias</i> (versión 1.0.1) [Conjunto de datos]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23455927">https://doi.org/10.5281/zenodo.23455927</a></div>
+  <div class="cite" id="cite">Belmar, F. (2026). <i>Tesis sobre el estallido social: mapa longitudinal y base de referencias</i> (versión 1.1.0) [Conjunto de datos]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23455927">https://doi.org/10.5281/zenodo.23455927</a></div>
   <p class="sub" style="margin-top:8px">El DOI apunta siempre a la última versión; cada versión tiene además su propio DOI en <a href="https://doi.org/10.5281/zenodo.23455927" style="color:var(--accent)">Zenodo</a>. Si usas la tipología, cita también a Bellolio (2026). Datos y código en <a href="https://github.com/belmarfabian/estallido-tesis" style="color:var(--accent)">GitHub</a>.</p>
   <details style="margin-top:10px"><summary style="cursor:pointer;font-size:13px;color:var(--muted)">BibTeX</summary>
 <pre>@dataset{belmar2026estallido,
   author    = {Belmar, Fabián},
   title     = {Tesis sobre el estallido social: mapa longitudinal y base de referencias},
   year      = {2026},
-  version   = {1.0.1},
+  version   = {1.1.0},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.23455927},
   url       = {https://doi.org/10.5281/zenodo.23455927},
@@ -197,10 +196,10 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
 }</pre></details>
 
   <h2>Proponer una referencia</h2>
-  <div class="prose"><p>Si falta una obra, envíala con autor, año, título y la tesis que defiende. La reviso y, si la puedo verificar, entra en la próxima versión.</p></div>
+  <div class="prose"><p>Si falta una obra, envíala con autor, año, título y su argumento central, aunque no calce en la tipología de Bellolio. Si se puede verificar, entra en la próxima versión.</p></div>
   <div class="btns"><a class="btn primary" id="propose" href="#">Proponer en GitHub</a><a class="btn" href="https://x.com/fabianbelmar_">Escribir en X</a></div>
 
-  <footer>Tipología: Cristóbal Bellolio (2026) · Asignación de obras y visualización: Fabián Belmar · Centro de Estudios Públicos · ORCID <a href="https://orcid.org/0000-0003-4239-1874" style="color:inherit">0000-0003-4239-1874</a> · Versión 1.0.1, octubre de 2026 · Datos bajo licencia CC BY 4.0.</footer>
+  <footer>Tipología: Cristóbal Bellolio (2026) · Asignación de obras y visualización: Fabián Belmar · Centro de Estudios Públicos · ORCID <a href="https://orcid.org/0000-0003-4239-1874" style="color:inherit">0000-0003-4239-1874</a> · Versión 1.1.0, octubre de 2026 · Datos bajo licencia CC BY 4.0.</footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
