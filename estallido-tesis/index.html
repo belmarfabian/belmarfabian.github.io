@@ -92,6 +92,7 @@ figcaption{font-family:"Source Serif 4",Georgia,serif;font-size:14px;color:var(-
 .detail .meta{color:var(--muted);font-size:12px;margin-top:8px;text-align:justify;hyphens:auto}
 .detail .meta div{margin-top:3px}
 .bars{margin-top:26px}
+.dl p{text-align:left;margin:0 0 6px}
 .hist p{margin:0 0 6px;font-size:14px}
 h2{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:22px;margin:40px 0 8px}
 h3{font-size:13px;font-weight:600;margin:0 0 4px;color:var(--text)}
@@ -172,14 +173,6 @@ tr.grp td{padding:18px 8px 6px;font-weight:600;font-size:14px;border-bottom:1px 
   <h2 class="wide">Referencias</h2>
   <div class="tbar">
     <input class="search" id="q" type="search" placeholder="Buscar autor, título o tesis…" aria-label="Buscar en referencias" style="min-width:240px">
-    <div class="btns">
-      <a class="btn" href="datos/tesis_estallido.csv" download>Descargar CSV</a>
-      <a class="btn" href="datos/tesis_estallido.json" download>Descargar JSON</a>
-      <a class="btn" href="https://doi.org/10.5281/zenodo.23455927">Zenodo (DOI)</a>
-      <a class="btn" href="figura_mapa_estallido.png" download>Figura PNG</a>
-      <a class="btn" href="figura_mapa_estallido_oscuro.png" download>Figura PNG (oscuro)</a>
-      <a class="btn" href="figura_mapa_emergente.png" download>Figura emergente PNG</a>
-    </div>
   </div>
   <div class="tw"><table id="tbl"><thead><tr><th data-sort="anio" role="button" tabindex="0">Año ↕</th><th>Subcorriente</th><th>Mecanismos causales</th><th data-sort="autor" role="button" tabindex="0">Referencia ↕</th><th>Fuente</th></tr></thead><tbody></tbody></table></div>
 
@@ -191,6 +184,12 @@ tr.grp td{padding:18px 8px 6px;font-weight:600;font-size:14px;border-bottom:1px 
     <p>El borde distingue tres registros. El borde continuo marca investigación: artículos en revistas arbitradas, monografías académicas basadas en evidencia y encuestas. El punteado fino marca ensayo: libros y capítulos que interpretan el estallido sin evidencia original sistemática, aunque sus autores sean académicos o publiquen en editoriales universitarias. El punteado grueso marca textos breves: columnas, crónicas de prensa, entrevistas, declaraciones, publicaciones en redes y documentos de gobierno o de centros de estudio. Un libro nunca se clasifica como opinión. El criterio se aplica igual a las cinco ramas. Algunas obras son casos límite entre dos tesis (por ejemplo, Contardo, Edwards y Tironi); la nota de cada referencia lo indica.</p>
     <p>Para evaluar la confiabilidad, un segundo codificador clasificó las 41 obras a ciegas, con las mismas definiciones y el mismo libro de códigos. El segundo codificador fue un modelo de lenguaje, no una persona; por eso la prueba es un contraste preliminar y no reemplaza a un codificador humano. El acuerdo en la tesis fue de 40 sobre 41 obras (kappa de Cohen = 0,97); el único desacuerdo es Contardo (2020), que se mantiene como transformacional con una nota. En el registro, el kappa fue 0,96 y en el mecanismo principal, 0,83. El acuerdo en el conjunto de mecanismos fue menor (alfa de Krippendorff = 0,64), bajo el umbral de 0,667 que Krippendorff (2004) propone para conclusiones tentativas. Los mecanismos secundarios deben leerse con cautela. Las dos codificaciones están en <a href="datos/confiabilidad.csv">confiabilidad.csv</a>.</p>
     <p>Para una revisión sistemática de la literatura, ver Joignant y Garrido-Vergara (2025), «Revisiting the Chilean Social Uprising», <i>Latin American Research Review</i>, 60(4).</p>
+  </div>
+
+  <h2 id="datos">Datos y figuras</h2>
+  <div class="prose dl">
+    <p><b>Datos:</b> <a href="datos/tesis_estallido.csv" download>base en CSV</a> · <a href="datos/tesis_estallido.json" download>JSON</a> · <a href="datos/libro_de_codigos.csv" download>libro de códigos</a> · <a href="datos/confiabilidad.csv" download>prueba de confiabilidad</a> · <a href="https://github.com/belmarfabian/estallido-tesis">repositorio</a></p>
+    <p><b>Figuras (PNG):</b> <a href="figura_mapa_estallido.png" download>mapa por tesis</a> · <a href="figura_mapa_estallido_oscuro.png" download>mapa por tesis, fondo oscuro</a> · <a href="figura_mapa_emergente.png" download>mapa por mecanismos</a></p>
   </div>
 
   <h2 id="citar">Cómo citar</h2>
