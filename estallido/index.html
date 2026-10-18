@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tesis sobre el estallido social</title>
+<meta name="description" content="Mapa longitudinal de las interpretaciones del estallido social chileno de 2019: autores, años y tesis. Datos abiertos para citar.">
+<meta name="author" content="Fabián Belmar">
+<meta property="og:title" content="Tesis sobre el estallido social — mapa longitudinal">
+<meta property="og:description" content="Autores y años detrás de las cuatro tesis sobre el 18-O. Datos abiertos.">
+<meta property="og:url" content="https://belmarfabian.github.io/estallido/">
+<meta property="og:image" content="https://belmarfabian.github.io/estallido/figura_mapa_estallido.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script>
+(function(){var s=null;try{s=localStorage.getItem('theme')}catch(e){}
+if(s)document.documentElement.setAttribute('data-theme',s);
+else if(window.matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+<style>
+:root{
+  --bg:#ffffff;--surface:#f5f5f2;--border:#e3e3df;--border-strong:#ccccc7;
+  --text:#111111;--text-2:#383838;--muted:#666666;--faint:#9a9a9a;
+  --accent:#3a5f87;--accent-soft:#e8eef4;
+  --t-trans:#2a78d6;--t-pop:#eb6834;--t-est:#1baf7a;--t-ins:#eda100;--t-otr:#9a9a9a;
+  --grid:#ececE8;--band:rgba(58,95,135,.07);
+}
+[data-theme="dark"]{
+  --bg:#141414;--surface:#1c1c1b;--border:#2c2c2a;--border-strong:#3c3c39;
+  --text:#f0f0ee;--text-2:#c4c4c0;--muted:#9a9a95;--faint:#6e6e69;
+  --accent:#6b9bc9;--accent-soft:#1a232e;
+  --t-trans:#3987e5;--t-pop:#d95926;--t-est:#199e70;--t-ins:#c98500;--t-otr:#6e6e69;
+  --grid:#262624;--band:rgba(107,155,201,.09);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text)}
+body{font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 16px 64px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+.top a{color:var(--muted);text-decoration:none}.top a:hover{color:var(--accent)}
+.theme{background:none;border:1px solid var(--border);color:var(--text-2);border-radius:6px;width:30px;height:30px;cursor:pointer;font-size:15px}
+header{margin:28px 0 20px}
+.kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:clamp(26px,4vw,36px);line-height:1.15;margin:6px 0 10px;letter-spacing:-.01em}
+.lede{max-width:72ch;color:var(--text-2);margin:0}
+.lede a,.prose a,td a,.detail a{color:var(--accent)}
+.stats{display:flex;flex-wrap:wrap;gap:28px;margin:22px 0 6px;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat b{display:block;font-family:"Source Serif 4",Georgia,serif;font-size:26px;font-weight:600;line-height:1.1}
+.stat span{font-size:12px;color:var(--muted)}
+.controls{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:22px 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border-strong);background:var(--bg);color:var(--text-2);border-radius:999px;padding:4px 11px 4px 9px;font:inherit;font-size:13px;cursor:pointer}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.chip[aria-pressed="false"]{opacity:.45}
+.chip[aria-pressed="false"] i{background:transparent!important;border:1.5px solid var(--faint)}
+select,.search{font:inherit;font-size:13px;color:var(--text);background:var(--bg);border:1px solid var(--border-strong);border-radius:6px;padding:5px 8px}
+label.cb{font-size:13px;color:var(--text-2);display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+figure{margin:0}
+.fig{border:1px solid var(--border);border-radius:10px;background:var(--bg);padding:14px 10px 6px;position:relative}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.bleed{width:min(1640px,calc(100vw - 32px));position:relative;left:50%;transform:translateX(-50%)}
+svg text{font-family:Inter,system-ui,sans-serif}
+.axis text{fill:var(--muted);font-size:11px}
+.axis line,.axis path{stroke:var(--border-strong)}
+.gridline{stroke:var(--grid)}
+.lane-label{font-size:12px;fill:var(--text-2)}
+.thesis-label{font-size:13px;font-weight:600;fill:var(--text)}
+.node{cursor:pointer}
+.node:focus{outline:none}
+.node:focus .mk,.node.sel .mk{stroke:var(--text);stroke-width:2.5}
+.dim{opacity:.12}
+figcaption{font-family:"Source Serif 4",Georgia,serif;font-size:14px;color:var(--text-2);margin:10px 4px 0;max-width:80ch}
+figcaption b{font-family:Inter,sans-serif;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--muted);margin:8px 4px 2px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.tip{position:absolute;pointer-events:none;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;padding:8px 10px;font-size:12.5px;max-width:300px;box-shadow:0 4px 18px rgba(0,0,0,.08);opacity:0;transition:opacity .12s;z-index:5}
+.tip .t1{font-weight:600}.tip .t2{color:var(--muted)}
+.detail{margin:12px 0 0;padding:14px 16px;border-left:3px solid var(--accent);background:var(--surface);border-radius:0;font-size:14px;min-height:56px}
+.detail .ref{font-family:"Source Serif 4",Georgia,serif;font-size:15px}
+.detail .meta{color:var(--muted);font-size:12.5px;margin-top:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+h2{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:22px;margin:40px 0 8px}
+h3{font-size:13px;font-weight:600;margin:0 0 4px;color:var(--text)}
+.sub{font-size:12.5px;color:var(--muted);margin:0 0 6px}
+.prose{max-width:74ch;color:var(--text-2)}
+.prose p{margin:0 0 12px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-weight:600;font-size:12px;color:var(--muted);border-bottom:1px solid var(--border-strong);padding:8px 8px 6px;white-space:nowrap}
+td{border-bottom:1px solid var(--border);padding:8px;vertical-align:top}
+td.ref{font-family:"Source Serif 4",Georgia,serif;font-size:14px}
+td .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.tbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:inherit;font-size:13px;text-decoration:none;color:var(--text);border:1px solid var(--border-strong);background:var(--bg);border-radius:6px;padding:6px 11px;cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.cite{font-family:"Source Serif 4",Georgia,serif;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:14.5px}
+pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;overflow:auto}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted)}
+.tw{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="../">← Fabián Belmar</a><button class="theme" id="themeBtn" aria-label="Cambiar tema">◐</button></div>
+
+  <header>
+    <div class="kicker">Datos abiertos · Estallido social 2019</div>
+    <h1>¿Qué fue el 18-O? Mapa longitudinal de las tesis</h1>
+    <p class="lede">Cristóbal Bellolio distinguió cuatro tesis sobre el estallido social: transformacional, populista, estructural e insurreccional (<a href="https://x.com/cbellolio/status/2111498263115272614">hilo en X</a>, 17 de octubre de 2026). Este mapa ubica a los autores de cada tesis según su año de publicación. Cada referencia está verificada y enlaza a su fuente.</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="controls">
+    <div class="chips" id="chips" role="group" aria-label="Filtrar por tesis"></div>
+    <select id="reg" aria-label="Filtrar por registro">
+      <option value="todos">Todos los registros</option>
+      <option value="academico">Solo literatura académica y ensayo</option>
+      <option value="opinion">Solo discurso político y opinión</option>
+    </select>
+    <label class="cb"><input type="checkbox" id="ant" checked> Antecedentes previos a 2019</label>
+  </div>
+
+  <figure class="bleed">
+    <div class="fig">
+      <div class="scroll"><svg id="map" role="img" aria-labelledby="mapTitle mapDesc"><title id="mapTitle">Mapa longitudinal de las tesis sobre el estallido social</title><desc id="mapDesc">Cada punto es una obra ubicada por año. Las filas agrupan subcorrientes dentro de cada tesis; cada rama nace el año de su primera obra.</desc></svg></div>
+      <div class="legend" id="legend"></div>
+      <div class="tip" id="tip"></div>
+    </div>
+    <figcaption><b>Figura 1</b>Mapa de las interpretaciones del estallido social, 2012–2026. Cada franja es una tesis de Bellolio y cada fila una subcorriente. Las obras se ubican en su año de publicación y las líneas unen obras de una misma subcorriente. Antes de 2019 la escala está comprimida.</figcaption>
+  </figure>
+  <div class="detail" id="detail" aria-live="polite"><span style="color:var(--muted)">Selecciona un punto para ver la referencia completa y su fuente.</span></div>
+
+  <div class="two">
+    <figure>
+      <h3>Obras por año y tesis</h3>
+      <p class="sub">Número de obras publicadas cada año.</p>
+      <div class="fig"><svg id="bars" role="img" aria-label="Barras apiladas de obras por año y tesis"></svg><div class="tip" id="tip2"></div></div>
+    </figure>
+    <figure>
+      <h3>Complejidad acumulada</h3>
+      <p class="sub">Subcorrientes distintas con al menos una obra, acumuladas por año.</p>
+      <div class="fig"><svg id="cum" role="img" aria-label="Línea escalonada de subcorrientes acumuladas"></svg><div class="tip" id="tip3"></div></div>
+    </figure>
+  </div>
+
+  <h2>Referencias</h2>
+  <div class="tbar">
+    <input class="search" id="q" type="search" placeholder="Buscar autor, título o tesis…" aria-label="Buscar en referencias" style="min-width:240px">
+    <div class="btns">
+      <a class="btn" href="datos/tesis_estallido.csv" download>Descargar CSV</a>
+      <a class="btn" href="datos/tesis_estallido.json" download>Descargar JSON</a>
+      <a class="btn" href="figura_mapa_estallido.png" download>Figura PNG</a>
+      <a class="btn" href="figura_mapa_estallido_oscuro.png" download>Figura PNG (oscuro)</a>
+    </div>
+  </div>
+  <div class="tw"><table id="tbl"><thead><tr><th>Año</th><th>Tesis</th><th>Subcorriente</th><th>Referencia</th><th>Fuente</th></tr></thead><tbody></tbody></table></div>
+
+  <h2>Criterios</h2>
+  <div class="prose">
+    <p>La tipología es de Bellolio. La clasificación de cada obra es mía y se basa en la tesis central que el texto defiende sobre las causas del estallido. Cuando una obra combina tesis, la ubico en la que domina su argumento. Solo incluyo referencias cuyo año, autor y argumento pude verificar en una fuente publicada.</p>
+    <p>La línea discontinua y los puntos vacíos marcan textos de opinión, entrevistas y declaraciones. La tesis insurreccional se sostiene casi entera en ese registro. No encontré literatura académica que la defienda. La rama «Otras lecturas» reúne interpretaciones que no caben en las cuatro tesis.</p>
+    <p>Para una revisión sistemática de la literatura, ver Joignant y Garrido-Vergara (2025), «Revisiting the Chilean Social Uprising», <i>Latin American Research Review</i>, 60(4).</p>
+  </div>
+
+  <h2>Cómo citar</h2>
+  <div class="cite" id="cite">Belmar, F. (2026). <i>Tesis sobre el estallido social: mapa longitudinal y base de referencias</i> (versión 1.0) [Conjunto de datos]. https://belmarfabian.github.io/estallido/</div>
+  <details style="margin-top:10px"><summary style="cursor:pointer;font-size:13px;color:var(--muted)">BibTeX</summary>
+<pre>@misc{belmar2026estallido,
+  author = {Belmar, Fabián},
+  title  = {Tesis sobre el estallido social: mapa longitudinal y base de referencias},
+  year   = {2026},
+  version = {1.0},
+  howpublished = {\url{https://belmarfabian.github.io/estallido/}},
+  note   = {Conjunto de datos. ORCID 0000-0003-4239-1874}
+}</pre></details>
+
+  <h2>Proponer una referencia</h2>
+  <div class="prose"><p>Si falta una obra, envíala con autor, año, título y la tesis que defiende. La reviso y, si la puedo verificar, entra en la próxima versión.</p></div>
+  <div class="btns"><a class="btn primary" id="propose" href="#">Proponer en GitHub</a><a class="btn" href="https://x.com/fabianbelmar_">Escribir en X</a></div>
+
+  <footer>Fabián Belmar · Centro de Estudios Públicos · ORCID <a href="https://orcid.org/0000-0003-4239-1874" style="color:inherit">0000-0003-4239-1874</a> · Versión 1.0, octubre de 2026 · Datos bajo licencia CC BY 4.0.</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
