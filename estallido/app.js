@@ -86,7 +86,7 @@
     var authors = new Set(v.map(function (d) { return d.autores; }));
     var html = [
       [v.length, "obras"], [authors.size, "autores o fuentes"], [subs.size, "subcorrientes"],
-      [acad, "académicas o ensayo"], [v.length - acad, "opinión o declaración"]
+      [acad, "académicas o ensayo"], [v.length - acad, "opinión, crónica o documento"]
     ].map(function (s) { return '<div class="stat"><b>' + s[0] + "</b><span>" + s[1] + "</span></div>"; }).join("");
     document.getElementById("stats").innerHTML = html;
   }
@@ -95,7 +95,7 @@
     var ink = css("--text-2"), bg = css("--bg");
     document.getElementById("legend").innerHTML =
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-width="1.5"/></svg>Literatura académica y ensayo</span>' +
-      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + bg + '" stroke="' + ink + '" stroke-dasharray="4 2.5" stroke-width="1.5"/></svg>Discurso político u opinión</span>' +
+      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + bg + '" stroke="' + ink + '" stroke-dasharray="4 2.5" stroke-width="1.5"/></svg>Opinión, crónica o documento político</span>' +
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="2" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-width="1.5"/></svg>Antecedente previo al 18-O</span>' +
       '<span><svg width="30" height="14"><line x1="1" y1="7" x2="29" y2="7" stroke="' + ink + '" stroke-width="1.5"/></svg>Continuidad dentro de una subcorriente</span>';
   }
@@ -141,7 +141,7 @@
   function renderMap() {
     var svg = d3.select("#map"); svg.selectAll("g,line,rect,path,text:not(title):not(desc)").remove();
     var L = lanes();
-    var labelW = 190, preW = 200, gapW = 34, yearW = 145, padR = 20, top = 52, pillH = 22, pillGap = 5, lanePad = 9, bandPad = 10, bandGap = 8;
+    var labelW = 190, preW = 200, gapW = 34, yearW = 145, padR = 20, top = 84, pillH = 22, pillGap = 5, lanePad = 9, bandPad = 10, bandGap = 8;
     var yearsPost = d3.range(2019, Y1 + 1);
     var W = labelW + preW + gapW + yearsPost.length * yearW + padR;
     var xPre = d3.scaleLinear().domain([Y0 - 0.5, 2018.5]).range([labelW, labelW + preW]);
@@ -191,6 +191,8 @@
     g.append("line").attr("x1", bx - 1).attr("x2", bx + 9).attr("y1", top - 30).attr("y2", top - 14).attr("stroke", muted);
     g.append("text").attr("x", (labelW + labelW + preW) / 2).attr("y", top - 36).attr("text-anchor", "middle").attr("font-size", 11)
       .attr("fill", muted).attr("font-style", "italic").text("antecedentes (escala comprimida)");
+    g.append("text").attr("x", 14).attr("y", top - 66).attr("font-size", 12).attr("font-weight", 600).attr("fill", css("--text")).text("Tipología: Cristóbal Bellolio (2026)");
+    g.append("text").attr("x", 14).attr("y", top - 50).attr("font-size", 11).attr("fill", muted).text("Asignación de obras: elaboración propia");
     var ox = X(2019);
     g.append("line").attr("x1", ox).attr("x2", ox).attr("y1", top - 8).attr("y2", H - 22)
       .attr("stroke", css("--accent")).attr("stroke-width", 1.5).attr("stroke-dasharray", "2 3");
@@ -247,13 +249,13 @@
       .on("keydown", function (evt, n) { if (evt.key === "Enter" || evt.key === " ") { evt.preventDefault(); select(n.d); } });
 
     svg.append("text").attr("x", W - padR).attr("y", H - 10).attr("text-anchor", "end").attr("font-size", 11)
-      .attr("fill", css("--faint")).attr("font-style", "italic").text("Fabián Belmar · @fabianbelmar_ · belmarfabian.github.io/estallido");
+      .attr("fill", css("--faint")).attr("font-style", "italic").text("Tipología: Cristóbal Bellolio (2026). Asignación de obras y diseño: Fabián Belmar · @fabianbelmar_ · belmarfabian.github.io/estallido");
   }
 
   function select(d) {
     state.sel = d.id;
     d3.selectAll("#map g.node").classed("sel", function (n) { return n.d.id === d.id; });
-    var reg = d.registro === "academico" ? "Literatura académica o ensayo" : "Discurso político u opinión";
+    var reg = d.registro === "academico" ? "Literatura académica o ensayo" : "Opinión, crónica o documento político";
     var rol = d.rol === "antecedente" ? " · Antecedente previo al 18-O" : "";
     document.getElementById("detail").innerHTML =
       '<div class="ref">' + esc(d.referencia) + "</div>" +
@@ -308,7 +310,7 @@
 
   function renderCum() {
     var host = document.getElementById("cum").parentNode;
-    var W = Math.max(300, host.clientWidth - 20), H = 220, m = { l: 28, r: 12, t: 10, b: 24 };
+    var W = Math.max(300, host.clientWidth - 20), H = 220, m = { l: 28, r: 22, t: 16, b: 24 };
     var svg = smallChart("#cum", W, H);
     var v = DATA.filter(visible);
     var start = d3.min(v, function (d) { return d.anio; }) || 2019;

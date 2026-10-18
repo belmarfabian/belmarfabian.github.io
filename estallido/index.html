@@ -6,7 +6,7 @@
 <title>Tesis sobre el estallido social</title>
 <meta name="description" content="Mapa longitudinal de las interpretaciones del estallido social chileno de 2019: autores, años y tesis. Datos abiertos para citar.">
 <meta name="author" content="Fabián Belmar">
-<meta property="og:title" content="Tesis sobre el estallido social — mapa longitudinal">
+<meta property="og:title" content="Las cuatro tesis de Bellolio sobre el 18-O — mapa longitudinal">
 <meta property="og:description" content="Autores y años detrás de las cuatro tesis sobre el 18-O. Datos abiertos.">
 <meta property="og:url" content="https://belmarfabian.github.io/estallido/">
 <meta property="og:image" content="https://belmarfabian.github.io/estallido/figura_mapa_estallido.png">
@@ -102,6 +102,13 @@ td .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right
 pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;overflow:auto}
 footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted)}
 .tw{overflow-x:auto}
+.authorship{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 0}
+@media (max-width:700px){.authorship{grid-template-columns:1fr}}
+.authorship>div{border:1px solid var(--border);border-radius:8px;padding:10px 14px;background:var(--surface)}
+.authorship .al{display:block;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.authorship b{display:block;font-family:"Source Serif 4",Georgia,serif;font-size:18px;font-weight:600;margin:2px 0}
+.authorship .as{display:block;font-size:12.5px;color:var(--text-2);line-height:1.5}
+.authorship a{color:var(--accent);word-break:break-all}
 </style>
 </head>
 <body>
@@ -110,8 +117,12 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
 
   <header>
     <div class="kicker">Datos abiertos · Estallido social 2019</div>
-    <h1>¿Qué fue el 18-O? Mapa longitudinal de las tesis</h1>
-    <p class="lede">Cristóbal Bellolio distinguió cuatro tesis sobre el estallido social: transformacional, populista, estructural e insurreccional (<a href="https://x.com/cbellolio/status/2111498263115272614">hilo en X</a>, 17 de octubre de 2026). Este mapa ubica a los autores de cada tesis según su año de publicación. Cada referencia está verificada y enlaza a su fuente.</p>
+    <h1>Las cuatro tesis de Bellolio sobre el 18-O: mapa longitudinal</h1>
+    <p class="lede">Cristóbal Bellolio propuso una tipología de cuatro tesis sobre el estallido social: transformacional, populista, estructural e insurreccional (<a href="https://x.com/cbellolio/status/2111498263115272614">hilo en X</a>, 17 de octubre de 2026). Este mapa toma esa tipología y ubica en ella a los autores que la sostienen, según su año de publicación. Cada referencia está verificada y enlaza a su fuente.</p>
+    <div class="authorship">
+      <div><span class="al">Tipología de las cuatro tesis</span><b>Cristóbal Bellolio</b><span class="as">Bellolio, C. [@cbellolio]. (2026, 17 de octubre). <i>A propósito del aniversario del 18O, hice un barrido por la literatura académica…</i> [Hilo]. X. <a href="https://x.com/cbellolio/status/2111498263115272614">https://x.com/cbellolio/status/2111498263115272614</a></span></div>
+      <div><span class="al">Asignación de obras, datos y visualización</span><b>Elaboración propia</b><span class="as">Fabián Belmar. Bellolio no participó en la ubicación de los autores; los errores de asignación son nuestros.</span></div>
+    </div>
     <div class="stats" id="stats"></div>
   </header>
 
@@ -120,18 +131,18 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
     <select id="reg" aria-label="Filtrar por registro">
       <option value="todos">Todos los registros</option>
       <option value="academico">Solo literatura académica y ensayo</option>
-      <option value="opinion">Solo discurso político y opinión</option>
+      <option value="opinion">Solo opinión, crónica o documento político</option>
     </select>
     <label class="cb"><input type="checkbox" id="ant" checked> Antecedentes previos a 2019</label>
   </div>
 
   <figure class="bleed">
     <div class="fig">
-      <div class="scroll"><svg id="map" role="img" aria-labelledby="mapTitle mapDesc"><title id="mapTitle">Mapa longitudinal de las tesis sobre el estallido social</title><desc id="mapDesc">Cada punto es una obra ubicada por año. Las filas agrupan subcorrientes dentro de cada tesis; cada rama nace el año de su primera obra.</desc></svg></div>
+      <div class="scroll"><svg id="map" role="img" aria-labelledby="mapTitle mapDesc"><title id="mapTitle">Mapa longitudinal de las tesis sobre el estallido social</title><desc id="mapDesc">Cada etiqueta es una obra ubicada por año. Las filas agrupan subcorrientes dentro de cada tesis de la tipología de Bellolio.</desc></svg></div>
       <div class="legend" id="legend"></div>
       <div class="tip" id="tip"></div>
     </div>
-    <figcaption><b>Figura 1</b>Mapa de las interpretaciones del estallido social, 2012–2026. Cada franja es una tesis de Bellolio y cada fila una subcorriente. Las obras se ubican en su año de publicación y las líneas unen obras de una misma subcorriente. La línea punteada marca el 18 de octubre de 2019. Antes de 2019 la escala está comprimida.</figcaption>
+    <figcaption><b>Figura 1</b>Mapa de las interpretaciones del estallido social, 2012–2026. Cada franja es una de las tesis de la tipología de Bellolio (2026) y cada fila, una subcorriente. La asignación de obras y las subcorrientes son de elaboración propia. Las obras se ubican en su año de publicación y las líneas unen obras de una misma subcorriente. La línea punteada marca el 18 de octubre de 2019. Antes de 2019 la escala está comprimida.</figcaption>
   </figure>
   <div class="detail" id="detail" aria-live="polite"><span style="color:var(--muted)">Selecciona un punto para ver la referencia completa y su fuente.</span></div>
 
@@ -163,31 +174,32 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
 
   <h2>Criterios</h2>
   <div class="prose">
-    <p>La tipología es de Bellolio. La clasificación de cada obra es mía y se basa en la tesis central que el texto defiende sobre las causas del estallido. Cuando una obra combina tesis, la ubico en la que domina su argumento. Solo incluyo referencias cuyo año, autor y argumento pude verificar en una fuente publicada.</p>
-    <p>La línea discontinua y los puntos vacíos marcan textos de opinión, entrevistas y declaraciones. La tesis insurreccional se sostiene casi entera en ese registro. No encontré literatura académica que la defienda. La rama «Otras lecturas» reúne interpretaciones que no caben en las cuatro tesis.</p>
+    <p>La tipología de cuatro tesis es de Cristóbal Bellolio. La asignación de cada obra a una tesis, las subcorrientes, la rama «Otras lecturas» y las variables de registro y enfoque son de elaboración propia. Bellolio no revisó esta asignación. Cada obra se ubica según la tesis central que defiende sobre las causas del estallido. Cuando una obra combina tesis, va en la que domina su argumento. Solo se incluyen referencias cuyo año, autor y argumento se verificaron en una fuente publicada.</p>
+    <p>El borde discontinuo marca columnas, crónicas, entrevistas, declaraciones y documentos de gobierno. Todas las obras de la tesis insurreccional están en ese registro; no se encontró literatura académica que la defienda. La rama «Otras lecturas» reúne interpretaciones que no caben en las cuatro tesis. Algunas obras son casos límite entre dos tesis (por ejemplo, Edwards y Tironi); la nota de cada referencia lo indica.</p>
     <p>Para una revisión sistemática de la literatura, ver Joignant y Garrido-Vergara (2025), «Revisiting the Chilean Social Uprising», <i>Latin American Research Review</i>, 60(4).</p>
   </div>
 
   <h2>Cómo citar</h2>
   <p style="margin:0 0 10px"><a href="https://doi.org/10.5281/zenodo.23455927"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23455927.svg" alt="DOI 10.5281/zenodo.23455927" height="20"></a></p>
-  <div class="cite" id="cite">Belmar, F. (2026). <i>Tesis sobre el estallido social: mapa longitudinal y base de referencias</i> (versión 1.0.0) [Conjunto de datos]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23455927">https://doi.org/10.5281/zenodo.23455927</a></div>
-  <p class="sub" style="margin-top:8px">El DOI apunta siempre a la última versión. Para citar la versión 1.0.0 exacta usa <a href="https://doi.org/10.5281/zenodo.23455928" style="color:var(--accent)">10.5281/zenodo.23455928</a>. Datos y código en <a href="https://github.com/belmarfabian/estallido-tesis" style="color:var(--accent)">GitHub</a>.</p>
+  <div class="cite" id="cite">Belmar, F. (2026). <i>Las tesis de Bellolio sobre el estallido social: mapa longitudinal y base de referencias</i> (versión 1.0.1) [Conjunto de datos]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23455927">https://doi.org/10.5281/zenodo.23455927</a></div>
+  <p class="sub" style="margin-top:8px">El DOI apunta siempre a la última versión; cada versión tiene además su propio DOI en <a href="https://doi.org/10.5281/zenodo.23455927" style="color:var(--accent)">Zenodo</a>. Si usas la tipología, cita también a Bellolio (2026). Datos y código en <a href="https://github.com/belmarfabian/estallido-tesis" style="color:var(--accent)">GitHub</a>.</p>
   <details style="margin-top:10px"><summary style="cursor:pointer;font-size:13px;color:var(--muted)">BibTeX</summary>
 <pre>@dataset{belmar2026estallido,
   author    = {Belmar, Fabián},
-  title     = {Tesis sobre el estallido social: mapa longitudinal y base de referencias},
+  title     = {Las tesis de Bellolio sobre el estallido social: mapa longitudinal y base de referencias},
   year      = {2026},
-  version   = {1.0.0},
+  version   = {1.0.1},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.23455927},
-  url       = {https://doi.org/10.5281/zenodo.23455927}
+  url       = {https://doi.org/10.5281/zenodo.23455927},
+  note      = {Tipología de las tesis: Bellolio (2026). Asignación de obras: elaboración propia}
 }</pre></details>
 
   <h2>Proponer una referencia</h2>
   <div class="prose"><p>Si falta una obra, envíala con autor, año, título y la tesis que defiende. La reviso y, si la puedo verificar, entra en la próxima versión.</p></div>
   <div class="btns"><a class="btn primary" id="propose" href="#">Proponer en GitHub</a><a class="btn" href="https://x.com/fabianbelmar_">Escribir en X</a></div>
 
-  <footer>Fabián Belmar · Centro de Estudios Públicos · ORCID <a href="https://orcid.org/0000-0003-4239-1874" style="color:inherit">0000-0003-4239-1874</a> · Versión 1.0, octubre de 2026 · Datos bajo licencia CC BY 4.0.</footer>
+  <footer>Tipología: Cristóbal Bellolio (2026) · Asignación de obras y visualización: Fabián Belmar · Centro de Estudios Públicos · ORCID <a href="https://orcid.org/0000-0003-4239-1874" style="color:inherit">0000-0003-4239-1874</a> · Versión 1.0.1, octubre de 2026 · Datos bajo licencia CC BY 4.0.</footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
