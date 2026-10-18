@@ -28,7 +28,7 @@ La base no se limita a la tipología de Bellolio. Las obras que no calzan en las
 | mecanismos | Códigos de todos los mecanismos causales que invoca la obra, separados por `;` (ver libro de códigos) |
 | mecanismo_principal | Código del mecanismo central del argumento |
 | confianza_codificacion | `alta` (texto leído), `media` o `baja` (codificación desde resúmenes o reseñas) |
-| registro | `academico` (literatura académica y ensayo) u `opinion` (discurso político, entrevista, columna) |
+| registro | `investigacion` (artículo arbitrado, monografía académica basada en evidencia, encuesta), `ensayo` (libro o capítulo interpretativo sin evidencia original sistemática) u `opinion` (columna, crónica, entrevista, declaración o documento de gobierno) |
 | rol | `principal` o `antecedente` (anterior al 18-O) |
 | referencia | Referencia completa |
 | fuente_url | Fuente que verifica autor, año y argumento |

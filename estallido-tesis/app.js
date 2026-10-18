@@ -45,7 +45,7 @@
     DATA = d.map(function (x) { x.anio = +x.anio; x.mecs = x.mecanismos ? x.mecanismos.split(";") : []; return x; });
     buildChips(); bind(); renderAll();
   }).catch(function () {
-    document.getElementById("detail").textContent = "No se pudieron cargar los datos. Descarga el CSV desde el enlace de la tabla.";
+    document.getElementById("stats").textContent = "No se pudieron cargar los datos. Descarga el CSV desde el enlace de la tabla.";
   });
 
   function visible(d) {
@@ -94,25 +94,26 @@
   function renderStats() {
     var v = DATA.filter(visible);
     var subs = new Set(v.map(function (d) { return d.tesis + "|" + d.subcorriente; }));
-    var acad = v.filter(function (d) { return d.registro === "academico"; }).length;
+    var cnt = function (r) { return v.filter(function (d) { return d.registro === r; }).length; };
     var authors = new Set(v.map(function (d) { return d.autores; }));
     document.getElementById("stats").textContent = v.length + " obras de " + authors.size + " autores o fuentes, " +
-      subs.size + " subcorrientes. " + acad + " son literatura académica o ensayo y " + (v.length - acad) + " son opinión, crónica o documento político.";
+      subs.size + " subcorrientes. " + cnt("investigacion") + " son investigación, " + cnt("ensayo") + " son ensayo y " + cnt("opinion") + " son opinión, crónica o documento político.";
   }
 
   function renderCaption() {
     var c = document.getElementById("caption");
     if (state.scheme === "emergente") {
-      c.textContent = "Figura 1. Matriz de obras por mecanismo causal, 2012–2026. Cada fila es un mecanismo y cada obra aparece en todos los mecanismos que invoca: en tono pleno si es su mecanismo principal y atenuado si es secundario. El color indica la tesis de la obra en la tipología de Bellolio (2026). La codificación es de elaboración propia, a partir de los textos y de reseñas. La línea punteada marca el 18 de octubre de 2019.";
+      c.textContent = "Figura 1. Matriz de obras por mecanismo causal, 2012–2026. Cada fila es un mecanismo y cada obra aparece en todos los mecanismos que invoca: en tono pleno si es su mecanismo principal y atenuado si es secundario. El color indica la tesis de la obra en la tipología de Bellolio (2026). La codificación es de elaboración propia, a partir de los textos y de reseñas. La línea punteada marca el 18 de octubre de 2019. Al pasar el cursor sobre una obra se muestra su referencia completa.";
     } else {
-      c.textContent = "Figura 1. Mapa de las interpretaciones del estallido social, 2012–2026. Cada franja es una tesis de la tipología de Bellolio (2026) y cada fila, una subcorriente. La asignación de obras y las subcorrientes son de elaboración propia. Las obras que no calzan en las cuatro tesis van a «Otras lecturas». La línea punteada marca el 18 de octubre de 2019. Antes de 2019 la escala está comprimida.";
+      c.textContent = "Figura 1. Mapa de las interpretaciones del estallido social, 2012–2026. Cada franja es una tesis de la tipología de Bellolio (2026) y cada fila, una subcorriente. La asignación de obras y las subcorrientes son de elaboración propia. Las obras que no calzan en las cuatro tesis van a «Otras lecturas». La línea punteada marca el 18 de octubre de 2019. Antes de 2019 la escala está comprimida. Al pasar el cursor sobre una obra se muestra su referencia completa.";
     }
   }
 
   function renderLegend() {
     var ink = css("--text-2"), bg = css("--bg");
     document.getElementById("legend").innerHTML =
-      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-width="1.5"/></svg>Literatura académica y ensayo</span>' +
+      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-width="1.5"/></svg>Investigación (artículo arbitrado, monografía, encuesta)</span>' +
+      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-dasharray="1.5 2" stroke-width="1.5"/></svg>Ensayo</span>' +
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + bg + '" stroke="' + ink + '" stroke-dasharray="4 2.5" stroke-width="1.5"/></svg>Opinión, crónica o documento político</span>' +
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="2" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-width="1.5"/></svg>Antecedente previo al 18-O</span>' +
       (state.scheme === "emergente"
@@ -270,24 +271,34 @@
       .attr("transform", function (n) { return "translate(" + n.cx + "," + n.cy + ")"; })
       .classed("sel", function (n) { return state.sel === n.d.id; });
     sel.each(function (n) {
-      var el = d3.select(this), c = color(n.d.tesis), op = n.d.registro === "opinion", ant = n.d.rol === "antecedente";
+      var el = d3.select(this), c = color(n.d.tesis), op = n.d.registro === "opinion", ens = n.d.registro === "ensayo", ant = n.d.rol === "antecedente";
       if (n.secondary) el.attr("opacity", 0.5);
       el.append("rect").attr("class", "mk").attr("x", -n.w / 2).attr("y", -pillH / 2).attr("width", n.w).attr("height", pillH)
         .attr("rx", ant ? 3 : pillH / 2)
-        .attr("fill", op ? bg : c).attr("fill-opacity", op ? 1 : 0.24).attr("stroke", c).attr("stroke-width", 1.5).attr("stroke-dasharray", op ? "4 2.5" : null);
+        .attr("fill", op ? bg : c).attr("fill-opacity", op ? 1 : 0.24).attr("stroke", c).attr("stroke-width", 1.5).attr("stroke-dasharray", op ? "4 2.5" : ens ? "1.5 2" : null);
       if (!op) el.insert("rect", ".mk").attr("x", -n.w / 2).attr("y", -pillH / 2).attr("width", n.w).attr("height", pillH).attr("rx", ant ? 3 : pillH / 2).attr("fill", bg);
       el.append("text").attr("text-anchor", "middle").attr("y", 4).attr("font-size", 12).attr("font-weight", 500)
         .attr("font-style", ant ? "italic" : null)
         .attr("fill", css("--text")).text(n.label);
     });
-    var hostFig = svg.node().closest(".fig");
+    // Panel de detalle dentro del gráfico, en el espacio libre entre 2023 y 2026
+    var sx0 = X(2023) + 80, sx1 = X(2026) - 48;
+    var side = document.getElementById("side");
+    side.style.left = (sx0 / W * 100) + "%"; side.style.width = ((sx1 - sx0) / W * 100) + "%";
+    var det = document.getElementById("detail"); det.classList.remove("on");
+    var hideT = null;
+    function place(n) {
+      var k = svg.node().getBoundingClientRect().height / H;
+      var top = n.cy * k - 30, max = H * k - det.offsetHeight - 30;
+      det.style.top = Math.max(top0 * k, Math.min(top, max)) + "px";
+    }
+    var top0 = top;
     links.on("mouseenter", function (evt, n) {
-      select(n.d);
-      var extra = n.code ? '<div class="t2">' + esc(CODE[n.code].mecanismo) + (n.secondary ? " (mecanismo secundario)" : " (mecanismo principal)") + "</div>" : "";
-      showTip(tip, '<div class="t1">' + esc(n.d.etiqueta) + '</div><div class="t2">Tesis ' + esc(n.d.tesis.toLowerCase()) + " · " + esc(n.d.subcorriente) + "</div>" + extra + '<div class="t2" style="margin-top:4px">Clic para abrir la fuente ↗</div>', evt, hostFig);
-    }).on("mousemove", function (evt) { showTip(tip, tip.innerHTML, evt, hostFig); })
-      .on("mouseleave", function () { hideTip(tip); })
-      .on("focus", function (evt, n) { select(n.d); });
+      clearTimeout(hideT); select(n.d, n); det.classList.add("on"); place(n);
+    }).on("mouseleave", function () { hideT = setTimeout(function () { det.classList.remove("on"); }, 900); })
+      .on("focus", function (evt, n) { select(n.d, n); det.classList.add("on"); place(n); });
+    det.onmouseenter = function () { clearTimeout(hideT); };
+    det.onmouseleave = function () { hideT = setTimeout(function () { det.classList.remove("on"); }, 400); };
 
     svg.append("a").attr("href", "https://belmarfabian.github.io/estallido-tesis/").attr("target", "_blank").attr("rel", "noopener")
       .append("text").attr("x", W - padR).attr("y", H - 10).attr("text-anchor", "end").attr("font-size", 11)
@@ -298,16 +309,18 @@
     return d.mecs.map(function (c) { return CODE[c] ? CODE[c].mecanismo + (c === d.mecanismo_principal ? " (principal)" : "") : c; }).join("; ");
   }
 
-  function select(d) {
+  function select(d, n) {
     state.sel = d.id;
     d3.selectAll("#map g.node").classed("sel", function (n) { return n.d.id === d.id; });
-    var reg = d.registro === "academico" ? "Literatura académica o ensayo" : "Opinión, crónica o documento político";
+    var reg = { investigacion: "Investigación", ensayo: "Ensayo", opinion: "Opinión, crónica o documento político" }[d.registro];
     var rol = d.rol === "antecedente" ? " · Antecedente previo al 18-O" : "";
+    var here = n && n.code ? "<div>Esta fila: " + esc(CODE[n.code].mecanismo) + (n.secondary ? " (mecanismo secundario)" : " (mecanismo principal)") + "</div>" : "";
     document.getElementById("detail").innerHTML =
       '<div class="ref">' + esc(d.referencia) + "</div>" +
-      '<div class="meta"><span style="color:' + color(d.tesis) + '">●</span> ' + esc(d.tesis) + " · " + esc(d.subcorriente) + " · Mecanismos: " + esc(mecNames(d)) + " · " + reg + rol +
-      (d.nota ? "<br>" + esc(d.nota) : "") +
-      ' · <a href="' + esc(d.fuente_url) + '" target="_blank" rel="noopener">Ver fuente ↗</a></div>';
+      '<div class="meta"><div><span style="color:' + color(d.tesis) + '">●</span> Tesis ' + esc(d.tesis.toLowerCase()) + " · " + esc(d.subcorriente) + "</div>" + here +
+      "<div>Mecanismos: " + esc(mecNames(d)) + "</div><div>" + reg + rol + "</div>" +
+      (d.nota ? "<div>" + esc(d.nota) + "</div>" : "") +
+      '<div><a href="' + esc(d.fuente_url) + '" target="_blank" rel="noopener">Ver fuente ↗</a></div></div>';
   }
 
   function smallChart(id, W, H) {
@@ -404,7 +417,7 @@
     }).sort(function (a, b) { return a.anio - b.anio || a.tesis.localeCompare(b.tesis) || a.etiqueta.localeCompare(b.etiqueta); });
     tb.innerHTML = rows.map(function (d) {
       return "<tr><td>" + d.anio + '</td><td><span class="dot" style="background:' + color(d.tesis) + '"></span>' + esc(d.tesis) +
-        "</td><td>" + esc(d.subcorriente) + (d.registro === "opinion" ? ' <span style="color:var(--faint)">(opinión)</span>' : "") +
+        "</td><td>" + esc(d.subcorriente) + (d.registro !== "investigacion" ? ' <span style="color:var(--faint)">(' + d.registro + ')</span>' : "") +
         "</td><td>" + esc(mecNames(d)) +
         '</td><td class="ref">' + esc(d.referencia) + (d.nota ? '<div style="font-family:Inter,sans-serif;font-size:12px;color:var(--muted)">' + esc(d.nota) + "</div>" : "") +
         '</td><td><a href="' + esc(d.fuente_url) + '" target="_blank" rel="noopener">↗</a></td></tr>';
