@@ -32,9 +32,7 @@
   syncThemeBtn();
 
   var propose = document.getElementById("propose");
-  propose.href = "https://github.com/belmarfabian/estallido-tesis/issues/new?title=" +
-    encodeURIComponent("Estallido: nueva referencia") + "&body=" +
-    encodeURIComponent("Autor(es):\nAño:\nTítulo:\nEditorial o revista:\nTesis que defiende (transformacional / populista / estructural / insurreccional / otra):\nEnlace a la fuente:\n");
+  propose.href = "https://github.com/belmarfabian/estallido-tesis/issues/new?template=nueva-obra.yml";
 
   var DATA = [];
   Promise.all([fetch("datos/tesis_estallido.json").then(function (r) { return r.json(); }),
