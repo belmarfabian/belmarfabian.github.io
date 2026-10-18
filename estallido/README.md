@@ -1,10 +1,13 @@
-# Tesis sobre el estallido social
+# Las tesis de Bellolio sobre el estallido social
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23455927.svg)](https://doi.org/10.5281/zenodo.23455927)
 
 Mapa longitudinal y base de referencias sobre las interpretaciones del estallido social chileno de 2019.
-La tipología de cuatro tesis (transformacional, populista, estructural, insurreccional) es de Cristóbal Bellolio.
-La clasificación de cada obra es de Fabián Belmar.
+
+## Autoría
+
+- **Tipología de las cuatro tesis** (transformacional, populista, estructural e insurreccional): Cristóbal Bellolio. Bellolio, C. [@cbellolio]. (2026, 17 de octubre). *A propósito del aniversario del 18O, hice un barrido por la literatura académica…* [Hilo]. X. https://x.com/cbellolio/status/2111498263115272614
+- **Asignación de obras, subcorrientes, variables y visualización**: elaboración propia (Fabián Belmar). Bellolio no participó en la ubicación de los autores.
 
 - Página: https://belmarfabian.github.io/estallido/
 - Datos: `datos/tesis_estallido.csv` y `datos/tesis_estallido.json` (se generan con `datos/build.py`)
@@ -29,6 +32,8 @@ La clasificación de cada obra es de Fabián Belmar.
 
 ## Cómo citar
 
-Belmar, F. (2026). *Tesis sobre el estallido social: mapa longitudinal y base de referencias* (versión 1.0.0) [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23455927
+Belmar, F. (2026). *Las tesis de Bellolio sobre el estallido social: mapa longitudinal y base de referencias* (versión 1.0.1) [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23455927
+
+Si usas la tipología, cita también a Bellolio (2026).
 
 Licencia de los datos: CC BY 4.0.
