@@ -104,6 +104,8 @@ td .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right
 pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;overflow:auto}
 footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted)}
 .tw{overflow-x:auto}
+.lede,.credit,figcaption,.prose p,.detail p,#stats{text-align:justify;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
+.lede,.credit,.stats{max-width:680px}
 </style>
 </head>
 <body>
@@ -112,15 +114,15 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
 
   <header>
     <h1>¿Qué fue el 18-O? Mapa longitudinal de las tesis</h1>
-    <p class="lede">Cristóbal Bellolio propuso una tipología de cuatro tesis sobre el estallido social: transformacional, populista, estructural e insurreccional (<a href="https://x.com/cbellolio/status/2111498263115272614">hilo en X</a>, 17 de octubre de 2026). Este mapa ubica en esa tipología a los autores que sostienen cada tesis, según su año de publicación. También permite ver las mismas obras ordenadas en una categorización emergente, construida desde el argumento de cada texto. Cada referencia está verificada y enlaza a su fuente.</p>
-    <p class="credit">La tipología de las cuatro tesis es de Cristóbal Bellolio. La asignación de obras, las subcorrientes, la categorización emergente y la visualización son de elaboración propia (Fabián Belmar). Bellolio no participó en la ubicación de los autores; los errores de asignación son nuestros.</p>
+    <p class="lede">Cristóbal Bellolio propuso una tipología de cuatro tesis sobre el estallido social: transformacional, populista, estructural e insurreccional (<a href="https://x.com/cbellolio/status/2111498263115272614">hilo en X</a>, 17 de octubre de 2026). Este mapa ubica en esa tipología a los autores que sostienen cada tesis, según su año de publicación. También permite ver las mismas obras según los mecanismos causales que cada texto invoca, una clasificación emergente que no depende de esa tipología. Cada referencia está verificada y enlaza a su fuente.</p>
+    <p class="credit">La tipología de las cuatro tesis es de Cristóbal Bellolio. La asignación de obras, las subcorrientes, la codificación de mecanismos y la visualización son de elaboración propia (Fabián Belmar). Bellolio no participó en la ubicación de los autores; los errores de asignación son nuestros.</p>
     <p class="stats" id="stats"></p>
   </header>
 
   <div class="controls">
     <div class="seg" role="group" aria-label="Ordenar las obras según">
       <button type="button" class="segb" data-scheme="bellolio" aria-pressed="true">Tipología de Bellolio</button>
-      <button type="button" class="segb" data-scheme="emergente" aria-pressed="false">Categorización emergente</button>
+      <button type="button" class="segb" data-scheme="emergente" aria-pressed="false">Mecanismos causales (emergente)</button>
     </div>
   </div>
   <div class="controls">
@@ -168,27 +170,27 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
       <a class="btn" href="figura_mapa_emergente.png" download>Figura emergente PNG</a>
     </div>
   </div>
-  <div class="tw"><table id="tbl"><thead><tr><th>Año</th><th>Tesis</th><th>Subcorriente</th><th>Categoría emergente</th><th>Referencia</th><th>Fuente</th></tr></thead><tbody></tbody></table></div>
+  <div class="tw"><table id="tbl"><thead><tr><th>Año</th><th>Tesis</th><th>Subcorriente</th><th>Mecanismos causales</th><th>Referencia</th><th>Fuente</th></tr></thead><tbody></tbody></table></div>
 
   <h2>Criterios</h2>
   <div class="prose">
-    <p>La tipología de cuatro tesis es de Cristóbal Bellolio. La asignación de cada obra a una tesis, las subcorrientes y las variables de registro y enfoque son de elaboración propia. Bellolio no revisó esta asignación. Cada obra se ubica según la tesis central que defiende sobre las causas del estallido. Cuando una obra combina tesis, va en la que domina su argumento. Solo se incluyen referencias cuyo año, autor y argumento se verificaron en una fuente publicada.</p>
+    <p>La tipología de cuatro tesis es de Cristóbal Bellolio. La asignación de cada obra a una tesis, las subcorrientes, la codificación de mecanismos y la variable de registro son de elaboración propia. Bellolio no revisó esta asignación. Cada obra se ubica según la tesis central que defiende sobre las causas del estallido. Cuando una obra combina tesis, va en la que domina su argumento. Solo se incluyen referencias cuyo año, autor y argumento se verificaron en una fuente publicada.</p>
     <p>La base no se limita a la tipología de Bellolio. Las obras que no calzan en ninguna de las cuatro tesis no se excluyen: van a la rama «Otras lecturas». Si una obra conocida no aparece en las cuatro tesis, lo más probable es que esté en esa rama o que aún no se haya verificado. En ese caso, se puede proponer.</p>
-    <p>La categorización emergente es una segunda lectura de las mismas obras. No parte de una tipología previa. Agrupa cada texto según el mecanismo causal que invoca: agravios del modelo económico, modernización y expectativas, experiencia cotidiana y malestar, representación y legitimidad, dinámica de la movilización, operación política, o violencia y desintegración cultural. En esa vista el color de cada obra sigue indicando su tesis en la tipología de Bellolio, para mostrar dónde ambas clasificaciones coinciden y dónde se cruzan. Es una propuesta preliminar.</p>
+    <p>La vista de mecanismos causales es una segunda lectura de las mismas obras y no parte de una tipología previa. Cada obra se codificó con todos los mecanismos que invoca como causa o condición del estallido, según un <a href="datos/libro_de_codigos.csv">libro de códigos</a> de 16 mecanismos agrupados en cinco familias. Tres de ellos (acumulación de movilizaciones, clima populista global y gnosticismo) surgieron durante la codificación. La codificación se hizo a partir de los textos cuando fueron accesibles y, en los demás casos, de resúmenes, reseñas y entrevistas a los autores; la columna de confianza lo indica. En esa vista el color sigue indicando la tesis de Bellolio, para mostrar dónde ambas lecturas coinciden y dónde se cruzan.</p>
     <p>El borde discontinuo marca columnas, crónicas, entrevistas, declaraciones y documentos de gobierno. Todas las obras de la tesis insurreccional están en ese registro; no se encontró literatura académica que la defienda. Algunas obras son casos límite entre dos tesis (por ejemplo, Edwards y Tironi); la nota de cada referencia lo indica.</p>
     <p>Para una revisión sistemática de la literatura, ver Joignant y Garrido-Vergara (2025), «Revisiting the Chilean Social Uprising», <i>Latin American Research Review</i>, 60(4).</p>
   </div>
 
   <h2>Cómo citar</h2>
   <p style="margin:0 0 10px"><a href="https://doi.org/10.5281/zenodo.23455927"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23455927.svg" alt="DOI 10.5281/zenodo.23455927" height="20"></a></p>
-  <div class="cite" id="cite">Belmar, F. (2026). <i>Tesis sobre el estallido social: mapa longitudinal y base de referencias</i> (versión 1.1.0) [Conjunto de datos]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23455927">https://doi.org/10.5281/zenodo.23455927</a></div>
+  <div class="cite" id="cite">Belmar, F. (2026). <i>Tesis sobre el estallido social: mapa longitudinal y base de referencias</i> (versión 1.2.0) [Conjunto de datos]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23455927">https://doi.org/10.5281/zenodo.23455927</a></div>
   <p class="sub" style="margin-top:8px">El DOI apunta siempre a la última versión; cada versión tiene además su propio DOI en <a href="https://doi.org/10.5281/zenodo.23455927" style="color:var(--accent)">Zenodo</a>. Si usas la tipología, cita también a Bellolio (2026). Datos y código en <a href="https://github.com/belmarfabian/estallido-tesis" style="color:var(--accent)">GitHub</a>.</p>
   <details style="margin-top:10px"><summary style="cursor:pointer;font-size:13px;color:var(--muted)">BibTeX</summary>
 <pre>@dataset{belmar2026estallido,
   author    = {Belmar, Fabián},
   title     = {Tesis sobre el estallido social: mapa longitudinal y base de referencias},
   year      = {2026},
-  version   = {1.1.0},
+  version   = {1.2.0},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.23455927},
   url       = {https://doi.org/10.5281/zenodo.23455927},
@@ -199,7 +201,7 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
   <div class="prose"><p>Si falta una obra, envíala con autor, año, título y su argumento central, aunque no calce en la tipología de Bellolio. Si se puede verificar, entra en la próxima versión.</p></div>
   <div class="btns"><a class="btn primary" id="propose" href="#">Proponer en GitHub</a><a class="btn" href="https://x.com/fabianbelmar_">Escribir en X</a></div>
 
-  <footer>Tipología: Cristóbal Bellolio (2026) · Asignación de obras y visualización: Fabián Belmar · Centro de Estudios Públicos · ORCID <a href="https://orcid.org/0000-0003-4239-1874" style="color:inherit">0000-0003-4239-1874</a> · Versión 1.1.0, octubre de 2026 · Datos bajo licencia CC BY 4.0.</footer>
+  <footer>Tipología: Cristóbal Bellolio (2026) · Asignación de obras y visualización: Fabián Belmar · Centro de Estudios Públicos · ORCID <a href="https://orcid.org/0000-0003-4239-1874" style="color:inherit">0000-0003-4239-1874</a> · Versión 1.2.0, octubre de 2026 · Datos bajo licencia CC BY 4.0.</footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>

@@ -10,7 +10,7 @@
   ];
   var Y0 = 2012, Y1 = 2026;
   var state = { on: {}, reg: "todos", ant: true, sel: null, q: "", scheme: "bellolio" };
-  var EMER = ["Agravios del modelo económico", "Modernización y expectativas", "Experiencia cotidiana y malestar", "Representación, élites y legitimidad", "Dinámica de la movilización", "Operación política o conspiración", "Violencia y desintegración cultural"];
+  var CODES = [], CODE = {}, FAMS = [];
   THESES.forEach(function (t) { state.on[t.key] = true; });
 
   function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
@@ -37,8 +37,12 @@
     encodeURIComponent("Autor(es):\nAño:\nTítulo:\nEditorial o revista:\nTesis que defiende (transformacional / populista / estructural / insurreccional / otra):\nEnlace a la fuente:\n");
 
   var DATA = [];
-  fetch("datos/tesis_estallido.json").then(function (r) { return r.json(); }).then(function (d) {
-    DATA = d.map(function (x) { x.anio = +x.anio; return x; });
+  Promise.all([fetch("datos/tesis_estallido.json").then(function (r) { return r.json(); }),
+               fetch("datos/libro_de_codigos.json").then(function (r) { return r.json(); })]).then(function (res) {
+    var d = res[0];
+    CODES = res[1];
+    CODES.forEach(function (c) { CODE[c.codigo] = c; if (FAMS.indexOf(c.familia) < 0) FAMS.push(c.familia); });
+    DATA = d.map(function (x) { x.anio = +x.anio; x.mecs = x.mecanismos ? x.mecanismos.split(";") : []; return x; });
     buildChips(); bind(); renderAll();
   }).catch(function () {
     document.getElementById("detail").textContent = "No se pudieron cargar los datos. Descarga el CSV desde el enlace de la tabla.";
@@ -99,7 +103,7 @@
   function renderCaption() {
     var c = document.getElementById("caption");
     if (state.scheme === "emergente") {
-      c.textContent = "Figura 1. Las mismas obras ordenadas en una categorización emergente, según el mecanismo causal que invoca cada texto. Cada franja es una categoría y cada fila, una tesis de la tipología de Bellolio (2026); el color indica esa tesis. La categorización es de elaboración propia y preliminar. La línea punteada marca el 18 de octubre de 2019.";
+      c.textContent = "Figura 1. Matriz de obras por mecanismo causal, 2012–2026. Cada fila es un mecanismo y cada obra aparece en todos los mecanismos que invoca: en tono pleno si es su mecanismo principal y atenuado si es secundario. El color indica la tesis de la obra en la tipología de Bellolio (2026). La codificación es de elaboración propia, a partir de los textos y de reseñas. La línea punteada marca el 18 de octubre de 2019.";
     } else {
       c.textContent = "Figura 1. Mapa de las interpretaciones del estallido social, 2012–2026. Cada franja es una tesis de la tipología de Bellolio (2026) y cada fila, una subcorriente. La asignación de obras y las subcorrientes son de elaboración propia. Las obras que no calzan en las cuatro tesis van a «Otras lecturas». La línea punteada marca el 18 de octubre de 2019. Antes de 2019 la escala está comprimida.";
     }
@@ -111,28 +115,39 @@
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-width="1.5"/></svg>Literatura académica y ensayo</span>' +
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + bg + '" stroke="' + ink + '" stroke-dasharray="4 2.5" stroke-width="1.5"/></svg>Opinión, crónica o documento político</span>' +
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="2" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-width="1.5"/></svg>Antecedente previo al 18-O</span>' +
-      '<span><svg width="30" height="14"><line x1="1" y1="7" x2="29" y2="7" stroke="' + ink + '" stroke-width="1.5"/></svg>Continuidad dentro de una subcorriente</span>';
+      (state.scheme === "emergente"
+        ? '<span><svg width="30" height="14" opacity=".5"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-width="1.5"/></svg>Mecanismo secundario de la obra</span>'
+        : '<span><svg width="30" height="14"><line x1="1" y1="7" x2="29" y2="7" stroke="' + ink + '" stroke-width="1.5"/></svg>Continuidad dentro de una subcorriente</span>');
   }
 
   function lanes() {
-    var out = [], emer = state.scheme === "emergente";
-    var groups = emer ? EMER : THESES.map(function (t) { return t.key; });
-    groups.forEach(function (gk) {
-      var items = DATA.filter(function (d) { return (emer ? d.categoria_emergente : d.tesis) === gk && visible(d); });
+    var out = [];
+    if (state.scheme === "emergente") {
+      FAMS.forEach(function (fam) {
+        var subs = [];
+        CODES.filter(function (c) { return c.familia === fam; }).forEach(function (c) {
+          var its = DATA.filter(function (d) { return visible(d) && d.mecs.indexOf(c.codigo) >= 0; });
+          if (!its.length) return;
+          subs.push({ name: c.mecanismo, code: c.codigo, line: css("--faint"), items: its,
+            first: d3.min(its, function (d) { return d.anio; }), opinionOnly: false });
+        });
+        if (subs.length) out.push({ name: fam, color: css("--faint"), subs: subs });
+      });
+      return out;
+    }
+    THESES.map(function (t) { return t.key; }).forEach(function (gk) {
+      var items = DATA.filter(function (d) { return d.tesis === gk && visible(d); });
       if (!items.length) return;
-      var rowKey = emer ? function (d) { return d.tesis; } : function (d) { return d.subcorriente; };
       var subs = [];
-      items.forEach(function (d) { if (subs.indexOf(rowKey(d)) < 0) subs.push(rowKey(d)); });
+      items.forEach(function (d) { if (subs.indexOf(d.subcorriente) < 0) subs.push(d.subcorriente); });
       subs.sort(function (p, q) {
-        if (emer) return THESES.findIndex(function (t) { return t.key === p; }) - THESES.findIndex(function (t) { return t.key === q; });
-        var fa = d3.min(items.filter(function (d) { return rowKey(d) === p; }), function (d) { return d.anio; });
-        var fb = d3.min(items.filter(function (d) { return rowKey(d) === q; }), function (d) { return d.anio; });
+        var fa = d3.min(items.filter(function (d) { return d.subcorriente === p; }), function (d) { return d.anio; });
+        var fb = d3.min(items.filter(function (d) { return d.subcorriente === q; }), function (d) { return d.anio; });
         return fa - fb || p.localeCompare(q);
       });
-      out.push({ name: gk, color: emer ? css("--faint") : color(gk), subs: subs.map(function (sn) {
-        var its = items.filter(function (d) { return rowKey(d) === sn; });
-        return { name: emer ? (sn === "Otras lecturas" ? sn : "Tesis " + sn.toLowerCase()) : sn, line: color(emer ? sn : gk), items: its,
-          first: d3.min(its, function (d) { return d.anio; }),
+      out.push({ name: gk, color: color(gk), subs: subs.map(function (sn) {
+        var its = items.filter(function (d) { return d.subcorriente === sn; });
+        return { name: sn, line: color(gk), items: its, first: d3.min(its, function (d) { return d.anio; }),
           opinionOnly: its.every(function (d) { return d.registro === "opinion"; }) };
       }) });
     });
@@ -159,7 +174,7 @@
   function renderMap() {
     var svg = d3.select("#map"); svg.selectAll("g,line,rect,path,text:not(title):not(desc)").remove();
     var L = lanes();
-    var labelW = 190, preW = 200, gapW = 34, yearW = 145, padR = 20, top = 84, pillH = 22, pillGap = 5, lanePad = 9, bandPad = 10, bandGap = 8;
+    var labelW = state.scheme === "emergente" ? 228 : 190, preW = 200, gapW = 34, yearW = 145, padR = 20, top = 84, pillH = 22, pillGap = 5, lanePad = 9, bandPad = 10, bandGap = 8;
     var yearsPost = d3.range(2019, Y1 + 1);
     var W = labelW + preW + gapW + yearsPost.length * yearW + padR;
     var xPre = d3.scaleLinear().domain([Y0 - 0.5, 2018.5]).range([labelW, labelW + preW]);
@@ -211,7 +226,7 @@
       .append("text").attr("x", 14).attr("y", top - 66).attr("font-size", 12).attr("font-weight", 600).attr("fill", css("--text"))
       .attr("text-decoration", "underline").text(state.scheme === "emergente" ? "Colores: tesis de Cristóbal Bellolio (2026) ↗" : "Tipología: Cristóbal Bellolio (2026) ↗");
     g.append("text").attr("x", 14).attr("y", top - 50).attr("font-size", 11).attr("fill", muted)
-      .text(state.scheme === "emergente" ? "Categorización emergente y asignación de obras: elaboración propia" : "Asignación de obras: elaboración propia");
+      .text(state.scheme === "emergente" ? "Mecanismos causales codificados desde los textos: elaboración propia" : "Asignación de obras: elaboración propia");
     var ox = X(2019);
     g.append("line").attr("x1", ox).attr("x2", ox).attr("y1", top - 8).attr("y2", H - 22)
       .attr("stroke", css("--accent")).attr("stroke-width", 1.5).attr("stroke-dasharray", "2 3");
@@ -224,15 +239,19 @@
         var byYear = Array.from(d3.group(s.items, function (d) { return d.anio; }), function (e) { return { yr: e[0], items: e[1] }; })
           .sort(function (a, b) { return a.yr - b.yr; });
         byYear.forEach(function (gy) {
-          gy.items.sort(function (a, b) { return a.etiqueta.localeCompare(b.etiqueta); });
+          gy.items.sort(function (a, b) {
+            if (s.code) { var pa = a.mecanismo_principal === s.code ? 0 : 1, pb = b.mecanismo_principal === s.code ? 0 : 1; if (pa !== pb) return pa - pb; }
+            return a.etiqueta.localeCompare(b.etiqueta);
+          });
           gy.items.forEach(function (d, i) {
             var label = shortName(d), w = Math.min(yearW - 10, textW(label, 12, 500) + 18);
-            nodes.push({ d: d, label: label, w: w, cx: X(d.anio), cy: s.y0 + i * (pillH + pillGap) + pillH / 2 });
+            nodes.push({ d: d, label: label, w: w, cx: X(d.anio), cy: s.y0 + i * (pillH + pillGap) + pillH / 2,
+              secondary: !!s.code && d.mecanismo_principal !== s.code, code: s.code });
           });
           gy.cy = s.y0 + ((gy.items.length - 1) * (pillH + pillGap)) / 2 + pillH / 2;
           gy.halfW = d3.max(gy.items, function (d) { return Math.min(yearW - 10, textW(shortName(d), 12, 500) + 18); }) / 2;
         });
-        for (var i = 0; i < byYear.length - 1; i++) {
+        for (var i = 0; !s.code && i < byYear.length - 1; i++) {
           var a = byYear[i], b = byYear[i + 1];
           var x1 = X(a.yr) + a.halfW, x2 = X(b.yr) - b.halfW, mx = (x1 + x2) / 2;
           var dashed = a.items.concat(b.items).every(function (d) { return d.registro === "opinion"; });
@@ -252,6 +271,7 @@
       .classed("sel", function (n) { return state.sel === n.d.id; });
     sel.each(function (n) {
       var el = d3.select(this), c = color(n.d.tesis), op = n.d.registro === "opinion", ant = n.d.rol === "antecedente";
+      if (n.secondary) el.attr("opacity", 0.5);
       el.append("rect").attr("class", "mk").attr("x", -n.w / 2).attr("y", -pillH / 2).attr("width", n.w).attr("height", pillH)
         .attr("rx", ant ? 3 : pillH / 2)
         .attr("fill", op ? bg : c).attr("fill-opacity", op ? 1 : 0.24).attr("stroke", c).attr("stroke-width", 1.5).attr("stroke-dasharray", op ? "4 2.5" : null);
@@ -263,7 +283,8 @@
     var hostFig = svg.node().closest(".fig");
     links.on("mouseenter", function (evt, n) {
       select(n.d);
-      showTip(tip, '<div class="t1">' + esc(n.d.etiqueta) + '</div><div class="t2">' + esc(n.d.tesis) + " · " + esc(n.d.subcorriente) + '</div><div class="t2" style="margin-top:4px">Clic para abrir la fuente ↗</div>', evt, hostFig);
+      var extra = n.code ? '<div class="t2">' + esc(CODE[n.code].mecanismo) + (n.secondary ? " (mecanismo secundario)" : " (mecanismo principal)") + "</div>" : "";
+      showTip(tip, '<div class="t1">' + esc(n.d.etiqueta) + '</div><div class="t2">Tesis ' + esc(n.d.tesis.toLowerCase()) + " · " + esc(n.d.subcorriente) + "</div>" + extra + '<div class="t2" style="margin-top:4px">Clic para abrir la fuente ↗</div>', evt, hostFig);
     }).on("mousemove", function (evt) { showTip(tip, tip.innerHTML, evt, hostFig); })
       .on("mouseleave", function () { hideTip(tip); })
       .on("focus", function (evt, n) { select(n.d); });
@@ -273,6 +294,10 @@
       .attr("fill", css("--faint")).attr("font-style", "italic").text("Tipología: Cristóbal Bellolio (2026). Asignación de obras y diseño: Fabián Belmar · @fabianbelmar_ · belmarfabian.github.io/estallido-tesis");
   }
 
+  function mecNames(d) {
+    return d.mecs.map(function (c) { return CODE[c] ? CODE[c].mecanismo + (c === d.mecanismo_principal ? " (principal)" : "") : c; }).join("; ");
+  }
+
   function select(d) {
     state.sel = d.id;
     d3.selectAll("#map g.node").classed("sel", function (n) { return n.d.id === d.id; });
@@ -280,7 +305,7 @@
     var rol = d.rol === "antecedente" ? " · Antecedente previo al 18-O" : "";
     document.getElementById("detail").innerHTML =
       '<div class="ref">' + esc(d.referencia) + "</div>" +
-      '<div class="meta"><span style="color:' + color(d.tesis) + '">●</span> ' + esc(d.tesis) + " · " + esc(d.subcorriente) + " · Categoría emergente: " + esc(d.categoria_emergente) + " · " + reg + rol +
+      '<div class="meta"><span style="color:' + color(d.tesis) + '">●</span> ' + esc(d.tesis) + " · " + esc(d.subcorriente) + " · Mecanismos: " + esc(mecNames(d)) + " · " + reg + rol +
       (d.nota ? "<br>" + esc(d.nota) : "") +
       ' · <a href="' + esc(d.fuente_url) + '" target="_blank" rel="noopener">Ver fuente ↗</a></div>';
   }
@@ -375,12 +400,12 @@
     var tb = document.querySelector("#tbl tbody");
     var rows = DATA.filter(visible).filter(function (d) {
       if (!state.q) return true;
-      return (d.referencia + " " + d.tesis + " " + d.subcorriente + " " + d.categoria_emergente + " " + d.autores).toLowerCase().indexOf(state.q) >= 0;
+      return (d.referencia + " " + d.tesis + " " + d.subcorriente + " " + mecNames(d) + " " + d.autores).toLowerCase().indexOf(state.q) >= 0;
     }).sort(function (a, b) { return a.anio - b.anio || a.tesis.localeCompare(b.tesis) || a.etiqueta.localeCompare(b.etiqueta); });
     tb.innerHTML = rows.map(function (d) {
       return "<tr><td>" + d.anio + '</td><td><span class="dot" style="background:' + color(d.tesis) + '"></span>' + esc(d.tesis) +
         "</td><td>" + esc(d.subcorriente) + (d.registro === "opinion" ? ' <span style="color:var(--faint)">(opinión)</span>' : "") +
-        "</td><td>" + esc(d.categoria_emergente) +
+        "</td><td>" + esc(mecNames(d)) +
         '</td><td class="ref">' + esc(d.referencia) + (d.nota ? '<div style="font-family:Inter,sans-serif;font-size:12px;color:var(--muted)">' + esc(d.nota) + "</div>" : "") +
         '</td><td><a href="' + esc(d.fuente_url) + '" target="_blank" rel="noopener">↗</a></td></tr>';
     }).join("") || '<tr><td colspan="6" style="color:var(--muted)">Sin resultados.</td></tr>';
