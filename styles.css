@@ -1037,3 +1037,6 @@ a:hover { text-decoration-color: var(--braun-yellow); text-decoration-thickness:
 @media (prefers-reduced-motion: reduce) {
     .tab, .back-to-top { transition: none; }
 }
+
+/* Iconos de ordenar/limpiar centrados en la ranura (no en todo el bloque del buscador) */
+.sort-toggle, .search-clear { top: 1.15rem; }
