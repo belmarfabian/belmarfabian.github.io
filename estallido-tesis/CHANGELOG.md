@@ -2,6 +2,16 @@
 
 Todas las versiones están en Zenodo bajo el DOI conceptual [10.5281/zenodo.23455927](https://doi.org/10.5281/zenodo.23455927), que siempre apunta a la más reciente.
 
+## 1.5.0 — 18 de octubre de 2026
+- Columna de texto centrada y justificada; controles del mapa en una fila y filtro de tesis dentro de la figura.
+- Las líneas de cada subcorriente unen años, con corchetes que agrupan las obras de un mismo año.
+- En pantallas táctiles, el primer toque muestra la referencia y el segundo abre la fuente.
+- Tabla agrupada por tesis y ordenable por año o autor; sección «Datos y figuras».
+- El tercer registro pasa a llamarse «Opinión o declaración».
+- La referencia de Vergara (2020) va a su nombre; la etiqueta «Folchi et al.» pasa a «Artaza et al.», por el primer autor.
+- Cita formal del hilo de Bellolio y cita verificada de Joignant y Garrido-Vergara (2025).
+- Créditos dentro del mapa solo en las figuras descargables.
+
 ## 1.4.0 — 18 de octubre de 2026 · [10.5281/zenodo.23457225](https://doi.org/10.5281/zenodo.23457225)
 - Prueba de confiabilidad con un segundo codificador ciego (modelo de lenguaje): kappa de 0,97 en tesis, 0,96 en registro y 0,83 en mecanismo principal; alfa de 0,64 en el conjunto de mecanismos. Nuevo archivo `datos/confiabilidad.csv`.
 - Los libros de Contardo (2020) y Tironi (2020) pasan de opinión a ensayo: un libro nunca se clasifica como opinión.
