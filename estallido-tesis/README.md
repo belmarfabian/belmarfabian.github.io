@@ -1,4 +1,4 @@
-# Las tesis de Bellolio sobre el estallido social
+# Tesis sobre el estallido social
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23455927.svg)](https://doi.org/10.5281/zenodo.23455927)
 
@@ -32,7 +32,7 @@ Mapa longitudinal y base de referencias sobre las interpretaciones del estallido
 
 ## Cómo citar
 
-Belmar, F. (2026). *Las tesis de Bellolio sobre el estallido social: mapa longitudinal y base de referencias* (versión 1.0.1) [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23455927
+Belmar, F. (2026). *Tesis sobre el estallido social: mapa longitudinal y base de referencias* (versión 1.0.1) [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23455927
 
 Si usas la tipología, cita también a Bellolio (2026).
 

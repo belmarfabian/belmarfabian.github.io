@@ -191,7 +191,9 @@
     g.append("line").attr("x1", bx - 1).attr("x2", bx + 9).attr("y1", top - 30).attr("y2", top - 14).attr("stroke", muted);
     g.append("text").attr("x", (labelW + labelW + preW) / 2).attr("y", top - 36).attr("text-anchor", "middle").attr("font-size", 11)
       .attr("fill", muted).attr("font-style", "italic").text("antecedentes (escala comprimida)");
-    g.append("text").attr("x", 14).attr("y", top - 66).attr("font-size", 12).attr("font-weight", 600).attr("fill", css("--text")).text("Tipología: Cristóbal Bellolio (2026)");
+    g.append("a").attr("href", "https://x.com/cbellolio/status/2111498263115272614").attr("target", "_blank").attr("rel", "noopener")
+      .append("text").attr("x", 14).attr("y", top - 66).attr("font-size", 12).attr("font-weight", 600).attr("fill", css("--text"))
+      .attr("text-decoration", "underline").text("Tipología: Cristóbal Bellolio (2026) ↗");
     g.append("text").attr("x", 14).attr("y", top - 50).attr("font-size", 11).attr("fill", muted).text("Asignación de obras: elaboración propia");
     var ox = X(2019);
     g.append("line").attr("x1", ox).attr("x2", ox).attr("y1", top - 8).attr("y2", H - 22)
@@ -225,9 +227,10 @@
     });
 
     var ng = svg.append("g");
-    var sel = ng.selectAll("g.node").data(nodes).enter().append("g").attr("class", "node")
-      .attr("tabindex", 0).attr("role", "button")
-      .attr("aria-label", function (n) { return n.d.etiqueta + ". " + n.d.tesis + ", " + n.d.subcorriente; })
+    var links = ng.selectAll("a.nodelink").data(nodes).enter().append("a").attr("class", "nodelink")
+      .attr("href", function (n) { return n.d.fuente_url; }).attr("target", "_blank").attr("rel", "noopener")
+      .attr("aria-label", function (n) { return n.d.etiqueta + ". " + n.d.tesis + ", " + n.d.subcorriente + ". Abre la fuente"; });
+    var sel = links.append("g").attr("class", "node")
       .attr("transform", function (n) { return "translate(" + n.cx + "," + n.cy + ")"; })
       .classed("sel", function (n) { return state.sel === n.d.id; });
     sel.each(function (n) {
@@ -241,14 +244,15 @@
         .attr("fill", css("--text")).text(n.label);
     });
     var hostFig = svg.node().closest(".fig");
-    sel.on("mouseenter", function (evt, n) {
-      showTip(tip, '<div class="t1">' + esc(n.d.etiqueta) + '</div><div class="t2">' + esc(n.d.tesis) + " · " + esc(n.d.subcorriente) + "</div>", evt, hostFig);
+    links.on("mouseenter", function (evt, n) {
+      select(n.d);
+      showTip(tip, '<div class="t1">' + esc(n.d.etiqueta) + '</div><div class="t2">' + esc(n.d.tesis) + " · " + esc(n.d.subcorriente) + '</div><div class="t2" style="margin-top:4px">Clic para abrir la fuente ↗</div>', evt, hostFig);
     }).on("mousemove", function (evt) { showTip(tip, tip.innerHTML, evt, hostFig); })
       .on("mouseleave", function () { hideTip(tip); })
-      .on("click", function (evt, n) { select(n.d); })
-      .on("keydown", function (evt, n) { if (evt.key === "Enter" || evt.key === " ") { evt.preventDefault(); select(n.d); } });
+      .on("focus", function (evt, n) { select(n.d); });
 
-    svg.append("text").attr("x", W - padR).attr("y", H - 10).attr("text-anchor", "end").attr("font-size", 11)
+    svg.append("a").attr("href", "https://belmarfabian.github.io/estallido-tesis/").attr("target", "_blank").attr("rel", "noopener")
+      .append("text").attr("x", W - padR).attr("y", H - 10).attr("text-anchor", "end").attr("font-size", 11)
       .attr("fill", css("--faint")).attr("font-style", "italic").text("Tipología: Cristóbal Bellolio (2026). Asignación de obras y diseño: Fabián Belmar · @fabianbelmar_ · belmarfabian.github.io/estallido-tesis");
   }
 
