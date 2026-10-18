@@ -117,10 +117,9 @@ h1{text-align:center;text-wrap:balance}
 .cite a{color:var(--accent)}
 td:nth-child(2){white-space:nowrap}
 @media (max-width:760px){th:nth-child(3),td:nth-child(3),th:nth-child(4),td:nth-child(4){display:none} td:nth-child(2){white-space:normal} table{table-layout:fixed;width:100%} th:nth-child(1){width:46px} th:nth-child(2){width:128px} th:nth-child(6){width:28px} td:nth-child(5){overflow-wrap:anywhere} td:nth-child(1),td:nth-child(2){font-size:13px}}
-.citetop{max-width:720px;box-sizing:border-box;margin:14px auto 4px;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13.5px;line-height:1.5;text-align:justify;hyphens:auto}
+.citetop{max-width:720px;box-sizing:border-box;margin:14px auto 4px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:center;font-size:13.5px}
 .citetop a{color:var(--accent)}
-.citeact{display:flex;gap:12px;align-items:center;margin-top:8px;font-size:13px}
-.citeact button{font:inherit;font-size:12.5px;padding:3px 10px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg);color:var(--text);cursor:pointer}
+.citetop button{font:inherit;font-size:12.5px;padding:3px 10px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg);color:var(--text);cursor:pointer}
 </style>
 </head>
 <body>
@@ -132,7 +131,7 @@ td:nth-child(2){white-space:nowrap}
     <p class="lede">Cristóbal Bellolio propuso una tipología de cuatro tesis sobre el estallido social: transformacional, populista, estructural e insurreccional (<a href="https://x.com/cbellolio/status/2111498263115272614">hilo en X</a>, 17 de octubre de 2026). Este mapa ubica en esa tipología a los autores que sostienen cada tesis, según su año de publicación. También permite ver las mismas obras según los mecanismos causales que cada texto invoca, una clasificación emergente que no depende de esa tipología. Cada referencia está verificada y enlaza a su fuente.</p>
     <p class="credit">La tipología de las cuatro tesis es de Cristóbal Bellolio. La asignación de obras, las subcorrientes, la codificación de mecanismos y la visualización son de elaboración propia (Fabián Belmar). Bellolio no participó en la ubicación de los autores; los errores de asignación son nuestros.</p>
     <p class="stats" id="stats"></p>
-    <div class="citetop"><div><b>Cómo citar.</b> Belmar, F. (2026). <i>Tesis sobre el estallido social: mapa longitudinal y base de referencias</i> (versión 1.4.0) [Conjunto de datos]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23455927">https://doi.org/10.5281/zenodo.23455927</a></div><div class="citeact"><a href="https://doi.org/10.5281/zenodo.23455927"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23455927.svg" alt="DOI 10.5281/zenodo.23455927" height="20"></a><button type="button" id="copycite">Copiar cita</button><a href="#citar">BibTeX</a></div></div>
+    <div class="citetop"><b>Cómo citar</b><a href="https://doi.org/10.5281/zenodo.23455927"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23455927.svg" alt="DOI 10.5281/zenodo.23455927" height="20"></a><button type="button" id="copycite">Copiar cita</button><a href="#citar">Cita completa y BibTeX</a></div>
   </header>
 
   <div class="controls">
@@ -227,7 +226,7 @@ td:nth-child(2){white-space:nowrap}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="app.js"></script>
 <script>
-(function(){var b=document.getElementById("copycite");if(!b)return;b.addEventListener("click",function(){var t=document.querySelector(".citetop > div").innerText.replace(/^Cómo citar\.\s*/,"");try{navigator.clipboard.writeText(t).then(function(){b.textContent="Copiada";setTimeout(function(){b.textContent="Copiar cita"},1500)})}catch(e){}})})();
+(function(){var b=document.getElementById("copycite");if(!b)return;b.addEventListener("click",function(){var t=document.getElementById("cite").innerText.trim();try{navigator.clipboard.writeText(t).then(function(){b.textContent="Copiada";setTimeout(function(){b.textContent="Copiar cita"},1500)})}catch(e){}})})();
 </script>
 </body>
 </html>
