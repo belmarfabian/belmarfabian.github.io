@@ -1,0 +1,98 @@
+[
+ {
+  "codigo": "M01",
+  "mecanismo": "Desigualdad y mercantilización",
+  "familia": "Económicos",
+  "definicion": "Desigualdad de ingresos o mercantilización de derechos (pensiones, salud, educación) atribuida al modelo neoliberal."
+ },
+ {
+  "codigo": "M02",
+  "mecanismo": "Expectativas frustradas",
+  "familia": "Económicos",
+  "definicion": "Expectativas frustradas, modernización acelerada, movilidad social bloqueada, endeudamiento de clases medias."
+ },
+ {
+  "codigo": "M13",
+  "mecanismo": "Desaceleración económica",
+  "familia": "Económicos",
+  "definicion": "Desaceleración o estancamiento económico."
+ },
+ {
+  "codigo": "M03",
+  "mecanismo": "Abuso y dignidad",
+  "familia": "Socioculturales",
+  "definicion": "Abusos, maltrato, desigualdad de trato o relacional, demanda de dignidad, irritación cotidiana."
+ },
+ {
+  "codigo": "M06",
+  "mecanismo": "Cambio generacional",
+  "familia": "Socioculturales",
+  "definicion": "Juventud sin memoria de la dictadura, socialización distinta."
+ },
+ {
+  "codigo": "M07",
+  "mecanismo": "Cambio cultural",
+  "familia": "Socioculturales",
+  "definicion": "Cambio de valores: feminismo, pueblos indígenas, individualización, igualitarismo."
+ },
+ {
+  "codigo": "M12",
+  "mecanismo": "Anomia y violencia",
+  "familia": "Socioculturales",
+  "definicion": "Violencia, anomia, lumpen, consumo o desintegración cultural."
+ },
+ {
+  "codigo": "M16",
+  "mecanismo": "Gnosticismo o milenarismo",
+  "familia": "Socioculturales",
+  "definicion": "Disposición cuasirreligiosa que ubica el mal fuera de la sociedad y busca una liberación redentora."
+ },
+ {
+  "codigo": "M04",
+  "mecanismo": "Crisis de representación",
+  "familia": "Políticos",
+  "definicion": "Partidos débiles, élites desconectadas, desafección política."
+ },
+ {
+  "codigo": "M05",
+  "mecanismo": "Pérdida de legitimidad",
+  "familia": "Políticos",
+  "definicion": "Pérdida de confianza institucional, escándalos, corrupción, colusión."
+ },
+ {
+  "codigo": "M15",
+  "mecanismo": "Clima populista global",
+  "familia": "Políticos",
+  "definicion": "El estallido como caso de una ola mundial de reacción contra el déficit de las democracias liberales."
+ },
+ {
+  "codigo": "M14",
+  "mecanismo": "Acumulación de movilizaciones",
+  "familia": "Dinámica de la protesta",
+  "definicion": "Ciclos previos de movilización (2006, 2011, No+AFP, mayo feminista de 2018) como condición del estallido."
+ },
+ {
+  "codigo": "M08",
+  "mecanismo": "Contagio y dinámica propia",
+  "familia": "Dinámica de la protesta",
+  "definicion": "Contagio, redes sociales, multitud, efecto umbral, espontaneidad."
+ },
+ {
+  "codigo": "M09",
+  "mecanismo": "Represión",
+  "familia": "Dinámica de la protesta",
+  "definicion": "Respuesta o represión del gobierno como factor que escaló la protesta."
+ },
+ {
+  "codigo": "M10",
+  "mecanismo": "Coordinación política",
+  "familia": "Operación deliberada",
+  "definicion": "Acción política deliberada u organizada por actores internos."
+ },
+ {
+  "codigo": "M11",
+  "mecanismo": "Injerencia extranjera",
+  "familia": "Operación deliberada",
+  "definicion": "Intervención o influencia extranjera."
+ }
+]
