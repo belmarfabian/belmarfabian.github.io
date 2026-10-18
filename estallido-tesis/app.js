@@ -176,7 +176,7 @@
   function renderMap() {
     var svg = d3.select("#map"); svg.selectAll("g,line,rect,path,text:not(title):not(desc)").remove();
     var L = lanes();
-    var labelW = state.scheme === "emergente" ? 228 : 190, preW = 200, gapW = 34, yearW = 145, padR = 20, top = 84, pillH = 22, pillGap = 5, lanePad = 9, bandPad = 10, bandGap = 8;
+    var labelW = state.scheme === "emergente" ? 228 : 190, preW = 200, gapW = 34, yearW = 145, padR = 20, top = 84, pillH = 22, pillGap = 5, lanePad = 13, bandPad = 10, bandGap = 8;
     var yearsPost = d3.range(2019, Y1 + 1);
     var W = labelW + preW + gapW + yearsPost.length * yearW + padR;
     var xPre = d3.scaleLinear().domain([Y0 - 0.5, 2018.5]).range([labelW, labelW + preW]);
@@ -207,7 +207,12 @@
       g.append("rect").attr("x", 0).attr("y", grp.y0).attr("width", W).attr("height", grp.y1 - grp.y0)
         .attr("rx", 6).attr("fill", grp.color).attr("fill-opacity", state.scheme === "emergente" ? 0.06 : 0.07);
       g.append("text").attr("class", "thesis-label").attr("x", 14).attr("y", grp.y0 + bandPad + 11).text(grp.name);
-      grp.subs.forEach(function (s) {
+      grp.subs.forEach(function (s, k) {
+        if (k > 0) {
+          var prev = grp.subs[k - 1], yd = (prev.y0 + prev.h + s.y0) / 2;
+          g.append("line").attr("x1", 10).attr("x2", W - 10).attr("y1", yd).attr("y2", yd)
+            .attr("stroke", grp.color).attr("stroke-opacity", 0.35).attr("stroke-width", 1);
+        }
         g.append("text").attr("class", "lane-label").attr("x", 14).attr("y", s.y0 + pillH / 2 + 4)
           .attr("font-style", "italic").text(s.name);
       });
