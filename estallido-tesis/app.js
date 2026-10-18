@@ -221,10 +221,10 @@
     g.append("line").attr("x1", bx - 1).attr("x2", bx + 9).attr("y1", top - 30).attr("y2", top - 14).attr("stroke", muted);
     g.append("text").attr("x", (labelW + labelW + preW) / 2).attr("y", top - 36).attr("text-anchor", "middle").attr("font-size", 11)
       .attr("fill", muted).attr("font-style", "italic").text("antecedentes (escala comprimida)");
-    g.append("a").attr("href", "https://x.com/cbellolio/status/2111498263115272614").attr("target", "_blank").attr("rel", "noopener")
+    g.append("a").attr("class", "printonly").attr("href", "https://x.com/cbellolio/status/2111498263115272614").attr("target", "_blank").attr("rel", "noopener")
       .append("text").attr("x", 14).attr("y", top - 66).attr("font-size", 12).attr("font-weight", 600).attr("fill", css("--text"))
       .attr("text-decoration", "underline").text(state.scheme === "emergente" ? "Colores: tesis de Cristóbal Bellolio (2026) ↗" : "Tipología: Cristóbal Bellolio (2026) ↗");
-    g.append("text").attr("x", 14).attr("y", top - 50).attr("font-size", 11).attr("fill", muted)
+    g.append("text").attr("class", "printonly").attr("x", 14).attr("y", top - 50).attr("font-size", 11).attr("fill", muted)
       .text(state.scheme === "emergente" ? "Mecanismos causales codificados desde los textos: elaboración propia" : "Asignación de obras: elaboración propia");
     var ox = X(2019);
     g.append("line").attr("x1", ox).attr("x2", ox).attr("y1", top - 8).attr("y2", H - 22)
@@ -305,7 +305,7 @@
     det.onmouseenter = function () { clearTimeout(hideT); };
     det.onmouseleave = function () { hideT = setTimeout(function () { det.classList.remove("on"); }, 400); };
 
-    svg.append("a").attr("href", "https://belmarfabian.github.io/estallido-tesis/").attr("target", "_blank").attr("rel", "noopener")
+    svg.append("a").attr("class", "printonly").attr("href", "https://belmarfabian.github.io/estallido-tesis/").attr("target", "_blank").attr("rel", "noopener")
       .append("text").attr("x", W - padR).attr("y", H - 10).attr("text-anchor", "end").attr("font-size", 11)
       .attr("fill", css("--faint")).attr("font-style", "italic").text("Tipología: Cristóbal Bellolio (2026). Asignación de obras y diseño: Fabián Belmar · @fabianbelmar_ · belmarfabian.github.io/estallido-tesis");
   }
