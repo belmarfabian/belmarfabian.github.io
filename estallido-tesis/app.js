@@ -250,9 +250,20 @@
           gy.cy = s.y0 + ((gy.items.length - 1) * (pillH + pillGap)) / 2 + pillH / 2;
           gy.halfW = d3.max(gy.items, function (d) { return Math.min(yearW - 10, textW(shortName(d), 12, 500) + 18); }) / 2;
         });
+        // Corchetes: agrupan las obras de un mismo año para que la línea una años, no obras
+        if (!s.code && byYear.length > 1) byYear.forEach(function (gy, k) {
+          if (gy.items.length < 2) return;
+          var yT = s.y0 + 3, yB = s.y0 + (gy.items.length - 1) * (pillH + pillGap) + pillH - 3;
+          [k > 0 ? -1 : 0, k < byYear.length - 1 ? 1 : 0].forEach(function (sd) {
+            if (!sd) return;
+            var bx = X(gy.yr) + sd * (gy.halfW + 6);
+            links.append("path").attr("fill", "none").attr("stroke", s.line).attr("stroke-width", 1.2).attr("opacity", 0.75)
+              .attr("d", "M" + (bx - sd * 4) + "," + yT + " L" + bx + "," + yT + " L" + bx + "," + yB + " L" + (bx - sd * 4) + "," + yB);
+          });
+        });
         for (var i = 0; !s.code && i < byYear.length - 1; i++) {
           var a = byYear[i], b = byYear[i + 1];
-          var x1 = X(a.yr) + a.halfW, x2 = X(b.yr) - b.halfW, mx = (x1 + x2) / 2;
+          var x1 = X(a.yr) + a.halfW + (a.items.length > 1 ? 6 : 0), x2 = X(b.yr) - b.halfW - (b.items.length > 1 ? 6 : 0), mx = (x1 + x2) / 2;
           var dashed = a.items.concat(b.items).every(function (d) { return d.registro === "opinion"; });
           links.append("path").attr("fill", "none").attr("stroke", s.line).attr("stroke-width", 1.5).attr("opacity", 0.75)
             .attr("stroke-dasharray", dashed ? "4 3" : null)
