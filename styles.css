@@ -892,3 +892,148 @@ a:hover {
         height: 34px;
     }
 }
+
+/* =============================================================
+   Lenguaje Braun (Rams, 1955-1995): gris hueso de los aparatos,
+   grafito, teclas de la calculadora ET66 con la tecla "=" amarilla
+   como único acento, y la rejilla perforada del parlante de la T3.
+   ============================================================= */
+:root {
+    --braun-yellow: #f0b323;
+    --braun-yellow-ink: #2a2826;
+    --key: #ffffff;
+    --key-edge: #cfcdc6;
+    --accent: #2a2826;
+    --accent-soft: #f7e3a8;
+    --q1: #3f7a3a;
+    --q2: #3f6788;
+    --q3: #a8681c;
+    --q4: #a63d2e;
+    --color-text: #2a2826;
+    --color-text-secondary: #45423e;
+    --color-text-muted: #6f6c66;
+    --color-text-faint: #9a978f;
+    --color-text-body: #3a3733;
+    --color-bg: #ecebe7;
+    --color-surface: #f8f7f4;
+    --color-border: #d8d6cf;
+    --color-border-strong: #b9b6ad;
+    --color-link: #2a2826;
+}
+[data-theme="dark"] {
+    --key: #3a3632;
+    --key-edge: #4a4540;
+    --accent: #f0b323;
+    --accent-soft: #4a3c18;
+    --q1: #8cbf6e;
+    --q2: #8fb3d1;
+    --q3: #e0aa55;
+    --q4: #e08a75;
+    --color-text: #edeae3;
+    --color-text-secondary: #cfcac0;
+    --color-text-muted: #a39e94;
+    --color-text-faint: #7a756c;
+    --color-text-body: #dcd7cd;
+    --color-bg: #24211f;
+    --color-surface: #2e2a27;
+    --color-border: #3b3733;
+    --color-border-strong: #57524b;
+    --color-link: #edeae3;
+}
+
+body {
+    font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-feature-settings: "tnum" 1;
+}
+
+h1 { font-weight: 700; letter-spacing: -0.035em; }
+h2 { font-weight: 600; border-bottom-color: var(--color-border-strong); }
+
+/* Enlaces: grafito subrayado fino, como la rotulación de los mandos */
+a { text-decoration: underline; text-decoration-color: var(--color-border-strong); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--braun-yellow); text-decoration-thickness: 2px; }
+.social-links a, .info a, .site-footer a { text-decoration: none; }
+
+/* Rejilla del parlante T3 en lugar del mosaico */
+.mosaico {
+    width: 46px;
+    height: 46px;
+    border-radius: 6px;
+    background-color: var(--color-surface);
+    background-image: radial-gradient(circle, var(--color-text) 1.6px, transparent 1.9px);
+    background-size: 7px 7px;
+    background-position: center;
+    box-shadow: inset 0 0 0 1px var(--color-border);
+    margin-left: 0.2rem;
+}
+.mosaico > i { display: none; }
+
+/* Avatar y perilla de tema */
+.avatar { box-shadow: 0 0 0 1px var(--color-border-strong); }
+.theme-toggle {
+    width: 34px; height: 34px; padding: 0;
+    border-radius: 50%;
+    background: var(--key);
+    border: 1px solid var(--key-edge);
+    box-shadow: 0 1px 0 var(--key-edge);
+}
+
+/* Panel lateral: como la placa frontal de un aparato */
+.inicio-recientes {
+    background: var(--key);
+    border: 1px solid var(--key-edge);
+    border-radius: 10px;
+    padding: 1rem 1.15rem;
+}
+.inicio-recientes h3 { text-transform: none; letter-spacing: 0; font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); }
+.ultima-link { color: var(--color-text); }
+
+/* Buscador: ranura redondeada */
+.search-input {
+    background: var(--key);
+    border: 1px solid var(--key-edge);
+    border-radius: 999px;
+    padding-left: 1.1rem;
+}
+.search-input:focus { border-color: var(--color-text-muted); }
+
+/* Pestañas = teclas de la ET66; la activa es la tecla "=" amarilla */
+.tabs {
+    border-bottom: none;
+    gap: 0.45rem;
+    padding: 0.6rem 0 0.8rem;
+    background-color: var(--color-bg);
+}
+.tab {
+    border: 1px solid var(--key-edge);
+    border-radius: 999px;
+    background: var(--key);
+    color: var(--color-text-secondary);
+    padding: 0.42rem 1rem;
+    margin-bottom: 0;
+    box-shadow: 0 1px 0 var(--key-edge);
+    transition: background-color 0.15s, transform 0.08s, box-shadow 0.08s;
+}
+.tab:hover { color: var(--color-text); border-color: var(--color-border-strong); }
+.tab:active { transform: translateY(1px); box-shadow: none; }
+.tab.active {
+    background: var(--braun-yellow);
+    border-color: #d99c12;
+    color: var(--braun-yellow-ink);
+    box-shadow: 0 1px 0 #c08a0f;
+}
+.tab.active .tab-count { color: var(--braun-yellow-ink); opacity: 0.7; }
+.tab:focus-visible { outline: 2px solid var(--color-text); outline-offset: 2px; }
+
+/* Publicaciones: filas sobre panel claro, sin cajas */
+.scrollable-list li:hover { background-color: var(--color-surface); outline-color: transparent; }
+.pub-quartile { border-radius: 4px; }
+.copy-cite { border-radius: 999px; }
+.search-highlight { background-color: var(--accent-soft); }
+.timeline-year-label::before { background-color: var(--braun-yellow); box-shadow: 0 0 0 1px #c08a0f; }
+.back-to-top { border-radius: 50%; background: var(--key); border-color: var(--key-edge); }
+.site-footer { border-top-color: var(--color-border-strong); }
+
+@media (prefers-reduced-motion: reduce) {
+    .tab, .back-to-top { transition: none; }
+}
