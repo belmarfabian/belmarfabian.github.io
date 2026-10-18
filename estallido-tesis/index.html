@@ -87,8 +87,7 @@ figcaption{font-family:"Source Serif 4",Georgia,serif;font-size:14px;color:var(-
 .detail .ref{font-family:"Source Serif 4",Georgia,serif;font-size:14px;text-align:justify;hyphens:auto}
 .detail .meta{color:var(--muted);font-size:12px;margin-top:8px;text-align:justify;hyphens:auto}
 .detail .meta div{margin-top:3px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
-@media (max-width:760px){.two{grid-template-columns:1fr}}
+.bars{margin-top:26px}
 h2{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:22px;margin:40px 0 8px}
 h3{font-size:13px;font-weight:600;margin:0 0 4px;color:var(--text)}
 .sub{font-size:12.5px;color:var(--muted);margin:0 0 6px}
@@ -154,18 +153,11 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
     <figcaption id="caption">Figura 1. Mapa de las interpretaciones del estallido social, 2012–2026.</figcaption>
   </figure>
 
-  <div class="two">
-    <figure>
-      <h3>Obras por año y tesis</h3>
-      <p class="sub">Número de obras publicadas cada año.</p>
-      <div class="fig"><svg id="bars" role="img" aria-label="Barras apiladas de obras por año y tesis"></svg><div class="tip" id="tip2"></div></div>
-    </figure>
-    <figure>
-      <h3>Complejidad acumulada</h3>
-      <p class="sub">Subcorrientes distintas con al menos una obra, acumuladas por año.</p>
-      <div class="fig"><svg id="cum" role="img" aria-label="Línea escalonada de subcorrientes acumuladas"></svg><div class="tip" id="tip3"></div></div>
-    </figure>
-  </div>
+  <figure class="bars">
+    <h3>Obras por año, tesis y registro</h3>
+    <p class="sub">Cada barra suma las obras publicadas ese año. El color indica la tesis; el relleno, el registro: pleno para investigación, claro para ensayo y vacío con borde punteado para opinión.</p>
+    <div class="fig"><svg id="bars" role="img" aria-label="Barras apiladas de obras por año, tesis y registro"></svg><div class="legend" id="legend2"></div><div class="tip" id="tip2"></div></div>
+  </figure>
 
   <h2>Referencias</h2>
   <div class="tbar">
