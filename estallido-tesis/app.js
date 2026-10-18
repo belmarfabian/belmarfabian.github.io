@@ -387,7 +387,7 @@
     }).sort(function (a, b) { return a.anio - b.anio || a.tesis.localeCompare(b.tesis) || a.etiqueta.localeCompare(b.etiqueta); });
     tb.innerHTML = rows.map(function (d) {
       return "<tr><td>" + d.anio + '</td><td><span class="dot" style="background:' + color(d.tesis) + '"></span>' + esc(d.tesis) +
-        "</td><td>" + esc(d.subcorriente) + (d.registro !== "investigacion" ? ' <span style="color:var(--faint)">(' + d.registro + ')</span>' : "") +
+        "</td><td>" + esc(d.subcorriente) + (d.registro !== "investigacion" ? ' <span style="color:var(--faint)">(' + (d.registro === "opinion" ? "opinión" : d.registro) + ')</span>' : "") +
         "</td><td>" + esc(mecNames(d)) +
         '</td><td class="ref">' + esc(d.referencia) + (d.nota ? '<div style="font-family:Inter,sans-serif;font-size:12px;color:var(--muted)">' + esc(d.nota) + "</div>" : "") +
         '</td><td><a href="' + esc(d.fuente_url) + '" target="_blank" rel="noopener">↗</a></td></tr>';
