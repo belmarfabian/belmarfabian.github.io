@@ -154,6 +154,7 @@ function activateTab(tab, tabs) {
 
 /* ===== Journal database (quartile = best SJR quartile, citescore) ===== */
 var JOURNAL_DB = {
+    'Political Studies Review': { quartile: 'Q1' },
     'Societies': { quartile: 'Q2', citescore: 3.0 },
     'Ethnic and Racial Studies': { quartile: 'Q1', citescore: 5.5 },
     'Policy Studies': { quartile: 'Q1', citescore: 5.8 },
