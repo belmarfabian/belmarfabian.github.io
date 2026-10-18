@@ -36,7 +36,7 @@ La base no se limita a la tipología de Bellolio. Las obras que no calzan en las
 
 ## Cómo citar
 
-Belmar, F. (2026). *Tesis sobre el estallido social: mapa longitudinal y base de referencias* (versión 1.2.0) [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23455927
+Belmar, F. (2026). *Tesis sobre el estallido social: mapa longitudinal y base de referencias* (versión 1.3.0) [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23455927
 
 Si usas la tipología, cita también a Bellolio (2026).
 
