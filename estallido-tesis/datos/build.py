@@ -285,7 +285,7 @@ ROWS = [
   "mecanismos": "M04;M08;M10;M13",
   "mecanismo_principal": "M10",
   "confianza_codificacion": "media",
-  "registro": "opinion",
+  "registro": "ensayo",
   "rol": "principal",
   "referencia": "Larraín Arroyo, L. (2020). El otro golpe: 18 de octubre de 2019 [prólogo de M. Cubillos].",
   "fuente_url": "https://www.pauta.cl/actualidad/2020/10/08/luis-larrain-crisis-social-le-podia-pasar-solo-a-un-gobierno-derecha.html",
@@ -413,7 +413,7 @@ ROWS = [
   "mecanismos": "M10;M11",
   "mecanismo_principal": "M10",
   "confianza_codificacion": "baja",
-  "registro": "opinion",
+  "registro": "ensayo",
   "rol": "principal",
   "referencia": "Villegas, F. (2020). Insurrección. Edición independiente.",
   "fuente_url": "https://www.goodreads.com/book/show/55819763-insurrecci-n",
@@ -578,6 +578,38 @@ ROWS = [
   "referencia": "Muñoz Riveros, S. (2026, julio). Exposición ante la comisión investigadora del 18-O, Cámara de Diputados. Reportada por Ex-Ante.",
   "fuente_url": "https://www.ex-ante.cl/el-estallido-no-fue-social-lo-que-expuso-sergio-munoz-riveros-ante-la-comision-investigadora-del-18-o/",
   "nota": "Sugerido en X por @Puduazul."
+ },
+ {
+  "id": "munoz2023",
+  "etiqueta": "Muñoz (2023)",
+  "autores": "Sergio Muñoz Riveros",
+  "anio": 2023,
+  "tesis": "Insurreccional",
+  "subcorriente": "Golpe no tradicional",
+  "mecanismos": "M10;M11",
+  "mecanismo_principal": "M10",
+  "confianza_codificacion": "media",
+  "registro": "ensayo",
+  "rol": "principal",
+  "referencia": "Muñoz Riveros, S. (2023). La democracia bajo asedio. Presentado en julio de 2023.",
+  "fuente_url": "https://www.ex-ante.cl/?p=160185",
+  "nota": "Sostiene que la revuelta requirió planificación, coordinación y recursos. Editorial no verificada. Comentarios al hilo de Bellolio."
+ },
+{
+  "id": "hodge2024",
+  "etiqueta": "Hodge (2024)",
+  "autores": "Eduardo Hodge Dupré",
+  "anio": 2024,
+  "tesis": "Insurreccional",
+  "subcorriente": "Guerra híbrida",
+  "mecanismos": "M10;M11",
+  "mecanismo_principal": "M10",
+  "confianza_codificacion": "media",
+  "registro": "investigacion",
+  "rol": "principal",
+  "referencia": "Hodge Dupré, E. (2024). Falsas dicotomías de la guerra durante el estallido social chileno. Revista Científica General José María Córdova, 22(48), 1127–1150. https://doi.org/10.21830/19006586.1360",
+  "fuente_url": "https://doi.org/10.21830/19006586.1360",
+  "nota": "Artículo en revista arbitrada. Sostiene que el estallido no fue espontáneo y lo lee como guerra híbrida; trata la injerencia extranjera como no descartable."
  }
 ]
 p = pathlib.Path(__file__).parent

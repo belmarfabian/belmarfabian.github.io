@@ -289,8 +289,15 @@
     var hideT = null;
     function place(n) {
       var k = svg.node().getBoundingClientRect().height / H;
-      var top = n.cy * k - 30, max = H * k - det.offsetHeight - 30;
-      det.style.top = Math.max(top0 * k, Math.min(top, max)) + "px";
+      var max = H * k - det.offsetHeight - 30, top;
+      if (n.cx > sx0 - 70 && n.cx < sx1 + 70) {
+        // la obra está bajo el panel: se muestra arriba o abajo de ella
+        top = n.cy * k + 18;
+        if (top > max) top = n.cy * k - 18 - det.offsetHeight;
+      } else {
+        top = Math.max(top0 * k, Math.min(n.cy * k - 30, max));
+      }
+      det.style.top = top + "px";
     }
     var top0 = top;
     links.on("mouseenter", function (evt, n) {
