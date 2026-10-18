@@ -82,6 +82,9 @@
     window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(renderAll, 150); });
   }
 
+  document.querySelectorAll("#tbl th[data-sort]").forEach(function (th) {
+    th.addEventListener("click", function () { state.sort = th.getAttribute("data-sort"); renderTable(); });
+  });
   function renderAll() {
     buildChipsColors(); renderStats(); renderCaption(); renderMap(); renderBars(); renderTable(); renderLegend();
   }
@@ -395,13 +398,29 @@
     var rows = DATA.filter(visible).filter(function (d) {
       if (!state.q) return true;
       return (d.referencia + " " + d.tesis + " " + d.subcorriente + " " + mecNames(d) + " " + d.autores).toLowerCase().indexOf(state.q) >= 0;
-    }).sort(function (a, b) { return a.anio - b.anio || a.tesis.localeCompare(b.tesis) || a.etiqueta.localeCompare(b.etiqueta); });
-    tb.innerHTML = rows.map(function (d) {
-      return "<tr><td>" + d.anio + '</td><td><span class="dot" style="background:' + color(d.tesis) + '"></span>' + esc(d.tesis) +
-        "</td><td>" + esc(d.subcorriente) + (d.registro !== "investigacion" ? ' <span style="color:var(--faint)">(' + (d.registro === "opinion" ? "opinión" : d.registro) + ')</span>' : "") +
-        "</td><td>" + esc(mecNames(d)) +
-        '</td><td class="ref">' + esc(d.referencia) + (d.nota ? '<div style="font-family:Inter,sans-serif;font-size:12px;color:var(--muted)">' + esc(d.nota) + "</div>" : "") +
-        '</td><td><a href="' + esc(d.fuente_url) + '" target="_blank" rel="noopener">↗</a></td></tr>';
-    }).join("") || '<tr><td colspan="6" style="color:var(--muted)">Sin resultados.</td></tr>';
+    });
+    var by = state.sort || "anio";
+    rows.sort(function (a, b) {
+      return by === "autor" ? a.referencia.localeCompare(b.referencia, "es") || a.anio - b.anio
+                            : a.anio - b.anio || a.referencia.localeCompare(b.referencia, "es");
+    });
+    document.querySelectorAll("#tbl th[data-sort]").forEach(function (th) {
+      th.setAttribute("aria-sort", th.getAttribute("data-sort") === by ? "ascending" : "none");
+    });
+    var html = "";
+    THESES.forEach(function (t) {
+      var its = rows.filter(function (d) { return d.tesis === t.key; });
+      if (!its.length) return;
+      html += '<tr class="grp"><td colspan="5"><span class="dot" style="background:' + color(t.key) + '"></span>' + esc(t.key) +
+        ' <span class="n">' + its.length + (its.length === 1 ? " obra" : " obras") + "</span></td></tr>";
+      html += its.map(function (d) {
+        return "<tr><td>" + d.anio + "</td><td>" + esc(d.subcorriente) + (d.registro !== "investigacion" ? ' <span style="color:var(--faint)">(' + (d.registro === "opinion" ? "opinión" : d.registro) + ')</span>' : "") +
+          "</td><td>" + esc(mecNames(d)) +
+          '</td><td class="ref">' + esc(d.referencia) + (d.nota ? '<div style="font-family:Inter,sans-serif;font-size:12px;color:var(--muted)">' + esc(d.nota) + "</div>" : "") +
+          '</td><td><a href="' + esc(d.fuente_url) + '" target="_blank" rel="noopener" aria-label="Abrir la fuente">↗</a></td></tr>';
+      }).join("");
+    });
+    tb.innerHTML = html || '<tr><td colspan="5" style="color:var(--muted)">Sin resultados.</td></tr>';
   }
+
 })();

@@ -114,13 +114,14 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
 .tw{overflow-x:auto}
 .lede,.credit,figcaption,.prose p,.detail p,#stats{text-align:justify;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
 .lede,.credit,.stats{max-width:680px}
-h1,.lede,.credit,.stats,.citetop,.prose,h2,.bars>h3,.bars>.sub,figcaption,.top{max-width:720px;margin-left:auto;margin-right:auto}
+h1,.lede,.credit,.stats,.citetop,.prose,h2:not(.wide),figcaption,.top{max-width:720px;margin-left:auto;margin-right:auto}
 h1{text-align:center;text-wrap:balance}
 .controls{justify-content:center;margin-left:auto;margin-right:auto}
 .segwrap{display:flex;justify-content:center}
 .cite a{color:var(--accent)}
-td:nth-child(2){white-space:nowrap}
-@media (max-width:760px){th:nth-child(3),td:nth-child(3),th:nth-child(4),td:nth-child(4){display:none} td:nth-child(2){white-space:normal} table{table-layout:fixed;width:100%} th:nth-child(1){width:46px} th:nth-child(2){width:128px} th:nth-child(6){width:28px} td:nth-child(5){overflow-wrap:anywhere} td:nth-child(1),td:nth-child(2){font-size:13px}}
+@media (max-width:760px){th:nth-child(2),td:nth-child(2),th:nth-child(3),td:nth-child(3){display:none} table{table-layout:fixed;width:100%} th:nth-child(1){width:46px} th:nth-child(5){width:28px} td:nth-child(4){overflow-wrap:anywhere} .grp td{display:table-cell!important}}
+th[data-sort]{cursor:pointer;user-select:none} th[aria-sort="ascending"]{color:var(--text)}
+tr.grp td{padding:18px 8px 6px;font-weight:600;font-size:14px;border-bottom:1px solid var(--border-strong)} tr.grp .n{font-weight:400;color:var(--muted);font-size:12.5px;margin-left:6px}
 .citetop{max-width:720px;box-sizing:border-box;margin:14px auto 4px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:center;font-size:13.5px}
 .citetop a{color:var(--accent)}
 .citetop button{font:inherit;font-size:12.5px;padding:3px 10px;border:1px solid var(--border-strong);border-radius:6px;background:var(--bg);color:var(--text);cursor:pointer}
@@ -168,7 +169,7 @@ td:nth-child(2){white-space:nowrap}
     <div class="fig"><svg id="bars" role="img" aria-label="Barras apiladas de obras por año, tesis y registro"></svg><div class="legend" id="legend2"></div><div class="tip" id="tip2"></div></div>
   </figure>
 
-  <h2>Referencias</h2>
+  <h2 class="wide">Referencias</h2>
   <div class="tbar">
     <input class="search" id="q" type="search" placeholder="Buscar autor, título o tesis…" aria-label="Buscar en referencias" style="min-width:240px">
     <div class="btns">
@@ -180,7 +181,7 @@ td:nth-child(2){white-space:nowrap}
       <a class="btn" href="figura_mapa_emergente.png" download>Figura emergente PNG</a>
     </div>
   </div>
-  <div class="tw"><table id="tbl"><thead><tr><th>Año</th><th>Tesis</th><th>Subcorriente</th><th>Mecanismos causales</th><th>Referencia</th><th>Fuente</th></tr></thead><tbody></tbody></table></div>
+  <div class="tw"><table id="tbl"><thead><tr><th data-sort="anio" role="button" tabindex="0">Año ↕</th><th>Subcorriente</th><th>Mecanismos causales</th><th data-sort="autor" role="button" tabindex="0">Referencia ↕</th><th>Fuente</th></tr></thead><tbody></tbody></table></div>
 
   <h2>Criterios</h2>
   <div class="prose">
