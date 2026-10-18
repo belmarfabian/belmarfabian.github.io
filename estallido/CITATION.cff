@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Si usas estos datos o la figura, cítalos así."
+title: "Tesis sobre el estallido social: mapa longitudinal y base de referencias"
+version: "1.0"
+date-released: 2026-10-18
+type: dataset
+license: CC-BY-4.0
+url: "https://belmarfabian.github.io/estallido/"
+repository-code: "https://github.com/belmarfabian/belmarfabian.github.io/tree/main/estallido"
+authors:
+  - family-names: Belmar
+    given-names: Fabián
+    orcid: "https://orcid.org/0000-0003-4239-1874"
+    affiliation: "Centro de Estudios Públicos (CEP)"
+keywords:
+  - estallido social
+  - Chile
+  - 2019
+  - protesta
+  - populismo
