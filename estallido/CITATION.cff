@@ -1,12 +1,13 @@
 cff-version: 1.2.0
 message: "Si usas estos datos o la figura, cítalos así."
 title: "Tesis sobre el estallido social: mapa longitudinal y base de referencias"
-version: "1.0"
+version: "1.0.0"
+doi: "10.5281/zenodo.23455927"
 date-released: 2026-10-18
 type: dataset
 license: CC-BY-4.0
 url: "https://belmarfabian.github.io/estallido/"
-repository-code: "https://github.com/belmarfabian/belmarfabian.github.io/tree/main/estallido"
+repository-code: "https://github.com/belmarfabian/estallido-tesis"
 authors:
   - family-names: Belmar
     given-names: Fabián
