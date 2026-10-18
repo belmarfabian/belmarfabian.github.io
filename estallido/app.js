@@ -191,10 +191,10 @@
     g.append("line").attr("x1", bx - 1).attr("x2", bx + 9).attr("y1", top - 30).attr("y2", top - 14).attr("stroke", muted);
     g.append("text").attr("x", (labelW + labelW + preW) / 2).attr("y", top - 36).attr("text-anchor", "middle").attr("font-size", 11)
       .attr("fill", muted).attr("font-style", "italic").text("antecedentes (escala comprimida)");
-    var ox = X(2019) + yearW * 0.3;
+    var ox = X(2019);
     g.append("line").attr("x1", ox).attr("x2", ox).attr("y1", top - 8).attr("y2", H - 22)
       .attr("stroke", css("--accent")).attr("stroke-width", 1.5).attr("stroke-dasharray", "2 3");
-    g.append("text").attr("x", ox + 5).attr("y", top - 2).attr("font-size", 11).attr("font-weight", 600).attr("fill", css("--accent")).text("18-O");
+    g.append("text").attr("x", ox).attr("y", top - 34).attr("text-anchor", "middle").attr("font-size", 11).attr("font-weight", 600).attr("fill", css("--accent")).text("18-O");
 
     var nodes = [];
     var links = g.append("g");
