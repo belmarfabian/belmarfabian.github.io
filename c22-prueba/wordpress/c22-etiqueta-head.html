@@ -1318,6 +1318,19 @@
       });
     };
     poner(); setTimeout(poner, 2500); setTimeout(poner, 7000);
+    // Si la página cambia de alto (p. ej. el Monitor incrustado pasa a una pestaña más
+    // corta), se rehacen; si no, su alto fijo dejaba página vacía bajo el final.
+    var ultimoFin = -1, pend = null;
+    var revisar = function () {
+      pend = null;
+      var foot = document.querySelector('footer'); if (!foot) return;
+      var f = Math.round(foot.getBoundingClientRect().top + scrollY);
+      if (f !== ultimoFin) { ultimoFin = f; poner(); }
+    };
+    if (window.ResizeObserver) {
+      var m = document.querySelector('main');
+      if (m) new ResizeObserver(function () { if (!pend) pend = setTimeout(revisar, 200); }).observe(m);
+    }
   });
 
   // Menú principal anidado: Sobre C22 ▸ Personas; Publicaciones ▸ las cinco series.
