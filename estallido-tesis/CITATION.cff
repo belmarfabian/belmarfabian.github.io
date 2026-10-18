@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Si usas estos datos o la figura, cítalos así. La tipología de las cuatro tesis es de Cristóbal Bellolio; cítala también."
 title: "Tesis sobre el estallido social: mapa longitudinal y base de referencias"
 abstract: "Base de referencias sobre el estallido social chileno de 2019. La tipología de cuatro tesis (transformacional, populista, estructural e insurreccional) es de Cristóbal Bellolio. La asignación de cada obra a una tesis, las subcorrientes, la codificación de mecanismos causales y la variable de registro son de elaboración propia."
-version: "1.3.0"
+version: "1.4.0"
 doi: "10.5281/zenodo.23455927"
 date-released: 2026-10-18
 type: dataset
