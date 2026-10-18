@@ -2,7 +2,7 @@
 
 Todas las versiones están en Zenodo bajo el DOI conceptual [10.5281/zenodo.23455927](https://doi.org/10.5281/zenodo.23455927), que siempre apunta a la más reciente.
 
-## 1.4.0 — 18 de octubre de 2026
+## 1.4.0 — 18 de octubre de 2026 · [10.5281/zenodo.23457225](https://doi.org/10.5281/zenodo.23457225)
 - Prueba de confiabilidad con un segundo codificador ciego (modelo de lenguaje): kappa de 0,97 en tesis, 0,96 en registro y 0,83 en mecanismo principal; alfa de 0,64 en el conjunto de mecanismos. Nuevo archivo `datos/confiabilidad.csv`.
 - Los libros de Contardo (2020) y Tironi (2020) pasan de opinión a ensayo: un libro nunca se clasifica como opinión.
 - Un solo gráfico de obras por año, tesis y registro reemplaza los dos gráficos anteriores.
