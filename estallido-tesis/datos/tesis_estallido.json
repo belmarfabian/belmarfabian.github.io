@@ -249,11 +249,11 @@
   "mecanismos": "M01;M03",
   "mecanismo_principal": "M03",
   "confianza_codificacion": "media",
-  "registro": "opinion",
+  "registro": "ensayo",
   "rol": "principal",
   "referencia": "Contardo, Ó. (2020). Antes de que fuera octubre. Planeta.",
   "fuente_url": "https://www.planetadelibros.com/libro-antes-de-que-fuera-octubre/316706",
-  "nota": "Crónica periodística de treinta años."
+  "nota": "Crónica periodística de treinta años. Caso límite: el segundo codificador lo ubicó en la tesis estructural por el peso del abuso y el clasismo."
  },
  {
   "id": "garces2020",
@@ -377,7 +377,7 @@
   "mecanismos": "M02;M03;M06;M07",
   "mecanismo_principal": "M02",
   "confianza_codificacion": "media",
-  "registro": "opinion",
+  "registro": "ensayo",
   "rol": "principal",
   "referencia": "Tironi, E. (2020). El desborde: vislumbres y aprendizajes del 18-O. Planeta.",
   "fuente_url": "https://educafuturo.cl/2020/03/17/el-desborde-vislumbres-y-aprendizajes-del-18o/",
