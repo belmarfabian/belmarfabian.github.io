@@ -54,6 +54,8 @@ h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:clamp(26
 .segb[aria-pressed="true"]{background:var(--text);color:var(--bg)}
 .controls{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:22px 0 10px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
+html:not(.export) #map .printonly{display:none}
+html.export .chiprow{display:none}
 .chiprow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0 4px 8px;font-size:12px;color:var(--muted)}
 .chiprow .chip{font-size:12px;padding:3px 10px}
 .chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border-strong);background:var(--bg);color:var(--text-2);border-radius:999px;padding:4px 11px 4px 9px;font:inherit;font-size:13px;cursor:pointer}
