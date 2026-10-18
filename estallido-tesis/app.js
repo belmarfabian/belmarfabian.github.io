@@ -249,7 +249,7 @@
       .on("keydown", function (evt, n) { if (evt.key === "Enter" || evt.key === " ") { evt.preventDefault(); select(n.d); } });
 
     svg.append("text").attr("x", W - padR).attr("y", H - 10).attr("text-anchor", "end").attr("font-size", 11)
-      .attr("fill", css("--faint")).attr("font-style", "italic").text("Tipología: Cristóbal Bellolio (2026). Asignación de obras y diseño: Fabián Belmar · @fabianbelmar_ · belmarfabian.github.io/estallido");
+      .attr("fill", css("--faint")).attr("font-style", "italic").text("Tipología: Cristóbal Bellolio (2026). Asignación de obras y diseño: Fabián Belmar · @fabianbelmar_ · belmarfabian.github.io/estallido-tesis");
   }
 
   function select(d) {

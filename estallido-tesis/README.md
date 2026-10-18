@@ -9,7 +9,7 @@ Mapa longitudinal y base de referencias sobre las interpretaciones del estallido
 - **Tipología de las cuatro tesis** (transformacional, populista, estructural e insurreccional): Cristóbal Bellolio. Bellolio, C. [@cbellolio]. (2026, 17 de octubre). *A propósito del aniversario del 18O, hice un barrido por la literatura académica…* [Hilo]. X. https://x.com/cbellolio/status/2111498263115272614
 - **Asignación de obras, subcorrientes, variables y visualización**: elaboración propia (Fabián Belmar). Bellolio no participó en la ubicación de los autores.
 
-- Página: https://belmarfabian.github.io/estallido/
+- Página: https://belmarfabian.github.io/estallido-tesis/
 - Datos: `datos/tesis_estallido.csv` y `datos/tesis_estallido.json` (se generan con `datos/build.py`)
 - Figura estática: `figura_mapa_estallido.png` (claro) y `figura_mapa_estallido_oscuro.png`
 
