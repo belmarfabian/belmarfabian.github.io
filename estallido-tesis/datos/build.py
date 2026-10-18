@@ -117,7 +117,7 @@ ROWS = [
  },
  {
   "id": "folchi2019",
-  "etiqueta": "Folchi et al. (2019)",
+  "etiqueta": "Artaza et al. (2019)",
   "autores": "Mauricio Folchi et al.",
   "anio": 2019,
   "tesis": "Transformacional",
@@ -399,7 +399,7 @@ ROWS = [
   "confianza_codificacion": "media",
   "registro": "opinion",
   "rol": "principal",
-  "referencia": "García-Huidobro, S. (2020, octubre). Académica de Columbia: «En Chile se vivió un momento populista sin líder» [Entrevista a Camila Vergara]. Diario Financiero.",
+  "referencia": "Vergara, C. (2020, octubre). «En Chile se vivió un momento populista sin líder» [Entrevista de S. García-Huidobro]. Diario Financiero.",
   "fuente_url": "https://www.df.cl/capital/personaje/academica-de-columbia-en-chile-se-vivio-un-momento-populista-sin-lider",
   "nota": "Sugerida en X por @javiarce."
  },
