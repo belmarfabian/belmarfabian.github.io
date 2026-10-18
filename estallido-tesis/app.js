@@ -95,7 +95,7 @@
     var cnt = function (r) { return v.filter(function (d) { return d.registro === r; }).length; };
     var authors = new Set(v.map(function (d) { return d.autores; }));
     document.getElementById("stats").textContent = v.length + " obras de " + authors.size + " autores o fuentes, " +
-      subs.size + " subcorrientes. " + cnt("investigacion") + " son investigación, " + cnt("ensayo") + " son ensayo y " + cnt("opinion") + " son opinión, crónica o documento político.";
+      subs.size + " subcorrientes. " + cnt("investigacion") + " son investigación, " + cnt("ensayo") + " son ensayo y " + cnt("opinion") + " son opinión o declaración.";
   }
 
   function renderCaption() {
@@ -112,7 +112,7 @@
     document.getElementById("legend").innerHTML =
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-width="1.5"/></svg>Investigación (artículo arbitrado, monografía, encuesta)</span>' +
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-dasharray="1.5 2" stroke-width="1.5"/></svg>Ensayo</span>' +
-      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + bg + '" stroke="' + ink + '" stroke-dasharray="4 2.5" stroke-width="1.5"/></svg>Opinión, crónica o documento político</span>' +
+      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + bg + '" stroke="' + ink + '" stroke-dasharray="4 2.5" stroke-width="1.5"/></svg>Opinión o declaración</span>' +
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="2" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-width="1.5"/></svg>Antecedente previo al 18-O</span>' +
       (state.scheme === "emergente"
         ? '<span><svg width="30" height="14" opacity=".5"><rect x="1" y="1" width="28" height="12" rx="6" fill="' + ink + '" fill-opacity=".24" stroke="' + ink + '" stroke-width="1.5"/></svg>Mecanismo secundario de la obra</span>'
@@ -317,7 +317,7 @@
   function select(d, n) {
     state.sel = d.id;
     d3.selectAll("#map g.node").classed("sel", function (n) { return n.d.id === d.id; });
-    var reg = { investigacion: "Investigación", ensayo: "Ensayo", opinion: "Opinión, crónica o documento político" }[d.registro];
+    var reg = { investigacion: "Investigación", ensayo: "Ensayo", opinion: "Opinión o declaración" }[d.registro];
     var rol = d.rol === "antecedente" ? " · Antecedente previo al 18-O" : "";
     var here = n && n.code ? "<div>Esta fila: " + esc(CODE[n.code].mecanismo) + (n.secondary ? " (mecanismo secundario)" : " (mecanismo principal)") + "</div>" : "";
     document.getElementById("detail").innerHTML =
@@ -376,7 +376,7 @@
     document.getElementById("legend2").innerHTML =
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="2" fill="' + ink + '" stroke="' + ink + '" stroke-width="1.5"/></svg>Investigación</span>' +
       '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="2" fill="' + ink + '" fill-opacity=".4" stroke="' + ink + '" stroke-width="1.5"/></svg>Ensayo</span>' +
-      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="2" fill="' + bg + '" stroke="' + ink + '" stroke-dasharray="4 2.5" stroke-width="1.5"/></svg>Opinión, crónica o documento político</span>';
+      '<span><svg width="30" height="14"><rect x="1" y="1" width="28" height="12" rx="2" fill="' + bg + '" stroke="' + ink + '" stroke-dasharray="4 2.5" stroke-width="1.5"/></svg>Opinión o declaración</span>';
   }
 
   function renderTable() {
