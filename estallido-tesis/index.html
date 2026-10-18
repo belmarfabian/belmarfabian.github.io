@@ -56,7 +56,7 @@ h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:clamp(26
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 html:not(.export) #map .printonly{display:none}
 html.export .chiprow{display:none}
-.chiprow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0 4px 8px;font-size:12px;color:var(--muted)}
+.chiprow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 10px;margin:0 4px 8px;font-size:12px;color:var(--muted)}
 .chiprow .chip{font-size:12px;padding:3px 10px}
 .chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border-strong);background:var(--bg);color:var(--text-2);border-radius:999px;padding:4px 11px 4px 9px;font:inherit;font-size:13px;cursor:pointer}
 .chip i{width:10px;height:10px;border-radius:50%;display:inline-block}
@@ -116,7 +116,9 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
 .tw{overflow-x:auto}
 .lede,.credit,figcaption,.prose p,.detail p,#stats{text-align:justify;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
 .lede,.credit,.stats{max-width:680px}
-h1,.lede,.credit,.stats,.citetop,.prose,h2:not(.wide),figcaption,.top{max-width:720px;margin-left:auto;margin-right:auto}
+h1,.lede,.credit,.stats,.citetop,.prose,.wrap>h2,figcaption,.top,.bars,.tbar,.wrap>p,.cite,.wrap>.sub,.wrap>details,.wrap>.btns,footer{max-width:720px;margin-left:auto;margin-right:auto}
+.controls{max-width:none}
+.legend{justify-content:center}
 h1{text-align:center;text-wrap:balance}
 .controls{justify-content:center;margin-left:auto;margin-right:auto}
 .segwrap{display:flex;justify-content:center}
@@ -171,7 +173,7 @@ tr.grp td{padding:18px 8px 6px;font-weight:600;font-size:14px;border-bottom:1px 
     <div class="fig"><svg id="bars" role="img" aria-label="Barras apiladas de obras por año, tesis y registro"></svg><div class="legend" id="legend2"></div><div class="tip" id="tip2"></div></div>
   </figure>
 
-  <h2 class="wide">Referencias</h2>
+  <h2>Referencias</h2>
   <div class="tbar">
     <input class="search" id="q" type="search" placeholder="Buscar autor, título o tesis…" aria-label="Buscar en referencias" style="min-width:240px">
   </div>
@@ -194,37 +196,26 @@ tr.grp td{padding:18px 8px 6px;font-weight:600;font-size:14px;border-bottom:1px 
   </div>
 
   <h2 id="citar">Cómo citar</h2>
-  <p style="margin:0 0 10px"><a href="https://doi.org/10.5281/zenodo.23455927"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23455927.svg" alt="DOI 10.5281/zenodo.23455927" height="20"></a></p>
-  <div class="cite" id="cite">Belmar, F. (2026). <i>Tesis sobre el estallido social: mapa longitudinal y base de referencias</i> (versión 1.5.0) [Conjunto de datos]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23455927">https://doi.org/10.5281/zenodo.23455927</a></div>
-  <p class="sub" style="margin-top:8px">El DOI apunta siempre a la última versión; cada versión tiene además su propio DOI en <a href="https://doi.org/10.5281/zenodo.23455927" style="color:var(--accent)">Zenodo</a>. Si usas la tipología, cita también a Bellolio (2026). Datos y código en <a href="https://github.com/belmarfabian/estallido-tesis" style="color:var(--accent)">GitHub</a>.</p>
+  <p style="margin-top:0;margin-bottom:10px"><a href="https://doi.org/10.5281/zenodo.23455927"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23455927.svg" alt="DOI 10.5281/zenodo.23455927" height="20"></a></p>
+  <div class="cite" id="cite">Belmar, F. (2026). <i>Tesis sobre el estallido social: mapa longitudinal y base de referencias</i> [Conjunto de datos]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23455927">https://doi.org/10.5281/zenodo.23455927</a></div>
+  <p class="sub" style="margin-top:8px">El registro está en <a href="https://doi.org/10.5281/zenodo.23455927" style="color:var(--accent)">Zenodo</a>. Si usas la tipología, cita también a Bellolio (2026). Datos y código en <a href="https://github.com/belmarfabian/estallido-tesis" style="color:var(--accent)">GitHub</a>.</p>
   <details style="margin-top:10px"><summary style="cursor:pointer;font-size:13px;color:var(--muted)">BibTeX</summary>
 <pre>@dataset{belmar2026estallido,
   author    = {Belmar, Fabián},
   title     = {Tesis sobre el estallido social: mapa longitudinal y base de referencias},
   year      = {2026},
-  version   = {1.5.0},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.23455927},
   url       = {https://doi.org/10.5281/zenodo.23455927},
   note      = {Tipología de las tesis: Bellolio (2026). Asignación de obras: elaboración propia}
 }</pre></details>
 
-  <h2>Historial de versiones</h2>
-  <div class="prose hist">
-    <p><b>1.5.0</b>. Revisión de diseño y legibilidad: columna centrada, tabla agrupada por tesis, líneas por año y referencia al tocar en pantallas táctiles. La entrevista de Vergara va a su nombre y la etiqueta «Folchi et al.» pasa a «Artaza et al.».</p>
-    <p><b>1.4.0</b> (<a href="https://doi.org/10.5281/zenodo.23457225">10.5281/zenodo.23457225</a>). Prueba de confiabilidad con un segundo codificador ciego. Los libros de Contardo y Tironi pasan a ensayo. Un solo gráfico por año, tesis y registro, y formulario para proponer obras.</p>
-    <p><b>1.3.0</b> (<a href="https://doi.org/10.5281/zenodo.23456785">10.5281/zenodo.23456785</a>). Registro en tres niveles con criterio común. Entran Hodge Dupré (2024) y Muñoz Riveros (2023) en la tesis insurreccional, y Tromben (2024), Libertad y Desarrollo (2024) y Ortúzar (2025) según su tesis central. Los libros de L. Larraín y Villegas pasan de opinión a ensayo. Blumel (2023) se evaluó y no entra, porque es una memoria de gestión. 41 obras.</p>
-    <p><b>1.2.0</b> (<a href="https://doi.org/10.5281/zenodo.23456580">10.5281/zenodo.23456580</a>). Codificación multietiqueta de 16 mecanismos causales y vista de obras por mecanismo.</p>
-    <p><b>1.1.0</b> (<a href="https://doi.org/10.5281/zenodo.23456422">10.5281/zenodo.23456422</a>). Primera categorización emergente y criterio para «Otras lecturas».</p>
-    <p><b>1.0.1</b> (<a href="https://doi.org/10.5281/zenodo.23456351">10.5281/zenodo.23456351</a>). Crédito explícito a Bellolio por la tipología y corrección de referencias.</p>
-    <p><b>1.0.0</b> (<a href="https://doi.org/10.5281/zenodo.23455928">10.5281/zenodo.23455928</a>). Primera versión, con 36 obras. Todas las versiones son del 18 de octubre de 2026. El detalle está en <a href="https://github.com/belmarfabian/estallido-tesis/blob/main/CHANGELOG.md">CHANGELOG.md</a>.</p>
-  </div>
 
   <h2>Proponer una referencia</h2>
-  <div class="prose"><p>Si falta una obra, envíala con autor, año, título y su argumento central, aunque no calce en la tipología de Bellolio. Si se puede verificar, entra en la próxima versión.</p></div>
+  <div class="prose"><p>Si falta una obra, envíala con autor, año, título y su argumento central, aunque no calce en la tipología de Bellolio. Si se puede verificar, se agrega a la base.</p></div>
   <div class="btns"><a class="btn primary" id="propose" href="https://github.com/belmarfabian/estallido-tesis/issues/new?template=nueva-obra.yml">Proponer una obra (formulario)</a><a class="btn" href="https://x.com/fabianbelmar_">Escribir en X</a></div>
 
-  <footer>Tipología: Cristóbal Bellolio (2026) · Asignación de obras y visualización: Fabián Belmar · Centro de Estudios Públicos · ORCID <a href="https://orcid.org/0000-0003-4239-1874" style="color:inherit">0000-0003-4239-1874</a> · Versión 1.5.0, octubre de 2026 · Datos bajo licencia CC BY 4.0.</footer>
+  <footer>Tipología: Cristóbal Bellolio (2026) · Asignación de obras y visualización: Fabián Belmar · Centro de Estudios Públicos · ORCID <a href="https://orcid.org/0000-0003-4239-1874" style="color:inherit">0000-0003-4239-1874</a> · Datos bajo licencia CC BY 4.0.</footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
