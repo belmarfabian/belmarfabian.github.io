@@ -16,6 +16,7 @@
 
   const NOMBRE_TIPO = {
     columna: 'Columna',
+    documento: 'Punto de Referencia',
     analisis: 'Análisis',
     paper: 'Paper',
     proyecto: 'Proyecto',

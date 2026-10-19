@@ -1041,3 +1041,19 @@ a:hover { text-decoration-color: var(--color-text); }
 /* El parlante puede asomar fuera del margen sin crear desplazamiento lateral */
 html, body { overflow-x: clip; }
 
+
+/* Prensa: dos listas */
+.prensa-sub { font-size: 0.95rem; font-weight: 600; margin: 1.6rem 0 0.2rem; color: var(--color-text); }
+
+.ultima-proyecto { font-size: 0.8rem; line-height: 1.4; }
+.ultima-proyecto p { margin: 0 0 0.25rem 0; }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; color: var(--color-text-secondary); }
+
+/* Celular: aviso de que las pestañas siguen hacia el lado */
+@media (max-width: 768px) {
+    .tabs {
+        -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+        mask-image: linear-gradient(90deg, #000 85%, transparent);
+        padding-right: 2rem;
+    }
+}
