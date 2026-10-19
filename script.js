@@ -1,3 +1,6 @@
+/* Búsqueda sin tildes: «corrupcion» encuentra «corrupción». Conserva el largo del texto (NFC). */
+function fold(s) { return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }
+
 /* ===== Init ===== */
 document.addEventListener('DOMContentLoaded', function () {
     initTitleBold();
@@ -290,7 +293,7 @@ function initSearch() {
             items.forEach(function (li) {
                 panels[target].items.push({
                     el: li,
-                    text: li.textContent.toLowerCase(),
+                    text: fold(li.textContent),
                     section: li.closest('section')
                 });
             });
@@ -304,7 +307,7 @@ function initSearch() {
         items.forEach(function (li) {
             allItems.push({
                 el: li,
-                text: li.textContent.toLowerCase(),
+                text: fold(li.textContent),
                 section: section
             });
         });
@@ -344,7 +347,7 @@ function initSearch() {
 }
 
 function filterPublications(query, allItems, sections, counter, totalCount, panels, noResults) {
-    var tokens = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    var tokens = fold(query).trim().split(/\s+/).filter(Boolean);
     var visibleCount = 0;
 
     allItems.forEach(function (item) {
@@ -455,13 +458,13 @@ function highlightMatches(allItems, tokens) {
 
         textNodes.forEach(function (textNode) {
             var text = textNode.textContent;
-            var lowerText = text.toLowerCase();
+            var lowerText = fold(text);
             var hasMatch = tokens.some(function (t) { return lowerText.indexOf(t) !== -1; });
             if (!hasMatch) return;
 
             var frag = document.createDocumentFragment();
             var remaining = text;
-            var lowerRemaining = remaining.toLowerCase();
+            var lowerRemaining = fold(remaining);
 
             while (remaining.length > 0) {
                 var earliest = -1;
@@ -488,7 +491,7 @@ function highlightMatches(allItems, tokens) {
                 frag.appendChild(span);
 
                 remaining = remaining.substring(earliest + earliestToken.length);
-                lowerRemaining = remaining.toLowerCase();
+                lowerRemaining = fold(remaining);
             }
 
             textNode.parentNode.replaceChild(frag, textNode);

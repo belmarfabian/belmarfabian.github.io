@@ -892,3 +892,155 @@ a:hover {
         height: 34px;
     }
 }
+
+/* =============================================================
+   Lenguaje Braun: radio de bolsillo T3 (Rams, 1958).
+   Cuerpo blanco, gris dial y el gran parlante perforado como
+   único gesto. Todo lo demás queda quieto y ordenado.
+   ============================================================= */
+:root {
+    --dial: #8d8e8a;
+    --dial-edge: #6f706c;
+    --dial-ink: #ffffff;
+    --perf: #2b2b29;
+    --key: #ffffff;
+    --key-edge: #d6d6d3;
+    --accent: #232322;
+    --accent-soft: #e3e3df;
+    --q1: #3f7a3a;
+    --q2: #3f6788;
+    --q3: #a8681c;
+    --q4: #a63d2e;
+    --color-text: #232322;
+    --color-text-secondary: #464643;
+    --color-text-muted: #6f6f6b;
+    --color-text-faint: #9b9b96;
+    --color-text-body: #353533;
+    --color-bg: #f2f2f0;
+    --color-surface: #ffffff;
+    --color-border: #e0e0dd;
+    --color-border-strong: #b4b4af;
+    --color-link: #232322;
+}
+[data-theme="dark"] {
+    --dial: #b8b9b4;
+    --dial-edge: #d3d4cf;
+    --dial-ink: #1d1d1c;
+    --perf: #c9c9c4;
+    --key: #2f2f2d;
+    --key-edge: #444441;
+    --accent: #e6e6e2;
+    --accent-soft: #3f3f3c;
+    --q1: #8cbf6e;
+    --q2: #8fb3d1;
+    --q3: #e0aa55;
+    --q4: #e08a75;
+    --color-text: #ecece8;
+    --color-text-secondary: #cdcdc8;
+    --color-text-muted: #a2a29d;
+    --color-text-faint: #7a7a75;
+    --color-text-body: #dadad5;
+    --color-bg: #1f1f1e;
+    --color-surface: #2a2a28;
+    --color-border: #363634;
+    --color-border-strong: #555551;
+    --color-link: #ecece8;
+}
+
+body {
+    font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-feature-settings: "tnum" 1;
+}
+h1 { font-weight: 700; letter-spacing: -0.035em; }
+h2 { font-weight: 600; border-bottom-color: var(--color-border-strong); }
+
+a { text-decoration: underline; text-decoration-color: var(--color-border-strong); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--color-text); }
+.social-links a, .info a, .site-footer a { text-decoration: none; }
+
+/* El parlante: un gran círculo perforado detrás de la cabecera */
+.content { position: relative; z-index: 0; }
+.inicio-grid { position: relative; }
+.mosaico {
+    position: absolute;
+    right: -110px;
+    top: -36px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    z-index: -1;
+    background-image: radial-gradient(circle, var(--perf) 2.4px, transparent 2.8px);
+    background-size: 13px 13px;
+    background-position: center;
+    opacity: 0.5;
+    pointer-events: none;
+}
+.mosaico > i { display: none; }
+
+.avatar { box-shadow: 0 0 0 1px var(--color-border-strong); }
+.theme-toggle {
+    width: 34px; height: 34px; padding: 0;
+    border-radius: 50%;
+    background: var(--key);
+    border: 1px solid var(--key-edge);
+}
+
+.inicio-recientes {
+    background: var(--key);
+    border: 1px solid var(--key-edge);
+    border-radius: 28px;
+    padding: 1.1rem 1.35rem;
+}
+.inicio-recientes h3 { text-transform: none; letter-spacing: 0; font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); }
+.ultima-link { color: var(--color-text); }
+
+.search-input {
+    background: var(--key);
+    border: 1px solid var(--key-edge);
+    border-radius: 999px;
+    padding-left: 1.1rem;
+}
+.search-input:focus { border-color: var(--color-text-muted); }
+.sort-toggle, .search-clear { top: 1.15rem; }
+
+/* Pestañas: botones redondeados; la activa toma el gris del dial */
+.tabs { border-bottom: none; gap: 0.45rem; padding: 0.6rem 0 0.8rem; background-color: var(--color-bg); }
+.tab {
+    border: 1px solid var(--key-edge);
+    border-radius: 999px;
+    background: var(--key);
+    color: var(--color-text-secondary);
+    padding: 0.42rem 1rem;
+    margin-bottom: 0;
+    transition: background-color 0.15s, transform 0.08s;
+}
+.tab:hover { color: var(--color-text); border-color: var(--color-border-strong); }
+.tab:active { transform: translateY(1px); }
+.tab.active { background: var(--dial); border-color: var(--dial-edge); color: var(--dial-ink); }
+.tab.active .tab-count { color: var(--dial-ink); opacity: 0.75; }
+.tab:focus-visible { outline: 2px solid var(--color-text); outline-offset: 2px; }
+
+.scrollable-list li:hover { background-color: var(--color-surface); outline-color: transparent; }
+.pub-quartile { border-radius: 4px; }
+.copy-cite { border-radius: 999px; }
+.search-highlight { background-color: var(--accent-soft); }
+.timeline-year-label::before { background-color: var(--dial); }
+.back-to-top { border-radius: 50%; background: var(--key); border-color: var(--key-edge); }
+.site-footer { border-top-color: var(--color-border-strong); }
+
+@media (max-width: 1024px) {
+    .mosaico { right: -90px; top: -50px; width: 200px; height: 200px; opacity: 0.35; }
+}
+@media (max-width: 768px) {
+    .mosaico { right: -70px; top: -60px; width: 170px; height: 170px; opacity: 0.25; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .tab, .back-to-top { transition: none; }
+}
+
+/* El parlante puede asomar fuera del margen sin crear desplazamiento lateral */
+html, body { overflow-x: clip; }
+
+/* Definición bajo el nombre */
+.lema { font-size: 1.05rem; font-weight: 600; color: var(--color-text); margin: -0.4rem 0 0.9rem; line-height: 1.35; }
+.lema span { display: block; font-size: 0.9rem; font-weight: 400; color: var(--color-text-muted); }
