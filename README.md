@@ -16,7 +16,6 @@ Sitio web personal académico diseñado para mostrar mi trayectoria investigativ
 - **Capítulos de libros:** Contribuciones en obras colectivas
 - **Working papers:** Investigaciones en curso
 - **Perfil académico:** Enlaces a Google Scholar, ORCID, Scopus
-- **CV actualizado:** Curriculum vitae disponible en PDF
 
 ---
 
@@ -31,8 +30,7 @@ Sitio web personal académico diseñado para mostrar mi trayectoria investigativ
 
 ```
 ├── index.html       # Página principal
-├── styles.css       # Estilos
-└── CV FB.pdf        # Curriculum vitae
+└── styles.css       # Estilos
 ```
 
 ---
