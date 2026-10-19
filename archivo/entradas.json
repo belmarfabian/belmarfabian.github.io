@@ -8,8 +8,86 @@
     "scholar",
     "utprensa"
   ],
-  "total": 71,
+  "total": 77,
   "items": [
+    {
+      "id": "cep:dime-con-quien-andas",
+      "fuente": "cep",
+      "seccion": "columnas",
+      "titulo": "Dime con quién andas… Los públicos de una coalición en la derecha. Un análisis a partir de la Encuesta CEP 96",
+      "url": "https://www.cepchile.cl/investigacion/dime-con-quien-andas-los-publicos-de-una-coalicion-en-la-derecha-un-analisis-a-partir-de-la-encuesta-cep-96/",
+      "fecha": "2026-10-15",
+      "imagen": null,
+      "tipo": "documento",
+      "bajada": "Puntos de Referencia N° 787. Lucas Fernández, Aldo Mascareño, Fabián Belmar y Juan Rozas.",
+      "cuerpo_html": "<p>Lucas Fernández, Aldo Mascareño, Fabián Belmar, Juan Rozas.</p>",
+      "parrafos": [
+        "Lucas Fernández, Aldo Mascareño, Fabián Belmar, Juan Rozas."
+      ],
+      "tags": [
+        "Elecciones"
+      ]
+    },
+    {
+      "id": "crossref:10.1177/14789299261461478",
+      "fuente": "crossref",
+      "seccion": "academico",
+      "titulo": "The impact of emotions on voting intention in a constitutional referendum",
+      "url": "https://doi.org/10.1177/14789299261461478",
+      "fecha": "2026-09-26",
+      "imagen": null,
+      "tipo": "paper",
+      "bajada": "Political Studies Review, 2026. Belmar, F., Morales, M. y Villarroel, B.",
+      "cuerpo_html": "<p>Political Studies Review, 2026</p>",
+      "parrafos": [
+        "Political Studies Review, 2026"
+      ],
+      "tags": [
+        "Constitución"
+      ]
+    },
+    {
+      "id": "otros:focusgn-casinos-2026",
+      "fuente": "otros",
+      "seccion": "prensa",
+      "titulo": "Estudio estima que los casinos online generan ingresos equivalentes al 35% de toda la industria del juego en Chile",
+      "url": "https://focusgn.com/latinoamerica/estudio-estima-que-los-casinos-online-generan-ingresos-equivalentes-al-35-de-toda-la-industria-del-juego-en-chile",
+      "fecha": "2026-07-21",
+      "imagen": null,
+      "tipo": "aparicion",
+      "bajada": "FOCUS GAMING NEWS",
+      "cuerpo_html": "",
+      "parrafos": [],
+      "tags": []
+    },
+    {
+      "id": "otros:latercera-casinos-2026",
+      "fuente": "otros",
+      "seccion": "prensa",
+      "titulo": "Estudio del CEP: casinos online representan en Chile un 35% de los ingresos de toda la industria de juegos de azar",
+      "url": "https://www.latercera.com/pulso/noticia/estudio-del-cep-casinos-online-representan-en-chile-un-35-de-los-ingresos-de-toda-la-industria-de-juegos-de-azar/",
+      "fecha": "2026-07-19",
+      "imagen": null,
+      "tipo": "aparicion",
+      "bajada": "LA TERCERA",
+      "cuerpo_html": "",
+      "parrafos": [],
+      "tags": []
+    },
+    {
+      "id": "otros:publimicro-casinos-2026",
+      "fuente": "otros",
+      "seccion": "prensa",
+      "titulo": "Casinos online no autorizados captan el 35% de los ingresos del juego en Chile y dejan US$94 millones en impuestos sin cobrar",
+      "url": "https://publimicro.cl/casinos-online-no-autorizados-captan-el-35-de-los-ingresos-del-juego-en-chile-y-dejan-us94-millones-en-impuestos-sin-cobrar/",
+      "fecha": "2026-07-19",
+      "imagen": null,
+      "tipo": "aparicion",
+      "bajada": "PUBLIMICRO",
+      "cuerpo_html": "",
+      "parrafos": [],
+      "tags": []
+    },
     {
       "id": "cep:apuestas-en-chile-regulacion-y-peso-economico-de-un-mercado-en-expansion",
       "fuente": "cep",
@@ -18,7 +96,7 @@
       "url": "https://www.cepchile.cl/investigacion/apuestas-en-chile-regulacion-y-peso-economico-de-un-mercado-en-expansion/",
       "fecha": "2026-07-18",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/07/16-234400_rxjl_Apuestas-en-Chile-regulación-y-peso-económico-de-un-mercado-en-expansión.jpg",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "\"Apuestas en Chile: regulación y peso económico de un mercado en expansión\" es una investigación del Centro de Estudios Públicos.",
       "cuerpo_html": "<p>Andrés Araya C., Fabián Belmar, Xiomara Kuwae, Sebastián Aliaga.</p>",
       "parrafos": [
@@ -34,7 +112,7 @@
       "url": "https://www.cepchile.cl/investigacion/crecer-en-campamentos-el-drama-de-un-doble-vinculo/",
       "fecha": "2026-07-13",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/07/10-175531_9l7b_Crecer-en-campamentos.-El-drama-de-un-doble-vínculo.jpg",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "\"Crecer en campamentos. El drama de un doble vínculo\" es una investigación de Rosario Palacios, Fabián Belmar y Aldo Mascareño.",
       "cuerpo_html": "<p>Rosario Palacios R. de G., Fabián Belmar, Aldo Mascareño.</p>",
       "parrafos": [
@@ -50,7 +128,7 @@
       "url": "https://www.cepchile.cl/investigacion/el-mundo-segun-polymarket-control-del-futuro-en-mercados-de-eventos/",
       "fecha": "2026-06-30",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/07/01-134539_0qsb_El-mundo-según-Polymarket.png",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "\"El mundo según Polymarket: control del futuro en mercados de eventos\" es una investigación del grupo C22 del CEP.",
       "cuerpo_html": "<p>Palabras clave: mercado de eventos, mercado de predicción, derivados, futuros, sistema financiero, reducción de incertidumbre, Polymarket, comunidades especulativas, insider trading, insider agency, regulación</p>",
       "parrafos": [
@@ -66,12 +144,26 @@
       "url": "https://www.cepchile.cl/investigacion/el-lado-b-de-la-megarreforma-senales-de-alerta-temprana-sobre-problemas-futuros/",
       "fecha": "2026-06-23",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/06/23-170827_umkb_El-lado-B-de-la-megarreforma.jpg",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "\"El lado B de la megarreforma: señales de alerta temprana sobre problemas futuros\" es una investigación del grupo C22 del CEP.",
       "cuerpo_html": "<p>Aldo Mascareño, Fabián Belmar, Pablo A. Henríquez, Juan Rozas.</p>",
       "parrafos": [
         "Aldo Mascareño, Fabián Belmar, Pablo A. Henríquez, Juan Rozas."
       ],
+      "tags": []
+    },
+    {
+      "id": "otros:latercera-ninos-2026",
+      "fuente": "otros",
+      "seccion": "prensa",
+      "titulo": "«Los niños, los niños», columna de opinión",
+      "url": "https://www.latercera.com/opinion/noticia/los-ninos-los-ninos/",
+      "fecha": "2026-06-22",
+      "imagen": null,
+      "tipo": "aparicion",
+      "bajada": "LA TERCERA",
+      "cuerpo_html": "",
+      "parrafos": [],
       "tags": []
     },
     {
@@ -82,7 +174,7 @@
       "url": "https://www.cepchile.cl/investigacion/la-cuenta-publica-del-presidente-kast-una-cuestion-doctrinaria/",
       "fecha": "2026-06-12",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/06/12-140756_bt10_La-cuenta-pública-del-presidente-Kast-una-cuestión-doctrinaria.jpg",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "Lee \"La cuenta pública del presidente Kast:una cuestión doctrinaria\" de Aldo Mascareño, Juan Rozas, Pablo Henríquez y Fabián Belmar.",
       "cuerpo_html": "<p>Las primeras cuentas públicas de cada presidente reflejan su diagnóstico de la situación del país y el sentido programático que le quieren imprimir a su gobierno. Las capacidades de articulación entre los problemas de las personas y una visión de sociedad de largo plazo anclada en principios doctrinarios que orientan la acción política son clave en este tipo de discursos.</p>\n<p>Por medio de distintos procedimientos algorítmicos de análisis de texto, en este artículo argumentamos que la primera cuenta pública del presidente José Antonio Kast muestra selecciones temáticas y lingüísticas que evidencian un sentido doctrinario distinto al expresado por otros gobiernos chilenos desde el retorno a la democracia en 1990.</p>\n<p>Los resultados muestran que hay varias condiciones de continuidad en los pesos programáticos del discurso del presidente Kast en comparación con la primera cuenta de los presidentes anteriores, por ejemplo, en temas políticos y económicos. Sin embargo, una diferencia radical está en el posicionamiento inédito, en el primer lugar, del tema de seguridad, lo que anticipa un conjunto de reformas institucionales y discursivas profundas. Los resultados también muestran que la construcción doctrinaria de este primer discurso se articula sobre los conceptos de familia, patria y esfuerzo, los que funcionan como nodos de legitimación y justificación de las acciones políticas propuestas.</p>\n<p>El artículo concluye que el discurso inaugura un nuevo escenario político que se alinea no solo con la eficacia de las políticas, sino con el tipo de sociedad que impulsan.</p>",
       "parrafos": [
@@ -101,7 +193,7 @@
       "url": "https://www.cepchile.cl/investigacion/de-la-reconciliacion-a-la-seguridad-la-ampliacion-semantica-de-la-democracia-en-los-discursos-inaugurales-de-chile-1990-2026/",
       "fecha": "2026-04-15",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2026/04/15-202253_0et7_De-la-reconciliación-a-la-seguridad-la-ampliación-semántica-de-la-democracia-en-los-discursos-inaugurales-de-Chile-1024x529.png",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "Lee \"De la reconciliación a la seguridad: la ampliación semántica de la democracia en los discursos inaugurales de Chile (1990-2026)\" de Fabián Belmar, Aldo Mascareño, Juan Rozas y Andrés Araya.",
       "cuerpo_html": "<p>Este artículo analiza los nueve discursos inaugurales (‘discursos de balcón’) pronunciados por los presidentes de Chile desde 1990 hasta la actualidad cuando se asoman al balcón de La Moneda por primera vez. Mediante técnicas de análisis computacional de texto, el estudio examina las direcciones semánticas e ideológicas de los discursos.</p>\n<p>Sobre esta base, argumentamos que los ‘discursos de balcón’ ilustran el tránsito desde una <em>comprensión pura</em> de la democracia liberal como oposición al autoritarismo dictatorial en 1990 a un orden posdemocrático que apela a recursos políticos y motivacionales de tipo autoritario e identitario para construir legitimación política y formar programas de acción.</p>\n<p>Los resultados muestran una transición desde un discurso simbólico centrado en la reconciliación, como el de Aylwin en 1990, hacia marcos crecientemente programáticos orientados a la seguridad pública (Piñera II y especialmente Kast). Los encuadres semánticos evolucionan del trauma dictatorial (Aylwin) a la seguridad como macrocategoría (Kast).</p>\n<p>El índice RILE (Right-Left Index) híbrido posiciona a los gobiernos de manera consistente con la clasificación experta: Boric y Bachelet II en el extremo izquierdo, la Concertación histórica en el centro, y Kast en el extremo derecho. Un análisis semántico complementario muestra que palabras como seguridad, libertad y democracia adquieren significados ideológicamente opuestos según el enunciante. Sin embargo, también muestra un hallazgo sustantivo: la disputa política contemporánea no opera por diferenciación léxica, sino por resignificación: las mismas palabras nombran proyectos opuestos (e.g., justicia, seguridad, democracia, entre otros): Boric y Kast, los presidentes ideológicamente más distantes, comparten el mayor vocabulario del corpus.</p>\n<p>Por último, el discurso se ha desplazado de ser un acto simbólico puro hacia el anuncio programático. Aylwin (1990) pronuncia un discurso enteramente abstracto, mientras Bachelet II (2014) invierte esa proporción con vocabulario concreto referido a programas e instituciones. Los discursos recientes combinan ambos registros, pero el ritual republicano ya no es solo ritual —una evolución que se aprecia en sus distintos momentos en el análisis de entidades discursivas.</p>\n<p>El artículo concluye que los discursos reflejan la búsqueda de la semántica democrática por responder a la fragmentación identitaria, al debilitamiento de los mecanismos clásicos de integración política y a la presión por restablecer el orden público.</p>",
       "parrafos": [
@@ -140,7 +232,7 @@
       "url": "https://www.cepchile.cl/investigacion/elecciones-2025-septimo-informe-c22-cep-el-nuevo-ciclo-politico/",
       "fecha": "2026-01-07",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2025/07/18-134923_mfi4_Elecciones-2025.-Tercer-Informe-C22-CEP-junio.png",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "Lee \"Elecciones 2025. Séptimo Informe C22-CEP, el nuevo ciclo político\" de Fabián Belmar, Aldo Mascareño, Juan Rozas y Pablo Henríquez.",
       "cuerpo_html": "<p>Las elecciones presidenciales y parlamentarias de noviembre y diciembre 2025 constituyen el inicio de un nuevo ciclo político. No se trata solo del triunfo claro de Kast en segunda vuelta, sino del espectro amplio de opciones que se abrieron en la primera vuelta presidencial especialmente en la derecha, con Kast, Matthei, Kaiser, y con Parisi en un eje político que no responde a las distinciones clásicas de la política chilena.</p>\n<p>Por medio del análisis de datos electorales, este séptimo y último informe del proceso electoral chileno de 2025 busca extraer las principales implicancias de tal proceso para el ciclo político que se inaugura.</p>\n<p>Una de esas implicancias se relaciona con los votos nulos y blancos, además de la población que regularmente no vota, y que alcanza al 15%. Esta población es la fuente del elector indiferente, cuya oscilación política ha caracterizado el reciente ciclo político desde el estallido social en adelante. El no cumplimiento de las tareas del gobierno de emergencia de Kast puede conducir a este elector a abandonar tempranamente el apoyo al gobierno.</p>\n<p>Asimismo, la contundencia del triunfo de Kast produce altas expectativas cuya administración debe ser distribuida entre los miembros de una coalición de gobierno para obtener un mayor respaldo técnico y político en la consecución de las tareas respectivas. Por otro lado, es preciso tener en consideración la alta votación de Parisi en el norte de Chile y en la zona centro-sur. Ella refleja un nuevo actor social (la clase media emergente) que dista mucho del ideal de universalidad de la clase media tradicional.</p>\n<p>Por otro lado, los patrones territoriales y socioeconómicos de votación de Kast muestran que la acción del gobierno debiera avanzar paralelamente en sus tres tareas centrales: control de la delincuencia y el crimen organizado, control de la inmigración y la reactivación económica. De otro modo, la crítica en una zona escalará a una crítica generalizada al gobierno y a la pérdida de su apoyo electoral, a pesar de la situación favorable del Partido Republicano en el Congreso y de las transferencias que obtuvo en segunda vuelta de los votantes de Parisi, Matthei y Kaiser.</p>\n<p>El artículo concluye que las elecciones presidenciales 2025 muestran una votación abundante para el gobierno electo, sin embargo, la base de desafección política es amplia, lo que representa un desafío al ciclo político próximo.</p>",
       "parrafos": [
@@ -248,7 +340,7 @@
       "url": "https://www.cepchile.cl/investigacion/elecciones-2025-sexto-informe-c22-cep-el-agotamiento-de-la-seguridad/",
       "fecha": "2025-10-30",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2025/10/30-123541_ru37_Elecciones-2025.-Sexto-Informe-C22-CEP-el-agotamiento-de-la-seguridad.jpg",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "Lee \"Elecciones 2025. Sexto Informe C22-CEP, el agotamiento de la seguridad\" de Aldo Mascareño, Fabián Belmar, Juan Rozas y Pablo Henríquez.",
       "cuerpo_html": "<p>Este sexto informe de la serie C22-CEP sobre las elecciones presidenciales 2025 analiza las visualizaciones y emociones de seis candidatos de cara a las elecciones del 16 de noviembre de 2025: Jeannette Jara, Franco Parisi, Harold Mayne-Nicholls, Evelyn Matthei, José Antonio Kast y Johannes Kaiser. El análisis se basa en un corpus de 901.112 palabras (distribuidas entre 15.160 publicaciones) obtenidas de Facebook e Instagram entre el 1 de agosto y el 30 de septiembre de 2025 y procesadas mediante técnicas de minería de texto y análisis de frecuencias léxicas.</p>\n<p>Nuestro argumento en este informe es que el tema de seguridad ha agotado su novedad. Este agotamiento de la seguridad como tema de campaña no implica que ya no sea relevante, sino que no produce nueva información para los públicos. Los resultados muestran que el agotamiento de la seguridad tiene varios efectos: 1) un surgimiento disperso de otras propuestas temáticas en algunos casos asociadas a los programas; 2) un aumento de polémicas entre candidatos; 3) un descenso de la primacía que Kast tenía en la derecha hace algunos meses; y 4) la predominancia del enojo como emoción central en los candidatos.</p>\n<p>La comunicación política transitó desde una configuración centrada exclusivamente en confrontaciones entre candidatos hacia una que incorpora propuestas programáticas. Los debates presidenciales y la publicación de programas electorales en septiembre forzaron este desplazamiento temático, especialmente visible en Matthei, Kaiser y Jara.</p>\n<p>El artículo concluye que la extensión del período de campaña dificulta cualquier capacidad de generar información innovadora de manera constante. De ahí el agotamiento de la seguridad como tema, así como el incremento de polémicas irrelevantes y la dispersión temática en la comunicación política en torno a los candidatos.</p>",
       "parrafos": [
@@ -269,7 +361,7 @@
       "url": "https://www.cepchile.cl/investigacion/elecciones-2025-quinto-informe-c22-cep-programas-presidenciales/",
       "fecha": "2025-10-09",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2025/05/23-153036_0l8s_Elecciones-2025.-Primer-Informe-C22-CEP-marzo-abril.jpg",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "Lee \"Elecciones 2025. Quinto Informe C22-CEP, programas presidenciales\" de Aldo Mascareño, Fabián Belmar, Juan Rozas y Pablo Henríquez.",
       "cuerpo_html": "<p>Este quinto informe de la serie C22-CEP sobre las elecciones presidenciales 2025 analiza los programas de siete candidatos de cara a las elecciones del 16 de noviembre de 2025: Eduardo Artés, Jeannette Jara, Harold Mayne-Nicholls, Franco Parisi, Evelyn Matthei, José Antonio Kast y Johannes Kaiser. El análisis se basa en un corpus de 221.582 palabras procesadas mediante técnicas de minería de texto, análisis de frecuencias léxicas, modelamiento de tópicos y técnicas de reducción dimensional. El estudio busca identificar las estructuras léxico-semánticas subyacentes, convergencias y divergencias programáticas, así como las orientaciones doctrinarias que caracterizan las propuestas.</p>\n<p>El hallazgo principal revela que el contenido programático de los candidatos muestra una estructura predominantemente gerencial-compromisoria, es decir, orientada por medidas técnicas para establecer compromisos institucionales sectoriales. Esta convergencia hacia un vocabulario técnico-administrativo (impulsaremos, fortaleceremos, implementaremos, crearemos) sugiere el predominio de un discurso de gestión pública que trasciende las diferencias ideológicas tradicionales. Dos excepciones doctrinarias notables emergen en los extremos del espectro. Por un lado, el programa de Artés, anclado en una retórica revolucionaria de tipo nacionalista-popular con vocabulario característico de la Guerra Fría (patriótico popular, gobierno patriótico, quinquenal), y el de Kaiser, articulado desde principios libertarios con énfasis en reformas estructurales de largo plazo.</p>\n<p>El análisis de similitud y componentes principales revela una paradoja significativa en la configuración del sistema político chileno. Los candidatos de izquierda (Artés y Jara) presentan la menor convergencia léxica en el corpus, inferior incluso a sus similitudes con candidatos de derecha. En contraste, el bloque de derecha muestra alta cohesión discursiva, con Matthei y Kast compartiendo un 59% de similitud en sus vocabularios.</p>\n<p>El análisis de ideal points sugiere un desplazamiento del centro de atracción político hacia la centroderecha, espacio donde convergen Matthei, Kast y, más alejado, Mayne-Nicholls por su proyecto de restauración del consenso de la transición democrática, mientras Jara ocupa una posición aislada en el cuadrante progresista-técnico. Este grupo configura lo que denominamos un centro excéntrico o multipolar, flanqueado por las posiciones extremas de Artés y Kaiser, quienes, además, presentan menor variedad terminológica en sus programas (Artés 0,19, Kaiser 0,17), lo que indica una mayor clausura doctrinaria que los demás candidatos.</p>\n<p>El artículo concluye que los patrones identificados revelan que el sistema político chileno actual se estructura menos en torno a un eje ideológico lineal izquierda-derecha y más como un espacio donde la radicalidad discursiva se opone a un centro excéntrico dominado por el lenguaje gerencial-compromisorio.</p>",
       "parrafos": [
@@ -307,7 +399,7 @@
       "url": "https://www.cepchile.cl/investigacion/muerte-en-el-monumental-gestion-simbolica-de-crisis-y-violencia-organizada/",
       "fecha": "2025-08-13",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2025/07/18-200329_80be_Muerte-en-el-Monumental-gestión-simbólica-de-crisis-y-violencia-organizada.png",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "\"Muerte en el Monumental: gestión simbólica de crisis y violencia organizada\" es un trabajo de investigadores CEP y C22.",
       "cuerpo_html": "<p>El 10 de abril de 2025, dos jóvenes de 12 y 18 años fallecieron en las inmediaciones del Estadio Monumental durante una ‘avalancha’ organizada y convocada previamente en redes sociales para ingresar al partido contra el equipo brasileño de Fortaleza. La intervención policial habría provocado que las víctimas quedaran atrapadas bajo una reja en uno de los accesos del estadio.</p>\n<p>A través del análisis de 5.585 publicaciones de redes sociales (Facebook e Instagram) procesadas con métodos computacionales (redes, comunidades discursivas, modelamiento de tópicos), examinamos cómo este evento reconfiguró el discurso público y las respuestas gubernamentales sobre la seguridad en estadios y sus inmediaciones. Argumentamos que el acontecimiento constituye el inicio de un nuevo ciclo de crisis-reforma-fracaso que conceptualizamos como <i>gestión simbólica de </i><i>crisis</i>, esto es, una reacción comunicativa inicial seguida de anuncios de reforma y una progresiva dilución operativa que no alcanza a intervenir en el mecanismo de producción de la violencia en los estadios. Este es un doble movimiento circular en el que en una dirección fluye la disposición de las barras bravas al enfrentamiento físico y uso de la violencia para distintas finalidades, y en el otro fluye la disposición de agentes deportivos e institucionales al financiamiento y la provisión de espacios de menor control para que estos grupos operen.</p>\n<p>Los principales resultados muestran la presencia de seis comunidades discursivas diferenciadas que compiten por la hegemonía narrativa del evento. El análisis revela un patrón de disrupción-normalización, caracterizado por un <i>peak</i> inicial del discurso sobre el incidente que se atenúa en diez días, seguido de una rápida recuperación e incluso fortalecimiento de las narrativas histórico-institucionales que funcionan como formas de absorción del evento crítico. A esto lo denominamos <i>desplazamiento discursivo</i>: el concepto de ‘barras bravas’ queda sistemáticamente ausente del discurso público postragedia. Esta omisión permite proteger la continuidad del mecanismo que conduce al evento crítico y ocultar las relaciones que lo producen.</p>\n<p>El artículo concluye que la gestión simbólica de crisis opera como tecnología de normalización que sostiene la reproducción de las condiciones estructurales de violencia, convirtiendo cada evento crítico en una oportunidad perdida para la intervención de la política pública.</p>",
       "parrafos": [
@@ -328,7 +420,7 @@
       "url": "https://www.cepchile.cl/investigacion/elecciones-2025-cuarto-informe-c22-cep-autorreferencia-politica/",
       "fecha": "2025-08-12",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2025/05/23-153036_0l8s_Elecciones-2025.-Primer-Informe-C22-CEP-marzo-abril.jpg",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "Lee el estudio \"Elecciones 2025. Cuarto Informe C22-CEP, autorreferencia política\" de Aldo Mascareño, Fabián Belmar, Juan Rozas y Pablo Henríquez.",
       "cuerpo_html": "<p>El 29 de junio se realizaron las primarias presidenciales de la izquierda. Jeannette Jara fue elegida la candidata presidencial de los sectores de izquierda. En la derecha se mantienen los tres candidatos conocidos (Kaiser, Kast, Matthei) e ingresa ahora Franco Parisi del PDG. Otros candidatos aún consiguen firmas o no han sido ratificados por Servel. En ese marco se ha dado inicio a la fase que culminará en la primera vuelta presidencial del 16 de noviembre.</p>\n<p>Por medio de técnicas digitales y estadísticas, en este Cuarto Informe C22-CEP sobre las elecciones 2025 observamos a los candidatos mencionados en sus redes sociales (Instagram y Facebook) para analizar sus visualizaciones, las emociones que generan y los temas que abordan. Nuestro argumento es que, en julio, aún sin claridad de los programas presidenciales, se incrementa la autorreferencia política producto de la necesidad de diferenciación de la derecha, la organización del comando de Jara y el posicionamiento de Franco Parisi. Este incremento de la autorreferencia política conduce a una comunicación clausurada frente a los públicos de la política, que pone énfasis en la confrontación y desplaza las propuestas programáticas en las que se da respuesta a preocupaciones generales y particulares de la ciudadanía.</p>\n<p>Los resultados indican que la emoción de enojo concentra temáticamente la autorreferencia política y desplaza propuestas programáticas dirigidas a los públicos de la política. Esta<br/>\nconcentración autorreferencial de la comunicación política se expresa en: a) una dinámica comunicacional de etiquetamiento ideológico; b) dependencia de la comunicación de métricas y rankings aportados por encuestas; y c) una posposición o renuncia a propuestas programáticas que abran la comunicación a la ciudadanía.</p>\n<p>El artículo concluye que una comunicación política instalada en la modalidad de negación del adversario conduce a una polarización centrífuga de las posiciones. Esto puede cambiar con la presentación de programas políticos sustantivos, pero la próxima incorporación de nuevos candidatos seguramente reactivará la dinámica de polarización centrífuga de la campaña presidencial en términos de identidad, redundancia y carácter inercial de la comunicación política.</p>",
       "parrafos": [
@@ -350,7 +442,7 @@
       "url": "https://www.cepchile.cl/investigacion/elecciones-2025-tercer-informe-c22-cep-primarias-junio/",
       "fecha": "2025-07-18",
       "imagen": "https://static.cepchile.cl/uploads/cepchile/2025/07/18-134923_mfi4_Elecciones-2025.-Tercer-Informe-C22-CEP-junio.png",
-      "tipo": "columna",
+      "tipo": "documento",
       "bajada": "Lee el estudio \"Elecciones 2025, Tercer Informe C22-CEP, junio\" de Aldo Mascareño, Juan Rozas y Pablo Henríquez.",
       "cuerpo_html": "<p>El 29 de junio se realizaron las primarias presidenciales de la izquierda. Jeannette Jara obtuvo 60,2%, Carolina Tohá 28,1%, Gonzalo Winter 9,0% y Jaime Mulet 2,7%. Con ello, Jeannette Jara es la representante de la izquierda para las elecciones presidenciales del 16 de noviembre de 2025.</p>\n<p>Por medio de técnicas digitales y estadísticas, en este Tercer Informe C22-CEP sobre las elecciones 2025 observamos los resultados de estas elecciones primarias y sus efectos para el escenario político general. Analizamos también el comportamiento de la comunicación en redes sociales (Instagram y Facebook) en torno a los siete principales candidatos presidenciales durante el mes de junio 2025. Ellos son Johannes Kaiser, José Antonio Kast, Evelyn Matthei, Gonzalo Winter, Jeannette Jara, Carolina Tohá y Jaime Mulet. Exploramos sus visualizaciones y la comunicación de sentimientos y emociones en torno a ellos.</p>\n<p>Los resultados generales indican que, en primarias, la izquierda redujo su capacidad de movilización entre 2021 y 2025. Lo mismo acontece con el Frente Amplio, el que baja de 1 millón de votos en las primarias de 2021 (Gabriel Boric) a 124 mil en 2025 (Gonzalo Winter). Jeannette Jara, con 826 mil votos, obtuvo un mejor rendimiento electoral en comunas de la zona poniente de Santiago con mayores niveles de pobreza, lo que muestra un voto asociado a componentes socioeconómicos para esta candidata. Esto no se reproduce a nivel nacional excluyendo la RM. En sentimientos y emociones, Jara logró un rendimiento mejor que el de Tohá, su rango de diferenciación es menor y los sentimientos positivos, así como la emoción de alegría, son los más altos entre todos los candidatos. Esto evidencia una fortaleza de la candidata: su cercanía y capacidad de conexión emocional con los públicos; en redes, su trasfondo político comunista es su desventaja.</p>\n<p>El Informe concluye que el triunfo de Jeannette Jara en las primarias de izquierda debe ser observado con cautela. La cantidad de votantes que convocó la izquierda es menor que la que movilizó en las primarias de 2021. Si esto se compara con la convocatoria de la Nueva Mayoría en 2013, el descenso en el rendimiento de la izquierda en elecciones primarias es más agudo. El triunfo de Jara no se explica tanto por un alto rendimiento del comunismo, sino por la debilidad de la socialdemocracia representada por Tohá.</p>",
       "parrafos": [

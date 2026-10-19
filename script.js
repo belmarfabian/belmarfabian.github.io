@@ -70,26 +70,31 @@ function initUltimaPub() {
 
 /* ===== Última prensa (auto from first press item) ===== */
 function initUltimaPrensa() {
-    var prensaItem = document.querySelector('#prensa .scrollable-list li');
+    // La aparición más reciente de cualquier lista de Prensa (data-fecha manda; si no, el año)
+    var items = Array.prototype.slice.call(document.querySelectorAll('#prensa .scrollable-list li'));
     var container = document.getElementById('ultima-prensa');
-
-    if (prensaItem && container) {
-        var texto = prensaItem.innerHTML;
-        var match = texto.match(/\((\d{4})\)\.\s*([^.]+\.)/);
-        var titulo = match ? match[2].trim() : '';
-        var emEl = prensaItem.querySelector('em');
-        var medio = emEl ? emEl.textContent : '';
-        var linkEl = prensaItem.querySelector('a');
-        var link = linkEl ? linkEl.href : '';
-        var yearMatch = texto.match(/\((\d{4})\)/);
-        var año = yearMatch ? yearMatch[1] : '';
-
-        container.innerHTML =
-            '<p class="ultima-prensa-titulo">' + titulo + '</p>' +
-            '<p class="ultima-prensa-meta"><em>' + medio + '</em> (' + año + ')' +
-            (link ? ' <a href="' + link + '" class="ultima-link">Ver →</a>' : '') +
-            '</p>';
+    if (!items.length || !container) return;
+    function clave(li) {
+        if (li.dataset.fecha) return li.dataset.fecha;
+        var y = li.textContent.match(/\((\d{4})\)/);
+        return y ? y[1] + '-00-00' : '0000';
     }
+    var prensaItem = items.reduce(function (a, b) { return clave(b) > clave(a) ? b : a; });
+    var texto = prensaItem.textContent;
+    var emEl = prensaItem.querySelector('em');
+    var medio = emEl ? emEl.textContent : '';
+    var resto = texto.replace(/^[\s\S]*?\(\d{4}\)\.\s*/, '');
+    var fin = medio ? resto.indexOf(medio) : -1;
+    var titulo = (fin > 0 ? resto.slice(0, fin) : resto).trim().replace(/[.\s]+$/, '');
+    var linkEl = prensaItem.querySelector('a');
+    var link = linkEl ? linkEl.href : '';
+    var yearMatch = texto.match(/\((\d{4})\)/);
+    var año = yearMatch ? yearMatch[1] : '';
+    container.innerHTML =
+        '<p class="ultima-prensa-titulo">' + titulo + '</p>' +
+        '<p class="ultima-prensa-meta"><em>' + medio + '</em> (' + año + ')' +
+        (link ? ' <a href="' + link + '" class="ultima-link">Ver →</a>' : '') +
+        '</p>';
 }
 
 /* ===== Tabs with item counts ===== */
@@ -520,7 +525,11 @@ function toggleTheme() {
 function updateThemeButton(theme) {
     var btn = document.querySelector('.theme-toggle');
     if (btn) {
-        btn.textContent = theme === 'dark' ? '◑' : '◐';
+        // Icono de lo que hará el botón: sol para volver a claro, luna para pasar a oscuro
+        btn.innerHTML = theme === 'dark'
+            ? '<iconify-icon icon="mdi:white-balance-sunny" width="18"></iconify-icon>'
+            : '<iconify-icon icon="mdi:weather-night" width="18"></iconify-icon>';
+        btn.title = theme === 'dark' ? 'Modo claro' : 'Modo oscuro';
         btn.setAttribute('aria-label',
             theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
     }
