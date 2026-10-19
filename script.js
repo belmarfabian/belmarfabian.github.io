@@ -680,13 +680,20 @@ function initTimeline() {
 
             // Extract short title
             var text = li.textContent;
-            var titleMatch = text.match(/\(\d{4}\)\.\s*([^.]+\.)/);
-            var title = titleMatch ? titleMatch[1].trim() : '';
-            if (title.length > 80) title = title.substring(0, 77) + '...';
-
             // Get source
             var emEl = li.querySelector('em');
             var source = emEl ? emEl.textContent : '';
+
+            // Título completo: del año hasta la revista/medio (no corta en el primer punto)
+            var titleEl = li.querySelector('.pub-title-text');
+            var title = titleEl ? titleEl.textContent.trim() : '';
+            if (!title) {
+                var start = text.search(/\(\d{4}\)\.\s*/);
+                var rest = start >= 0 ? text.slice(start).replace(/^\(\d{4}\)\.\s*/, '') : '';
+                var end = source ? rest.indexOf(source) : -1;
+                title = (end > 0 ? rest.slice(0, end) : rest).trim().replace(/[.\s]+$/, '');
+            }
+            if (title.length > 110) title = title.substring(0, 107) + '…';
 
             // Get link
             var linkEl = li.querySelector('a');
