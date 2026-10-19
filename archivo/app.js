@@ -198,7 +198,6 @@
     }
   }
 
-  const FALLBACK_IMG = 'fabian.jpg';
 
   function pintar(c) {
     const node = tpl.content.cloneNode(true);
@@ -212,7 +211,7 @@
     const img = node.querySelector('.post__imagen img');
     aImg.href = c.url;
 
-    if (c.seccion === 'academico' && !c.imagen) {
+    if (!c.imagen && c.seccion !== 'prensa') {
       // Thumbnail generado: año + tipo + fuente
       img.remove();
       const thumb = document.createElement('div');
@@ -237,14 +236,10 @@
       `;
       aImg.appendChild(thumb);
     } else {
-      const src = c.imagen || FALLBACK_IMG;
-      img.src = src;
+      img.src = c.imagen;
       img.alt = c.titulo;
-      img.addEventListener('error', () => {
-        if (img.src !== FALLBACK_IMG && !img.src.endsWith('/' + FALLBACK_IMG)) {
-          img.src = FALLBACK_IMG;
-        }
-      }, { once: true });
+      // Si la imagen remota no carga, se oculta (nunca se reemplaza por una foto personal)
+      img.addEventListener('error', () => { img.style.visibility = 'hidden'; }, { once: true });
     }
 
     const fecha = node.querySelector('.post__fecha');
