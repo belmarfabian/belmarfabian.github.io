@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#ffffff"/>
-  <text x="80" y="290" font-family="Helvetica, Arial, sans-serif" font-size="78" font-weight="600" fill="#111111" letter-spacing="-2">Fabián Belmar</text>
-  <rect x="84" y="320" width="120" height="5" rx="2.5" fill="#3a5f87"/>
-  <text x="80" y="392" font-family="Helvetica, Arial, sans-serif" font-size="32" fill="#383838">Doctor en Ciencia Política</text>
-  <text x="80" y="438" font-family="Helvetica, Arial, sans-serif" font-size="25" fill="#666666">Investigador Posdoctoral · SODAS · CEP</text>
-  <text x="80" y="560" font-family="Helvetica, Arial, sans-serif" font-size="21" fill="#9a9a9a">belmarfabian.github.io</text>
-</svg>
