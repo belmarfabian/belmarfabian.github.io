@@ -1,0 +1,16 @@
+@font-face{font-family:icomoon;src:url(icomoon.woff) format("woff");font-weight:400;font-style:normal;font-display:block}
+[class^=icon-],[class*=" icon-"]{font-family:icomoon!important;speak:never;font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased}
+.icon-buscar:before{content:""}
+.icon-descargar:before{content:""}
+.icon-equis:before{content:""}
+.icon-facebook:before{content:""}
+.icon-flecha-derecha-mediana:before{content:""}
+.icon-flecha-izquierda-mediana:before{content:""}
+.icon-instagram:before{content:""}
+.icon-linkedin:before{content:""}
+.icon-mail:before{content:""}
+.icon-reloj:before{content:""}
+.icon-spotify:before{content:""}
+.icon-whatsapp:before{content:""}
+.icon-x:before{content:""}
+.icon-youtube-isotipo:before{content:""}
