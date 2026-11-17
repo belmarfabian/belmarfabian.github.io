@@ -1076,7 +1076,8 @@ html, body { overflow-x: clip; }
 /* Cuadre: el panel derecho llega hasta el borde inferior de las ventanas */
 @media (min-width: 1025px) {
   .inicio-grid { align-items: stretch; }
-  .inicio-recientes { display: flex; flex-direction: column; justify-content: space-between; }
+  .inicio-recientes { display: flex; flex-direction: column; }
+  .inicio-recientes .metricas { margin-top: auto; }
   .inicio-recientes h3:not(:first-child) { margin-top: 0; }
 }
 .ventanas { max-width: none; }
@@ -1084,3 +1085,13 @@ html, body { overflow-x: clip; }
 .inicio-recientes .bloque + .bloque { border-top: 1px solid var(--key-edge); padding-top: 0.8rem; margin-top: 0.8rem; }
 @media (min-width: 1025px) { .inicio-recientes .bloque + .bloque { margin-top: 0; } }
 .inicio-grid > * { min-width: 0; }
+
+.metricas__cifras { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; text-decoration: none !important; color: var(--color-text); }
+.metricas__cifras span { display: flex; flex-direction: column; font-size: .72rem; color: var(--color-text-muted); }
+.metricas__cifras b { font-size: 1.6rem; font-weight: 600; line-height: 1.1; color: var(--color-text); font-variant-numeric: tabular-nums; }
+.metricas__cifras:hover b { color: var(--dial, #8d8e8a); }
+@media (min-width: 1025px) { .inicio-recientes .bloque + .bloque.metricas { margin-top: auto; } }
+@media (min-width: 1025px) {
+  .metricas__cifras b { font-size: 2.6rem; letter-spacing: -0.02em; }
+  .metricas__cifras span { font-size: .78rem; }
+}
