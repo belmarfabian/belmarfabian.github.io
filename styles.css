@@ -1072,3 +1072,15 @@ html, body { overflow-x: clip; }
 .ventana__pie span { font-size: .7rem; color: var(--color-text-muted); }
 @media (max-width: 768px) { .ventanas { grid-template-columns: repeat(3, minmax(150px, 1fr)); overflow-x: auto; max-width: none; } }
 @media (prefers-reduced-motion: reduce) { .ventana { transition: none; } .ventana:hover { transform: none; } }
+
+/* Cuadre: el panel derecho llega hasta el borde inferior de las ventanas */
+@media (min-width: 1025px) {
+  .inicio-grid { align-items: stretch; }
+  .inicio-recientes { display: flex; flex-direction: column; justify-content: space-between; }
+  .inicio-recientes h3:not(:first-child) { margin-top: 0; }
+}
+.ventanas { max-width: none; }
+.ventana { border-radius: 16px; }
+.inicio-recientes .bloque + .bloque { border-top: 1px solid var(--key-edge); padding-top: 0.8rem; margin-top: 0.8rem; }
+@media (min-width: 1025px) { .inicio-recientes .bloque + .bloque { margin-top: 0; } }
+.inicio-grid > * { min-width: 0; }
