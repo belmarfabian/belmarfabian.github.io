@@ -571,3 +571,20 @@ img { max-width: 100%; display: block; }
 [data-theme="dark"] .chip.activo { color: #1d1d1c !important; }
 #q { border-radius: 999px; }
 .post { border-radius: 14px; }
+
+/* Coherencia con la portada: sin rótulos en mayúsculas, píldoras redondas,
+   tarjetas sin imagen en los grises del sitio */
+.intro__kicker { display: none; }
+.intro h1::after { display: none; }
+.post__tipo, .post__fecha, .post__thumb-academico .ta-tipo, .post__thumb-prensa .tp-tipo,
+.subbar, .tagbar, .tagbar__label { text-transform: none !important; letter-spacing: 0 !important; }
+.subbar .pill, .tagbar__tag { border-radius: 999px !important; }
+.subbar .pill.activo, .tagbar__tag.activo { background: var(--dial) !important; border-color: var(--dial) !important; color: #fff !important; }
+[data-theme="dark"] .subbar .pill.activo, [data-theme="dark"] .tagbar__tag.activo { color: #1d1d1c !important; }
+.post__thumb-academico, [data-theme="dark"] .post__thumb-academico {
+  background: var(--bg) !important; border: 1px solid var(--border); color: var(--text);
+}
+.post__thumb-academico .ta-año { color: var(--text) !important; }
+.post__thumb-academico .ta-fuente, .post__thumb-academico .ta-tipo { color: var(--muted) !important; border-color: var(--border) !important; }
+.post__thumb-prensa { background: var(--bg) !important; }
+.post__imagen img { border-radius: 10px; }

@@ -63,7 +63,7 @@ function initUltimaPub() {
         container.innerHTML =
             '<p class="ultima-titulo">' + titulo + '</p>' +
             '<p class="ultima-meta"><em>' + revista + '</em> (' + año + ')' +
-            (link ? ' <a href="' + link + '" class="ultima-link">Ver artículo →</a>' : '') +
+            (link ? ' <a href="' + link + '" class="ultima-link">Ver →</a>' : '') +
             '</p>';
     }
 }
