@@ -8,8 +8,24 @@
     "scholar",
     "utprensa"
   ],
-  "total": 77,
+  "total": 78,
   "items": [
+    {
+      "id": "ciper:la-fifa-en-chile-2026",
+      "fuente": "ciper",
+      "seccion": "columnas",
+      "titulo": "La FIFA en Chile: la autonomía como moneda de cambio",
+      "url": "https://www.ciperchile.cl/2026/10/29/la-fifa-en-chile-la-autonomia-como-moneda-de-cambio/",
+      "fecha": "2026-10-29",
+      "imagen": null,
+      "tipo": "columna",
+      "bajada": "Columna de opinión en CIPER Chile.",
+      "cuerpo_html": "",
+      "parrafos": [],
+      "tags": [
+        "Fútbol"
+      ]
+    },
     {
       "id": "cep:dime-con-quien-andas",
       "fuente": "cep",
