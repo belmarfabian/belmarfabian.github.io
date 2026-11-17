@@ -1095,3 +1095,45 @@ html, body { overflow-x: clip; }
   .metricas__cifras b { font-size: 2.6rem; letter-spacing: -0.02em; }
   .metricas__cifras span { font-size: .78rem; }
 }
+
+/* ===== Cabecera invertida: datos + panel a la izquierda, ventanas a la derecha ===== */
+.ventana__barra em { margin-left: auto; font-style: normal; opacity: .7; }
+.ventana__barra > span { font-weight: 600; color: var(--color-text); }
+.inicio-recientes { margin-top: 1.1rem; }
+@media (min-width: 769px) {
+  .inicio-recientes { display: grid !important; grid-template-columns: 1.15fr 1.15fr 1fr; gap: 0; padding: 1rem 0; border-radius: 22px; }
+  .inicio-recientes .bloque { padding: 0 1.1rem; }
+  .inicio-recientes .bloque + .bloque { border-top: 0; border-left: 1px solid var(--key-edge); padding-top: 0; margin-top: 0 !important; }
+  .metricas__cifras { gap: .25rem; }
+  .metricas__cifras b { font-size: 1.55rem !important; }
+  .metricas__cifras span { font-size: .68rem !important; }
+}
+@media (min-width: 1025px) {
+  .inicio-grid { align-items: stretch; }
+  .ventanas { position: relative; display: block; margin: 0; min-height: 360px; }
+  .ventana { position: absolute; left: 0; right: 0; box-shadow: 0 10px 28px -14px rgba(0,0,0,.28); }
+  .ventana:nth-child(1) { top: 92px; z-index: 3; }
+  .ventana:nth-child(2) { top: 46px; z-index: 2; left: 14px; right: -14px; }
+  .ventana:nth-child(3) { top: 0;    z-index: 1; left: 28px; right: -28px; }
+  .ventana:hover { z-index: 4; transform: translateY(-4px); }
+  .ventana:nth-child(n+2) .ventana__pie { visibility: hidden; }
+  .ventana:nth-child(n+2):hover .ventana__pie { visibility: visible; }
+  .mosaico { top: auto; bottom: -60px; right: -150px; }
+}
+@media (max-width: 1024px) {
+  .ventanas { display: grid; grid-template-columns: repeat(3, minmax(150px, 1fr)); gap: .75rem; overflow-x: auto; }
+}
+@media (max-width: 768px) {
+  .inicio-recientes .bloque + .bloque { border-left: 0; }
+}
+@media (min-width: 1025px) {
+  .ventana:nth-child(1) { top: 104px; }
+  .ventana:nth-child(2) { top: 52px; left: 0; right: 0; }
+  .ventana:nth-child(3) { top: 0; left: 0; right: 0; }
+  .ventana:nth-child(2) .ventana__barra, .ventana:nth-child(3) .ventana__barra { background: var(--color-bg); }
+}
+@media (max-width: 1024px) {
+  .ventana__barra > span { display: none; }
+  .ventana__barra em { margin-left: 0; opacity: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .inicio-grid { gap: 1.25rem; }
+}
