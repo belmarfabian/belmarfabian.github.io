@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistemas complejos para las ciencias sociales · Fabián Belmar</title>
+<meta name="description" content="Biblioteca comentada de lecturas, cursos y simulaciones sobre sistemas complejos para estudiantes de pregrado en ciencias sociales.">
+<meta name="author" content="Fabián Belmar">
+<meta property="og:title" content="Sistemas complejos para las ciencias sociales">
+<meta property="og:description" content="Lecturas, cursos y simulaciones comentadas, ordenadas en siete módulos para estudiantes de pregrado.">
+<meta property="og:url" content="https://belmarfabian.github.io/sistemas-complejos/">
+<link rel="canonical" href="https://belmarfabian.github.io/sistemas-complejos/">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+(function(){var s=null;try{s=localStorage.getItem('theme')}catch(e){}
+if(s)document.documentElement.setAttribute('data-theme',s);
+else if(window.matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.setAttribute('data-theme','dark');})();
+</script>
+<style>
+/* Misma paleta que el resto del sitio (radio T3): grises cálidos, un gris dial para lo activo. */
+:root{--bg:#f2f2f0;--surface:#ffffff;--border:#e0e0dd;--border-strong:#b4b4af;
+  --text:#232322;--text-2:#464643;--muted:#6f6f6b;--faint:#9b9b96;
+  --accent:#232322;--dial:#8d8e8a;--open:#2e7d57;--open-soft:#e4f1ea}
+[data-theme="dark"]{--bg:#1f1f1e;--surface:#2a2a28;--border:#363634;--border-strong:#555551;
+  --text:#ecece8;--text-2:#cdcdc8;--muted:#a2a29d;--faint:#7a7a75;
+  --accent:#ecece8;--dial:#b8b9b4;--open:#6cc495;--open-soft:#25332b}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text)}
+body{font-family:'Instrument Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:32px 16px 64px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+.top a{color:var(--muted);text-decoration:none}.top a:hover{color:var(--text)}
+.theme{display:inline-flex;align-items:center;justify-content:center;padding:0;border:1px solid var(--border);border-radius:50%;width:34px;height:34px;background:var(--surface);color:var(--text-2);cursor:pointer}
+.theme svg{width:17px;height:17px}
+header{margin:28px 0 8px}
+.kicker{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+h1{font-weight:700;letter-spacing:-.035em;font-size:clamp(28px,4.4vw,40px);line-height:1.1;margin:6px 0 14px}
+.lede,.prose p,.mdesc,.nota{text-align:justify;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
+.lede{color:var(--text-2);margin:0 0 12px}
+.stats{color:var(--muted);font-size:13.5px;margin:0}
+a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--border-strong);text-underline-offset:3px}
+h2{font-weight:600;font-size:21px;letter-spacing:-.015em;margin:44px 0 6px;display:flex;align-items:baseline;gap:10px}
+h2 .num{font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--border-strong);border-radius:999px;min-width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;flex:none;transform:translateY(-2px)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 14px}
+.mdesc{color:var(--text-2);margin:0 0 14px}
+.rec{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin:0 0 10px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.tag{font-size:11.5px;color:var(--text-2);border:1px solid var(--border-strong);border-radius:999px;padding:1px 9px;background:var(--bg)}
+.tag.t-1{background:var(--dial);border-color:var(--dial);color:#fff}
+[data-theme="dark"] .tag.t-1{color:#1d1d1c}
+.tag.open{color:var(--open);border-color:var(--open);background:var(--open-soft)}
+.ref{margin:0 0 6px;font-size:14.5px;line-height:1.5}
+.nota{margin:0 0 10px;color:var(--text-2);font-size:14px}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.go{font-size:13px;text-decoration:none;color:var(--text);border:1px solid var(--border-strong);border-radius:999px;padding:3px 12px;background:var(--bg)}
+.go:hover{border-color:var(--text)}
+.go::after{content:" ↗";color:var(--muted)}
+.mod{margin-left:auto;font-size:12px;color:var(--faint)}
+#lista .mod{display:none}
+ol.ruta{list-style:none;padding:0;margin:0}
+ol.ruta li{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:start}
+.paso{width:28px;height:28px;border-radius:50%;background:var(--text);color:var(--bg);font-weight:600;font-size:13px;display:inline-flex;align-items:center;justify-content:center;margin-top:14px}
+.controls{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0 10px;margin-top:8px;border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+select,.search{font:inherit;font-size:13px;color:var(--text);background:var(--surface);border:1px solid var(--border-strong);border-radius:999px;padding:5px 10px}
+.search{flex:1 1 200px;min-width:160px}
+label.cb{font-size:13px;color:var(--text-2);display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.count{font-size:12.5px;color:var(--muted);margin-left:auto}
+.vacio{color:var(--muted);margin:28px 0}
+.prose p{color:var(--text-2);margin:0 0 12px}
+.modulo,#lista h2{scroll-margin-top:110px}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted)}
+@media (max-width:560px){.count{margin-left:0;width:100%}.mod{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="../">← Fabián Belmar</a><button class="theme" id="themeBtn" aria-label="Cambiar tema">◐</button></div>
+
+  <header>
+    <p class="kicker">Material docente</p>
+    <h1>Sistemas complejos para las ciencias sociales</h1>
+    <p class="lede">Esta página reúne lecturas, cursos y simulaciones para estudiantes de pregrado que quieren entender por qué muchos fenómenos colectivos (un barrio que se segrega, una protesta que crece de un día para otro, una canción que se vuelve éxito) no se explican sumando lo que quiere cada persona. Los recursos están ordenados en siete módulos, desde la intuición hasta las herramientas, y cada uno trae un comentario breve sobre qué aporta y cuánto exige.</p>
+    <p class="lede">No hace falta saber matemáticas para empezar, pues la mayoría de los recursos de entrada son juegos interactivos o textos escritos para un público general. Los marcados como avanzados suponen haber pasado antes por los de entrada del mismo módulo.</p>
+    <p class="stats" id="stats"></p>
+  </header>
+
+  <h2>Por dónde empezar</h2>
+  <p class="sub">Si solo hay tiempo para cuatro cosas, que sean estas y en este orden.</p>
+  <ol class="ruta" id="inicio"></ol>
+
+  <h2>Biblioteca</h2>
+  <div class="controls" role="search">
+    <input class="search" id="q" type="search" placeholder="Buscar autor, tema o palabra…" aria-label="Buscar recursos">
+    <select id="fMod" aria-label="Filtrar por módulo"></select>
+    <select id="fNivel" aria-label="Filtrar por nivel">
+      <option value="todos">Todos los niveles</option>
+      <option value="1">Entrada</option>
+      <option value="2">Intermedio</option>
+      <option value="3">Avanzado</option>
+    </select>
+    <select id="fTipo" aria-label="Filtrar por tipo"></select>
+    <select id="fLang" aria-label="Filtrar por idioma">
+      <option value="todos">Todos los idiomas</option>
+      <option value="es">Español</option>
+      <option value="en">Inglés</option>
+    </select>
+    <label class="cb"><input type="checkbox" id="fAb"> Solo acceso abierto</label>
+    <span class="count" id="count" aria-live="polite"></span>
+  </div>
+  <div id="lista"></div>
+
+  <h2>Criterios</h2>
+  <div class="prose">
+    <p>La selección privilegia textos que se puedan discutir en una clase de ciencias sociales y que no exijan formación matemática previa, si bien cada módulo incluye uno o dos recursos más exigentes para quien quiera seguir. Cada referencia se verificó en la editorial, la revista o un repositorio institucional, y los enlaces apuntan a esas fuentes. «Acceso abierto» indica que el texto completo puede leerse gratis y de forma legal; «En biblioteca» indica que se encuentra en bases suscritas por las universidades o en préstamo.</p>
+    <p>La mayoría de los recursos están en inglés, pues es el idioma en que se ha desarrollado el campo. El módulo sobre teoría de sistemas sociales concentra los textos en español, varios de ellos escritos en Chile.</p>
+  </div>
+
+  <footer>Selección y comentarios de Fabián Belmar. Última revisión: noviembre de 2026.</footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
