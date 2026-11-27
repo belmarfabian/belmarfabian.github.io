@@ -1184,3 +1184,7 @@ html, body { overflow-x: clip; }
 @media (min-width: 1025px) { .ventana:nth-child(1) { top: 42px; } }
 @media (min-width: 769px) { .inicio-recientes .ultima-meta, .inicio-recientes .ultima-prensa-meta { white-space: normal !important; } }
 @media (min-width: 1025px) { .ventana:nth-child(1) { top: 58px; } }
+
+/* Tres ventanas: la del medio asoma entre la primera y la última */
+@media (min-width: 1025px) { .ventana:nth-child(2) { top: 29px; } }
+@media (max-width: 1024px) { .ventanas { grid-template-columns: repeat(3, minmax(150px, 1fr)); } }
