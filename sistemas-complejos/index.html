@@ -51,6 +51,9 @@ nav.indice li::before{content:counter(i) ". ";color:var(--faint)}
 nav.indice a{text-decoration:none;color:var(--text-2)}nav.indice a:hover{color:var(--text)}
 @media(max-width:560px){nav.indice ol{grid-template-columns:1fr}}
 article.post{margin:56px 0 0;padding-top:4px}
+.seccion{margin:72px 0 -24px;padding-top:14px;border-top:2px solid var(--text)}
+.seccion .kicker{font-weight:600;color:var(--text);font-size:14px}
+.sdesc{font-family:'Source Serif 4',Georgia,serif;font-size:17px;color:var(--text-2);margin:4px 0 0}
 .post figure{margin:0 0 18px}
 .post figure img,.post figure svg{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:14px;background:var(--surface);border:1px solid var(--border)}
 .post figcaption{font-size:12px;color:var(--faint);margin-top:6px}
@@ -96,7 +99,7 @@ footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--border);font-
   <header class="hero">
     <p class="kicker">Material docente</p>
     <h1>Sistemas complejos para las ciencias sociales</h1>
-    <p class="lede">Muchos de los fenómenos que vemos a diario -un servicio público que no cambia a pesar de las reformas, una ola que recorre el estadio o un taco que aparece sin un accidente que lo explique- no se pueden entender sumando lo que quiere o hace cada persona. Esta sección reúne entradas breves sobre ese tipo de casos, pensadas para estudiantes de pregrado en ciencias sociales que nunca han leído sobre sistemas complejos.</p>
+    <p class="lede">Muchos de los fenómenos que vemos a diario -un servicio público que no cambia a pesar de las reformas, una ola que recorre el estadio o un taco que aparece sin un accidente que lo explique- no se pueden entender sumando lo que quiere o hace cada persona. Esta sección reúne entradas breves sobre ese tipo de casos, pensadas para estudiantes de pregrado en ciencias sociales que nunca han leído sobre sistemas complejos. Las entradas van de lo más simple a lo más difícil, pues parten por la naturaleza y la vida cotidiana, siguen con fenómenos sociales y terminan con los problemas que enfrentan las políticas públicas.</p>
     <p class="lede">La idea es partir por lo concreto y luego pasar a la teoría, pues cada entrada termina con un enlace a la sección «La teoría detrás», donde están los textos que explican el caso. No hace falta saber matemáticas para comenzar, si bien algunas lecturas de la segunda parte son más exigentes.</p>
     <p class="byline">Por Fabián Belmar</p>
   </header>
@@ -104,42 +107,27 @@ footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--border);font-
   <nav class="indice" aria-label="Entradas">
     <p>Entradas</p>
     <ol>
-      <li><a href="#estado">El Estado no es una máquina</a></li>
       <li><a href="#bandada">Nadie dirige a la bandada</a></li>
-      <li><a href="#jurassic">Jurassic Park y la ilusión del control</a></li>
-      <li><a href="#ola">La ola del estadio</a></li>
       <li><a href="#taco">El taco sin culpable</a></li>
+      <li><a href="#ola">La ola del estadio</a></li>
       <li><a href="#bacon">Seis grados de Kevin Bacon</a></li>
-      <li><a href="#juegos">Juegos para la sala de clases</a></li>
+      <li><a href="#juegos">El barrio que nadie quiso segregar</a></li>
+      <li><a href="#jurassic">Jurassic Park y la ilusión del control</a></li>
+      <li><a href="#hanoi">Las ratas de Hanoi</a></li>
+      <li><a href="#transantiago">Transantiago y el plan perfecto</a></li>
+      <li><a href="#perversos">Problemas que no se resuelven</a></li>
+      <li><a href="#estado">El Estado no es una máquina</a></li>
       <li><a href="#teoria">La teoría detrás</a></li>
     </ol>
   </nav>
 
-  <article class="post" id="estado">
-    <figure>
-      <img src="img/moneda.jpg" alt="Fachada del Palacio de La Moneda, en Santiago" width="960" height="540" loading="lazy">
-      <figcaption>Palacio de La Moneda, Santiago. Foto: Schwittu, <a href="https://commons.wikimedia.org/wiki/File:Moneda_1.JPG">Wikimedia Commons</a>, CC BY-SA 3.0.</figcaption>
-    </figure>
-    <p class="meta"><span class="tema">Gestión pública</span><span>Entrada 1</span></p>
-    <h2>El Estado no es una máquina</h2>
-    <p class="body">En un documento escrito para sus cursos de gestión pública en la Universidad de Chile, Mario Waissbluth distingue entre sistemas complicados y sistemas complejos, y sostiene que tanto la economía de un país como una institución pública pertenecen al segundo grupo (Waissbluth 2008a). La diferencia no es menor. Un reloj es complicado, pues tiene muchas piezas, pero si se desarma y se vuelve a armar funciona igual. Una institución pública, en tanto, está formada por funcionarios, usuarios, gremios y autoridades que se adaptan entre sí y que reaccionan a cualquier cambio que se intente introducir, por lo que las reformas diseñadas desde arriba suelen producir resultados que nadie buscó.</p>
-    <p class="body">Si bien el texto está pensado para directivos públicos, es una buena entrada para estudiantes de ciencias sociales, pues no exige formación matemática y sus ejemplos provienen del Estado chileno. Recomiendo leerlo junto con «Gestión del cambio en el sector público» (Waissbluth 2008b), que el propio autor presenta como su continuación y que, según advierte, carece de sentido sin la lectura previa del primero.</p>
-    <div class="leer">
-      <h3>Para leer</h3>
-      <ul>
-        <li>Waissbluth, M. (2008a). <a href="https://www.mariowaissbluth.com/descargas/complejidad_y_gestion.pdf"><i>Sistemas complejos y gestión pública</i></a>. Documento de trabajo, Serie Gestión n.º 99, Departamento de Ingeniería Industrial, Universidad de Chile.</li>
-        <li>Waissbluth, M. (2008b). <a href="http://www.dii.uchile.cl/~ceges/publicaciones/109%20ceges%20MW.pdf"><i>Gestión del cambio en el sector público</i></a>. Documento de trabajo, Serie Gestión n.º 109, Departamento de Ingeniería Industrial, Universidad de Chile.</li>
-      </ul>
-    </div>
-    <a class="teoria" href="#m-intro">La teoría detrás: qué es un sistema complejo →</a>
-  </article>
-
+  <div class="seccion"><p class="kicker">Primera parte · Lo que nadie dirige</p><p class="sdesc">Partimos por fenómenos de la naturaleza y de la vida cotidiana, donde se ve con claridad cómo surge un orden que nadie diseñó.</p></div>
   <article class="post" id="bandada">
     <figure>
       <img src="img/estorninos.jpg" alt="Una bandada de estorninos forma una nube oscura sobre un campo" width="640" height="360" loading="lazy">
       <figcaption>Bandada de estorninos en Anthorn, Inglaterra. Foto: John Holmes, <a href="https://commons.wikimedia.org/wiki/File:The_flock_of_starlings_acting_as_a_swarm._-_geograph.org.uk_-_124593.jpg">Wikimedia Commons</a>, CC BY-SA 2.0.</figcaption>
     </figure>
-    <p class="meta"><span class="tema">Emergencia</span><span>Entrada 2</span></p>
+    <p class="meta"><span class="tema">Emergencia</span><span>Entrada 1</span></p>
     <h2>Nadie dirige a la bandada</h2>
     <p class="body">Una bandada de estorninos puede reunir miles de aves que giran al mismo tiempo sin que ninguna de ellas dirija el movimiento. Cada pájaro solo responde a lo que hacen sus vecinos más cercanos y, sin embargo, el conjunto produce una figura que ninguno se propuso dibujar. A este tipo de fenómenos se les llama emergentes, y Steven Johnson los recorre en <i>Sistemas emergentes</i> a partir de hormigueros, neuronas, ciudades y programas computacionales (Johnson 2003).</p>
     <p class="body">La misma idea puede verse en el juego de la vida que John Conway inventó a fines de los sesenta y que Martin Gardner dio a conocer en <i>Scientific American</i> en octubre de 1970 (Gardner 1970). Se trata de una cuadrícula con reglas muy simples sobre cuándo una celda nace, sobrevive o muere, pero de esas reglas surgen figuras que se desplazan por la pantalla. SimCity, en tanto, llevó esta lógica a la ciudad, pues Will Wright se inspiró en los modelos urbanos de Jay Forrester para diseñarlo (Wright 1989).</p>
@@ -153,46 +141,6 @@ footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--border);font-
     </div>
     <a class="teoria" href="#m-emergencia">La teoría detrás: de lo individual a lo colectivo →</a>
   </article>
-
-  <article class="post" id="jurassic">
-    <figure>
-      <img src="img/trex.jpg" alt="Cráneo de un esqueleto de Tyrannosaurus rex en un museo" width="1026" height="577" loading="lazy">
-      <figcaption>Tyrannosaurus rex, Museo Nacional de Historia Natural (Smithsonian). Foto: Quadell, <a href="https://commons.wikimedia.org/wiki/File:Trex_edited.jpg">Wikimedia Commons</a>, CC BY-SA 2.0.</figcaption>
-    </figure>
-    <p class="meta"><span class="tema">Cultura popular</span><span>Entrada 3</span></p>
-    <h2>Jurassic Park y la ilusión del control</h2>
-    <p class="body">En <i>Jurassic Park</i>, la novela de Michael Crichton (1990) que Steven Spielberg llevó al cine en 1993, el matemático Ian Malcolm anticipa que el parque fracasará. Su argumento es que nadie puede controlar del todo un sistema complejo, por más cercas eléctricas y protocolos de seguridad que se instalen. Si bien la película simplifica la teoría del caos para efectos dramáticos, la intuición de Malcolm es bastante cercana a la de Waissbluth respecto del Estado, pues en ambos casos lo planificado se desordena debido a interacciones que nadie previó.</p>
-    <p class="body">Para quien quiera saber qué hay de cierto en esta intuición, recomiendo el libro de divulgación de Melanie Mitchell (2009), donde explica de dónde vienen las ideas sobre caos y complejidad y por qué todavía no existe una sola definición de sistema complejo. El curso gratuito que dicta en Complexity Explorer sigue el mismo recorrido y no exige saber matemáticas.</p>
-    <div class="leer">
-      <h3>Para ver y leer</h3>
-      <ul>
-        <li>Spielberg, S. (Dir.). (1993). <a href="https://www.britannica.com/print/article/1488391"><i>Jurassic Park</i></a> [Película]. Universal Pictures. Basada en Crichton, M. (1990). <i>Jurassic Park</i>. Knopf.</li>
-        <li>Mitchell, M. (2009). <a href="https://search.worldcat.org/title/Complexity-:-a-guided-tour/oclc/216938473"><i>Complexity: A guided tour</i></a>. Oxford University Press.</li>
-        <li>Mitchell, M. (s. f.). <a href="https://www.complexityexplorer.org/courses/185-introduction-to-complexity"><i>Introduction to Complexity</i></a> [Curso en línea]. Complexity Explorer, Santa Fe Institute.</li>
-      </ul>
-    </div>
-    <a class="teoria" href="#m-intro">La teoría detrás: qué es un sistema complejo →</a>
-  </article>
-
-  <article class="post" id="ola">
-    <figure>
-      <img src="img/ola.jpg" alt="Hinchas levantan los brazos haciendo la ola en las graderías de un estadio" width="960" height="540" loading="lazy">
-      <figcaption>La ola en la Copa Confederaciones 2005, Frankfurt. Foto: <a href="https://commons.wikimedia.org/wiki/File:Confed-Cup_2005_-_Laolawelle.JPG">Wikimedia Commons</a>, CC BY-SA 3.0.</figcaption>
-    </figure>
-    <p class="meta"><span class="tema">Umbrales</span><span>Entrada 4</span></p>
-    <h2>La ola del estadio</h2>
-    <p class="body">La ola se hizo conocida durante el Mundial de México 86 y desde entonces es parte de cualquier estadio. Lo interesante es que no basta con que una persona se pare para que comience, pues se requiere que un grupo mínimo de hinchas se levante al mismo tiempo. Farkas, Helbing y Vicsek analizaron videos de catorce olas en estadios con más de 50.000 personas y mostraron que la ola se comporta como un medio excitable, donde cada espectador se suma solo si suficientes vecinos ya lo hicieron (Farkas et al. 2002).</p>
-    <p class="body">Este es un ejemplo bastante claro de lo que Granovetter llamó modelos de umbral, es decir, situaciones en que cada persona decide sumarse a una acción colectiva según cuántos otros ya se sumaron (Granovetter 1978). La misma lógica sirve para pensar por qué algunas protestas crecen de un día para otro mientras otras, en condiciones muy parecidas, nunca despegan.</p>
-    <div class="leer">
-      <h3>Para leer</h3>
-      <ul>
-        <li>Farkas, I., Helbing, D., &amp; Vicsek, T. (2002). <a href="https://doi.org/10.1038/419131a">Mexican waves in an excitable medium</a>. <i>Nature</i>, 419(6903), 131–132. <a href="https://arxiv.org/abs/cond-mat/0210073">Versión abierta</a>.</li>
-        <li>Granovetter, M. (1978). <a href="https://doi.org/10.1086/226707">Threshold models of collective behavior</a>. <i>American Journal of Sociology</i>, 83(6), 1420–1443.</li>
-      </ul>
-    </div>
-    <a class="teoria" href="#m-umbrales">La teoría detrás: umbrales, contagios y puntos de quiebre →</a>
-  </article>
-
   <article class="post" id="taco">
     <figure>
       <svg class="ill" viewBox="0 0 960 540" role="img" aria-label="Ilustración: autos en una pista circular, con un grupo de autos detenidos en una parte del anillo">
@@ -205,10 +153,10 @@ footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--border);font-
       </svg>
       <figcaption>Ilustración del experimento de Sugiyama et al. (2008). Los autos en color están detenidos en el taco.</figcaption>
     </figure>
-    <p class="meta"><span class="tema">Emergencia</span><span>Entrada 5</span></p>
+    <p class="meta"><span class="tema">Emergencia</span><span>Entrada 2</span></p>
     <h2>El taco sin culpable</h2>
     <p class="body">En 2008 un grupo de físicos japoneses puso a 22 autos a dar vueltas en una pista circular de 230 metros, sin semáforos, obras ni accidentes que pudieran detener el tránsito. Aun así, al poco tiempo apareció un taco (Sugiyama et al. 2008). Es decir, el atasco no tenía un culpable, sino que surgía de pequeños frenazos que se amplificaban una vez que la densidad de autos superaba cierto valor, tal como ocurre en las autopistas cuando nos detenemos sin ver ningún choque más adelante.</p>
-    <p class="body">Philip Ball dedica <i>Masa crítica</i> a este tipo de fenómenos y muestra cómo las herramientas de la física sirven para entender atascos, multitudes y mercados (Ball 2008). Si bien es un libro largo, no es necesario leerlo completo para entender el argumento, y su lectura conversa bien con la entrada anterior sobre la ola del estadio.</p>
+    <p class="body">Philip Ball dedica <i>Masa crítica</i> a este tipo de fenómenos y muestra cómo las herramientas de la física sirven para entender atascos, multitudes y mercados (Ball 2008). Si bien es un libro largo, no es necesario leerlo completo para entender el argumento, y su lectura conversa bien con la entrada siguiente sobre la ola del estadio.</p>
     <div class="leer">
       <h3>Para leer</h3>
       <ul>
@@ -218,7 +166,25 @@ footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--border);font-
     </div>
     <a class="teoria" href="#m-emergencia">La teoría detrás: de lo individual a lo colectivo →</a>
   </article>
-
+  <article class="post" id="ola">
+    <figure>
+      <img src="img/ola.jpg" alt="Hinchas levantan los brazos haciendo la ola en las graderías de un estadio" width="960" height="540" loading="lazy">
+      <figcaption>La ola en la Copa Confederaciones 2005, Frankfurt. Foto: <a href="https://commons.wikimedia.org/wiki/File:Confed-Cup_2005_-_Laolawelle.JPG">Wikimedia Commons</a>, CC BY-SA 3.0.</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Umbrales</span><span>Entrada 3</span></p>
+    <h2>La ola del estadio</h2>
+    <p class="body">La ola se hizo conocida durante el Mundial de México 86 y desde entonces es parte de cualquier estadio. Lo interesante es que no basta con que una persona se pare para que comience, pues se requiere que un grupo mínimo de hinchas se levante al mismo tiempo. Farkas, Helbing y Vicsek analizaron videos de catorce olas en estadios con más de 50.000 personas y mostraron que la ola se comporta como un medio excitable, donde cada espectador se suma solo si suficientes vecinos ya lo hicieron (Farkas et al. 2002).</p>
+    <p class="body">Este es un ejemplo bastante claro de lo que Granovetter llamó modelos de umbral, es decir, situaciones en que cada persona decide sumarse a una acción colectiva según cuántos otros ya se sumaron (Granovetter 1978). La misma lógica sirve para pensar por qué algunas protestas crecen de un día para otro mientras otras, en condiciones muy parecidas, nunca despegan.</p>
+    <div class="leer">
+      <h3>Para leer</h3>
+      <ul>
+        <li>Farkas, I., Helbing, D., &amp; Vicsek, T. (2002). <a href="https://doi.org/10.1038/419131a">Mexican waves in an excitable medium</a>. <i>Nature</i>, 419(6903), 131–132. <a href="https://arxiv.org/abs/cond-mat/0210073">Versión abierta</a>.</li>
+        <li>Granovetter, M. (1978). <a href="https://doi.org/10.1086/226707">Threshold models of collective behavior</a>. <i>American Journal of Sociology</i>, 83(6), 1420–1443.</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-umbrales">La teoría detrás: umbrales, contagios y puntos de quiebre →</a>
+  </article>
+  <div class="seccion"><p class="kicker">Lo social</p><p class="sdesc">Luego pasamos a fenómenos propiamente sociales, como las redes de contactos, la segregación o la confianza.</p></div>
   <article class="post" id="bacon">
     <figure>
       <svg class="ill" viewBox="0 0 960 540" role="img" aria-label="Ilustración: una red en anillo con unos pocos atajos que la cruzan">
@@ -227,7 +193,7 @@ footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--border);font-
       </svg>
       <figcaption>Ilustración de una red de mundo pequeño: unos pocos atajos (en color) acortan la distancia entre cualquier par de nodos.</figcaption>
     </figure>
-    <p class="meta"><span class="tema">Redes</span><span>Entrada 6</span></p>
+    <p class="meta"><span class="tema">Redes</span><span>Entrada 4</span></p>
     <h2>Seis grados de Kevin Bacon</h2>
     <p class="body">A mediados de los noventa, tres estudiantes del Albright College, en Estados Unidos, inventaron un juego que consistía en unir a cualquier actor con Kevin Bacon a través de las películas que compartían. Poco después, Brett Tjaden creó en la Universidad de Virginia el Oracle of Bacon, un sitio que calcula esa distancia con bases de datos de películas y que sigue funcionando hasta hoy. Casi siempre la distancia es corta, pues Hollywood es lo que en análisis de redes se conoce como un «mundo pequeño» (Watts y Strogatz 1998).</p>
     <p class="body">Ricard Solé explica para un público general por qué Internet, las epidemias y el comercio comparten esta misma forma de red (Solé 2009). Para quien prefiera aprender jugando, recomiendo además <i>The Wisdom and/or Madness of Crowds</i>, donde en media hora se dibujan redes y se simulan contagios (Case 2018).</p>
@@ -241,7 +207,6 @@ footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--border);font-
     </div>
     <a class="teoria" href="#m-redes">La teoría detrás: redes →</a>
   </article>
-
   <article class="post" id="juegos">
     <figure>
       <svg class="ill" viewBox="0 0 960 540" role="img" aria-label="Ilustración: cuadrícula de triángulos y cuadrados agrupados por forma">
@@ -250,8 +215,8 @@ footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--border);font-
       </svg>
       <figcaption>Ilustración inspirada en el modelo de segregación de Schelling (1971).</figcaption>
     </figure>
-    <p class="meta"><span class="tema">Para la clase</span><span>Entrada 7</span></p>
-    <h2>Juegos para la sala de clases</h2>
+    <p class="meta"><span class="tema">Segregación y confianza</span><span>Entrada 5</span></p>
+    <h2>El barrio que nadie quiso segregar</h2>
     <p class="body">Algunos de los mejores recursos para enseñar complejidad no son textos sino juegos interactivos. <i>Parable of the Polygons</i> muestra en veinte minutos cómo preferencias individuales moderadas producen un barrio segregado, siguiendo el modelo que Schelling propuso a comienzos de los setenta (Hart y Case 2014; Schelling 1971). <i>The Evolution of Trust</i>, en tanto, utiliza el dilema del prisionero repetido para explicar por qué la confianza crece o se derrumba según las reglas del juego y no solo según el carácter de los jugadores (Axelrod 1984; Case 2017).</p>
     <p class="body">Si bien ambos están en inglés, se pueden jugar en sala sin mayor dificultad, pues el texto es breve y lo importante ocurre en la simulación. Para quien quiera seguir después de jugar, el último módulo de la segunda parte reúne NetLogo y otros programas para construir modelos propios.</p>
     <div class="leer">
@@ -262,6 +227,109 @@ footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--border);font-
       </ul>
     </div>
     <a class="teoria" href="#m-cooperacion">La teoría detrás: cooperación y gobierno de lo común →</a>
+  </article>
+  <div class="seccion"><p class="kicker">Cuando el Estado interviene</p><p class="sdesc">Por último, vemos qué ocurre cuando alguien intenta ordenar desde arriba un sistema complejo, un problema central para las políticas públicas.</p></div>
+  <article class="post" id="jurassic">
+    <figure>
+      <img src="img/trex.jpg" alt="Cráneo de un esqueleto de Tyrannosaurus rex en un museo" width="1026" height="577" loading="lazy">
+      <figcaption>Tyrannosaurus rex, Museo Nacional de Historia Natural (Smithsonian). Foto: Quadell, <a href="https://commons.wikimedia.org/wiki/File:Trex_edited.jpg">Wikimedia Commons</a>, CC BY-SA 2.0.</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Cultura popular</span><span>Entrada 6</span></p>
+    <h2>Jurassic Park y la ilusión del control</h2>
+    <p class="body">En <i>Jurassic Park</i>, la novela de Michael Crichton (1990) que Steven Spielberg llevó al cine en 1993, el matemático Ian Malcolm anticipa que el parque fracasará. Su argumento es que nadie puede controlar del todo un sistema complejo, por más cercas eléctricas y protocolos de seguridad que se instalen. Si bien la película simplifica la teoría del caos para efectos dramáticos, la intuición de Malcolm es bastante cercana a lo que ocurre con muchas políticas públicas, pues en ambos casos lo planificado se desordena debido a interacciones que nadie previó. Las entradas que siguen tratan precisamente sobre ese problema.</p>
+    <p class="body">Para quien quiera saber qué hay de cierto en esta intuición, recomiendo el libro de divulgación de Melanie Mitchell (2009), donde explica de dónde vienen las ideas sobre caos y complejidad y por qué todavía no existe una sola definición de sistema complejo. El curso gratuito que dicta en Complexity Explorer sigue el mismo recorrido y no exige saber matemáticas.</p>
+    <div class="leer">
+      <h3>Para ver y leer</h3>
+      <ul>
+        <li>Spielberg, S. (Dir.). (1993). <a href="https://www.britannica.com/print/article/1488391"><i>Jurassic Park</i></a> [Película]. Universal Pictures. Basada en Crichton, M. (1990). <i>Jurassic Park</i>. Knopf.</li>
+        <li>Mitchell, M. (2009). <a href="https://search.worldcat.org/title/Complexity-:-a-guided-tour/oclc/216938473"><i>Complexity: A guided tour</i></a>. Oxford University Press.</li>
+        <li>Mitchell, M. (s. f.). <a href="https://www.complexityexplorer.org/courses/185-introduction-to-complexity"><i>Introduction to Complexity</i></a> [Curso en línea]. Complexity Explorer, Santa Fe Institute.</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-intro">La teoría detrás: qué es un sistema complejo →</a>
+  </article>
+  <article class="post" id="hanoi">
+    <figure>
+      <svg class="ill" viewBox="0 0 960 540" role="img" aria-label="Ilustración: filas de ratas, varias de ellas sin cola">
+        <rect width="960" height="540" fill="var(--surface)"/>
+        <g id="ratas"></g>
+      </svg>
+      <figcaption>Ilustración. En Hanoi, la recompensa se pagaba por cola entregada, no por rata muerta.</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Políticas públicas</span><span>Entrada 7</span></p>
+    <h2>Las ratas de Hanoi</h2>
+    <p class="body">En 1902, en medio de la tercera pandemia de peste bubónica, la administración colonial francesa en Hanoi decidió combatir a las ratas que salían de las nuevas alcantarillas del barrio francés. Para ello contrató cazadores vietnamitas y, luego, ofreció una recompensa a cualquier habitante que entregara la cola de una rata. Al poco tiempo los funcionarios comenzaron a ver ratas sin cola en la ciudad, pues la recompensa premiaba la cola y no la rata muerta (Vann 2003).</p>
+    <p class="body">El episodio es un buen ejemplo de lo que Merton llamó consecuencias no anticipadas de la acción social intencionada (Merton 1936). Si bien la medida tenía un objetivo razonable, su diseño no consideró cómo reaccionarían las personas a las que iba dirigida, por lo que terminó creando incentivos contrarios a los que se buscaban. Lo mismo ocurre, con bastante frecuencia, en las políticas públicas contemporáneas.</p>
+    <div class="leer">
+      <h3>Para leer</h3>
+      <ul>
+        <li>Vann, M. G. (2003). <a href="https://muse.jhu.edu/purchase/add/issue/2588">Of rats, rice, and race: The Great Hanoi Rat Massacre, an episode in French colonial history</a>. <i>French Colonial History</i>, 4.</li>
+        <li>Vann, M. G. (2018). <a href="https://mitpressbookstore.mit.edu/book/9780190602697"><i>The Great Hanoi Rat Hunt: Empire, disease, and modernity in French colonial Vietnam</i></a>. Oxford University Press.</li>
+        <li>Merton, R. K. (1936). <a href="https://doi.org/10.2307/2084615">The unanticipated consequences of purposive social action</a>. <i>American Sociological Review</i>, 1(6), 894–904.</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-politicas">La teoría detrás: políticas públicas y complejidad →</a>
+  </article>
+  <article class="post" id="transantiago">
+    <figure>
+      <svg class="ill" viewBox="0 0 960 540" role="img" aria-label="Ilustración: un plano de recorridos ordenado sobre una ciudad cuyos viajes reales se entrecruzan">
+        <rect width="960" height="540" fill="var(--surface)"/>
+        <g id="recorridos"></g>
+      </svg>
+      <figcaption>Ilustración. Un plano de troncales ordenado (en color) sobre los viajes reales de una ciudad (en gris).</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Políticas públicas</span><span>Entrada 8</span></p>
+    <h2>Transantiago y el plan perfecto</h2>
+    <p class="body">El 10 de febrero de 2007 comenzó a operar por completo el Transantiago, un sistema que reemplazó los antiguos recorridos de micros por una red de troncales y alimentadores diseñada desde el Estado. Los problemas fueron inmediatos, al punto que la comisión investigadora que creó la Cámara de Diputados concluyó que una política pensada para mejorar sustancialmente el transporte terminó produciendo, en los hechos, efectos exactamente contrarios.</p>
+    <p class="body">Las explicaciones del fracaso apuntan a problemas de información y de diseño institucional (Figueroa y Orellana 2007; Briones 2009). Si bien hay varias lecturas posibles, el caso muestra con bastante claridad lo que ocurre cuando se trata a un sistema complejo -millones de viajes diarios, operadores, usuarios y municipios que se adaptan entre sí- como si fuera un sistema complicado que se puede rediseñar desde un escritorio.</p>
+    <div class="leer">
+      <h3>Para leer</h3>
+      <ul>
+        <li>Figueroa, O., &amp; Orellana, A. (2007). <a href="https://www.redalyc.org/pdf/196/19610010.pdf">Transantiago: gobernabilidad e institucionalidad</a>. <i>EURE</i>, 33(100), 165–171.</li>
+        <li>Briones, I. (2009). <a href="https://static.cepchile.cl/uploads/cepchile/2022/09/sem_transantiago_ibriones.pdf"><i>Transantiago: un problema de información</i></a> [Presentación]. Centro de Estudios Públicos.</li>
+        <li>Cámara de Diputados de Chile. (s. f.). <a href="https://www.emol.com/especiales/resolucion_transantiago/conclusiones.doc"><i>Conclusiones de la Comisión Investigadora del Plan Transantiago</i></a>.</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-politicas">La teoría detrás: políticas públicas y complejidad →</a>
+  </article>
+  <article class="post" id="perversos">
+    <figure>
+      <svg class="ill" viewBox="0 0 960 540" role="img" aria-label="Ilustración: una línea recta junto a un nudo enredado">
+        <rect width="960" height="540" fill="var(--surface)"/>
+        <g id="nudo"></g>
+      </svg>
+      <figcaption>Ilustración. Un problema domesticado (izquierda) y uno perverso (derecha).</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Políticas públicas</span><span>Entrada 9</span></p>
+    <h2>Problemas que no se resuelven</h2>
+    <p class="body">En 1973 Horst Rittel y Melvin Webber, profesores de diseño y de planificación urbana en la Universidad de California en Berkeley, distinguieron entre problemas «domesticados» y problemas «perversos» (wicked problems). Los primeros, como una partida de ajedrez, tienen una formulación clara y una solución que se puede verificar. Los segundos, en cambio, no pueden describirse de forma definitiva y sus soluciones no son correctas o incorrectas, sino mejores o peores (Rittel y Webber 1973).</p>
+    <p class="body">Buena parte de los problemas de política pública -la pobreza, la delincuencia o el transporte de una ciudad- son de este segundo tipo. Años antes, Charles Lindblom había sostenido que los gobiernos no deciden comparando todas las alternativas posibles, sino avanzando a pequeños pasos y apoyándose en la experiencia de las decisiones anteriores, algo que llamó «salir del paso» (Lindblom 1959). Si bien esta forma de decidir suele verse como un defecto, puede ser la más razonable frente a un sistema complejo.</p>
+    <div class="leer">
+      <h3>Para leer</h3>
+      <ul>
+        <li>Rittel, H. W. J., &amp; Webber, M. M. (1973). <a href="https://doi.org/10.1007/BF01405730">Dilemmas in a general theory of planning</a>. <i>Policy Sciences</i>, 4(2), 155–169.</li>
+        <li>Lindblom, C. E. (1959). <a href="https://doi.org/10.2307/973677">The science of «muddling through»</a>. <i>Public Administration Review</i>, 19(2), 79–88.</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-politicas">La teoría detrás: políticas públicas y complejidad →</a>
+  </article>
+  <article class="post" id="estado">
+    <figure>
+      <img src="img/moneda.jpg" alt="Fachada del Palacio de La Moneda, en Santiago" width="960" height="540" loading="lazy">
+      <figcaption>Palacio de La Moneda, Santiago. Foto: Schwittu, <a href="https://commons.wikimedia.org/wiki/File:Moneda_1.JPG">Wikimedia Commons</a>, CC BY-SA 3.0.</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Gestión pública</span><span>Entrada 10</span></p>
+    <h2>El Estado no es una máquina</h2>
+    <p class="body">Los casos anteriores tienen algo en común, pues en todos ellos una intervención bien intencionada chocó con un sistema que reaccionó de formas que nadie previó. Para pensar este problema, Mario Waissbluth propone en un documento escrito para sus cursos de gestión pública en la Universidad de Chile distinguir entre sistemas complicados y sistemas complejos, y sostiene que tanto la economía de un país como una institución pública pertenecen al segundo grupo (Waissbluth 2008a). Un reloj es complicado, pues tiene muchas piezas, pero si se desarma y se vuelve a armar funciona igual. Una institución pública, en tanto, está formada por funcionarios, usuarios, gremios y autoridades que se adaptan entre sí y que reaccionan a cualquier cambio que se intente introducir, por lo que las reformas diseñadas desde arriba suelen producir resultados que nadie buscó.</p>
+    <p class="body">Si bien el texto está pensado para directivos públicos, es una buena entrada para estudiantes de ciencias sociales, pues no exige formación matemática y sus ejemplos provienen del Estado chileno. Recomiendo leerlo junto con «Gestión del cambio en el sector público» (Waissbluth 2008b), que el propio autor presenta como su continuación y que, según advierte, carece de sentido sin la lectura previa del primero.</p>
+    <div class="leer">
+      <h3>Para leer</h3>
+      <ul>
+        <li>Waissbluth, M. (2008a). <a href="https://www.mariowaissbluth.com/descargas/complejidad_y_gestion.pdf"><i>Sistemas complejos y gestión pública</i></a>. Documento de trabajo, Serie Gestión n.º 99, Departamento de Ingeniería Industrial, Universidad de Chile.</li>
+        <li>Waissbluth, M. (2008b). <a href="http://www.dii.uchile.cl/~ceges/publicaciones/109%20ceges%20MW.pdf"><i>Gestión del cambio en el sector público</i></a>. Documento de trabajo, Serie Gestión n.º 109, Departamento de Ingeniería Industrial, Universidad de Chile.</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-politicas">La teoría detrás: políticas públicas y complejidad →</a>
   </article>
 
   <section class="parte" id="teoria">

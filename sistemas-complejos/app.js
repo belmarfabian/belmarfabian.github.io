@@ -13,9 +13,11 @@
       d: "La forma en que estamos conectados importa tanto como lo que pensamos, pues de ella depende qué información nos llega y qué comportamientos se propagan. Este módulo reúne los textos que fundaron el análisis moderno de redes y un manual abierto para quien nunca ha trabajado con un grafo." },
     { key: "cooperacion", n: 5, t: "Cooperación y gobierno de lo común",
       d: "Si nadie coordina, ¿cómo se explica que las personas cooperen y sostengan reglas en el tiempo? Este módulo reúne dos respuestas. La primera viene de la teoría de juegos evolutiva (Axelrod 1984), mientras que la segunda viene del trabajo empírico sobre comunidades que administran recursos comunes sin depender del mercado ni del Estado (Ostrom 1990)." },
-    { key: "luhmann", n: 6, t: "Complejidad y teoría de sistemas sociales",
+    { key: "politicas", n: 6, t: "Políticas públicas y complejidad",
+      d: "Los casos de la última sección de entradas tienen una base teórica común. Desde Merton sabemos que la acción intencionada produce consecuencias que nadie anticipó (Merton 1936), y desde Rittel y Webber que muchos problemas públicos no admiten una solución definitiva (Rittel y Webber 1973). Este módulo reúne esos textos y una revisión de cómo la teoría de la complejidad se ha incorporado al estudio de las políticas públicas (Cairney 2012)." },
+    { key: "luhmann", n: 7, t: "Complejidad y teoría de sistemas sociales",
       d: "La teoría de sistemas sociales de Niklas Luhmann también parte del problema de la complejidad, si bien lo aborda desde la comunicación y no desde los individuos. En este módulo propongo una entrada gradual a esta teoría, con autores chilenos y latinoamericanos que la han utilizado para pensar problemas de la región (Rodríguez y Arnold 1991; Mascareño 2010)." },
-    { key: "practica", n: 7, t: "Herramientas para practicar",
+    { key: "practica", n: 8, t: "Herramientas para practicar",
       d: "Este módulo reúne cursos, programas y manuales para pasar de leer modelos a construirlos. Para comenzar recomiendo NetLogo, pues no exige saber programar, mientras que Mesa es una buena alternativa para quienes ya trabajan en Python." }
   ];
 
@@ -106,6 +108,27 @@
       url: "https://doi.org/10.1257/aer.100.3.641", alt: "https://dlc.dlib.indiana.edu/dlc/bitstream/handle/10535/7707/ostrom.pdf", altt: "Borrador abierto",
       nota: "Es su conferencia del Nobel, donde resume medio siglo de investigación y explica por qué los sistemas con muchos centros de decisión suelen funcionar mejor que una reforma única impuesta desde arriba, una idea que conversa bien con Waissbluth." },
 
+
+    { m: "politicas", tipo: "Documento", nivel: 1, lang: "es", acceso: "abierto",
+      ref: "Waissbluth, M. (2008). <i>Sistemas complejos y gestión pública</i> (Documento de trabajo, Serie Gestión n.º 99). Departamento de Ingeniería Industrial, Universidad de Chile.",
+      url: "https://www.mariowaissbluth.com/descargas/complejidad_y_gestion.pdf",
+      nota: "Es el texto de la última entrada de la primera parte. Distingue entre sistemas complicados y sistemas complejos con ejemplos del Estado chileno, y no exige formación matemática." },
+    { m: "politicas", tipo: "Artículo", nivel: 1, lang: "en", acceso: "biblioteca",
+      ref: "Merton, R. K. (1936). The unanticipated consequences of purposive social action. <i>American Sociological Review</i>, 1(6), 894–904.",
+      url: "https://doi.org/10.2307/2084615",
+      nota: "Es un artículo breve y clásico, donde Merton analiza por qué la acción organizada produce consecuencias que nadie anticipó (e.g., la ignorancia, el error o el apuro por el interés inmediato). Es la base teórica de la entrada sobre las ratas de Hanoi." },
+    { m: "politicas", tipo: "Artículo", nivel: 1, lang: "en", acceso: "biblioteca",
+      ref: "Lindblom, C. E. (1959). The science of «muddling through». <i>Public Administration Review</i>, 19(2), 79–88.",
+      url: "https://doi.org/10.2307/973677",
+      nota: "Contrapone el método racional-comprehensivo, que compara todas las alternativas posibles, con las comparaciones sucesivas y limitadas que en la práctica usan las burocracias. Es uno de los artículos más reimpresos de la administración pública." },
+    { m: "politicas", tipo: "Artículo", nivel: 2, lang: "en", acceso: "abierto",
+      ref: "Rittel, H. W. J., & Webber, M. M. (1973). Dilemmas in a general theory of planning. <i>Policy Sciences</i>, 4(2), 155–169.",
+      url: "https://doi.org/10.1007/BF01405730", alt: "https://archive.epa.gov/reg3esd1/data/web/pdf/rittel%2Bwebber%2Bdilemmas%2Bgeneral_theory_of_planning.pdf", altt: "PDF abierto",
+      nota: "Define los problemas perversos a partir de diez características y sostiene que la búsqueda de bases científicas para enfrentar los problemas de política social está destinada a fracasar, debido a la naturaleza de esos problemas." },
+    { m: "politicas", tipo: "Artículo", nivel: 3, lang: "en", acceso: "abierto",
+      ref: "Cairney, P. (2012). Complexity theory in political science and public policy. <i>Political Studies Review</i>, 10(3), 346–358.",
+      url: "https://doi.org/10.1111/j.1478-9302.2012.00270.x", alt: "https://dspace.stir.ac.uk/handle/1893/15959", altt: "Versión abierta",
+      nota: "Revisa cómo se ha utilizado la teoría de la complejidad en ciencia política y políticas públicas, y discute los problemas que deben resolverse para que sea realmente útil. Lo recomiendo para no usar la complejidad como una metáfora vacía." },
     { m: "luhmann", tipo: "Libro", nivel: 1, lang: "es", acceso: "biblioteca",
       ref: "Rodríguez, D., & Arnold, M. (1991). <i>Sociedad y teoría de sistemas: elementos para la comprensión de la teoría de Niklas Luhmann</i>. Editorial Universitaria.",
       url: "https://repositorio.uchile.cl/handle/2250/122275",
@@ -224,5 +247,43 @@
       else g += '<rect x="' + (px - sz * 0.85) + '" y="' + (py - sz * 0.85) + '" width="' + sz * 1.7 + '" height="' + sz * 1.7 + '" rx="3" fill="var(--text)"/>';
     }
     pol.innerHTML = g;
+  }
+  var ratas = document.getElementById("ratas");
+  if (ratas) {
+    var g2 = "", k2 = 0;
+    for (var ry = 0; ry < 5; ry++) for (var rx = 0; rx < 8; rx++) {
+      var bx = 90 + rx * 112, by = 80 + ry * 96, sin = (rx * 3 + ry * 5) % 4 === 0;
+      g2 += '<ellipse cx="' + bx + '" cy="' + by + '" rx="30" ry="17" fill="var(--text)"/>' +
+        '<circle cx="' + (bx + 28) + '" cy="' + (by - 6) + '" r="11" fill="var(--text)"/>' +
+        '<circle cx="' + (bx + 24) + '" cy="' + (by - 16) + '" r="5" fill="var(--text)"/>';
+      if (!sin) g2 += '<path d="M' + (bx - 28) + " " + by + " q -26 -4 -34 18" + '" fill="none" stroke="var(--text)" stroke-width="3" stroke-linecap="round"/>';
+      else g2 += '<circle cx="' + (bx - 30) + '" cy="' + by + '" r="4" fill="var(--warm)"/>';
+    }
+    ratas.innerHTML = g2;
+  }
+  var rec = document.getElementById("recorridos");
+  if (rec) {
+    var g3 = "", seed = 7;
+    function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+    for (var q = 0; q < 70; q++) {
+      var x1 = rnd() * 960, y1 = rnd() * 540, x2 = rnd() * 960, y2 = rnd() * 540;
+      g3 += '<path d="M' + x1 + " " + y1 + " Q " + rnd() * 960 + " " + rnd() * 540 + " " + x2 + " " + y2 + '" fill="none" stroke="var(--border-strong)" stroke-width="1.5" opacity=".8"/>';
+    }
+    [[80, 270, 880, 270], [480, 40, 480, 500], [150, 80, 810, 460], [150, 460, 810, 80]].forEach(function (l) {
+      g3 += '<line x1="' + l[0] + '" y1="' + l[1] + '" x2="' + l[2] + '" y2="' + l[3] + '" stroke="var(--warm)" stroke-width="9" stroke-linecap="round"/>';
+    });
+    g3 += '<circle cx="480" cy="270" r="18" fill="var(--surface)" stroke="var(--text)" stroke-width="5"/>';
+    rec.innerHTML = g3;
+  }
+  var nudo = document.getElementById("nudo");
+  if (nudo) {
+    var d = "M 600 270", t2;
+    for (t2 = 0; t2 <= 6.283 * 3; t2 += 0.05) {
+      var rr = 110 + 60 * Math.sin(5 * t2 / 3);
+      d += " L " + (690 + rr * Math.cos(t2) * 1.2).toFixed(1) + " " + (270 + rr * Math.sin(t2) * 0.9).toFixed(1);
+    }
+    nudo.innerHTML = '<line x1="90" y1="270" x2="400" y2="270" stroke="var(--text)" stroke-width="8" stroke-linecap="round"/>' +
+      '<circle cx="90" cy="270" r="12" fill="var(--text)"/><circle cx="400" cy="270" r="12" fill="var(--text)"/>' +
+      '<path d="' + d + '" fill="none" stroke="var(--warm)" stroke-width="6" stroke-linejoin="round"/>';
   }
 })();
