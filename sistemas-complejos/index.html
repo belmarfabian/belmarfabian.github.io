@@ -70,7 +70,13 @@ label.cb{font-size:13px;color:var(--text-2);display:inline-flex;align-items:cent
 .count{font-size:12.5px;color:var(--muted);margin-left:auto}
 .vacio{color:var(--muted);margin:28px 0}
 .prose p{color:var(--text-2);margin:0 0 12px}
-.modulo,#lista h2{scroll-margin-top:110px}
+.modulo{scroll-margin-top:110px}
+h2.parte{flex-direction:column;align-items:flex-start;gap:2px;font-size:24px;margin-top:52px;padding-top:14px;border-top:2px solid var(--text)}
+.pnum{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+h3{font-weight:600;font-size:19px;letter-spacing:-.01em;margin:36px 0 6px;display:flex;align-items:baseline;gap:10px}
+h3 .num{font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--border-strong);border-radius:999px;min-width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;flex:none;transform:translateY(-2px)}
+.teoria{margin-left:auto;font-size:12.5px;color:var(--text-2);text-decoration:none;border-bottom:1px dotted var(--border-strong)}
+.teoria:hover{color:var(--text)}
 footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted)}
 @media (max-width:560px){.count{margin-left:0;width:100%}.mod{display:none}}
 </style>
@@ -82,14 +88,10 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
   <header>
     <p class="kicker">Material docente</p>
     <h1>Sistemas complejos para las ciencias sociales</h1>
-    <p class="lede">Esta página reúne lecturas, cursos y simulaciones para estudiantes de pregrado que quieren entender por qué muchos fenómenos colectivos (un barrio que se segrega, una protesta que crece de un día para otro, una canción que se vuelve éxito) no se explican sumando lo que quiere cada persona. Los recursos están ordenados en siete módulos, desde la intuición hasta las herramientas, y cada uno trae un comentario breve sobre qué aporta y cuánto exige.</p>
-    <p class="lede">No hace falta saber matemáticas para empezar, pues la mayoría de los recursos de entrada son juegos interactivos o textos escritos para un público general. Los marcados como avanzados suponen haber pasado antes por los de entrada del mismo módulo.</p>
+    <p class="lede">Esta página reúne lecturas, cursos y juegos para estudiantes de pregrado que quieren entender por qué muchos fenómenos colectivos (un servicio público que no cambia aunque se reforme, un barrio que se segrega, una protesta que crece de un día para otro) no se explican sumando lo que quiere cada persona. Está ordenada en dos partes: la primera reúne textos de divulgación, casi todos en español, que muestran la complejidad en situaciones cotidianas; la segunda presenta la teoría que hay detrás de cada una de esas situaciones.</p>
+    <p class="lede">La idea es leer primero la parte I y pasar a la II siguiendo los enlaces «La teoría detrás», pues cada texto de divulgación indica qué módulo explica lo que describe. No hace falta saber matemáticas para empezar; los recursos marcados como avanzados suponen haber leído antes los de entrada del mismo módulo.</p>
     <p class="stats" id="stats"></p>
   </header>
-
-  <h2>Por dónde empezar</h2>
-  <p class="sub">Si solo hay tiempo para cuatro cosas, que sean estas y en este orden.</p>
-  <ol class="ruta" id="inicio"></ol>
 
   <h2>Biblioteca</h2>
   <div class="controls" role="search">
@@ -115,7 +117,7 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-
   <h2>Criterios</h2>
   <div class="prose">
     <p>La selección privilegia textos que se puedan discutir en una clase de ciencias sociales y que no exijan formación matemática previa, si bien cada módulo incluye uno o dos recursos más exigentes para quien quiera seguir. Cada referencia se verificó en la editorial, la revista o un repositorio institucional, y los enlaces apuntan a esas fuentes. «Acceso abierto» indica que el texto completo puede leerse gratis y de forma legal; «En biblioteca» indica que se encuentra en bases suscritas por las universidades o en préstamo.</p>
-    <p>La mayoría de los recursos están en inglés, pues es el idioma en que se ha desarrollado el campo. El módulo sobre teoría de sistemas sociales concentra los textos en español, varios de ellos escritos en Chile.</p>
+    <p>La mayoría de los recursos están en inglés, pues es el idioma en que se ha desarrollado el campo. La primera parte privilegia textos en español, varios escritos en Chile, y el módulo sobre teoría de sistemas sociales también se apoya en autores chilenos y latinoamericanos.</p>
   </div>
 
   <footer>Selección y comentarios de Fabián Belmar. Última revisión: noviembre de 2026.</footer>

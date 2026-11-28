@@ -3,6 +3,8 @@
 
   /* Módulos: el orden es el de lectura sugerido. */
   var MODULOS = [
+    { key: "vida", n: 0, parte: 1, t: "La complejidad en la vida diaria",
+      d: "Antes de cualquier modelo conviene ver que la complejidad está en cosas cotidianas: en cómo funciona (o no funciona) un servicio público, en cómo se forma un barrio, en por qué un atasco aparece sin que nadie lo cause. Estos textos y juegos están escritos para un público general y en su mayoría en español. Cada uno indica qué módulo de la segunda parte contiene la teoría que lo explica." },
     { key: "intro", n: 1, t: "Qué es un sistema complejo",
       d: "Antes de los modelos conviene tener una idea clara de qué se entiende por complejidad, pues el término se usa de muchas maneras y no siempre con precisión. Estos recursos ofrecen un mapa general del campo y de sus conceptos básicos (interacción local, retroalimentación, ausencia de control central, orden que nadie diseñó)." },
     { key: "emergencia", n: 2, t: "De lo individual a lo colectivo",
@@ -22,12 +24,37 @@
   /* nivel: 1 entrada, 2 intermedio, 3 avanzado. acceso: "abierto" | "biblioteca".
      Cada referencia se verificó en una fuente publicada (editorial, revista o repositorio). */
   var R = [
+    /* ---------- 0. Divulgación ---------- */
+    { m: "vida", teoria: "intro", tipo: "Documento", nivel: 1, lang: "es", acceso: "abierto",
+      ref: "Waissbluth, M. (2008). <i>Sistemas complejos y gestión pública</i> (Documento de trabajo, Serie Gestión n.º 99). Departamento de Ingeniería Industrial, Universidad de Chile.",
+      url: "https://www.mariowaissbluth.com/descargas/complejidad_y_gestion.pdf",
+      nota: "El punto de partida. Waissbluth distingue entre sistemas complicados y sistemas complejos con ejemplos del Estado chileno, y explica por qué una institución pública no se reforma como se repara una máquina. Escrito para directivos y estudiantes, sin fórmulas." },
+    { m: "vida", teoria: "cooperacion", tipo: "Documento", nivel: 1, lang: "es", acceso: "abierto",
+      ref: "Waissbluth, M. (2008). <i>Gestión del cambio en el sector público</i> (Documento de trabajo, Serie Gestión n.º 109). Departamento de Ingeniería Industrial, Universidad de Chile.",
+      url: "http://www.dii.uchile.cl/~ceges/publicaciones/109%20ceges%20MW.pdf",
+      nota: "La continuación del anterior, que el propio autor pide leer después. Pasa del diagnóstico a la acción: qué ocurre cuando alguien intenta cambiar un servicio público, quiénes se resisten y por qué los planes diseñados desde arriba suelen fallar." },
+    { m: "vida", teoria: "emergencia", tipo: "Libro", nivel: 1, lang: "es", acceso: "biblioteca",
+      ref: "Johnson, S. (2003). <i>Sistemas emergentes: o qué tienen en común hormigas, neuronas, ciudades y software</i> (M. F. Ferré, Trad.). Turner; Fondo de Cultura Económica.",
+      url: "https://opac.biblio.iteso.mx/vufind/Record/000307034",
+      nota: "Un hormiguero no tiene jefe y aun así se organiza; un barrio de Manchester se especializa sin que nadie lo planifique. Johnson cuenta con ejemplos cotidianos cómo surge orden desde abajo, que es la intuición detrás de los modelos de Schelling y Epstein." },
+    { m: "vida", teoria: "umbrales", tipo: "Libro", nivel: 2, lang: "es", acceso: "biblioteca",
+      ref: "Ball, P. (2008). <i>Masa crítica: cambio, caos y complejidad</i>. Turner; Fondo de Cultura Económica.",
+      url: "https://www.marcialpons.es/libros/masa-critica/9788475068510/",
+      nota: "Los atascos, la bolsa o las modas leídos con las herramientas de la física, en un libro que ganó el premio Aventis de divulgación. Es largo; los capítulos sobre tráfico y sobre multitudes bastan para entender por qué lo social cambia de golpe." },
+    { m: "vida", teoria: "redes", tipo: "Libro", nivel: 1, lang: "es", acceso: "biblioteca",
+      ref: "Solé, R. (2009). <i>Redes complejas: del genoma a Internet</i>. Tusquets.",
+      url: "https://www.planetadelibros.com/libro-redes-complejas/89623",
+      nota: "Breve y en español. Un físico y biólogo explica para público general por qué Internet, las epidemias y el comercio comparten la misma forma de red, y qué se sigue de eso." },
     /* ---------- 1. Introducción ---------- */
-    { m: "intro", tipo: "Curso", nivel: 1, lang: "en", acceso: "abierto", inicio: 2,
+    { m: "intro", tipo: "Artículo", nivel: 1, lang: "en", acceso: "abierto",
+      ref: "Weaver, W. (1948). Science and complexity. <i>American Scientist</i>, 36(4), 536–544.",
+      url: "https://repositorio.colmex.mx/pdf_viewer/7m01bq982?locale=es",
+      nota: "El ensayo fundador, corto y sin fórmulas. Distingue los problemas de simplicidad (pocas variables), los de complejidad desorganizada (millones de variables, tratables con estadística) y los de complejidad organizada, que quedan al medio y son los que importan para lo social." },
+    { m: "vida", teoria: "intro", tipo: "Curso", nivel: 1, lang: "en", acceso: "abierto",
       ref: "Mitchell, M. (s. f.). <i>Introduction to Complexity</i> [Curso en línea]. Complexity Explorer, Santa Fe Institute.",
       url: "https://www.complexityexplorer.org/courses/185-introduction-to-complexity",
       nota: "Curso gratuito, sin requisitos de matemáticas y disponible en cualquier momento. Recorre en diez unidades los temas centrales del campo (caos, autómatas celulares, cooperación, redes, escalamiento) y usa NetLogo para los ejercicios." },
-    { m: "intro", tipo: "Libro", nivel: 1, lang: "en", acceso: "biblioteca",
+    { m: "vida", teoria: "intro", tipo: "Libro", nivel: 1, lang: "en", acceso: "biblioteca",
       ref: "Mitchell, M. (2009). <i>Complexity: A Guided Tour</i>. Oxford University Press.",
       url: "https://search.worldcat.org/title/Complexity-:-a-guided-tour/oclc/216938473",
       nota: "El libro de divulgación que acompaña al curso anterior. Escrito para un público general, explica con paciencia de dónde vienen las ideas y por qué todavía no hay una sola definición de complejidad." },
@@ -45,7 +72,7 @@
       nota: "Panorama de cómo la complejidad se ha incorporado a la teoría social y a los métodos (cualitativos, cuantitativos y mixtos). Recomendado para quien ya pasó por los módulos 2 a 5 y quiere discutir sus límites." },
 
     /* ---------- 2. Emergencia ---------- */
-    { m: "emergencia", tipo: "Interactivo", nivel: 1, lang: "en", acceso: "abierto", inicio: 1,
+    { m: "vida", teoria: "emergencia", tipo: "Interactivo", nivel: 1, lang: "en", acceso: "abierto",
       ref: "Hart, V., & Case, N. (2014). <i>Parable of the Polygons</i> [Explicación interactiva].",
       url: "https://ncase.me/polygons/",
       nota: "Un juego de veinte minutos basado en el modelo de Schelling. Muestra cómo preferencias individuales moderadas producen un barrio segregado, y cómo una pequeña demanda de diversidad lo revierte. Ideal para la primera clase." },
@@ -67,7 +94,7 @@
       nota: "El clásico «Sugarscape»: una sociedad artificial en la que, a partir de reglas muy simples, aparecen desigualdad, comercio y migración. Más útil para hojear los experimentos que para leerlo entero." },
 
     /* ---------- 3. Umbrales ---------- */
-    { m: "umbrales", tipo: "Artículo", nivel: 1, lang: "en", acceso: "biblioteca", inicio: 3,
+    { m: "umbrales", tipo: "Artículo", nivel: 1, lang: "en", acceso: "biblioteca",
       ref: "Granovetter, M. (1978). Threshold models of collective behavior. <i>American Journal of Sociology</i>, 83(6), 1420–1443.",
       url: "https://doi.org/10.1086/226707",
       nota: "Cada persona se suma a una acción colectiva si ya se sumaron suficientes otros. El ejemplo del motín muestra que dos grupos casi idénticos pueden terminar en resultados opuestos. Se lee sin matemáticas y conversa bien con el 18-O." },
@@ -85,7 +112,7 @@
       nota: "Viene de la ecología, pero su pregunta es social: ¿hay señales estadísticas (más varianza, más inercia) antes de un quiebre? Abre la discusión sobre si las crisis sociales pueden anticiparse y con qué datos." },
 
     /* ---------- 4. Redes ---------- */
-    { m: "redes", tipo: "Interactivo", nivel: 1, lang: "en", acceso: "abierto",
+    { m: "vida", teoria: "redes", tipo: "Interactivo", nivel: 1, lang: "en", acceso: "abierto",
       ref: "Case, N. (2018). <i>The Wisdom and/or Madness of Crowds</i> [Explicación interactiva].",
       url: "https://ncase.me/crowds/",
       nota: "Media hora dibujando redes y simulando contagios. Introduce, sin fórmulas, el contagio complejo, la paradoja de la mayoría y la diferencia entre lazos que unen al grupo y lazos que tienden puentes." },
@@ -107,7 +134,7 @@
       nota: "Manual completo con versión en línea gratuita, visualizaciones interactivas y diapositivas que el autor deja usar en clases. Los primeros cuatro capítulos son accesibles para pregrado." },
 
     /* ---------- 5. Cooperación ---------- */
-    { m: "cooperacion", tipo: "Interactivo", nivel: 1, lang: "en", acceso: "abierto",
+    { m: "vida", teoria: "cooperacion", tipo: "Interactivo", nivel: 1, lang: "en", acceso: "abierto",
       ref: "Case, N. (2017). <i>The Evolution of Trust</i> [Explicación interactiva].",
       url: "https://ncase.me/trust/",
       nota: "Un juego sobre el dilema del prisionero repetido, inspirado en Axelrod. En treinta minutos muestra por qué la confianza crece o se derrumba según las reglas del juego y no solo según el carácter de los jugadores." },
@@ -125,7 +152,7 @@
       nota: "Su conferencia del Nobel. Resume medio siglo de investigación y explica por qué los sistemas con muchos centros de decisión (gobernanza policéntrica) suelen funcionar mejor que la reforma única impuesta desde arriba." },
 
     /* ---------- 6. Luhmann ---------- */
-    { m: "luhmann", tipo: "Libro", nivel: 1, lang: "es", acceso: "biblioteca", inicio: 4,
+    { m: "luhmann", tipo: "Libro", nivel: 1, lang: "es", acceso: "biblioteca",
       ref: "Rodríguez, D., & Arnold, M. (1991). <i>Sociedad y teoría de sistemas: elementos para la comprensión de la teoría de Niklas Luhmann</i>. Editorial Universitaria.",
       url: "https://repositorio.uchile.cl/handle/2250/122275",
       nota: "El primer libro en América Latina en presentar la teoría de Luhmann, escrito por dos profesores chilenos y reeditado varias veces. Sigue siendo la mejor puerta de entrada en español, pues parte de la teoría general de sistemas y llega a Luhmann paso a paso." },
@@ -174,7 +201,7 @@
   ];
 
   var NIVEL = { 1: "Entrada", 2: "Intermedio", 3: "Avanzado" };
-  var TIPOS = ["Libro", "Artículo", "Curso", "Interactivo", "Software"];
+  var TIPOS = ["Libro", "Artículo", "Documento", "Curso", "Interactivo", "Software"];
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function plain(s) { return s.replace(/<[^>]+>/g, ""); }
@@ -197,6 +224,12 @@
   });
   syncThemeBtn();
 
+  function teoriaLink(r) {
+    if (!r.teoria) return "";
+    var t = MODULOS.filter(function (x) { return x.key === r.teoria; })[0];
+    return '<a class="teoria" href="#m-' + t.key + '">La teoría detrás: ' + t.n + ". " + esc(t.t) + " →</a>";
+  }
+
   function card(r) {
     var mod = MODULOS.filter(function (x) { return x.key === r.m; })[0];
     var links = '<a class="go" href="' + esc(r.url) + '" target="_blank" rel="noopener">Abrir</a>';
@@ -209,21 +242,15 @@
       "</div>" +
       '<p class="ref">' + r.ref + "</p>" +
       '<p class="nota">' + esc(r.nota) + "</p>" +
-      '<div class="links">' + links + (mod ? '<span class="mod">Módulo ' + mod.n + "</span>" : "") + "</div>" +
+      '<div class="links">' + links + teoriaLink(r) + "</div>" +
       "</article>";
   }
-
-  /* Ruta para empezar */
-  var start = R.filter(function (r) { return r.inicio; }).sort(function (a, b) { return a.inicio - b.inicio; });
-  document.getElementById("inicio").innerHTML = start.map(function (r, i) {
-    return '<li><span class="paso">' + (i + 1) + "</span>" + card(r) + "</li>";
-  }).join("");
 
   /* Controles */
   var state = { mod: "todos", tipo: "todos", nivel: "todos", lang: "todos", abierto: false, q: "" };
   var modSel = document.getElementById("fMod");
   modSel.innerHTML = '<option value="todos">Todos los módulos</option>' + MODULOS.map(function (m) {
-    return '<option value="' + m.key + '">' + m.n + ". " + esc(m.t) + "</option>";
+    return '<option value="' + m.key + '">' + (m.n ? m.n + ". " : "Divulgación: ") + esc(m.t) + "</option>";
   }).join("");
   document.getElementById("fTipo").innerHTML = '<option value="todos">Todos los tipos</option>' + TIPOS.map(function (t) {
     return '<option value="' + t + '">' + t + "</option>";
@@ -247,13 +274,15 @@
   }
 
   function render() {
-    var out = [], total = 0;
+    var out = [], total = 0, parte2 = false;
     MODULOS.forEach(function (m) {
       var items = R.filter(function (r) { return r.m === m.key && pass(r); })
         .sort(function (a, b) { return a.nivel - b.nivel; });
       if (!items.length) return;
       total += items.length;
-      out.push('<section class="modulo" id="m-' + m.key + '"><h2><span class="num">' + m.n + "</span>" + esc(m.t) + "</h2>" +
+      if (m.parte === 1) out.push('<h2 class="parte"><span class="pnum">Parte I</span>Para empezar</h2>');
+      else if (!parte2) { parte2 = true; out.push('<h2 class="parte"><span class="pnum">Parte II</span>La teoría detrás</h2><p class="mdesc">Cada módulo toma un fenómeno de la primera parte y presenta los textos que lo explican. Aquí la lectura se vuelve más exigente: los recursos están ordenados de entrada a avanzado.</p>'); }
+      out.push('<section class="modulo" id="m-' + m.key + '"><h3>' + (m.n ? '<span class="num">' + m.n + "</span>" : "") + esc(m.t) + "</h3>" +
         '<p class="mdesc">' + esc(m.d) + "</p>" + items.map(card).join("") + "</section>");
     });
     document.getElementById("lista").innerHTML = out.length ? out.join("") : '<p class="vacio">Ningún recurso cumple esos filtros.</p>';
@@ -261,7 +290,7 @@
   }
   render();
 
-  document.getElementById("stats").textContent = R.length + " recursos en " + MODULOS.length + " módulos · " +
+  document.getElementById("stats").textContent = R.length + " recursos · " + R.filter(function (r) { return r.m === "vida"; }).length + " de divulgación y " + R.filter(function (r) { return r.m !== "vida"; }).length + " de teoría · " +
     R.filter(function (r) { return r.acceso === "abierto"; }).length + " de acceso abierto · " +
     R.filter(function (r) { return r.lang === "es"; }).length + " en español";
 })();
