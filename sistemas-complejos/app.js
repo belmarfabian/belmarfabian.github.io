@@ -5,6 +5,8 @@
   var MODULOS = [
     { key: "vida", n: 0, parte: 1, t: "La complejidad en la vida diaria",
       d: "Antes de cualquier modelo conviene ver que la complejidad está en cosas cotidianas: en cómo funciona (o no funciona) un servicio público, en cómo se forma un barrio, en por qué un atasco aparece sin que nadie lo cause. Estos textos y juegos están escritos para un público general y en su mayoría en español. Cada uno indica qué módulo de la segunda parte contiene la teoría que lo explica." },
+    { key: "pop", n: 0, parte: 1, t: "Casos de la cultura popular",
+      d: "Películas, juegos y escenas que cualquiera reconoce y que esconden un problema de complejidad. Sirven para abrir una clase: primero se ve la escena o se juega, después se pregunta por qué ocurre, y el enlace lleva a la teoría que responde." },
     { key: "intro", n: 1, t: "Qué es un sistema complejo",
       d: "Antes de los modelos conviene tener una idea clara de qué se entiende por complejidad, pues el término se usa de muchas maneras y no siempre con precisión. Estos recursos ofrecen un mapa general del campo y de sus conceptos básicos (interacción local, retroalimentación, ausencia de control central, orden que nadie diseñó)." },
     { key: "emergencia", n: 2, t: "De lo individual a lo colectivo",
@@ -45,6 +47,32 @@
       ref: "Solé, R. (2009). <i>Redes complejas: del genoma a Internet</i>. Tusquets.",
       url: "https://www.planetadelibros.com/libro-redes-complejas/89623",
       nota: "Breve y en español. Un físico y biólogo explica para público general por qué Internet, las epidemias y el comercio comparten la misma forma de red, y qué se sigue de eso." },
+
+    /* ---------- 0b. Cultura popular ---------- */
+    { m: "pop", teoria: "intro", tipo: "Película", nivel: 1, lang: "en", acceso: "biblioteca",
+      ref: "Spielberg, S. (Dir.). (1993). <i>Jurassic Park</i> [Película]. Universal Pictures. Basada en Crichton, M. (1990). <i>Jurassic Park</i>. Knopf.",
+      url: "https://www.britannica.com/print/article/1488391",
+      nota: "Ian Malcolm, el matemático del parque, anuncia que el proyecto fracasará porque nadie puede controlar del todo un sistema complejo, por muchas cercas eléctricas que tenga. Es la mejor puerta de entrada a la idea de que lo planificado desde arriba se desordena por interacciones que nadie previó, el mismo argumento que Waissbluth hace para el Estado." },
+    { m: "pop", teoria: "umbrales", tipo: "Artículo", nivel: 1, lang: "en", acceso: "abierto",
+      ref: "Farkas, I., Helbing, D., & Vicsek, T. (2002). Mexican waves in an excitable medium. <i>Nature</i>, 419(6903), 131–132.",
+      url: "https://doi.org/10.1038/419131a", alt: "https://arxiv.org/abs/cond-mat/0210073", altt: "Versión abierta",
+      nota: "La ola del estadio, que se hizo famosa en el Mundial de México 86. Analizando videos de catorce olas en estadios de más de 50.000 personas, los autores muestran que no parte si no se suma de golpe un grupo mínimo de hinchas. Es un modelo de umbral que cualquiera ha vivido en la galería." },
+    { m: "pop", teoria: "emergencia", tipo: "Artículo", nivel: 1, lang: "en", acceso: "abierto",
+      ref: "Sugiyama, Y., Fukui, M., Kikuchi, M., Hasebe, K., Nakayama, A., Nishinari, K., Tadaki, S., & Yukawa, S. (2008). Traffic jams without bottlenecks: Experimental evidence for the physical mechanism of the formation of a jam. <i>New Journal of Physics</i>, 10(3), 033001.",
+      url: "https://doi.org/10.1088/1367-2630/10/3/033001",
+      nota: "Veintidós autos dan vueltas en una pista circular, sin semáforos ni choques, y en pocos minutos aparece un taco. El experimento, que se puede ver en video, muestra que el atasco no tiene un culpable: surge de pequeños frenazos que se amplifican cuando hay demasiados autos." },
+    { m: "pop", teoria: "emergencia", tipo: "Juego", nivel: 1, lang: "en", acceso: "biblioteca",
+      ref: "Wright, W. (1989). <i>SimCity</i> [Videojuego]. Maxis.",
+      url: "https://www.britannica.com/topic/SimCity",
+      nota: "El videojuego de construir ciudades. Wright se inspiró en los modelos urbanos de Jay Forrester, y por eso la ciudad responde de formas inesperadas: una autopista nueva puede empeorar el tráfico. Johnson lo comenta en Sistemas emergentes." },
+    { m: "pop", teoria: "emergencia", tipo: "Juego", nivel: 1, lang: "en", acceso: "abierto",
+      ref: "Gardner, M. (1970). Mathematical games: The fantastic combinations of John Conway's new solitaire game «life». <i>Scientific American</i>, 223(4), 120–123.",
+      url: "https://doi.org/10.1038/scientificamerican1070-120", alt: "https://conwaylife.com/wiki/Conway%27s_Game_of_Life", altt: "Jugar y ver ejemplos",
+      nota: "El «juego de la vida» de Conway: una cuadrícula, tres reglas sobre cuándo una celda nace o muere, y aparecen figuras que se mueven y se reproducen. Es la demostración más simple de que reglas locales generan orden global sin que nadie lo dirija." },
+    { m: "pop", teoria: "redes", tipo: "Interactivo", nivel: 1, lang: "en", acceso: "abierto",
+      ref: "Tjaden, B., et al. (s. f.). <i>The Oracle of Bacon</i> [Sitio web]. University of Virginia.",
+      url: "https://oracleofbacon.org/",
+      nota: "El juego de los «seis grados de Kevin Bacon»: unir a cualquier actor con Bacon a través de películas compartidas. El sitio calcula la distancia de cualquier actor, y casi siempre es corta. Es el mundo pequeño de Watts y Strogatz explicado con Hollywood." },
     /* ---------- 1. Introducción ---------- */
     { m: "intro", tipo: "Artículo", nivel: 1, lang: "en", acceso: "abierto",
       ref: "Weaver, W. (1948). Science and complexity. <i>American Scientist</i>, 36(4), 536–544.",
@@ -201,7 +229,7 @@
   ];
 
   var NIVEL = { 1: "Entrada", 2: "Intermedio", 3: "Avanzado" };
-  var TIPOS = ["Libro", "Artículo", "Documento", "Curso", "Interactivo", "Software"];
+  var TIPOS = ["Libro", "Artículo", "Documento", "Película", "Juego", "Curso", "Interactivo", "Software"];
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function plain(s) { return s.replace(/<[^>]+>/g, ""); }
@@ -250,7 +278,7 @@
   var state = { mod: "todos", tipo: "todos", nivel: "todos", lang: "todos", abierto: false, q: "" };
   var modSel = document.getElementById("fMod");
   modSel.innerHTML = '<option value="todos">Todos los módulos</option>' + MODULOS.map(function (m) {
-    return '<option value="' + m.key + '">' + (m.n ? m.n + ". " : "Divulgación: ") + esc(m.t) + "</option>";
+    return '<option value="' + m.key + '">' + (m.n ? m.n + ". " : "Para empezar: ") + esc(m.t) + "</option>";
   }).join("");
   document.getElementById("fTipo").innerHTML = '<option value="todos">Todos los tipos</option>' + TIPOS.map(function (t) {
     return '<option value="' + t + '">' + t + "</option>";
@@ -274,13 +302,13 @@
   }
 
   function render() {
-    var out = [], total = 0, parte2 = false;
+    var out = [], total = 0, parte1 = false, parte2 = false;
     MODULOS.forEach(function (m) {
       var items = R.filter(function (r) { return r.m === m.key && pass(r); })
         .sort(function (a, b) { return a.nivel - b.nivel; });
       if (!items.length) return;
       total += items.length;
-      if (m.parte === 1) out.push('<h2 class="parte"><span class="pnum">Parte I</span>Para empezar</h2>');
+      if (m.parte === 1 && !parte1) { parte1 = true; out.push('<h2 class="parte"><span class="pnum">Parte I</span>Para empezar</h2>'); }
       else if (!parte2) { parte2 = true; out.push('<h2 class="parte"><span class="pnum">Parte II</span>La teoría detrás</h2><p class="mdesc">Cada módulo toma un fenómeno de la primera parte y presenta los textos que lo explican. Aquí la lectura se vuelve más exigente: los recursos están ordenados de entrada a avanzado.</p>'); }
       out.push('<section class="modulo" id="m-' + m.key + '"><h3>' + (m.n ? '<span class="num">' + m.n + "</span>" : "") + esc(m.t) + "</h3>" +
         '<p class="mdesc">' + esc(m.d) + "</p>" + items.map(card).join("") + "</section>");
@@ -290,7 +318,7 @@
   }
   render();
 
-  document.getElementById("stats").textContent = R.length + " recursos · " + R.filter(function (r) { return r.m === "vida"; }).length + " de divulgación y " + R.filter(function (r) { return r.m !== "vida"; }).length + " de teoría · " +
+  document.getElementById("stats").textContent = R.length + " recursos · " + R.filter(function (r) { return r.m === "vida" || r.m === "pop"; }).length + " para empezar y " + R.filter(function (r) { return r.m !== "vida" && r.m !== "pop"; }).length + " de teoría · " +
     R.filter(function (r) { return r.acceso === "abierto"; }).length + " de acceso abierto · " +
     R.filter(function (r) { return r.lang === "es"; }).length + " en español";
 })();
