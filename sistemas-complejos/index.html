@@ -4,48 +4,73 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sistemas complejos para las ciencias sociales · Fabián Belmar</title>
-<meta name="description" content="Biblioteca comentada de lecturas, cursos y simulaciones sobre sistemas complejos para estudiantes de pregrado en ciencias sociales.">
+<meta name="description" content="Entradas, casos y lecturas sobre sistemas complejos para estudiantes de pregrado en ciencias sociales.">
 <meta name="author" content="Fabián Belmar">
 <meta property="og:title" content="Sistemas complejos para las ciencias sociales">
-<meta property="og:description" content="Lecturas, cursos y simulaciones comentadas, ordenadas en siete módulos para estudiantes de pregrado.">
+<meta property="og:description" content="Entradas sobre casos cotidianos y la teoría que hay detrás, para estudiantes de pregrado.">
 <meta property="og:url" content="https://belmarfabian.github.io/sistemas-complejos/">
 <link rel="canonical" href="https://belmarfabian.github.io/sistemas-complejos/">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <script>
 (function(){var s=null;try{s=localStorage.getItem('theme')}catch(e){}
 if(s)document.documentElement.setAttribute('data-theme',s);
 else if(window.matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.setAttribute('data-theme','dark');})();
 </script>
 <style>
-/* Misma paleta que el resto del sitio (radio T3): grises cálidos, un gris dial para lo activo. */
+/* Misma paleta que el resto del sitio (radio T3). Formato de blog: columna de lectura, fotos a todo el ancho. */
 :root{--bg:#f2f2f0;--surface:#ffffff;--border:#e0e0dd;--border-strong:#b4b4af;
   --text:#232322;--text-2:#464643;--muted:#6f6f6b;--faint:#9b9b96;
-  --accent:#232322;--dial:#8d8e8a;--open:#2e7d57;--open-soft:#e4f1ea}
+  --accent:#232322;--dial:#8d8e8a;--open:#2e7d57;--open-soft:#e4f1ea;--warm:#c8553d}
 [data-theme="dark"]{--bg:#1f1f1e;--surface:#2a2a28;--border:#363634;--border-strong:#555551;
   --text:#ecece8;--text-2:#cdcdc8;--muted:#a2a29d;--faint:#7a7a75;
-  --accent:#ecece8;--dial:#b8b9b4;--open:#6cc495;--open-soft:#25332b}
-*{box-sizing:border-box}
+  --accent:#ecece8;--dial:#b8b9b4;--open:#6cc495;--open-soft:#25332b;--warm:#e07a62}
+*{box-sizing:border-box;min-width:0}
 html,body{margin:0;background:var(--bg);color:var(--text)}
-body{font-family:'Instrument Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:760px;margin:0 auto;padding:32px 16px 64px}
+html{scroll-padding-top:24px}
+body{font-family:'Instrument Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.wrap{max-width:760px;margin:0 auto;padding:32px 18px 72px}
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
 .top a{color:var(--muted);text-decoration:none}.top a:hover{color:var(--text)}
 .theme{display:inline-flex;align-items:center;justify-content:center;padding:0;border:1px solid var(--border);border-radius:50%;width:34px;height:34px;background:var(--surface);color:var(--text-2);cursor:pointer}
 .theme svg{width:17px;height:17px}
-header{margin:28px 0 8px}
-.kicker{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
-h1{font-weight:700;letter-spacing:-.035em;font-size:clamp(28px,4.4vw,40px);line-height:1.1;margin:6px 0 14px}
-.lede,.prose p,.mdesc,.nota{text-align:justify;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
-.lede{color:var(--text-2);margin:0 0 12px}
-.stats{color:var(--muted);font-size:13.5px;margin:0}
 a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--border-strong);text-underline-offset:3px}
-h2{font-weight:600;font-size:21px;letter-spacing:-.015em;margin:44px 0 6px;display:flex;align-items:baseline;gap:10px}
-h2 .num{font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--border-strong);border-radius:999px;min-width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;flex:none;transform:translateY(-2px)}
-.sub{color:var(--muted);font-size:14px;margin:0 0 14px}
-.mdesc{color:var(--text-2);margin:0 0 14px}
+a:hover{text-decoration-color:var(--text)}
+header.hero{margin:34px 0 10px}
+.kicker{font-size:13px;color:var(--muted);margin:0}
+h1{font-weight:700;letter-spacing:-.035em;font-size:clamp(30px,5vw,46px);line-height:1.06;margin:8px 0 18px;text-wrap:balance}
+.lede{font-family:'Source Serif 4',Georgia,serif;font-size:18.5px;line-height:1.62;color:var(--text-2);margin:0 0 14px;text-wrap:pretty}
+.byline{font-size:13px;color:var(--muted);margin:16px 0 0}
+nav.indice{margin:30px 0 8px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:12px 0}
+nav.indice p{margin:0 0 6px;font-size:12.5px;color:var(--muted)}
+nav.indice ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 22px;counter-reset:i}
+nav.indice li{counter-increment:i;font-size:14px}
+nav.indice li::before{content:counter(i) ". ";color:var(--faint)}
+nav.indice a{text-decoration:none;color:var(--text-2)}nav.indice a:hover{color:var(--text)}
+@media(max-width:560px){nav.indice ol{grid-template-columns:1fr}}
+article.post{margin:56px 0 0;padding-top:4px}
+.post figure{margin:0 0 18px}
+.post figure img,.post figure svg{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:14px;background:var(--surface);border:1px solid var(--border)}
+.post figcaption{font-size:12px;color:var(--faint);margin-top:6px}
+.post figcaption a{color:var(--faint)}
+.meta{font-size:12.5px;color:var(--muted);margin:0 0 4px;display:flex;gap:10px;flex-wrap:wrap}
+.meta .tema{color:var(--warm);font-weight:600}
+.post h2{font-weight:700;letter-spacing:-.025em;font-size:clamp(24px,3.6vw,31px);line-height:1.12;margin:0 0 12px;text-wrap:balance}
+.post p.body{font-family:'Source Serif 4',Georgia,serif;font-size:18px;line-height:1.66;color:var(--text);margin:0 0 14px;text-wrap:pretty}
+.leer{margin:18px 0 0;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px}
+.leer h3{font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px}
+.leer ul{margin:0;padding:0 0 0 18px}
+.leer li{font-size:14px;line-height:1.5;margin:0 0 6px;color:var(--text-2)}
+.teoria{display:inline-block;margin-top:12px;font-size:14px;font-weight:600;color:var(--text);text-decoration:none;border-bottom:2px solid var(--warm);padding-bottom:1px}
+.teoria:hover{color:var(--warm)}
+.parte{margin:84px 0 0;padding-top:18px;border-top:2px solid var(--text)}
+.parte h2{font-weight:700;letter-spacing:-.03em;font-size:clamp(26px,4vw,36px);line-height:1.1;margin:4px 0 12px}
+.modulo{margin:40px 0 0;scroll-margin-top:24px}
+.modulo h3{font-weight:600;font-size:20px;letter-spacing:-.01em;margin:0 0 6px;display:flex;align-items:baseline;gap:10px}
+.modulo h3 .num{font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--border-strong);border-radius:999px;min-width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;flex:none;transform:translateY(-2px)}
+.mdesc{font-family:'Source Serif 4',Georgia,serif;font-size:17px;line-height:1.62;color:var(--text-2);margin:0 0 14px}
 .rec{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin:0 0 10px}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 .tag{font-size:11.5px;color:var(--text-2);border:1px solid var(--border-strong);border-radius:999px;padding:1px 9px;background:var(--bg)}
@@ -53,74 +78,209 @@ h2 .num{font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(-
 [data-theme="dark"] .tag.t-1{color:#1d1d1c}
 .tag.open{color:var(--open);border-color:var(--open);background:var(--open-soft)}
 .ref{margin:0 0 6px;font-size:14.5px;line-height:1.5}
-.nota{margin:0 0 10px;color:var(--text-2);font-size:14px}
-.links{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.nota{margin:0 0 10px;color:var(--text-2);font-size:14.5px;line-height:1.55}
+.links{display:flex;flex-wrap:wrap;gap:8px}
 .go{font-size:13px;text-decoration:none;color:var(--text);border:1px solid var(--border-strong);border-radius:999px;padding:3px 12px;background:var(--bg)}
 .go:hover{border-color:var(--text)}
 .go::after{content:" ↗";color:var(--muted)}
-.mod{margin-left:auto;font-size:12px;color:var(--faint)}
-#lista .mod{display:none}
-ol.ruta{list-style:none;padding:0;margin:0}
-ol.ruta li{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:start}
-.paso{width:28px;height:28px;border-radius:50%;background:var(--text);color:var(--bg);font-weight:600;font-size:13px;display:inline-flex;align-items:center;justify-content:center;margin-top:14px}
-.controls{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0 10px;margin-top:8px;border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-select,.search{font:inherit;font-size:13px;color:var(--text);background:var(--surface);border:1px solid var(--border-strong);border-radius:999px;padding:5px 10px}
-.search{flex:1 1 200px;min-width:160px}
-label.cb{font-size:13px;color:var(--text-2);display:inline-flex;align-items:center;gap:6px;cursor:pointer}
-.count{font-size:12.5px;color:var(--muted);margin-left:auto}
-.vacio{color:var(--muted);margin:28px 0}
-.prose p{color:var(--text-2);margin:0 0 12px}
-.modulo{scroll-margin-top:110px}
-h2.parte{flex-direction:column;align-items:flex-start;gap:2px;font-size:24px;margin-top:52px;padding-top:14px;border-top:2px solid var(--text)}
-.pnum{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
-h3{font-weight:600;font-size:19px;letter-spacing:-.01em;margin:36px 0 6px;display:flex;align-items:baseline;gap:10px}
-h3 .num{font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--border-strong);border-radius:999px;min-width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;flex:none;transform:translateY(-2px)}
-.teoria{margin-left:auto;font-size:12.5px;color:var(--text-2);text-decoration:none;border-bottom:1px dotted var(--border-strong)}
-.teoria:hover{color:var(--text)}
-footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted)}
-@media (max-width:560px){.count{margin-left:0;width:100%}.mod{display:none}}
+.prose p{font-family:'Source Serif 4',Georgia,serif;font-size:16.5px;line-height:1.62;color:var(--text-2);margin:0 0 12px}
+footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted)}
+@keyframes vuelta{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.ill *{animation:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="top"><a href="../">← Fabián Belmar</a><button class="theme" id="themeBtn" aria-label="Cambiar tema">◐</button></div>
 
-  <header>
+  <header class="hero">
     <p class="kicker">Material docente</p>
     <h1>Sistemas complejos para las ciencias sociales</h1>
-    <p class="lede">Esta página reúne lecturas, cursos y juegos para estudiantes de pregrado que quieren entender por qué muchos fenómenos colectivos (un servicio público que no cambia aunque se reforme, un barrio que se segrega, una protesta que crece de un día para otro) no se explican sumando lo que quiere cada persona. Está ordenada en dos partes: la primera reúne textos de divulgación, casi todos en español, que muestran la complejidad en situaciones cotidianas; la segunda presenta la teoría que hay detrás de cada una de esas situaciones.</p>
-    <p class="lede">La idea es leer primero la parte I y pasar a la II siguiendo los enlaces «La teoría detrás», pues cada texto de divulgación indica qué módulo explica lo que describe. No hace falta saber matemáticas para empezar; los recursos marcados como avanzados suponen haber leído antes los de entrada del mismo módulo.</p>
-    <p class="stats" id="stats"></p>
+    <p class="lede">Muchos de los fenómenos que vemos a diario -un servicio público que no cambia a pesar de las reformas, una ola que recorre el estadio o un taco que aparece sin un accidente que lo explique- no se pueden entender sumando lo que quiere o hace cada persona. Esta sección reúne entradas breves sobre ese tipo de casos, pensadas para estudiantes de pregrado en ciencias sociales que nunca han leído sobre sistemas complejos.</p>
+    <p class="lede">La idea es partir por lo concreto y luego pasar a la teoría, pues cada entrada termina con un enlace a la sección «La teoría detrás», donde están los textos que explican el caso. No hace falta saber matemáticas para comenzar, si bien algunas lecturas de la segunda parte son más exigentes.</p>
+    <p class="byline">Por Fabián Belmar</p>
   </header>
 
-  <h2>Biblioteca</h2>
-  <div class="controls" role="search">
-    <input class="search" id="q" type="search" placeholder="Buscar autor, tema o palabra…" aria-label="Buscar recursos">
-    <select id="fMod" aria-label="Filtrar por módulo"></select>
-    <select id="fNivel" aria-label="Filtrar por nivel">
-      <option value="todos">Todos los niveles</option>
-      <option value="1">Entrada</option>
-      <option value="2">Intermedio</option>
-      <option value="3">Avanzado</option>
-    </select>
-    <select id="fTipo" aria-label="Filtrar por tipo"></select>
-    <select id="fLang" aria-label="Filtrar por idioma">
-      <option value="todos">Todos los idiomas</option>
-      <option value="es">Español</option>
-      <option value="en">Inglés</option>
-    </select>
-    <label class="cb"><input type="checkbox" id="fAb"> Solo acceso abierto</label>
-    <span class="count" id="count" aria-live="polite"></span>
-  </div>
-  <div id="lista"></div>
+  <nav class="indice" aria-label="Entradas">
+    <p>Entradas</p>
+    <ol>
+      <li><a href="#estado">El Estado no es una máquina</a></li>
+      <li><a href="#bandada">Nadie dirige a la bandada</a></li>
+      <li><a href="#jurassic">Jurassic Park y la ilusión del control</a></li>
+      <li><a href="#ola">La ola del estadio</a></li>
+      <li><a href="#taco">El taco sin culpable</a></li>
+      <li><a href="#bacon">Seis grados de Kevin Bacon</a></li>
+      <li><a href="#juegos">Juegos para la sala de clases</a></li>
+      <li><a href="#teoria">La teoría detrás</a></li>
+    </ol>
+  </nav>
 
-  <h2>Criterios</h2>
-  <div class="prose">
-    <p>La selección privilegia textos que se puedan discutir en una clase de ciencias sociales y que no exijan formación matemática previa, si bien cada módulo incluye uno o dos recursos más exigentes para quien quiera seguir. Cada referencia se verificó en la editorial, la revista o un repositorio institucional, y los enlaces apuntan a esas fuentes. «Acceso abierto» indica que el texto completo puede leerse gratis y de forma legal; «En biblioteca» indica que se encuentra en bases suscritas por las universidades o en préstamo.</p>
-    <p>La mayoría de los recursos están en inglés, pues es el idioma en que se ha desarrollado el campo. La primera parte privilegia textos en español, varios escritos en Chile, y el módulo sobre teoría de sistemas sociales también se apoya en autores chilenos y latinoamericanos.</p>
-  </div>
+  <article class="post" id="estado">
+    <figure>
+      <img src="img/moneda.jpg" alt="Fachada del Palacio de La Moneda, en Santiago" width="960" height="540" loading="lazy">
+      <figcaption>Palacio de La Moneda, Santiago. Foto: Schwittu, <a href="https://commons.wikimedia.org/wiki/File:Moneda_1.JPG">Wikimedia Commons</a>, CC BY-SA 3.0.</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Gestión pública</span><span>Entrada 1</span></p>
+    <h2>El Estado no es una máquina</h2>
+    <p class="body">En un documento escrito para sus cursos de gestión pública en la Universidad de Chile, Mario Waissbluth distingue entre sistemas complicados y sistemas complejos, y sostiene que tanto la economía de un país como una institución pública pertenecen al segundo grupo (Waissbluth 2008a). La diferencia no es menor. Un reloj es complicado, pues tiene muchas piezas, pero si se desarma y se vuelve a armar funciona igual. Una institución pública, en tanto, está formada por funcionarios, usuarios, gremios y autoridades que se adaptan entre sí y que reaccionan a cualquier cambio que se intente introducir, por lo que las reformas diseñadas desde arriba suelen producir resultados que nadie buscó.</p>
+    <p class="body">Si bien el texto está pensado para directivos públicos, es una buena entrada para estudiantes de ciencias sociales, pues no exige formación matemática y sus ejemplos provienen del Estado chileno. Recomiendo leerlo junto con «Gestión del cambio en el sector público» (Waissbluth 2008b), que el propio autor presenta como su continuación y que, según advierte, carece de sentido sin la lectura previa del primero.</p>
+    <div class="leer">
+      <h3>Para leer</h3>
+      <ul>
+        <li>Waissbluth, M. (2008a). <a href="https://www.mariowaissbluth.com/descargas/complejidad_y_gestion.pdf"><i>Sistemas complejos y gestión pública</i></a>. Documento de trabajo, Serie Gestión n.º 99, Departamento de Ingeniería Industrial, Universidad de Chile.</li>
+        <li>Waissbluth, M. (2008b). <a href="http://www.dii.uchile.cl/~ceges/publicaciones/109%20ceges%20MW.pdf"><i>Gestión del cambio en el sector público</i></a>. Documento de trabajo, Serie Gestión n.º 109, Departamento de Ingeniería Industrial, Universidad de Chile.</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-intro">La teoría detrás: qué es un sistema complejo →</a>
+  </article>
 
-  <footer>Selección y comentarios de Fabián Belmar. Última revisión: noviembre de 2026.</footer>
+  <article class="post" id="bandada">
+    <figure>
+      <img src="img/estorninos.jpg" alt="Una bandada de estorninos forma una nube oscura sobre un campo" width="640" height="360" loading="lazy">
+      <figcaption>Bandada de estorninos en Anthorn, Inglaterra. Foto: John Holmes, <a href="https://commons.wikimedia.org/wiki/File:The_flock_of_starlings_acting_as_a_swarm._-_geograph.org.uk_-_124593.jpg">Wikimedia Commons</a>, CC BY-SA 2.0.</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Emergencia</span><span>Entrada 2</span></p>
+    <h2>Nadie dirige a la bandada</h2>
+    <p class="body">Una bandada de estorninos puede reunir miles de aves que giran al mismo tiempo sin que ninguna de ellas dirija el movimiento. Cada pájaro solo responde a lo que hacen sus vecinos más cercanos y, sin embargo, el conjunto produce una figura que ninguno se propuso dibujar. A este tipo de fenómenos se les llama emergentes, y Steven Johnson los recorre en <i>Sistemas emergentes</i> a partir de hormigueros, neuronas, ciudades y programas computacionales (Johnson 2003).</p>
+    <p class="body">La misma idea puede verse en el juego de la vida que John Conway inventó a fines de los sesenta y que Martin Gardner dio a conocer en <i>Scientific American</i> en octubre de 1970 (Gardner 1970). Se trata de una cuadrícula con reglas muy simples sobre cuándo una celda nace, sobrevive o muere, pero de esas reglas surgen figuras que se desplazan por la pantalla. SimCity, en tanto, llevó esta lógica a la ciudad, pues Will Wright se inspiró en los modelos urbanos de Jay Forrester para diseñarlo (Wright 1989).</p>
+    <div class="leer">
+      <h3>Para leer y jugar</h3>
+      <ul>
+        <li>Johnson, S. (2003). <a href="https://opac.biblio.iteso.mx/vufind/Record/000307034"><i>Sistemas emergentes: o qué tienen en común hormigas, neuronas, ciudades y software</i></a>. Turner; Fondo de Cultura Económica.</li>
+        <li>Gardner, M. (1970). <a href="https://doi.org/10.1038/scientificamerican1070-120">Mathematical games: The fantastic combinations of John Conway's new solitaire game «life»</a>. <i>Scientific American</i>, 223(4), 120–123. Para jugar: <a href="https://conwaylife.com/wiki/Conway%27s_Game_of_Life">LifeWiki</a>.</li>
+        <li>Wright, W. (1989). <a href="https://www.britannica.com/topic/SimCity"><i>SimCity</i></a> [Videojuego]. Maxis.</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-emergencia">La teoría detrás: de lo individual a lo colectivo →</a>
+  </article>
+
+  <article class="post" id="jurassic">
+    <figure>
+      <img src="img/trex.jpg" alt="Cráneo de un esqueleto de Tyrannosaurus rex en un museo" width="1026" height="577" loading="lazy">
+      <figcaption>Tyrannosaurus rex, Museo Nacional de Historia Natural (Smithsonian). Foto: Quadell, <a href="https://commons.wikimedia.org/wiki/File:Trex_edited.jpg">Wikimedia Commons</a>, CC BY-SA 2.0.</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Cultura popular</span><span>Entrada 3</span></p>
+    <h2>Jurassic Park y la ilusión del control</h2>
+    <p class="body">En <i>Jurassic Park</i>, la novela de Michael Crichton (1990) que Steven Spielberg llevó al cine en 1993, el matemático Ian Malcolm anticipa que el parque fracasará. Su argumento es que nadie puede controlar del todo un sistema complejo, por más cercas eléctricas y protocolos de seguridad que se instalen. Si bien la película simplifica la teoría del caos para efectos dramáticos, la intuición de Malcolm es bastante cercana a la de Waissbluth respecto del Estado, pues en ambos casos lo planificado se desordena debido a interacciones que nadie previó.</p>
+    <p class="body">Para quien quiera saber qué hay de cierto en esta intuición, recomiendo el libro de divulgación de Melanie Mitchell (2009), donde explica de dónde vienen las ideas sobre caos y complejidad y por qué todavía no existe una sola definición de sistema complejo. El curso gratuito que dicta en Complexity Explorer sigue el mismo recorrido y no exige saber matemáticas.</p>
+    <div class="leer">
+      <h3>Para ver y leer</h3>
+      <ul>
+        <li>Spielberg, S. (Dir.). (1993). <a href="https://www.britannica.com/print/article/1488391"><i>Jurassic Park</i></a> [Película]. Universal Pictures. Basada en Crichton, M. (1990). <i>Jurassic Park</i>. Knopf.</li>
+        <li>Mitchell, M. (2009). <a href="https://search.worldcat.org/title/Complexity-:-a-guided-tour/oclc/216938473"><i>Complexity: A guided tour</i></a>. Oxford University Press.</li>
+        <li>Mitchell, M. (s. f.). <a href="https://www.complexityexplorer.org/courses/185-introduction-to-complexity"><i>Introduction to Complexity</i></a> [Curso en línea]. Complexity Explorer, Santa Fe Institute.</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-intro">La teoría detrás: qué es un sistema complejo →</a>
+  </article>
+
+  <article class="post" id="ola">
+    <figure>
+      <img src="img/ola.jpg" alt="Hinchas levantan los brazos haciendo la ola en las graderías de un estadio" width="960" height="540" loading="lazy">
+      <figcaption>La ola en la Copa Confederaciones 2005, Frankfurt. Foto: <a href="https://commons.wikimedia.org/wiki/File:Confed-Cup_2005_-_Laolawelle.JPG">Wikimedia Commons</a>, CC BY-SA 3.0.</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Umbrales</span><span>Entrada 4</span></p>
+    <h2>La ola del estadio</h2>
+    <p class="body">La ola se hizo conocida durante el Mundial de México 86 y desde entonces es parte de cualquier estadio. Lo interesante es que no basta con que una persona se pare para que comience, pues se requiere que un grupo mínimo de hinchas se levante al mismo tiempo. Farkas, Helbing y Vicsek analizaron videos de catorce olas en estadios con más de 50.000 personas y mostraron que la ola se comporta como un medio excitable, donde cada espectador se suma solo si suficientes vecinos ya lo hicieron (Farkas et al. 2002).</p>
+    <p class="body">Este es un ejemplo bastante claro de lo que Granovetter llamó modelos de umbral, es decir, situaciones en que cada persona decide sumarse a una acción colectiva según cuántos otros ya se sumaron (Granovetter 1978). La misma lógica sirve para pensar por qué algunas protestas crecen de un día para otro mientras otras, en condiciones muy parecidas, nunca despegan.</p>
+    <div class="leer">
+      <h3>Para leer</h3>
+      <ul>
+        <li>Farkas, I., Helbing, D., &amp; Vicsek, T. (2002). <a href="https://doi.org/10.1038/419131a">Mexican waves in an excitable medium</a>. <i>Nature</i>, 419(6903), 131–132. <a href="https://arxiv.org/abs/cond-mat/0210073">Versión abierta</a>.</li>
+        <li>Granovetter, M. (1978). <a href="https://doi.org/10.1086/226707">Threshold models of collective behavior</a>. <i>American Journal of Sociology</i>, 83(6), 1420–1443.</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-umbrales">La teoría detrás: umbrales, contagios y puntos de quiebre →</a>
+  </article>
+
+  <article class="post" id="taco">
+    <figure>
+      <svg class="ill" viewBox="0 0 960 540" role="img" aria-label="Ilustración: autos en una pista circular, con un grupo de autos detenidos en una parte del anillo">
+        <rect width="960" height="540" fill="var(--surface)"/>
+        <circle cx="480" cy="270" r="190" fill="none" stroke="var(--border-strong)" stroke-width="46"/>
+        <circle cx="480" cy="270" r="190" fill="none" stroke="var(--surface)" stroke-width="2" stroke-dasharray="10 12"/>
+        <g style="transform-origin:480px 270px;animation:vuelta 60s linear infinite"><g id="autos"></g></g>
+        <text x="480" y="262" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-size="24" font-weight="600" fill="var(--text)">22 autos, 230 metros</text>
+        <text x="480" y="294" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-size="17" fill="var(--muted)">sin semáforos ni accidentes</text>
+      </svg>
+      <figcaption>Ilustración del experimento de Sugiyama et al. (2008). Los autos en color están detenidos en el taco.</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Emergencia</span><span>Entrada 5</span></p>
+    <h2>El taco sin culpable</h2>
+    <p class="body">En 2008 un grupo de físicos japoneses puso a 22 autos a dar vueltas en una pista circular de 230 metros, sin semáforos, obras ni accidentes que pudieran detener el tránsito. Aun así, al poco tiempo apareció un taco (Sugiyama et al. 2008). Es decir, el atasco no tenía un culpable, sino que surgía de pequeños frenazos que se amplificaban una vez que la densidad de autos superaba cierto valor, tal como ocurre en las autopistas cuando nos detenemos sin ver ningún choque más adelante.</p>
+    <p class="body">Philip Ball dedica <i>Masa crítica</i> a este tipo de fenómenos y muestra cómo las herramientas de la física sirven para entender atascos, multitudes y mercados (Ball 2008). Si bien es un libro largo, no es necesario leerlo completo para entender el argumento, y su lectura conversa bien con la entrada anterior sobre la ola del estadio.</p>
+    <div class="leer">
+      <h3>Para leer</h3>
+      <ul>
+        <li>Sugiyama, Y., Fukui, M., Kikuchi, M., Hasebe, K., Nakayama, A., Nishinari, K., Tadaki, S., &amp; Yukawa, S. (2008). <a href="https://doi.org/10.1088/1367-2630/10/3/033001">Traffic jams without bottlenecks: Experimental evidence for the physical mechanism of the formation of a jam</a>. <i>New Journal of Physics</i>, 10(3), 033001.</li>
+        <li>Ball, P. (2008). <a href="https://www.marcialpons.es/libros/masa-critica/9788475068510/"><i>Masa crítica: cambio, caos y complejidad</i></a>. Turner; Fondo de Cultura Económica.</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-emergencia">La teoría detrás: de lo individual a lo colectivo →</a>
+  </article>
+
+  <article class="post" id="bacon">
+    <figure>
+      <svg class="ill" viewBox="0 0 960 540" role="img" aria-label="Ilustración: una red en anillo con unos pocos atajos que la cruzan">
+        <rect width="960" height="540" fill="var(--surface)"/>
+        <g id="red"></g>
+      </svg>
+      <figcaption>Ilustración de una red de mundo pequeño: unos pocos atajos (en color) acortan la distancia entre cualquier par de nodos.</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Redes</span><span>Entrada 6</span></p>
+    <h2>Seis grados de Kevin Bacon</h2>
+    <p class="body">A mediados de los noventa, tres estudiantes del Albright College, en Estados Unidos, inventaron un juego que consistía en unir a cualquier actor con Kevin Bacon a través de las películas que compartían. Poco después, Brett Tjaden creó en la Universidad de Virginia el Oracle of Bacon, un sitio que calcula esa distancia con bases de datos de películas y que sigue funcionando hasta hoy. Casi siempre la distancia es corta, pues Hollywood es lo que en análisis de redes se conoce como un «mundo pequeño» (Watts y Strogatz 1998).</p>
+    <p class="body">Ricard Solé explica para un público general por qué Internet, las epidemias y el comercio comparten esta misma forma de red (Solé 2009). Para quien prefiera aprender jugando, recomiendo además <i>The Wisdom and/or Madness of Crowds</i>, donde en media hora se dibujan redes y se simulan contagios (Case 2018).</p>
+    <div class="leer">
+      <h3>Para leer y jugar</h3>
+      <ul>
+        <li>Tjaden, B., et al. (s. f.). <a href="https://oracleofbacon.org/"><i>The Oracle of Bacon</i></a> [Sitio web]. University of Virginia.</li>
+        <li>Solé, R. (2009). <a href="https://www.planetadelibros.com/libro-redes-complejas/89623"><i>Redes complejas: del genoma a Internet</i></a>. Tusquets.</li>
+        <li>Case, N. (2018). <a href="https://ncase.me/crowds/"><i>The Wisdom and/or Madness of Crowds</i></a> [Explicación interactiva].</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-redes">La teoría detrás: redes →</a>
+  </article>
+
+  <article class="post" id="juegos">
+    <figure>
+      <svg class="ill" viewBox="0 0 960 540" role="img" aria-label="Ilustración: cuadrícula de triángulos y cuadrados agrupados por forma">
+        <rect width="960" height="540" fill="var(--surface)"/>
+        <g id="poligonos"></g>
+      </svg>
+      <figcaption>Ilustración inspirada en el modelo de segregación de Schelling (1971).</figcaption>
+    </figure>
+    <p class="meta"><span class="tema">Para la clase</span><span>Entrada 7</span></p>
+    <h2>Juegos para la sala de clases</h2>
+    <p class="body">Algunos de los mejores recursos para enseñar complejidad no son textos sino juegos interactivos. <i>Parable of the Polygons</i> muestra en veinte minutos cómo preferencias individuales moderadas producen un barrio segregado, siguiendo el modelo que Schelling propuso a comienzos de los setenta (Hart y Case 2014; Schelling 1971). <i>The Evolution of Trust</i>, en tanto, utiliza el dilema del prisionero repetido para explicar por qué la confianza crece o se derrumba según las reglas del juego y no solo según el carácter de los jugadores (Axelrod 1984; Case 2017).</p>
+    <p class="body">Si bien ambos están en inglés, se pueden jugar en sala sin mayor dificultad, pues el texto es breve y lo importante ocurre en la simulación. Para quien quiera seguir después de jugar, el último módulo de la segunda parte reúne NetLogo y otros programas para construir modelos propios.</p>
+    <div class="leer">
+      <h3>Para jugar</h3>
+      <ul>
+        <li>Hart, V., &amp; Case, N. (2014). <a href="https://ncase.me/polygons/"><i>Parable of the Polygons</i></a> [Explicación interactiva].</li>
+        <li>Case, N. (2017). <a href="https://ncase.me/trust/"><i>The Evolution of Trust</i></a> [Explicación interactiva].</li>
+      </ul>
+    </div>
+    <a class="teoria" href="#m-cooperacion">La teoría detrás: cooperación y gobierno de lo común →</a>
+  </article>
+
+  <section class="parte" id="teoria">
+    <p class="kicker">Segunda parte</p>
+    <h2>La teoría detrás</h2>
+    <p class="mdesc">Cada módulo reúne los textos que explican uno o más de los casos anteriores. Aquí la lectura es más exigente, por lo que los recursos están ordenados desde los de entrada hasta los avanzados, y estos últimos suponen haber leído antes los primeros.</p>
+    <div id="lista"></div>
+  </section>
+
+  <section class="parte">
+    <p class="kicker">Notas</p>
+    <h2>Criterios de selección</h2>
+    <div class="prose">
+      <p>Para seleccionar los recursos privilegié textos que se puedan discutir en una clase de ciencias sociales y que no exijan formación matemática previa, si bien cada módulo incluye uno o dos más exigentes para quien quiera profundizar. Cada referencia fue verificada en la editorial, la revista o un repositorio institucional, y los enlaces apuntan a esas fuentes. La etiqueta «Acceso abierto» indica que el texto completo puede leerse de forma gratuita y legal, mientras que «En biblioteca» indica que se encuentra en bases suscritas por las universidades o disponible para préstamo.</p>
+      <p>Gran parte de los textos de la segunda parte están en inglés, pues es el idioma en que se ha desarrollado el campo. Por ello, en las entradas privilegié textos en español, varios escritos en Chile, y el módulo sobre teoría de sistemas sociales también se apoya en autores chilenos y latinoamericanos. Las fotografías provienen de Wikimedia Commons y se usan bajo las licencias que se indican en cada una.</p>
+    </div>
+  </section>
+
+  <footer>Selección y textos de Fabián Belmar. Última revisión: noviembre de 2026.</footer>
 </div>
 <script src="app.js"></script>
 </body>
